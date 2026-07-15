@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, summary, cover, coverAlt, tags, year, externalUrl } = project.data;
+const { title, summary, cover, coverAlt, tags, year, yearLabel, externalUrl } = project.data;
 const href = externalUrl ?? `/proyectos/${project.id}`;
 ---
 
@@ -35,7 +35,7 @@ const href = externalUrl ?? `/proyectos/${project.id}`;
       </h3>
       <p class="mt-1 text-sm text-ink-muted">{summary}</p>
     </div>
-    <span class="shrink-0 text-sm text-ink-muted">{year}</span>
+    {!externalUrl && <span class="shrink-0 text-sm text-ink-muted">{yearLabel ?? year}</span>}
   </div>
   {
     tags.length > 0 && (

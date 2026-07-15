@@ -14,6 +14,9 @@ const projects = defineCollection({
       coverAlt: z.string(),
       tags: z.array(z.string()).default([]),
       year: z.number(),
+      // Texto a mostrar en vez del año (ej. "2022–2026") cuando el proyecto
+      // abarcó un rango; `year` se sigue usando para ordenar cronológicamente.
+      yearLabel: z.string().optional(),
       featured: z.boolean().default(false),
       order: z.number().default(0),
       draft: z.boolean().default(false),

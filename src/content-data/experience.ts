@@ -10,9 +10,14 @@ export const experience = [
     period: 'Noviembre 2021 — Junio 2022',
   },
   {
-    company: 'Asiste App',
+    company: 'Asiste App (hoy WIP)',
     role: 'Product Designer',
-    period: 'Enero 2021 — Noviembre 2021',
+    period: 'Junio 2021 — Noviembre 2021',
+  },
+  {
+    company: 'Asiste App (hoy WIP)',
+    role: 'Diseñador Generalista · Marketing',
+    period: 'Enero 2021 — Mayo 2021',
   },
   {
     company: 'Grupo Telvinco SAS',

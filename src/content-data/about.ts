@@ -2,11 +2,11 @@ export const about = {
   sections: [
     {
       heading: 'Quién soy',
-      body: 'Soy diseñador digital y multimedia, con una especialización en gerencia de diseño de producto. Mi trayectoria empezó en branding y piezas de comunicación, pasó por el diseño de servicios y hoy se concentra en productos B2B que operan sobre procesos de negocio complejos: facturación, logística y relacionamiento con proveedores a gran escala.',
+      body: 'Soy diseñador digital y multimedia, con una especialización en gerencia de diseño de producto. Mi trayectoria es transversal: empecé en branding y piezas de comunicación, pasé por diseño de servicios y sistemas de diseño, y hoy trabajo tanto en productos B2B complejos como en proyectos de marca — me muevo con comodidad entre distintos tipos de retos de diseño.',
     },
     {
       heading: 'Qué tipo de problemas resuelvo',
-      body: 'Sistemas donde conviven varios actores —proveedores, analistas, negocio y tecnología— y donde el volumen de información hace que la gestión manual deje de ser viable. Mi trabajo es traducir esa complejidad en productos usables, medibles y que escalan con el volumen en lugar de depender de más personas para operarlos.',
+      body: 'Desde experiencias de marca y comunicación hasta productos B2B donde conviven varios actores y un alto volumen de información. Disfruto tanto darle forma a una identidad visual como resolver la arquitectura de un sistema complejo — mi constante es traducir un problema, sea cual sea su naturaleza, en algo usable y medible.',
     },
     {
       heading: 'Mi forma de trabajar',
@@ -15,6 +15,7 @@ export const about = {
   ],
   skills: [
     'Investigación aplicada y discovery',
+    'Branding y comunicación visual',
     'Diseño de servicios',
     'Arquitectura de información',
     'Sistemas de diseño',
@@ -24,7 +25,7 @@ export const about = {
     'Mentoría de perfiles junior en UX',
   ],
   experienceIntro:
-    'Cuatro etapas que van de la comunicación de marca al diseño de servicios, y del diseño de servicios al diseño de producto para operaciones de negocio a gran escala.',
+    'Cuatro etapas que reflejan una trayectoria transversal: de la comunicación de marca al diseño de servicios, y del diseño de servicios al diseño de producto — pasando por branding, sistemas de diseño y proyectos B2B de distinta escala.',
   philosophy:
     'La función precede a la forma. Un producto puede verse bien y aun así no resolver nada; el diseño que me interesa es el que se sostiene porque responde a un problema real de negocio y de las personas que lo viven a diario.',
 };
