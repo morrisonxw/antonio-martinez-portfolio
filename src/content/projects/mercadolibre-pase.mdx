@@ -1,8 +1,8 @@
 ---
 title: "Transformando el ciclo de facturación de proveedores logísticos"
 summary: "Cómo rediseñamos el ciclo de facturación de proveedores logísticos en Mercado Libre para pasar de reclamos reactivos a un proceso confiable y escalable."
-cover: "../../assets/projects/mercadolibre-pase/cover.svg"
-coverAlt: "Portada del case study de PASE en Mercado Libre"
+cover: "../../assets/projects/mercadolibre-pase/cover.png"
+coverAlt: "Panel de control de rutas ejecutadas de Mercado Libre, con ajustes y reclamos por ruta"
 tags: ["Mercado Libre", "Product Design", "Marketplace", "Logística", "B2B", "Facturación"]
 year: 2022
 yearLabel: "2022–2026"
@@ -27,6 +27,11 @@ import Figure from '../../components/mdx/Figure.astro';
 import reclamosHome from '../../assets/projects/mercadolibre-pase/reclamos-home.png';
 import reclamosDetalle from '../../assets/projects/mercadolibre-pase/reclamos-detalle.png';
 import reclamosSinFiltro from '../../assets/projects/mercadolibre-pase/reclamos-sin-filtro.png';
+import componentesReclamos from '../../assets/projects/mercadolibre-pase/componentes-reclamos.png';
+import exploracionCards from '../../assets/projects/mercadolibre-pase/exploracion-cards.png';
+import configVentanas from '../../assets/projects/mercadolibre-pase/config-ventanas-reclamos.png';
+import notificacionesMlp from '../../assets/projects/mercadolibre-pase/notificaciones-mlp.png';
+import notificacionesMeli from '../../assets/projects/mercadolibre-pase/notificaciones-meli.png';
 
 ## Contexto
 
@@ -74,6 +79,32 @@ Esto cambió el reclamo de un evento acumulado al final del periodo a una gesti�
 
 Mover la revisión del final del proceso al día a día fue la decisión que cambió la naturaleza del problema.
 
+Parte de la iteración de este panel la hice apoyándome en herramientas de IA para prototipar más rápido y validar variantes de la interfaz sin esperar a tener el desarrollo final:
+
+<figure class="my-10">
+  <video
+    src="/projects/mercadolibre-pase/prototipo-figma-make.mp4"
+    autoplay
+    loop
+    muted
+    playsinline
+    class="w-full rounded-xl"
+  />
+  <figcaption class="mt-3 text-sm text-ink-muted">Iteración del panel de control de rutas ejecutadas, prototipado con Figma Make.</figcaption>
+</figure>
+
+<figure class="my-10">
+  <video
+    src="/projects/mercadolibre-pase/prototipo-claude.mp4"
+    autoplay
+    loop
+    muted
+    playsinline
+    class="w-full rounded-xl"
+  />
+  <figcaption class="mt-3 text-sm text-ink-muted">Iteración del flujo de gestión de reclamos, prototipado con Claude.</figcaption>
+</figure>
+
 ## Sistema de reclamos
 
 Rediseñamos el proceso de reclamos de facturación pasando de una gestión individual —un reclamo, un caso, una revisión— a una gestión masiva: cargas y respuestas por lote, y filtros automáticos que resolvían de inmediato los conceptos que contractualmente no correspondía reclamar. También dimos a los proveedores trazabilidad sobre el estado de cada reclamo, algo que antes no existía.
@@ -116,11 +147,47 @@ Rediseñamos el proceso de reclamos de facturación pasando de una gestión indi
 
 El proceso solo se volvió sostenible cuando dejamos de diseñarlo caso por caso y empezamos a diseñarlo por lotes.
 
+Antes de llegar a esta versión, exploramos distintas formas de organizar la información y de dar acceso a los analistas para configurar las ventanas de reclamos:
+
+<Figure
+  src={exploracionCards}
+  alt="Exploración de cards para la gestión de reclamos de rutas ejecutadas"
+  caption="Exploración de distintos formatos de card para priorizar y resolver reclamos."
+/>
+
+<Figure
+  src={componentesReclamos}
+  alt="Componentes de UI para el sistema de reclamos"
+  caption="Componentes del sistema de reclamos, pensados para reutilizarse entre la bandeja general y el detalle."
+/>
+
+<Figure
+  src={configVentanas}
+  alt="Flujo de configuración de una nueva ventana de reclamos"
+  caption="Flujo interno para que los analistas configuraran nuevas ventanas de reclamos."
+/>
+
 ## Prefacturación
 
 Trabajamos en simplificar la información que se mostraba a los proveedores en cada prefactura, priorizando lo accionable sobre el detalle exhaustivo, y mejoramos la comunicación de los tiempos del proceso —cuándo estaría disponible la prefactura y cuándo se realizaría el pago— para reducir la incertidumbre que generaba este momento.
 
 Mostrar menos información, pero la correcta, redujo más fricción que agregar más detalle.
+
+## Comunicación y notificaciones
+
+Además del producto, diseñé las comunicaciones que acompañaron otros cambios del ecosistema de proveedores. Un ejemplo: cuando los MLP pasaron a poder gestionar ellos mismos el rol de aprobador de Acuerdos Tarifarios, sin depender del equipo de Procurement de Mercado Libre como intermediario. Esto incluyó tanto el email a los proveedores explicando el cambio, como la comunicación interna al equipo de Procurement sobre cómo acompañarlos durante la transición.
+
+<Figure
+  src={notificacionesMlp}
+  alt="Notificación por email a proveedores (MLP) sobre el nuevo proceso de gestión de aprobadores"
+  caption="Notificación a proveedores (MLP) sobre el nuevo proceso de autogestión de aprobadores."
+/>
+
+<Figure
+  src={notificacionesMeli}
+  alt="Comunicación interna al equipo de Procurement de Mercado Libre sobre el mismo cambio"
+  caption="Comunicación interna al equipo de Procurement, explicando el cambio y cómo acompañar a los proveedores."
+/>
 
 ## Impacto general y aprendizajes
 
