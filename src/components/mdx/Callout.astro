@@ -1,0 +1,14 @@
+---
+interface Props {
+  label?: string;
+}
+
+const { label = 'Aprendizaje clave' } = Astro.props;
+---
+
+<div class="my-8 rounded-xl border border-accent-muted bg-accent-muted/40 p-5">
+  <p class="text-xs font-medium uppercase tracking-wide text-accent">{label}</p>
+  <div class="mt-2 text-ink">
+    <slot />
+  </div>
+</div>

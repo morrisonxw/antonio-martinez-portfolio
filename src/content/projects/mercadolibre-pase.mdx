@@ -1,0 +1,92 @@
+---
+title: "Transformando el ciclo de facturación de proveedores logísticos"
+summary: "Cómo rediseñamos el ciclo de facturación de proveedores logísticos en Mercado Libre para pasar de reclamos reactivos a un proceso confiable y escalable."
+cover: "../../assets/projects/mercadolibre-pase/cover.svg"
+coverAlt: "Portada del case study de PASE en Mercado Libre"
+tags: ["Product Design", "Marketplace", "Logística", "B2B", "Facturación"]
+year: 2022
+featured: true
+order: 1
+draft: false
+
+role: "Product Designer"
+team: "Producto, Negocio y Tecnología"
+duration: "~4 años"
+company: "Mercado Libre"
+industry: "Marketplace · Logística B2B"
+scope: ["UX Research", "Discovery", "Arquitectura de Información", "Product Design", "Prototipado"]
+confidential: false
+
+problem: "Miles de servicios logísticos ejecutados a diario sin transparencia entre lo que los proveedores ejecutaban y lo que Mercado Libre reconocía y facturaba, generando desconfianza y un volumen de reclamos manuales inviable de sostener."
+outcome: "Los productos rediseñados redujeron la dependencia de la revisión manual caso por caso, dieron a los proveedores mayor visibilidad sobre sus pagos, y mejoraron la relación entre Mercado Libre y sus proveedores logísticos."
+---
+
+import ImagePlaceholder from '../../components/mdx/ImagePlaceholder.astro';
+
+## Contexto
+
+Durante casi cuatro años trabajé en la unidad de negocio de transporte de Mercado Libre, en productos dirigidos a proveedores logísticos de primera, media y última milla. El desafío de fondo era la falta de transparencia entre los servicios que los proveedores ejecutaban y lo que los sistemas de Mercado Libre reconocían y facturaban.
+
+## Mi rol
+
+Trabajé como product designer dentro de squads multidisciplinarios —producto, negocio y tecnología— cubriendo distintos puntos del ciclo de vida del proveedor: alta y registro, facturación, sistema de reclamos y monitoreo diario de servicios.
+
+## Impacto
+
+Los productos en los que participé redujeron la dependencia de la revisión manual caso por caso, dieron a los proveedores más visibilidad sobre lo que se les iba a pagar, y mejoraron la relación entre Mercado Libre y sus proveedores logísticos.
+
+<ImagePlaceholder label="Mapa del ecosistema de proveedores (MLP y comercial carriers) y su relación con Mercado Libre." />
+
+Un mismo problema —la brecha entre lo ejecutado y lo facturado— atravesó cada producto en el que trabajé.
+
+## El problema
+
+Miles de servicios ejecutados a diario, en distintos países y bajo distintas reglas operativas. Proveedores que no confiaban en lo que se les facturaba. Analistas desbordados por reclamos que, en su mayoría, correspondían a conceptos que ya estaban acordados como no facturables.
+
+<ImagePlaceholder label="Diagrama del proceso as-is con los cuellos de botella marcados: contratación → ejecución del servicio → cierre de periodo → prefactura → reclamo manual → revisión caso por caso." aspect="wide" />
+
+El problema no era la falta de un canal de reclamos. Era que el proceso completo dependía de revisar, uno por uno, un volumen que ninguna cantidad de analistas podía absorber.
+
+## Discovery
+
+### Usuarios
+
+Proveedores MLP (contratados directamente por Mercado Libre), comercial carriers de gran escala como operadores logísticos internacionales, y analistas internos responsables de revisar y resolver reclamos.
+
+### Insights
+
+Los proveedores solo tenían visibilidad de sus servicios al cierre del periodo de facturación —que podía tardar semanas—, momento en el que ya era tarde para corregir cualquier diferencia. La revisión de reclamos caso por caso era estructuralmente inviable frente al volumen real. Y una parte importante de esos reclamos correspondía a conceptos que el negocio ya había definido como no pagables desde la negociación con el proveedor.
+
+La mayor oportunidad no estaba en resolver reclamos más rápido, sino en evitar que la mayoría de ellos llegara a existir.
+
+## La solución: plataforma de aceptación de servicios
+
+Diseñamos PASE (Plataforma de Aceptación de Servicios), una herramienta de uso diario —no de cierre de proceso— que muestra a los proveedores los servicios ejecutados y el monto que se les pagará, con una ventana de tiempo definida para presentar objeciones. Si el proveedor no reclama dentro de ese plazo, el servicio se entiende aceptado.
+
+Esto cambió el reclamo de un evento acumulado al final del periodo a una gestión distribuida en el tiempo, dirigida directamente al equipo responsable del servicio en cuestión, mientras la información todavía estaba fresca.
+
+<ImagePlaceholder label="Mockup del panel diario de servicios con estado de aceptación/objeción por servicio." />
+
+Mover la revisión del final del proceso al día a día fue la decisión que cambió la naturaleza del problema.
+
+## Sistema de reclamos
+
+Rediseñamos el proceso de reclamos de facturación pasando de una gestión individual —un reclamo, un caso, una revisión— a una gestión masiva: cargas y respuestas por lote, y filtros automáticos que resolvían de inmediato los conceptos que contractualmente no correspondía reclamar. También dimos a los proveedores trazabilidad sobre el estado de cada reclamo, algo que antes no existía.
+
+El proceso solo se volvió sostenible cuando dejamos de diseñarlo caso por caso y empezamos a diseñarlo por lotes.
+
+## Prefacturación
+
+Trabajamos en simplificar la información que se mostraba a los proveedores en cada prefactura, priorizando lo accionable sobre el detalle exhaustivo, y mejoramos la comunicación de los tiempos del proceso —cuándo estaría disponible la prefactura y cuándo se realizaría el pago— para reducir la incertidumbre que generaba este momento.
+
+Mostrar menos información, pero la correcta, redujo más fricción que agregar más detalle.
+
+## Impacto general y aprendizajes
+
+### Impacto
+
+Menos reclamos dependientes de revisión manual, procesos que ganaron capacidad de escalar con el volumen en lugar de requerir más personas para sostenerse, y una relación más predecible y transparente entre Mercado Libre y sus proveedores logísticos.
+
+### Aprendizajes
+
+Diseñar pensando en el volumen desde el primer día, no como una optimización posterior. Reutilizar una herramienta interna ya existente no siempre acelera la entrega: en el caso del sistema de reclamos, adaptarla tomó más esfuerzo del que hubiera tomado construir de cero, y terminó limitando la experiencia final.

@@ -1,0 +1,48 @@
+/*
+  Design tokens — fuente única de verdad.
+  Fase 0 (identidad visual): estos son valores de partida razonables
+  (paleta neutra + un acento, par tipográfico display/texto). Ajustar
+  aquí cuando se cierre la identidad visual definitiva; todo lo demás
+  (Tailwind utilities, componentes) hereda de estas variables.
+*/
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --ink: #15161a;
+  --ink-muted: #55565f;
+  --paper: #faf9f6;
+  --paper-muted: #f0efe8;
+  --accent: #3652ff;
+  --accent-muted: #dde2ff;
+  --border: #e4e2da;
+
+  --content-width: 72rem;
+  --prose-width: 42rem;
+}
+
+.dark {
+  --ink: #f4f3ef;
+  --ink-muted: #a3a3ab;
+  --paper: #111113;
+  --paper-muted: #1a1a1d;
+  --accent: #8391ff;
+  --accent-muted: #262b52;
+  --border: #2b2b2e;
+}
+
+@theme {
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk Variable", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-paper: var(--paper);
+  --color-paper-muted: var(--paper-muted);
+  --color-accent: var(--accent);
+  --color-accent-muted: var(--accent-muted);
+  --color-border: var(--border);
+
+  --container-content: var(--content-width);
+  --container-prose: var(--prose-width);
+}

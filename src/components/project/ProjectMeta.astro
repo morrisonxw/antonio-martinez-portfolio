@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { role, team, duration, company, industry, scope, tools, liveUrl } = project.data;
+
+const items = [
+  { label: 'Empresa', value: company },
+  { label: 'Industria', value: industry },
+  { label: 'Rol', value: role },
+  { label: 'Duración', value: duration },
+  { label: 'Equipo', value: team },
+  { label: 'Alcance', value: scope.length > 0 ? scope.join(', ') : undefined },
+  { label: 'Herramientas', value: tools.length > 0 ? tools.join(', ') : undefined },
+].filter((item) => Boolean(item.value));
+---
+
+<dl class="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3">
+  {
+    items.map((item) => (
+      <div>
+        <dt class="text-xs font-medium uppercase tracking-wide text-ink-muted">{item.label}</dt>
+        <dd class="mt-1 text-sm text-ink">{item.value}</dd>
+      </div>
+    ))
+  }
+  {
+    liveUrl && (
+      <div>
+        <dt class="text-xs font-medium uppercase tracking-wide text-ink-muted">Enlace</dt>
+        <dd class="mt-1 text-sm">
+          <a href={liveUrl} target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">
+            Ver producto ↗
+          </a>
+        </dd>
+      </div>
+    )
+  }
+</dl>

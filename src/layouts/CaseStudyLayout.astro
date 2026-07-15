@@ -1,0 +1,78 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import PageLayout from './PageLayout.astro';
+import Container from '../components/ui/Container.astro';
+import Tag from '../components/ui/Tag.astro';
+import ProjectMeta from '../components/project/ProjectMeta.astro';
+import ProjectNav from '../components/project/ProjectNav.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  prev?: CollectionEntry<'projects'>;
+  next?: CollectionEntry<'projects'>;
+}
+
+const { project, prev, next } = Astro.props;
+const { title, summary, cover, coverAlt, tags, problem, outcome, confidential } = project.data;
+---
+
+<PageLayout title={title} description={summary} image={cover.src}>
+  <article>
+    <Container class="pt-12 sm:pt-16">
+      <div class="max-w-[var(--prose-width)]">
+        {
+          tags.length > 0 && (
+            <div class="mb-4 flex flex-wrap gap-2">
+              {tags.map((tag) => <Tag>{tag}</Tag>)}
+            </div>
+          )
+        }
+        <h1 class="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">{title}</h1>
+        <p class="mt-4 text-lg text-ink-muted">{summary}</p>
+        {
+          confidential && (
+            <p class="mt-4 text-sm text-ink-muted">
+              Algunos detalles de este proyecto se mantienen confidenciales por acuerdo con el cliente/empresa.
+            </p>
+          )
+        }
+      </div>
+
+      <div class="mt-10">
+        <ProjectMeta project={project} />
+      </div>
+    </Container>
+
+    <Container class="mt-12">
+      <Image src={cover} alt={coverAlt} width={1600} class="w-full rounded-2xl" priority />
+    </Container>
+
+    {
+      (problem || outcome) && (
+        <Container class="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-3">
+          {problem && (
+            <div>
+              <h2 class="text-xs font-medium uppercase tracking-wide text-ink-muted">El reto</h2>
+              <p class="mt-2 text-ink">{problem}</p>
+            </div>
+          )}
+          {outcome && (
+            <div class="sm:col-span-2">
+              <h2 class="text-xs font-medium uppercase tracking-wide text-ink-muted">Impacto</h2>
+              <p class="mt-2 text-ink">{outcome}</p>
+            </div>
+          )}
+        </Container>
+      )
+    }
+
+    <Container class="prose prose-neutral mt-16 max-w-[var(--prose-width)] dark:prose-invert prose-headings:font-display">
+      <slot />
+    </Container>
+
+    <Container class="mt-16 mb-24">
+      <ProjectNav prev={prev} next={next} />
+    </Container>
+  </article>
+</PageLayout>

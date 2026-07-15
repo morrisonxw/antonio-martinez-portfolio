@@ -1,0 +1,25 @@
+---
+import { nav } from '../../content-data/nav';
+
+const current = Astro.url.pathname;
+---
+
+<nav aria-label="Principal" class="flex items-center gap-4 sm:gap-6">
+  {
+    nav.map((item) => {
+      const active = current === item.href || current.startsWith(`${item.href}/`);
+      return (
+        <a
+          href={item.href}
+          aria-current={active ? 'page' : undefined}
+          class:list={[
+            'text-sm font-medium transition-colors hover:text-accent',
+            active ? 'text-accent' : 'text-ink',
+          ]}
+        >
+          {item.label}
+        </a>
+      );
+    })
+  }
+</nav>

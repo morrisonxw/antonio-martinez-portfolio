@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import ProjectGrid from '../../components/project/ProjectGrid.astro';
+
+const allProjects = (await getCollection('projects', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.year - a.data.year || a.data.order - b.data.order,
+);
+---
+
+<PageLayout title="Proyectos" description="Case studies de producto digital.">
+  <Container class="pt-16 pb-24 sm:pt-20">
+    <SectionHeading eyebrow="Trabajo" class="mb-12">Proyectos</SectionHeading>
+    <ProjectGrid projects={allProjects} />
+  </Container>
+</PageLayout>
