@@ -12,6 +12,9 @@ interface Props {
 
 const { title, description, image, path } = Astro.props;
 const seo = buildSeo({ title, description, image, path: path ?? Astro.url.pathname });
+
+const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+const showAnalytics = import.meta.env.PROD && gaId;
 ---
 
 <!doctype html>
@@ -50,6 +53,22 @@ const seo = buildSeo({ title, description, image, path: path ?? Astro.url.pathna
         document.documentElement.classList.add('dark');
       }
     </script>
+
+    {
+      showAnalytics && (
+        <>
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+          <script is:inline define:vars={{ gaId }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', gaId);
+          </script>
+        </>
+      )
+    }
   </head>
   <body class="font-sans antialiased">
     <a
