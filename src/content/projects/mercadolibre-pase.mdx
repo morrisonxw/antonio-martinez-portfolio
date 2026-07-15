@@ -23,6 +23,10 @@ outcome: "Los productos rediseñados redujeron la dependencia de la revisión ma
 ---
 
 import ImagePlaceholder from '../../components/mdx/ImagePlaceholder.astro';
+import Figure from '../../components/mdx/Figure.astro';
+import reclamosHome from '../../assets/projects/mercadolibre-pase/reclamos-home.png';
+import reclamosDetalle from '../../assets/projects/mercadolibre-pase/reclamos-detalle.png';
+import reclamosSinFiltro from '../../assets/projects/mercadolibre-pase/reclamos-sin-filtro.png';
 
 ## Contexto
 
@@ -73,6 +77,42 @@ Mover la revisión del final del proceso al día a día fue la decisión que cam
 ## Sistema de reclamos
 
 Rediseñamos el proceso de reclamos de facturación pasando de una gestión individual —un reclamo, un caso, una revisión— a una gestión masiva: cargas y respuestas por lote, y filtros automáticos que resolvían de inmediato los conceptos que contractualmente no correspondía reclamar. También dimos a los proveedores trazabilidad sobre el estado de cada reclamo, algo que antes no existía.
+
+<Figure
+  src={reclamosHome}
+  alt="Bandeja de reclamos de facturación en Mercado Libre, con ventanas de tiempo abiertas y volumen de reclamos por periodo"
+  caption="Bandeja de reclamos: cada ventana de tiempo agrupa el volumen de reclamos recibidos y su estado general."
+/>
+
+<figure class="my-10">
+  <img
+    src="/projects/mercadolibre-pase/crear-reclamo.gif"
+    alt="Flujo de creación de un reclamo de facturación"
+    class="w-full rounded-xl"
+  />
+  <figcaption class="mt-3 text-sm text-ink-muted">Flujo de creación de un reclamo.</figcaption>
+</figure>
+
+<Figure
+  src={reclamosDetalle}
+  alt="Detalle de una ventana de reclamos con el estado de cada solicitud"
+  caption="Detalle de una ventana de reclamos, con el estado de cada solicitud (en revisión, aprobado, rechazado)."
+/>
+
+<figure class="my-10">
+  <img
+    src="/projects/mercadolibre-pase/cargar-desde-detalle.gif"
+    alt="Carga de un reclamo directamente desde el detalle de un viaje"
+    class="w-full rounded-xl"
+  />
+  <figcaption class="mt-3 text-sm text-ink-muted">Carga de un reclamo directamente desde el detalle de un viaje.</figcaption>
+</figure>
+
+<Figure
+  src={reclamosSinFiltro}
+  alt="Vista de todos los reclamos sin filtro, con trazabilidad completa por viaje"
+  caption="Vista sin filtro de todos los reclamos, con trazabilidad completa por viaje y por concepto."
+/>
 
 El proceso solo se volvió sostenible cuando dejamos de diseñarlo caso por caso y empezamos a diseñarlo por lotes.
 
