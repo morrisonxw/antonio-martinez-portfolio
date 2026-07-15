@@ -8,7 +8,7 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.PUBLIC_SITE_URL ?? 'https://tudominio.com',
+  site: process.env.PUBLIC_SITE_URL ?? 'https://antonio-martinez-portfolio.vercel.app',
   vite: {
     plugins: [tailwindcss()]
   },

@@ -23,6 +23,6 @@ const aspectClass = {
     <circle cx="8.5" cy="8.5" r="1.5" />
     <path d="M21 15l-5-5-9 9" />
   </svg>
-  <p class="text-sm font-medium text-ink-muted">Espacio para imagen o GIF</p>
-  <p class="max-w-md text-sm text-ink-muted">{label}</p>
+  <p class="text-sm font-medium text-ink-muted">Imagen próximamente</p>
+  {import.meta.env.DEV && <p class="max-w-md text-sm text-ink-muted">{label}</p>}
 </div>

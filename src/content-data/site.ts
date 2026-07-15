@@ -1,7 +1,7 @@
 export const site = {
   name: 'Antonio Martínez',
   role: 'Senior Product Designer',
-  tagline: 'Diseñar la complejidad operativa',
+  tagline: 'Creo productos digitales alineando las necesidades de los usuarios con el crecimiento del negocio.',
   description:
     'Transformar procesos operativos complejos —con múltiples actores, alto volumen y baja visibilidad— en productos digitales que reducen pérdidas y generan confianza entre las partes.',
   email: 'anton.mtinez@gmail.com',
@@ -11,5 +11,5 @@ export const site = {
     linkedin: 'https://linkedin.com/in/ant-martinez',
     behance: 'https://www.behance.net/jaidermartinez',
   },
-  url: 'https://tudominio.com',
+  url: 'https://antonio-martinez-portfolio.vercel.app',
 };

@@ -6,6 +6,7 @@
     </linearGradient>
   </defs>
   <rect width="1200" height="800" fill="url(#g)"/>
-  <text x="60" y="700" font-family="Arial, sans-serif" font-weight="700" font-size="64" fill="#15161A">PASE</text>
-  <text x="60" y="750" font-family="Arial, sans-serif" font-size="26" fill="#15161A">Reemplaza esta portada por una captura real del producto</text>
+  <rect x="60" y="60" width="230" height="44" rx="22" fill="#15161A" fill-opacity="0.15"/>
+  <text x="86" y="89" font-family="Arial, sans-serif" font-weight="700" font-size="18" letter-spacing="1" fill="#15161A">PRÓXIMAMENTE</text>
+  <text x="60" y="700" font-family="Arial, sans-serif" font-weight="700" font-size="72" fill="#15161A">PASE</text>
 </svg>
