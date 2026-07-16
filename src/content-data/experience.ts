@@ -2,7 +2,7 @@ export const experience = [
   {
     company: 'Mercado Libre',
     role: 'Especialista UX SSR',
-    period: 'Junio 2022 — Junio 2026',
+    period: 'Junio 2022 — Mayo 2026',
   },
   {
     company: 'Intergrupo SoftwareOne',

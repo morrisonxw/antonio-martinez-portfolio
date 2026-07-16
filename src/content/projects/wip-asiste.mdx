@@ -1,8 +1,8 @@
 ---
 title: "Rediseñar una herramienta operativa para retener y crecer"
 summary: "Cómo redujimos el abandono de una herramienta de gestión de personal de campo y construimos su nueva web de adquisición."
-cover: "../../assets/projects/wip-asiste/cover.svg"
-coverAlt: "Portada del case study de WIP (antes Asiste)"
+cover: "../../assets/projects/wip-asiste/cover.png"
+coverAlt: "Diagrama del ecosistema de Asiste: usuarios, proveedores, colaboradores y canales de gestión conectados a la plataforma"
 tags: ["Product Design", "SaaS B2B", "Servicios de Campo", "Adquisición"]
 year: 2021
 featured: true
@@ -18,10 +18,16 @@ scope: ["UX Research", "Arquitectura de Información", "Product Design", "UI Des
 confidential: false
 
 problem: "El producto tenía muchas funcionalidades pero un enfoque poco claro: los operadores de campo no contaban con una forma clara de registrar y rastrear su trabajo, y los analistas de operaciones enfrentaban fricciones que se traducían en riesgo real de abandono de la herramienta."
-outcome: "La herramienta redujo su tasa de abandono, y la nueva web aumentó de forma sostenida el registro semanal de nuevos usuarios."
+outcome: "La herramienta redujo su tasa de abandono, y la nueva web duplicó (2x) el registro semanal de nuevos usuarios agendando una demo."
 ---
 
-import ImagePlaceholder from '../../components/mdx/ImagePlaceholder.astro';
+import ImpactStats from '../../components/mdx/ImpactStats.astro';
+import Figure from '../../components/mdx/Figure.astro';
+import panelMonitoreo from '../../assets/projects/wip-asiste/panel-monitoreo.png';
+import gestionProveedores from '../../assets/projects/wip-asiste/gestion-proveedores.png';
+import exploracionesMonitoreo from '../../assets/projects/wip-asiste/exploraciones-monitoreo.png';
+import flujoAgendamientoDemo from '../../assets/projects/wip-asiste/flujo-agendamiento-demo.png';
+import landingFinal from '../../assets/projects/wip-asiste/landing-final.png';
 
 ## Contexto
 
@@ -33,7 +39,12 @@ Lideré el discovery con analistas de operaciones, el rediseño de arquitectura 
 
 ## Impacto
 
-La herramienta redujo su tasa de abandono, y la nueva web aumentó de forma sostenida el registro semanal de nuevos usuarios.
+<ImpactStats
+  stats={[
+    { value: "Menos abandono", label: "De la herramienta, por parte de los operadores de campo que ya la usaban." },
+    { value: "2x", label: "Registros semanales para agendar una demo, con la nueva web de adquisición." },
+  ]}
+/>
 
 ## Problema
 
@@ -41,12 +52,40 @@ El producto tenía muchas funcionalidades pero un enfoque poco claro. Los operad
 
 ## Proceso
 
-Entrevisté a cinco analistas de operaciones para identificar las fricciones más relevantes, y crucé esos hallazgos con datos de usuarios que ya habían abandonado la herramienta o se quejaban activamente. A partir de ahí, trabajé en arquitectura de información, contenido y refinamiento de flujos orientados al trabajo que el usuario necesitaba resolver, y construí una app para operadores de campo con listado de servicios, navegación hacia el lugar de ejecución y carga de evidencias.
+Entrevisté a cinco analistas de operaciones para identificar las fricciones más relevantes, y crucé esos hallazgos con datos de usuarios que ya habían abandonado la herramienta o se quejaban activamente. A partir de ahí, trabajé en arquitectura de información, contenido y refinamiento de flujos orientados al trabajo que el usuario necesitaba resolver, construí una app para operadores de campo con listado de servicios, navegación hacia el lugar de ejecución y carga de evidencias, y di a los analistas herramientas para monitorear en tiempo real la operación y el estado de cada colaborador en campo.
 
-<ImagePlaceholder label="Flujo o pantallas de la app para operadores de campo: listado de servicios, navegación y carga de evidencias." />
+<Figure
+  src={panelMonitoreo}
+  alt="Panel de administrador de Asiste con central de monitoreo en tiempo real de servicios y colaboradores en campo"
+  caption="Central de monitoreo: seguimiento en tiempo real de los servicios y colaboradores en campo."
+/>
+
+<Figure
+  src={gestionProveedores}
+  alt="Gestión de unidades de negocio y proveedores compartidos dentro de Asiste"
+  caption="Gestión de unidades de negocio: creación, configuración y relaciones entre proveedores compartidos."
+/>
+
+<Figure
+  src={exploracionesMonitoreo}
+  alt="Exploraciones de gestión de colaboradores e historial de rutas ejecutadas"
+  caption="Gestión de colaboradores e historial de rutas, para que los analistas rastrearan el trabajo ejecutado en campo."
+/>
+
+Para la web de adquisición, mapeamos junto a marketing todo el flujo de agendamiento de una demo —desde el formulario hasta los recordatorios automáticos— para no perder leads por falta de seguimiento.
+
+<Figure
+  src={flujoAgendamientoDemo}
+  alt="Diagrama de flujo del proceso de agendamiento de demo, con automatizaciones de CRM y correo"
+  caption="Flujo de agendamiento de demo: automatizaciones de CRM y recordatorios diseñadas junto a marketing."
+/>
 
 ## Resultado
 
 Menor abandono de la herramienta por parte de los usuarios existentes, y crecimiento sostenido en el registro semanal de nuevos usuarios a través de la web rediseñada.
 
-<ImagePlaceholder label="Antes/después de la web de adquisición rediseñada." aspect="wide" />
+<Figure
+  src={landingFinal}
+  alt="Landing page rediseñada de Asiste, orientada a conversión y agendamiento de demos"
+  caption="La nueva web de adquisición, orientada a comunicar la propuesta de valor y agendar demos."
+/>

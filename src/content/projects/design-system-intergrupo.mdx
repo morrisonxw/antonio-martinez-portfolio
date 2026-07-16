@@ -1,8 +1,8 @@
 ---
 title: "De un PDF estático a una biblioteca de componentes"
 summary: "Cómo construí el primer sistema de diseño para la cuenta de EPM, pasando de un PDF estático a una biblioteca de componentes viva."
-cover: "../../assets/projects/design-system-intergrupo/cover.svg"
-coverAlt: "Portada del case study del sistema de diseño de Intergrupo / SoftwareOne"
+cover: "../../assets/projects/design-system-intergrupo/cover.png"
+coverAlt: "Muestra de componentes del UI Kit de EPM: botones, inputs, cards y estilos de texto sobre fondo oscuro"
 tags: ["Design System", "B2B", "Enterprise"]
 year: 2021
 yearLabel: "2021–2022"
@@ -20,14 +20,28 @@ problem: "En la cuenta de EPM, el sistema de diseño compartido con otro proveed
 outcome: "Los cuatro diseñadores del equipo pasamos de reconstruir componentes a reutilizarlos, ganando consistencia y velocidad en el trabajo diario."
 ---
 
-import ImagePlaceholder from '../../components/mdx/ImagePlaceholder.astro';
+import ImpactStats from '../../components/mdx/ImpactStats.astro';
+import BeforeAfter from '../../components/mdx/BeforeAfter.astro';
+import pdfBotones from '../../assets/projects/design-system-intergrupo/pdf-botones.png';
+import libreriaFuncional from '../../assets/projects/design-system-intergrupo/libreria-funcional.png';
 
 ## Contexto
 
 En la cuenta de EPM, el sistema de diseño compartido con otro proveedor vivía en un PDF: cada vez que se necesitaba un componente, había que reconstruirlo desde cero. Estudié sistemas de diseño de referencia como los de Google e IBM, y construí de forma empírica una biblioteca de componentes documentada en un archivo maestro.
 
-<ImagePlaceholder label="Secuencia PDF → biblioteca de componentes → equipo trabajando con ella." aspect="wide" />
+<BeforeAfter
+  before={pdfBotones}
+  beforeAlt="Página de un PDF estático especificando la estructura y estados de los botones del sistema de diseño de EPM"
+  after={libreriaFuncional}
+  afterAlt="Biblioteca de componentes funcional en Figma, con átomos de botones, inputs y estilos organizados en capas"
+/>
 
 ## Impacto
 
-Los cuatro diseñadores del equipo pasamos de reconstruir componentes a reutilizarlos, ganando consistencia y velocidad en el trabajo diario.
+<ImpactStats
+  stats={[
+    { value: "De reconstruir a reutilizar", label: "Los cuatro diseñadores del equipo dejaron de rehacer componentes desde cero." },
+    { value: "Más consistencia", label: "En el trabajo diario de todo el equipo." },
+    { value: "Más velocidad", label: "Al construir sobre componentes ya documentados." },
+  ]}
+/>
