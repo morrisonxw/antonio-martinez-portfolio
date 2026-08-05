@@ -1,9 +1,9 @@
 export const site = {
   name: 'Antonio Martínez',
   role: 'Product Designer',
-  tagline: 'Diseño productos digitales que transforman procesos complejos en experiencias claras, medibles y con impacto real de negocio.',
+  tagline: 'Diseño productos digitales que transforman oportunidades en experiencias con impacto real para negocio y usuarios.',
   description:
-    'Transformar procesos operativos complejos —con múltiples actores, alto volumen y baja visibilidad— en productos digitales que reducen pérdidas y generan confianza entre las partes.',
+    'Me he especializado en transformar procesos operativos complejos con múltiples actores, en productos digitales.',
   email: 'anton.mtinez@gmail.com',
   phone: '+57 350 497 57 85',
   whatsappUrl: 'https://wa.me/573504975785',
