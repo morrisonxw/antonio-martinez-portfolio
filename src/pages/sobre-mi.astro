@@ -10,9 +10,9 @@ import { about } from '../content-data/about';
 
 <PageLayout title="Sobre mí" description={`Conoce más sobre ${site.name}, ${site.role}.`}>
   <Container class="pt-16 pb-24 sm:pt-20">
-    <div class="max-w-[var(--prose-width)]">
+    <div class="max-w-[var(--prose-width)]" data-reveal>
       <p class="text-sm font-medium text-accent">Sobre mí</p>
-      <h1 class="mt-3 font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+      <h1 class="mt-3 font-display text-4xl font-bold tracking-tightest text-ink sm:text-6xl">
         Hola, soy {site.name}.
       </h1>
 
@@ -20,7 +20,7 @@ import { about } from '../content-data/about';
         {
           about.sections.map((section) => (
             <div>
-              <h2 class="font-display text-lg font-bold text-ink">{section.heading}</h2>
+              <h2 class="font-display text-lg font-bold tracking-tightest text-ink">{section.heading}</h2>
               <p class="mt-2 text-ink-muted">{section.body}</p>
             </div>
           ))
@@ -28,7 +28,7 @@ import { about } from '../content-data/about';
       </div>
 
       <div class="mt-10">
-        <h2 class="font-display text-lg font-bold text-ink">Skills principales</h2>
+        <h2 class="font-display text-lg font-bold tracking-tightest text-ink">Skills principales</h2>
         <div class="mt-3 flex flex-wrap gap-2">
           {about.skills.map((skill) => <Tag>{skill}</Tag>)}
         </div>
@@ -40,8 +40,8 @@ import { about } from '../content-data/about';
       </div>
     </div>
 
-    <div class="mt-20 max-w-[var(--prose-width)]">
-      <h2 class="font-display text-2xl font-bold text-ink">Trayectoria</h2>
+    <div class="mt-20 max-w-[var(--prose-width)]" data-reveal>
+      <h2 class="font-display text-2xl font-bold tracking-tightest text-ink">Trayectoria</h2>
       <p class="mt-2 text-ink-muted">{about.experienceIntro}</p>
       <ul class="mt-6 divide-y divide-border border-y border-border">
         {
@@ -60,8 +60,8 @@ import { about } from '../content-data/about';
       </ul>
     </div>
 
-    <div class="mt-20 max-w-[var(--prose-width)] border-l-2 border-accent pl-6">
-      <p class="font-display text-xl font-medium text-ink sm:text-2xl">
+    <div class="mt-20 max-w-[var(--prose-width)] border-l-2 border-accent pl-6" data-reveal>
+      <p class="font-display text-xl font-medium tracking-tightest text-ink sm:text-2xl">
         "{about.philosophy}"
       </p>
     </div>

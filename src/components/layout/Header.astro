@@ -1,28 +1,29 @@
 ---
 import Container from '../ui/Container.astro';
 import Button from '../ui/Button.astro';
-import Nav from './Nav.astro';
+import Logo from '../ui/Logo.astro';
+import MenuOverlay from './MenuOverlay.astro';
 import ThemeToggle from '../islands/ThemeToggle';
 import { site } from '../../content-data/site';
 ---
 
-<header class="border-b border-border py-5 sm:py-6">
+<header class="fixed inset-x-0 top-0 z-[60] border-b border-border bg-paper py-5 sm:py-6">
   <Container class="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
-    <a href="/" class="shrink-0 whitespace-nowrap font-display text-lg font-bold text-ink">
-      {site.name}
+    <a href="/" class="flex shrink-0 items-center gap-2.5 whitespace-nowrap text-ink">
+      <Logo class="h-6 w-6" />
+      <span class="font-display text-lg font-bold">{site.name}</span>
     </a>
     <div class="flex flex-wrap items-center gap-x-4 gap-y-3 sm:gap-x-6">
-      <Nav />
       <Button
         href="/cv/Antonio-Martinez-CV.pdf"
         download
         variant="secondary"
-        class="px-3 text-xs sm:px-5 sm:text-sm"
+        class="hidden px-3 text-xs sm:inline-flex sm:px-5 sm:text-sm"
       >
-        <span class="sm:hidden">CV</span>
-        <span class="hidden sm:inline">Descargar CV</span>
+        Descargar CV
       </Button>
       <ThemeToggle client:load />
+      <MenuOverlay />
     </div>
   </Container>
 </header>

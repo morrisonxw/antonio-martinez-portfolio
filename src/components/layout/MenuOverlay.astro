@@ -1,0 +1,157 @@
+---
+import { nav } from '../../content-data/nav';
+import { site } from '../../content-data/site';
+
+const current = Astro.url.pathname;
+---
+
+<button
+  id="menu-toggle"
+  type="button"
+  aria-haspopup="true"
+  aria-expanded="false"
+  aria-controls="menu-panel"
+  class="group inline-flex items-center gap-2 text-sm font-medium text-ink"
+>
+  Menú
+  <span class="relative flex h-3 w-6 flex-col justify-between">
+    <span class="h-px w-full origin-center bg-ink transition-transform duration-300 group-aria-expanded:translate-y-[5px] group-aria-expanded:rotate-45"
+    ></span>
+    <span class="h-px w-full origin-center bg-ink transition-transform duration-300 group-aria-expanded:-translate-y-[5px] group-aria-expanded:-rotate-45"
+    ></span>
+  </span>
+</button>
+
+<div id="menu-panel" data-state="closed" class="fixed inset-0 z-[70] pointer-events-none data-[state=open]:pointer-events-auto">
+  <div
+    data-menu-backdrop
+    data-state="closed"
+    class="absolute inset-0 bg-ink/40 opacity-0 transition-opacity duration-500 ease-out data-[state=open]:opacity-100"
+  >
+  </div>
+  <div
+    data-menu-content
+    data-state="closed"
+    class="absolute inset-y-0 right-0 flex w-full max-w-lg translate-x-full flex-col overflow-y-auto bg-paper px-8 py-8 shadow-2xl transition-transform duration-500 ease-out data-[state=open]:translate-x-0 sm:px-12 sm:py-10"
+  >
+    <div class="flex items-center justify-between">
+      <a href="/" class="font-display text-lg font-bold text-ink">{site.name}</a>
+      <button
+        type="button"
+        data-menu-close
+        aria-label="Cerrar menú"
+        class="flex h-9 w-9 items-center justify-center rounded-full border border-border text-ink transition-colors hover:border-accent hover:text-accent"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" class="h-4 w-4">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+
+    <nav aria-label="Principal" class="mt-16 flex flex-1 flex-col gap-3">
+      {
+        nav.map((item) => {
+          const active = current === item.href || current.startsWith(`${item.href}/`);
+          return (
+            <a
+              href={item.href}
+              aria-current={active ? 'page' : undefined}
+              class:list={[
+                'font-display text-4xl font-bold tracking-tightest transition-colors hover:text-accent sm:text-5xl',
+                active ? 'text-accent' : 'text-ink',
+              ]}
+            >
+              {item.label}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <div class="mt-10 space-y-3 border-t border-border pt-8 text-sm">
+      <p class="text-xs font-medium tracking-wide text-ink-muted uppercase">Contacto</p>
+      <a href={`mailto:${site.email}`} class="block text-ink hover:text-accent">{site.email}</a>
+      <a
+        href={site.social.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block text-ink hover:text-accent"
+      >
+        LinkedIn
+      </a>
+      <a
+        href={site.social.behance}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block text-ink hover:text-accent"
+      >
+        Behance
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupMenu() {
+    const toggle = document.getElementById('menu-toggle');
+    const panel = document.getElementById('menu-panel');
+    const backdrop = panel?.querySelector<HTMLElement>('[data-menu-backdrop]');
+    const content = panel?.querySelector<HTMLElement>('[data-menu-content]');
+    const closeBtn = panel?.querySelector<HTMLElement>('[data-menu-close]');
+    if (!toggle || !panel || !backdrop || !content) return;
+
+    let lastFocused: HTMLElement | null = null;
+
+    function setState(state: 'open' | 'closed') {
+      panel!.dataset.state = state;
+      backdrop!.dataset.state = state;
+      content!.dataset.state = state;
+      toggle!.setAttribute('aria-expanded', String(state === 'open'));
+    }
+
+    function open() {
+      lastFocused = document.activeElement as HTMLElement;
+      setState('open');
+      document.documentElement.classList.add('overflow-hidden');
+      document.addEventListener('keydown', onKeydown);
+      const firstLink = content!.querySelector<HTMLElement>('a, button');
+      firstLink?.focus();
+    }
+
+    function close() {
+      setState('closed');
+      document.documentElement.classList.remove('overflow-hidden');
+      document.removeEventListener('keydown', onKeydown);
+      (lastFocused ?? toggle)?.focus();
+    }
+
+    function onKeydown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        close();
+        return;
+      }
+      if (e.key === 'Tab') {
+        const focusables = content!.querySelectorAll<HTMLElement>('a, button');
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+
+    toggle.addEventListener('click', () => {
+      panel!.dataset.state === 'open' ? close() : open();
+    });
+    closeBtn?.addEventListener('click', close);
+    backdrop.addEventListener('click', close);
+    content.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
+  }
+
+  document.addEventListener('astro:page-load', setupMenu);
+</script>

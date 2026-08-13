@@ -1,9 +1,10 @@
 ---
-title: "Transformando el ciclo de facturación de proveedores logísticos"
-summary: "Cómo rediseñamos el ciclo de facturación de proveedores logísticos en Mercado Libre para pasar de reclamos reactivos a un proceso confiable y escalable."
+title: "PASE: de reclamos reactivos a conciliación operativa diaria"
+summary: "Diseñé PASE, la plataforma donde Mercado Libre y sus proveedores logísticos concilian a diario lo ejecutado en ruta, evitando fugas de capital antes de que lleguen a facturación."
 cover: "../../assets/projects/mercadolibre-pase/cover.png"
-coverAlt: "Panel de control de rutas ejecutadas de Mercado Libre, con ajustes y reclamos por ruta"
-tags: ["Mercado Libre", "Product Design", "Marketplace", "Logística", "B2B", "Facturación"]
+coverAlt: "Panel de control de rutas ejecutadas en PASE, con ajustes y reclamos por ruta"
+thumbnail: "../../assets/projects/mercadolibre-pase/thumbnail.png"
+tags: ["Product Design", "B2B Enterprise", "Logística", "Conciliación"]
 year: 2022
 yearLabel: "2022–2026"
 featured: true
@@ -11,80 +12,50 @@ order: 1
 draft: false
 
 role: "Product Designer"
-team: "Producto, Negocio y Tecnología"
-duration: "~4 años"
+team: "Triada de producto — 1 PM, 1 Tech Lead, 1 UX Senior, ingenieros frontend/backend y equipo de User Research"
 company: "Mercado Libre"
-industry: "Marketplace · Logística B2B"
-scope: ["UX Research", "Discovery", "Arquitectura de Información", "Product Design", "Prototipado"]
+industry: "Envíos / Transporte B2B"
+scope: ["UX Research", "Estrategia UX", "Arquitectura de Información", "UI Design", "Prototipado"]
+tools: ["Figma", "FigJam", "Claude Code", "Gemini", "Figma Make", "NotebookLM"]
 confidential: false
-
-problem: "Miles de servicios logísticos ejecutados a diario sin transparencia entre lo que los proveedores ejecutaban y lo que Mercado Libre reconocía y facturaba, generando desconfianza y un volumen de reclamos manuales inviable de sostener."
-outcome: "Los productos rediseñados redujeron los reclamos de facturación en un 90% y contribuyeron a recuperos financieros estimados en millones de dólares para Mercado Libre, además de dar a los proveedores mayor visibilidad sobre sus pagos."
 ---
 
-import Figure from '../../components/mdx/Figure.astro';
 import ImpactStats from '../../components/mdx/ImpactStats.astro';
 import ProductDivider from '../../components/mdx/ProductDivider.astro';
-import reclamosHome from '../../assets/projects/mercadolibre-pase/reclamos-home.png';
-import reclamosDetalle from '../../assets/projects/mercadolibre-pase/reclamos-detalle.png';
-import reclamosSinFiltro from '../../assets/projects/mercadolibre-pase/reclamos-sin-filtro.png';
-import componentesReclamos from '../../assets/projects/mercadolibre-pase/componentes-reclamos.png';
-import exploracionCards from '../../assets/projects/mercadolibre-pase/exploracion-cards.png';
-import configVentanas from '../../assets/projects/mercadolibre-pase/config-ventanas-reclamos.png';
-import notificacionesMlp from '../../assets/projects/mercadolibre-pase/notificaciones-mlp.png';
-import notificacionesMeli from '../../assets/projects/mercadolibre-pase/notificaciones-meli.png';
 
-## Contexto
+## Contexto de negocio
 
-Durante casi cuatro años trabajé en la unidad de negocio de transporte de Mercado Libre, en productos dirigidos a proveedores logísticos de primera, media y última milla. El desafío de fondo era la falta de transparencia entre los servicios que los proveedores ejecutaban y lo que los sistemas de Mercado Libre reconocían y facturaban.
+Mercado Libre enfrentaba fugas de capital de alto impacto por divergencias no detectadas a tiempo entre los servicios de transporte que terceros ejecutaban en campo y lo que el sistema de facturación registraba. La conciliación se hacía de forma reactiva, semanas después de ejecutados los viajes, lo que generaba dos cuellos de botella críticos: los transportistas no tenían transparencia sobre penalizaciones o desvíos, y una parte de los sobrepagos no era recuperable por barreras contractuales con grandes carriers que impedían aplicar descuentos retroactivos.
 
+{/*
 ## Mi rol
 
-Trabajé como product designer dentro de squads multidisciplinarios —producto, negocio y tecnología— cubriendo distintos puntos del ciclo de vida del proveedor: alta y registro, facturación, sistema de reclamos y monitoreo diario de servicios. En el frente de reclamos, esto significó diseñar para un volumen de hasta 20.000 reclamos por periodo, un orden de magnitud que ninguna revisión manual podía sostener.
+Trabajé dentro de la triada de producto —PM, Tech Lead y yo como UX— junto a ingenieros de frontend/backend y el equipo de User Research, cubriendo estrategia UX, investigación, arquitectura de información y UI design de punta a punta.
+*/}
 
 ## Impacto
 
 <ImpactStats
   stats={[
-    { value: "90%", label: "Menos reclamos de facturación tras el rediseño del sistema de reclamos y el lanzamiento de PASE." },
-    { value: "Millones de USD", label: "En recuperos financieros estimados para Mercado Libre." },
-    { value: "Relación más sana", label: "Mejoró la relación entre Mercado Libre y sus proveedores logísticos." },
+    { value: "70%", label: "Menos divergencias financieras no recuperables y reclamos extemporáneos en los sites de despliegue inicial (México y Brasil)." },
+    { value: "48 horas", label: "Tiempo de resolución de disputas, antes medido en semanas." },
+    { value: "-50%", label: "Reclamos extemporáneos tras el lanzamiento de PASE." },
   ]}
 />
 
-{/* PENDIENTE: Mapa del ecosistema de proveedores (MLP y comercial carriers) y su relación con Mercado Libre. */}
+## Research e insights
 
-Un mismo problema —la brecha entre lo ejecutado y lo facturado— atravesó cada producto en el que trabajé.
+Las pruebas cualitativas y entrevistas contextuales en México y Brasil revelaron que revisar un viaje con semanas de antigüedad exigía reconstruir trazabilidades manuales con coordinadores que no recordaban la novedad.
 
-## El problema
+<ProductDivider eyebrow="Research" label="Revisar un viaje con semanas de antigüedad exigía reconstruir de memoria algo que debió quedar registrado el mismo día." />
 
-Miles de servicios ejecutados a diario, en distintos países y bajo distintas reglas operativas. Proveedores que no confiaban en lo que se les facturaba. Analistas desbordados por reclamos que, en su mayoría, correspondían a conceptos que ya estaban acordados como no facturables.
+## Reglas de negocio y decisiones de diseño
 
-{/* PENDIENTE: Diagrama del proceso as-is con los cuellos de botella marcados: contratación → ejecución del servicio → cierre de periodo → prefactura → reclamo manual → revisión caso por caso. */}
+De ese hallazgo surgió la regla contractual de **Silencio Positivo**: un servicio no cuestionado dentro de la ventana estipulada se da por aceptado automáticamente. Separamos con rigurosidad la aceptación de atributos físicos (rutas, kilómetros, placa/patente, conductor, facility) de la gestión de tarifas y penalidades.
 
-<ProductDivider eyebrow="El problema" label="El problema no era la falta de un canal de reclamos. Era que el proceso completo dependía de revisar, uno por uno, un volumen que ninguna cantidad de analistas podía absorber." />
+Para evitar que el panel colapsara bajo un volumen masivo de datos, descarté la auditoría ítem por ítem en pantalla a favor de un panel ejecutivo con filtros avanzados y descarga parametrizada de plantillas CSV/Excel compatibles con el software contable de los proveedores.
 
-## Discovery
-
-### Usuarios
-
-Proveedores MLP (contratados directamente por Mercado Libre), comercial carriers de gran escala como operadores logísticos internacionales, y analistas internos responsables de revisar y resolver reclamos.
-
-### Insights
-
-Los proveedores solo tenían visibilidad de sus servicios al cierre del periodo de facturación —que podía tardar semanas—, momento en el que ya era tarde para corregir cualquier diferencia. La revisión de reclamos caso por caso era estructuralmente inviable frente al volumen real. Y una parte importante de esos reclamos correspondía a conceptos que el negocio ya había definido como no pagables desde la negociación con el proveedor.
-
-<ProductDivider eyebrow="Discovery" label="La mayor oportunidad no estaba en resolver reclamos más rápido, sino en evitar que la mayoría de ellos llegara a existir." />
-
-## La solución: plataforma de aceptación de servicios
-
-Diseñamos PASE (Plataforma de Aceptación de Servicios), una herramienta de uso diario —no de cierre de proceso— que muestra a los proveedores los servicios ejecutados y el monto que se les pagará, con una ventana de tiempo definida para presentar objeciones. Si el proveedor no reclama dentro de ese plazo, el servicio se entiende aceptado.
-
-Esto cambió el reclamo de un evento acumulado al final del periodo a una gestión distribuida en el tiempo, dirigida directamente al equipo responsable del servicio en cuestión, mientras la información todavía estaba fresca.
-
-{/* PENDIENTE: Mockup del panel diario de servicios con estado de aceptación/objeción por servicio. */}
-
-<ProductDivider eyebrow="La solución" label="Mover la revisión del final del proceso al día a día fue la decisión que cambió la naturaleza del problema." />
+<ProductDivider eyebrow="Decisión de diseño" label="Mover la revisión del final del proceso al día a día fue lo que cambió la naturaleza del problema, no solo su velocidad." />
 
 Parte de la iteración de este panel la hice apoyándome en herramientas de IA para prototipar más rápido y validar variantes de la interfaz sin esperar a tener el desarrollo final:
 
@@ -100,108 +71,6 @@ Parte de la iteración de este panel la hice apoyándome en herramientas de IA p
   <figcaption class="mt-3 text-sm text-ink-muted">Iteración del panel de control de rutas ejecutadas, prototipado con Figma Make.</figcaption>
 </figure>
 
-<figure class="my-10">
-  <video
-    src="/projects/mercadolibre-pase/prototipo-claude.mp4"
-    autoplay
-    loop
-    muted
-    playsinline
-    class="w-full rounded-xl"
-  />
-  <figcaption class="mt-3 text-sm text-ink-muted">Iteración del flujo de gestión de reclamos, prototipado con Claude.</figcaption>
-</figure>
+## Resultado
 
-## Sistema de reclamos
-
-Rediseñamos el proceso de reclamos de facturación pasando de una gestión individual —un reclamo, un caso, una revisión— a una gestión masiva: cargas y respuestas por lote, y filtros automáticos que resolvían de inmediato los conceptos que contractualmente no correspondía reclamar. También dimos a los proveedores trazabilidad sobre el estado de cada reclamo, algo que antes no existía.
-
-<Figure
-  src={reclamosHome}
-  alt="Bandeja de reclamos de facturación en Mercado Libre, con ventanas de tiempo abiertas y volumen de reclamos por periodo"
-  caption="Bandeja de reclamos: cada ventana de tiempo agrupa el volumen de reclamos recibidos y su estado general."
-/>
-
-<figure class="my-10">
-  <img
-    src="/projects/mercadolibre-pase/crear-reclamo.gif"
-    alt="Flujo de creación de un reclamo de facturación"
-    class="w-full rounded-xl"
-  />
-  <figcaption class="mt-3 text-sm text-ink-muted">Flujo de creación de un reclamo.</figcaption>
-</figure>
-
-<Figure
-  src={reclamosDetalle}
-  alt="Detalle de una ventana de reclamos con el estado de cada solicitud"
-  caption="Detalle de una ventana de reclamos, con el estado de cada solicitud (en revisión, aprobado, rechazado)."
-/>
-
-<figure class="my-10">
-  <img
-    src="/projects/mercadolibre-pase/cargar-desde-detalle.gif"
-    alt="Carga de un reclamo directamente desde el detalle de un viaje"
-    class="w-full rounded-xl"
-  />
-  <figcaption class="mt-3 text-sm text-ink-muted">Carga de un reclamo directamente desde el detalle de un viaje.</figcaption>
-</figure>
-
-<Figure
-  src={reclamosSinFiltro}
-  alt="Vista de todos los reclamos sin filtro, con trazabilidad completa por viaje"
-  caption="Vista sin filtro de todos los reclamos, con trazabilidad completa por viaje y por concepto."
-/>
-
-<ProductDivider eyebrow="Sistema de reclamos" label="El proceso solo se volvió sostenible cuando dejamos de diseñarlo caso por caso y empezamos a diseñarlo por lotes." />
-
-Antes de llegar a esta versión, exploramos distintas formas de organizar la información y de dar acceso a los analistas para configurar las ventanas de reclamos:
-
-<Figure
-  src={exploracionCards}
-  alt="Exploración de cards para la gestión de reclamos de rutas ejecutadas"
-  caption="Exploración de distintos formatos de card para priorizar y resolver reclamos."
-/>
-
-<Figure
-  src={componentesReclamos}
-  alt="Componentes de UI para el sistema de reclamos"
-  caption="Componentes del sistema de reclamos, pensados para reutilizarse entre la bandeja general y el detalle."
-/>
-
-<Figure
-  src={configVentanas}
-  alt="Flujo de configuración de una nueva ventana de reclamos"
-  caption="Flujo interno para que los analistas configuraran nuevas ventanas de reclamos."
-/>
-
-## Prefacturación
-
-Trabajamos en simplificar la información que se mostraba a los proveedores en cada prefactura, priorizando lo accionable sobre el detalle exhaustivo, y mejoramos la comunicación de los tiempos del proceso —cuándo estaría disponible la prefactura y cuándo se realizaría el pago— para reducir la incertidumbre que generaba este momento.
-
-<ProductDivider eyebrow="Prefacturación" label="Mostrar menos información, pero la correcta, redujo más fricción que agregar más detalle." />
-
-## Comunicación y notificaciones
-
-Además del producto, diseñé las comunicaciones que acompañaron otros cambios del ecosistema de proveedores. Un ejemplo: cuando los MLP pasaron a poder gestionar ellos mismos el rol de aprobador de Acuerdos Tarifarios, sin depender del equipo de Procurement de Mercado Libre como intermediario. Esto incluyó tanto el email a los proveedores explicando el cambio, como la comunicación interna al equipo de Procurement sobre cómo acompañarlos durante la transición.
-
-<Figure
-  src={notificacionesMlp}
-  alt="Notificación por email a proveedores (MLP) sobre el nuevo proceso de gestión de aprobadores"
-  caption="Notificación a proveedores (MLP) sobre el nuevo proceso de autogestión de aprobadores."
-/>
-
-<Figure
-  src={notificacionesMeli}
-  alt="Comunicación interna al equipo de Procurement de Mercado Libre sobre el mismo cambio"
-  caption="Comunicación interna al equipo de Procurement, explicando el cambio y cómo acompañar a los proveedores."
-/>
-
-## Impacto general y aprendizajes
-
-### Impacto
-
-Menos reclamos dependientes de revisión manual, procesos que ganaron capacidad de escalar con el volumen en lugar de requerir más personas para sostenerse, y una relación más predecible y transparente entre Mercado Libre y sus proveedores logísticos.
-
-### Aprendizajes
-
-Diseñar pensando en el volumen desde el primer día, no como una optimización posterior. Reutilizar una herramienta interna ya existente no siempre acelera la entrega: en el caso del sistema de reclamos, adaptarla tomó más esfuerzo del que hubiera tomado construir de cero, y terminó limitando la experiencia final.
+La iniciativa devolvió predictibilidad financiera a la cadena logística: menos divergencias no recuperables y disputas resueltas en horas en lugar de semanas.

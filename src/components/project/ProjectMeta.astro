@@ -6,10 +6,9 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { role, team, duration, company, industry, scope, tools, liveUrl } = project.data;
+const { role, team, duration, industry, scope, tools, liveUrl } = project.data;
 
 const items = [
-  { label: 'Empresa', value: company },
   { label: 'Industria', value: industry },
   { label: 'Rol', value: role },
   { label: 'Duración', value: duration },

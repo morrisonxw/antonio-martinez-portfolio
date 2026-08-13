@@ -16,3 +16,106 @@ body {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
+
+/* Scroll reveals: visibles por defecto (sin JS / prefers-reduced-motion).
+   El motor de motion (src/lib/motion/reveal.ts) añade .reveal-init justo
+   antes de observar el elemento, y .is-revealed cuando entra en viewport. */
+[data-reveal].reveal-init {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-reveal].reveal-init.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Textura grain para secciones oscuras full-bleed (CTA, experiencia) */
+.bg-grain {
+  position: relative;
+  isolation: isolate;
+}
+
+.bg-grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.bg-grain > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Cursor custom (solo con pointer fino y sin prefers-reduced-motion,
+   activado por src/lib/motion/cursor.ts) */
+.mk-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border-radius: 999px;
+  background: var(--color-ink);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: width 0.25s ease, height 0.25s ease, margin 0.25s ease;
+  will-change: transform;
+}
+
+.mk-cursor.is-active {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+}
+
+html.has-custom-cursor,
+html.has-custom-cursor a,
+html.has-custom-cursor button {
+  cursor: none;
+}
+
+/* Transición de página (astro:transitions ClientRouter) */
+::view-transition-old(root) {
+  animation: mk-view-fade-out 0.35s ease-out forwards;
+}
+
+::view-transition-new(root) {
+  animation: mk-view-fade-in 0.45s ease-out 0.12s backwards;
+}
+
+@keyframes mk-view-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes mk-view-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal].reveal-init {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

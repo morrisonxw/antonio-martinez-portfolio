@@ -1,0 +1,108 @@
+---
+title: "Claims Billing 2.0: de 20.000 reclamos individuales a gestión por lotes"
+summary: "Rediseñé el sistema de reclamos de facturación de Mercado Libre pasando de una revisión caso por caso a una bandeja estandarizada integrada al motor de reglas Solver."
+cover: "../../assets/projects/mercadolibre-reclamos/cover.png"
+coverAlt: "Detalle de una ventana de reclamos de facturación en Mercado Libre, con el estado de cada solicitud (en revisión, aprobado, rechazado)"
+thumbnail: "../../assets/projects/mercadolibre-reclamos/thumbnail.png"
+tags: ["Product Design", "B2B Enterprise", "Facturación", "Operaciones"]
+year: 2022
+yearLabel: "2022–2026"
+featured: true
+order: 4
+draft: false
+
+role: "Product Designer end-to-end"
+team: "1 PM, 1 Business Analyst, Tech Lead, equipo UX y desarrolladores"
+company: "Mercado Libre"
+industry: "Módulo B2B de reclamaciones y mesa de ayuda interna"
+scope: ["Product Design", "UX Writing", "Mapeo As-Is/To-Be"]
+tools: ["Figma", "Jira Service Management", "Mapeo As-Is/To-Be"]
+confidential: false
+---
+
+import Figure from '../../components/mdx/Figure.astro';
+import ImpactStats from '../../components/mdx/ImpactStats.astro';
+import ProductDivider from '../../components/mdx/ProductDivider.astro';
+import exploracionCards from '../../assets/projects/mercadolibre-reclamos/exploracion-cards.png';
+import configVentanas from '../../assets/projects/mercadolibre-reclamos/config-ventanas-reclamos.png';
+
+## Contexto de negocio
+
+Más de 20.000 reclamos de facturación ingresaban por periodo, vía formularios desestandarizados, generando una carga operativa insostenible para el equipo de control de negocio.
+
+{/*
+## Mi rol
+
+Diseñé el sistema end-to-end, desde el mapeo as-is/to-be del proceso hasta la UI final, trabajando con un PM, un business analyst, el tech lead y desarrolladores.
+*/}
+
+## Impacto
+
+<ImpactStats
+  stats={[
+    { value: "Filtrado automático", label: "De reclamos improcedentes, resueltos antes de llegar a un analista." },
+    { value: "Menos tiempo", label: "De respuesta interno, tras pasar de gestión individual a gestión por lotes." },
+  ]}
+/>
+
+## Bandeja de reclamos
+
+Creamos una bandeja de reclamaciones estandarizada y parametrizada —la que se ve en la portada de este proyecto—, integrada al motor de reglas Solver, para procesar por lotes y resolver reembolsos directos sin intervención manual caso por caso.
+
+<figure class="my-10">
+  <img
+    src="/projects/mercadolibre-pase/crear-reclamo.gif"
+    alt="Flujo de creación de un reclamo de facturación"
+    class="w-full rounded-xl"
+  />
+  <figcaption class="mt-3 text-sm text-ink-muted">Flujo de creación de un reclamo.</figcaption>
+</figure>
+
+<figure class="my-10">
+  <img
+    src="/projects/mercadolibre-pase/cargar-desde-detalle.gif"
+    alt="Carga de un reclamo directamente desde el detalle de un viaje"
+    class="w-full rounded-xl"
+  />
+  <figcaption class="mt-3 text-sm text-ink-muted">Carga de un reclamo directamente desde el detalle de un viaje.</figcaption>
+</figure>
+
+<ProductDivider eyebrow="Sistema de reclamos" label="El proceso solo se volvió sostenible cuando dejamos de diseñarlo caso por caso y empezamos a diseñarlo por lotes." />
+
+Antes de llegar a esta versión, exploramos distintas formas de organizar la información y de dar acceso a los analistas para configurar las ventanas de reclamos:
+
+<Figure
+  src={exploracionCards}
+  alt="Exploración de cards para la gestión de reclamos de rutas ejecutadas"
+  caption="Exploración de distintos formatos de card para priorizar y resolver reclamos."
+/>
+
+<Figure
+  src={configVentanas}
+  alt="Flujo de configuración de una nueva ventana de reclamos"
+  caption="Flujo interno para que los analistas configuraran nuevas ventanas de reclamos."
+/>
+
+Parte de la iteración de este flujo la hice apoyándome en herramientas de IA para prototipar y validar variantes de la interfaz sin esperar al desarrollo final:
+
+<figure class="my-10">
+  <video
+    src="/projects/mercadolibre-pase/prototipo-claude.mp4"
+    autoplay
+    loop
+    muted
+    playsinline
+    class="w-full rounded-xl"
+  />
+  <figcaption class="mt-3 text-sm text-ink-muted">Iteración del flujo de gestión de reclamos, prototipado con Claude.</figcaption>
+</figure>
+
+## UX writing en las notificaciones
+
+Rediseñamos las notificaciones de rechazo sustituyendo códigos sistémicos por explicaciones claras alineadas a las cláusulas contractuales vigentes, para que un reclamo rechazado se entendiera sin necesidad de escalar a un analista.
+
+## Aprendizaje: el tradeoff de MVP a batch
+
+Inicialmente salimos con un MVP de gestión individual, pensado para garantizar trazabilidad sistémica desde el día uno. A nivel de tecnología se volvió insostenible, y la experiencia de cara al equipo de Control de Negocio no fue favorable. Hicimos el tradeoff de eliminar funcionalidades que internamente entendíamos como valiosas, pero que los usuarios no percibían así, y pivotamos hacia el esquema de carga y gestión por lotes (batch processing) que terminó sosteniendo el volumen real.
+
+<ProductDivider eyebrow="Aprendizaje" label="Construir trazabilidad caso por caso se sentía más responsable, pero era la razón por la que el sistema no podía escalar." />

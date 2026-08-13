@@ -1,7 +1,9 @@
 export const site = {
   name: 'Antonio Martínez',
   role: 'Product Designer',
-  tagline: 'Diseño productos digitales que transforman procesos complejos en experiencias claras, medibles y con impacto real de negocio.',
+  tagline: 'Soy Antonio Martínez, diseñador de productos digitales',
+  subheading:
+    'Los grandes productos no nacen de juntar pantallas, sino de conectar las necesidades del usuario con las metas del negocio.',
   description:
     'Transformar procesos operativos complejos —con múltiples actores, alto volumen y baja visibilidad— en productos digitales que reducen pérdidas y generan confianza entre las partes.',
   email: 'anton.mtinez@gmail.com',

@@ -1,0 +1,13 @@
+---
+interface Props {
+  class?: string;
+  as?: keyof HTMLElementTagNameMap;
+  'data-reveal'?: boolean | string;
+}
+
+const { class: className = '', as: Tag = 'section', ...rest } = Astro.props;
+---
+
+<Tag class:list={['on-dark w-full bg-paper text-ink', className]} {...rest}>
+  <slot />
+</Tag>

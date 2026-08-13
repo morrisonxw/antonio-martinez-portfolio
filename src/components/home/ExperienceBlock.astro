@@ -1,0 +1,180 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import Container from '../ui/Container.astro';
+import DarkSection from '../ui/DarkSection.astro';
+import Tag from '../ui/Tag.astro';
+
+interface Props {
+  period: string;
+  company: string;
+  companyUrl?: string;
+  description: string;
+  projects: CollectionEntry<'projects'>[];
+}
+
+const { period, company, companyUrl, description, projects } = Astro.props;
+---
+
+<DarkSection class="border-t border-border py-20 sm:py-28" data-reveal>
+  <Container>
+    <p class="text-xs font-medium tracking-wide text-ink-muted uppercase">{period}</p>
+    <h2 class="mt-4 max-w-3xl font-display text-3xl font-bold tracking-tightest text-ink sm:text-5xl">
+      {
+        companyUrl ? (
+          <a
+            href={companyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline decoration-2 underline-offset-4 hover:text-accent"
+          >
+            {company}
+          </a>
+        ) : (
+          company
+        )
+      }
+    </h2>
+    <p class="mt-6 max-w-2xl text-lg text-ink-muted sm:text-xl">{description}</p>
+  </Container>
+
+  {
+    projects.length > 0 && (
+      <div class="mx-auto mt-16 w-full max-w-[var(--content-width)] sm:mt-20">
+        {
+          /*
+            Sin scroll-snap: Chromium "corrige" el scrollLeft inicial hacia
+            el primer punto de snap apenas carga la página —incluso en modo
+            proximity, no solo mandatory—, saltándose cualquier inset previo
+            y dejando la primera card desalineada del heading de arriba. No
+            era parte de lo pedido, así que en vez de pelear ese efecto
+            queda scroll libre nativo, ya cubierto por la rueda del mouse
+            de más abajo. El inset inicial/final es simplemente el padding
+            del contenedor (sin snap ya no se "salta").
+          */
+        }
+        <div
+          data-project-scroller
+          role="region"
+          aria-label={`Proyectos en ${company}`}
+          class="flex cursor-grab gap-8 overflow-x-auto px-6 [scrollbar-width:none] active:cursor-grabbing sm:gap-10 sm:px-8 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {projects.map((project) => {
+            const href = project.data.externalUrl ?? `/proyectos/${project.id}`;
+            return (
+              <a
+                href={href}
+                target={project.data.externalUrl ? '_blank' : undefined}
+                rel={project.data.externalUrl ? 'noopener noreferrer' : undefined}
+                class="group block w-[320px] shrink-0 sm:w-[420px]"
+              >
+                <div class="overflow-hidden rounded-2xl bg-paper-muted">
+                  <Image
+                    src={project.data.thumbnail ?? project.data.cover}
+                    alt={project.data.coverAlt}
+                    width={840}
+                    height={481}
+                    class="aspect-[344/197] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                  />
+                </div>
+                <p class="mt-5 font-display text-lg font-semibold text-ink sm:mt-6 sm:text-xl">
+                  {project.data.title}
+                </p>
+                {
+                  project.data.tags.length > 0 && (
+                    <div class="mt-3 flex flex-wrap gap-2">
+                      {project.data.tags.map((tag) => (
+                        <Tag>{tag}</Tag>
+                      ))}
+                    </div>
+                  )
+                }
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    )
+  }
+</DarkSection>
+
+<script>
+  // Convierte scroll vertical de mouse en scroll horizontal mientras el
+  // cursor está sobre el carrusel, y solo mientras haya algo hacia donde
+  // desplazarse en esa dirección: al llegar al principio/final, el evento
+  // se deja pasar para que la página siga scrolleando normal en vez de
+  // quedar "atrapada" en el carrusel. Gestos horizontales de trackpad
+  // (deltaX ya presente) se ignoran acá y los maneja el scroll nativo.
+  function setupProjectScrollers() {
+    document.querySelectorAll<HTMLElement>('[data-project-scroller]').forEach((el) => {
+      el.addEventListener(
+        'wheel',
+        (e) => {
+          if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+
+          const canScrollRight = el.scrollLeft + el.clientWidth < el.scrollWidth - 1;
+          const canScrollLeft = el.scrollLeft > 0;
+          const scrollingForward = e.deltaY > 0;
+          if ((scrollingForward && !canScrollRight) || (!scrollingForward && !canScrollLeft)) return;
+
+          e.preventDefault();
+          e.stopPropagation();
+          el.scrollBy({ left: e.deltaY });
+        },
+        { passive: false },
+      );
+
+      // Drag-to-scroll con mouse: sin la barra de scroll visible, el cursor
+      // "grab" + arrastre directo reemplaza esa afordancia y hace la
+      // interacción más táctil/dinámica. Solo se considera "arrastre" (y se
+      // suprime el click de la card) al superar un umbral de movimiento
+      // holgado: un umbral chico confunde el temblor normal de un click de
+      // mouse real con un drag y termina bloqueando la navegación.
+      const DRAG_THRESHOLD = 8;
+      let isDown = false;
+      let dragging = false;
+      let startX = 0;
+      let startScrollLeft = 0;
+      let pointerId: number | null = null;
+
+      el.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'touch') return;
+        isDown = true;
+        dragging = false;
+        startX = e.clientX;
+        startScrollLeft = el.scrollLeft;
+        pointerId = e.pointerId;
+      });
+
+      el.addEventListener('pointermove', (e) => {
+        if (!isDown) return;
+        const delta = e.clientX - startX;
+        if (!dragging) {
+          if (Math.abs(delta) <= DRAG_THRESHOLD) return;
+          dragging = true;
+          if (pointerId !== null) el.setPointerCapture(pointerId);
+        }
+        el.scrollLeft = startScrollLeft - delta;
+      });
+
+      const endDrag = () => {
+        isDown = false;
+      };
+      el.addEventListener('pointerup', endDrag);
+      el.addEventListener('pointercancel', endDrag);
+
+      el.addEventListener(
+        'click',
+        (e) => {
+          if (dragging) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        },
+        { capture: true },
+      );
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupProjectScrollers);
+</script>

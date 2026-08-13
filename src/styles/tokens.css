@@ -1,34 +1,89 @@
 /*
   Design tokens — fuente única de verdad.
-  Fase 0 (identidad visual): estos son valores de partida razonables
-  (paleta neutra + un acento, par tipográfico display/texto). Ajustar
-  aquí cuando se cierre la identidad visual definitiva; todo lo demás
-  (Tailwind utilities, componentes) hereda de estas variables.
+  Paleta inspirada en monzo.com: navy #091723 como ink, coral como acento
+  de marca, blanco/menta pálido como superficies. Todos los pares
+  texto/fondo listados abajo fueron verificados contra WCAG 2.1 AA
+  (>=4.5:1 para texto normal, >=3:1 para texto grande/componentes UI)
+  usando la fórmula de luminancia relativa estándar. Ajustar aquí; todo
+  lo demás (Tailwind utilities, componentes) hereda de estas variables.
+
+  Verificaciones clave (light):
+  - ink #091723 sobre paper #ffffff:            18.1:1
+  - ink-muted #6b747b sobre paper #ffffff:        4.8:1
+  - accent #d6371f sobre paper #ffffff:           4.8:1  (accent es una versión
+    más oscura del coral de marca #ff4f40 —el coral vívido da solo 3.3:1 sobre
+    blanco, insuficiente para texto normal)
+  - paper sobre accent (texto de botón):          4.8:1
+
+  Verificaciones clave (dark / .on-dark):
+  - ink #f3f6f5 sobre paper #091723:              17.9:1
+  - ink-muted #96a3ac sobre paper #091723:         7.0:1
+  - accent #ff8a75 sobre paper #091723:            7.9:1
+
+  --accent-on-dark: mismo valor que el accent de dark mode (#ff8a75), pero
+  como token FIJO (no cambia con el toggle claro/oscuro). Existe porque hay
+  bloques que son oscuros por diseño incluso en el sitio en modo claro (ej.
+  ProductDivider, bg-ink) — ahí el accent normal (pensado para fondo claro)
+  no tiene contraste suficiente sobre un fondo oscuro, así que esos bloques
+  usan este token en vez de --accent/text-accent.
 */
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --ink: #15161a;
-  --ink-muted: #55565f;
-  --paper: #faf9f6;
-  --paper-muted: #f0efe8;
-  --accent: #3652ff;
-  --accent-muted: #dde2ff;
-  --border: #e4e2da;
+  --ink: #091723;
+  --ink-muted: #6b747b;
+  --paper: #ffffff;
+  --paper-muted: #f2f8f3;
+  --accent: #d6371f;
+  --accent-on-dark: #ff8a75;
+  --accent-muted: #ffe4de;
+  --border: #dde3e6;
 
   --content-width: 72rem;
   --prose-width: 42rem;
 }
 
 .dark {
-  --ink: #f4f3ef;
-  --ink-muted: #a3a3ab;
-  --paper: #111113;
-  --paper-muted: #1a1a1d;
-  --accent: #8391ff;
-  --accent-muted: #262b52;
-  --border: #2b2b2e;
+  --ink: #f3f6f5;
+  --ink-muted: #96a3ac;
+  --paper: #091723;
+  --paper-muted: #122536;
+  --accent: #ff8a75;
+  --accent-muted: #352128;
+  --border: #223240;
+}
+
+/*
+  .on-dark: bloque estructural siempre oscuro (independiente del toggle de
+  tema claro/oscuro), usado en secciones full-bleed como la experiencia
+  laboral o el CTA final. Reutiliza los mismos valores que .dark para no
+  introducir color nuevo — solo cambia el alcance en que se aplican.
+
+  Nota: las utilidades de Tailwind (bg-paper, text-ink, ...) consumen
+  --color-ink/--color-paper/etc, no --ink/--paper directamente. Esas
+  variables --color-* se declaran una sola vez en :root como var(--ink),
+  y las custom properties heredan el VALOR YA RESUELTO del ancestro que
+  las declara — no se re-evalúan en cada descendiente. Por eso hay que
+  redeclarar aquí también las --color-* (no solo --ink/--paper) para que
+  se recalculen usando los valores oscuros de este mismo elemento.
+*/
+.on-dark {
+  --ink: #f3f6f5;
+  --ink-muted: #96a3ac;
+  --paper: #091723;
+  --paper-muted: #122536;
+  --accent: #ff8a75;
+  --accent-muted: #352128;
+  --border: #223240;
+
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-paper: var(--paper);
+  --color-paper-muted: var(--paper-muted);
+  --color-accent: var(--accent);
+  --color-accent-muted: var(--accent-muted);
+  --color-border: var(--border);
 }
 
 @theme {
@@ -40,9 +95,12 @@
   --color-paper: var(--paper);
   --color-paper-muted: var(--paper-muted);
   --color-accent: var(--accent);
+  --color-accent-on-dark: var(--accent-on-dark);
   --color-accent-muted: var(--accent-muted);
   --color-border: var(--border);
 
   --container-content: var(--content-width);
   --container-prose: var(--prose-width);
+
+  --tracking-tightest: -0.045em;
 }

@@ -3,21 +3,23 @@ title: "De un PDF estático a una biblioteca de componentes"
 summary: "Cómo construí el primer sistema de diseño para la cuenta de EPM, pasando de un PDF estático a una biblioteca de componentes viva."
 cover: "../../assets/projects/design-system-intergrupo/cover.png"
 coverAlt: "Muestra de componentes del UI Kit de EPM: botones, inputs, cards y estilos de texto sobre fondo oscuro"
-tags: ["Design System", "B2B", "Enterprise"]
+tags: ["Design System", "B2B", "Enterprise", "Sector Público"]
 year: 2021
 yearLabel: "2021–2022"
 featured: true
-order: 3
+order: 6
 draft: false
 
-role: "Especialista UX Senior"
+role: "Senior UX Specialist / Lead UX Squad"
+team: "Squad de 4 diseñadores UX/UI en la cuenta Empresas Públicas de Medellín"
 company: "Intergrupo / SoftwareOne"
-industry: "Servicios digitales · Utilities (EPM)"
-scope: ["Sistemas de Diseño", "UI Design", "Documentación"]
+industry: "Sistema de diseño B2B Enterprise · Sector público (cliente: EPM)"
+scope: ["Sistemas de Diseño", "UI Design", "Documentación", "Gobernanza", "Accesibilidad"]
+tools: ["Adobe XD", "Figma", "Design Tokens", "Guías de accesibilidad WCAG"]
 confidential: false
 
-problem: "En la cuenta de EPM, el sistema de diseño compartido con otro proveedor vivía en un PDF estático: cada vez que se necesitaba un componente, había que reconstruirlo desde cero."
-outcome: "Los cuatro diseñadores del equipo pasamos de reconstruir componentes a reutilizarlos, ganando consistencia y velocidad en el trabajo diario."
+problem: "Los equipos de diseño y desarrollo construían soluciones a partir de guías de marca estáticas en formato PDF, generando inconsistencias visuales y duplicación de esfuerzos."
+outcome: "Aumento significativo en la velocidad de diseño e implementación del equipo, garantizando consistencia e interoperabilidad."
 ---
 
 import ImpactStats from '../../components/mdx/ImpactStats.astro';
@@ -27,7 +29,7 @@ import libreriaFuncional from '../../assets/projects/design-system-intergrupo/li
 
 ## Contexto
 
-En la cuenta de EPM, el sistema de diseño compartido con otro proveedor vivía en un PDF: cada vez que se necesitaba un componente, había que reconstruirlo desde cero. Estudié sistemas de diseño de referencia como los de Google e IBM, y construí de forma empírica una biblioteca de componentes documentada en un archivo maestro.
+En la cuenta de EPM, los equipos de diseño y desarrollo construían soluciones a partir de guías de marca estáticas en formato PDF: cada vez que se necesitaba un componente, había que reconstruirlo desde cero, generando inconsistencias visuales y duplicación de esfuerzos entre proveedores. Construí y documenté la primera biblioteca maestra de componentes vivos para la cuenta.
 
 <BeforeAfter
   before={pdfBotones}
@@ -40,8 +42,12 @@ En la cuenta de EPM, el sistema de diseño compartido con otro proveedor vivía 
 
 <ImpactStats
   stats={[
-    { value: "De reconstruir a reutilizar", label: "Los cuatro diseñadores del equipo dejaron de rehacer componentes desde cero." },
-    { value: "Más consistencia", label: "En el trabajo diario de todo el equipo." },
-    { value: "Más velocidad", label: "Al construir sobre componentes ya documentados." },
+    { value: "4", label: "Diseñadores UX/UI construyendo sobre la misma biblioteca en vez de reconstruir cada componente." },
+    { value: "50%+", label: "De los patrones de UI de la cuenta, normalizados en la biblioteca." },
+    { value: "Más velocidad", label: "Al construir sobre componentes ya documentados, en vez de rehacerlos." },
   ]}
 />
+
+## Liderazgo y gobernanza
+
+Catalogué cada componente de las aplicaciones activas de EPM para construir la biblioteca digital parametrizada, normalizando más del 50% de los patrones de UI de la cuenta. Lideré mesas de alineación con proveedores tecnológicos externos para lograr la adopción del sistema fuera de nuestro propio squad, y mentoricé a diseñadores junior en una cultura de sistemas escalables en lugar de soluciones puntuales por pantalla.

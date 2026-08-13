@@ -11,15 +11,54 @@ interface Props {
 const { stats } = Astro.props;
 ---
 
-<div class="my-10 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2">
+{
+  /*
+    Siempre 2 columnas a partir de sm (nunca 3 o 4): con más de 2 stats,
+    el resto simplemente arma filas nuevas (2x2, 2x3, 2x4...) en vez de
+    apretar cada columna hasta que un valor largo ("Cierre más simple")
+    no tenga ancho para envolver bien y desborde hacia la columna vecina.
+    Con solo 2 columnas cada una tiene ancho de sobra incluso para
+    text-5xl, así que ya no hace falta reducir el tamaño de fuente ni
+    partir palabras a mitad de sílaba para que quepan.
+  */
+}
+<div class="my-10 grid grid-cols-1 gap-x-8 gap-y-8 border-t border-border pt-8 sm:grid-cols-2">
   {
-    stats.map((stat) => (
-      <div>
-        <p class="font-display text-4xl font-bold tracking-tight text-accent sm:text-5xl">
-          {stat.value}
-        </p>
-        <p class="mt-2 text-sm text-ink-muted">{stat.label}</p>
-      </div>
-    ))
+    stats.map((stat, index) => {
+      const isRightCol = index % 2 === 1;
+      const isFirstRow = index < 2;
+      return (
+        <div
+          class:list={[
+            'min-w-0',
+            index > 0 && 'border-t border-border pt-6',
+            isFirstRow ? 'sm:border-t-0 sm:pt-0' : 'sm:border-t sm:pt-6',
+            isRightCol && 'sm:border-l sm:pl-8',
+          ]}
+        >
+          {
+            /*
+              min-h reserva el alto de 2 líneas (con leading-tight, no el
+              leading-none por defecto de text-4xl/text-5xl que solapa
+              líneas si un valor envuelve) e items-end ancla el valor al
+              fondo de ese espacio, para que el label de abajo arranque a
+              la misma altura entre las 2 columnas de cada fila. El flex
+              vive en este div envolvente y no en el <p> del valor: si el
+              <p> fuera el contenedor flex, su texto pasaría a ser un flex
+              item anónimo con min-width:auto (no se encoge por debajo del
+              ancho de su contenido). break-words queda como red de
+              seguridad para el caso extremo de un valor que aun así no
+              quepa.
+            */
+          }
+          <div class="flex min-h-[5.625rem] items-end sm:min-h-[7.5rem]">
+            <p class="min-w-0 break-words font-display text-4xl leading-tight font-bold tracking-tightest text-accent sm:text-5xl">
+              {stat.value}
+            </p>
+          </div>
+          <p class="mt-2 text-sm text-ink-muted">{stat.label}</p>
+        </div>
+      );
+    })
   }
 </div>

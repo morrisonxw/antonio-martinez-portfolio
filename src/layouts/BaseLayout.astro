@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import { buildSeo } from '../lib/seo';
-import { site } from '../content-data/site';
 
 interface Props {
   title: string;
@@ -18,12 +18,13 @@ const showAnalytics = import.meta.env.PROD && gaId;
 ---
 
 <!doctype html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={seo.url} />
+    <ClientRouter />
 
     <title>{seo.title}</title>
     <meta name="description" content={seo.description} />
@@ -78,5 +79,8 @@ const showAnalytics = import.meta.env.PROD && gaId;
       Saltar al contenido
     </a>
     <slot />
+    <script>
+      import '../lib/motion/index';
+    </script>
   </body>
 </html>

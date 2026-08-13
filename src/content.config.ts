@@ -12,6 +12,11 @@ const projects = defineCollection({
       summary: z.string().max(200),
       cover: image(),
       coverAlt: z.string(),
+      // Miniatura opcional para las cards del home y de /proyectos. Si no se
+      // define, las cards usan `cover`. Existe para poder mostrar una versión
+      // recortada/con marco en las cards sin afectar la portada a ancho
+      // completo dentro del case study, que sigue usando `cover`.
+      thumbnail: image().optional(),
       tags: z.array(z.string()).default([]),
       year: z.number(),
       // Texto a mostrar en vez del año (ej. "2022–2026") cuando el proyecto

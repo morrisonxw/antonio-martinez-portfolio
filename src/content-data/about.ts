@@ -25,7 +25,7 @@ export const about = {
     'Mentoría de perfiles junior en UX',
   ],
   experienceIntro:
-    'Cuatro etapas que reflejan una trayectoria transversal: de la comunicación de marca al diseño de servicios, y del diseño de servicios al diseño de producto — pasando por branding, sistemas de diseño y proyectos B2B de distinta escala.',
+    'Cinco etapas que reflejan una trayectoria transversal: de la comunicación de marca al diseño de servicios, y del diseño de servicios al diseño de producto — pasando por branding, sistemas de diseño y proyectos B2B de distinta escala.',
   philosophy:
     'La función precede a la forma. Un producto puede verse bien y aun así no resolver nada; el diseño que me interesa es el que se sostiene porque responde a un problema real de negocio y de las personas que lo viven a diario.',
 };

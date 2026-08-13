@@ -1,0 +1,63 @@
+---
+title: "PACTO: digitalizar la negociación de tarifas con miles de transportistas"
+summary: "Centralicé el ciclo de vida completo de los acuerdos comerciales entre Mercado Libre y sus transportistas, reemplazando correos y hojas de cálculo por un sistema con reglas de negocio en tiempo real."
+cover: "../../assets/projects/mercadolibre-pacto/cover.png"
+coverAlt: "Portada del proyecto PACTO, plataforma de negociación de tarifas con transportistas"
+thumbnail: "../../assets/projects/mercadolibre-pacto/thumbnail.png"
+tags: ["Product Design", "B2B Enterprise", "Tarifas", "Procurement"]
+year: 2022
+yearLabel: "2022–2026"
+featured: true
+order: 2
+draft: false
+
+role: "Product Designer"
+team: "Product Manager, Business Lead, Tech Lead, 3 developers y Product Designer"
+company: "Mercado Libre"
+industry: "Mercado Envíos · Rates & Procurement"
+scope: ["Service Design", "UX Research", "Arquitectura de Información", "UI Design"]
+tools: ["Figma", "FigJam", "Claude", "Mapas de servicio"]
+confidential: false
+---
+
+import ImpactStats from '../../components/mdx/ImpactStats.astro';
+import ProductDivider from '../../components/mdx/ProductDivider.astro';
+import Figure from '../../components/mdx/Figure.astro';
+import homeMisTarifas from '../../assets/projects/mercadolibre-pacto/home-mis-tarifas.png';
+
+## Contexto de negocio
+
+La negociación y el registro de acuerdos tarifarios entre Mercado Libre y miles de transportistas se gestionaba de forma fragmentada, por correo y en hojas de cálculo locales. Cada analista destinaba varias horas diarias a procesar manualmente esquemas de tarifa por kilómetro, por paquete, esquemas mixtos e impuestos locales.
+
+{/*
+## Mi rol
+
+Trabajé como product designer dentro de un equipo compacto —PM, business lead, tech lead y tres developers— cubriendo service design, research y la arquitectura de información del sistema completo.
+*/}
+
+## Impacto
+
+<ImpactStats
+  stats={[
+    { value: "83%", label: "Menos tiempo de procesamiento operativo por analista." },
+    { value: "0 desfases", label: "En facturación por tarifas desactualizadas, eliminados tras la digitalización del ciclo de vida completo." },
+  ]}
+/>
+
+## Research y decisión de diseño
+
+El descubrimiento mostró que las modificaciones masivas de tarifas —por variaciones de combustible o inflación— eran las que más errores provocaban, precisamente porque se hacían a mano, fila por fila, en una hoja de cálculo compartida.
+
+<ProductDivider eyebrow="Insight" label="El mayor riesgo no estaba en negociar una tarifa nueva, sino en actualizar miles de tarifas existentes sin introducir un error." />
+
+Digitalizamos y centralizamos el ciclo de vida completo de los acuerdos comerciales —alta, modificación, indexación y baja— con validaciones de reglas de negocio en tiempo real. Para las actualizaciones masivas, diseñé un sistema de carga por matriz que valida inconsistencias en la interfaz antes de impactar las bases de datos financieras backend, en vez de descubrir el error después de que ya afectó una factura.
+
+<Figure
+  src={homeMisTarifas}
+  alt="Pantalla principal de Mis Tarifas en PACTO, con el listado de acuerdos vigentes por transportista"
+  caption="Home de Mis Tarifas: el punto de partida para consultar y gestionar el ciclo de vida completo de cada acuerdo."
+/>
+
+## Resultado
+
+El equipo pasó de horas de procesamiento manual por analista a un flujo validado en tiempo real, y la facturación dejó de arrastrar desfases por tarifas desactualizadas.

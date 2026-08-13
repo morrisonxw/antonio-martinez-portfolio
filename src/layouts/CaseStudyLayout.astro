@@ -14,22 +14,24 @@ interface Props {
 }
 
 const { project, prev, next } = Astro.props;
-const { title, summary, cover, coverAlt, tags, problem, outcome, confidential } = project.data;
+const { title, summary, cover, coverAlt, tags, company, confidential } = project.data;
+const eyebrow = company ?? tags[0] ?? 'Case study';
 ---
 
 <PageLayout title={title} description={summary} image={cover.src}>
   <article>
     <Container class="pt-12 sm:pt-16">
-      <div class="max-w-[var(--prose-width)]">
+      <div class="max-w-[var(--prose-width)]" data-reveal>
+        <p class="text-xs font-medium tracking-wide text-accent uppercase">{eyebrow}</p>
+        <h1 class="mt-3 font-display text-4xl font-bold tracking-tightest text-ink sm:text-6xl">{title}</h1>
+        <p class="mt-5 text-lg text-ink-muted">{summary}</p>
         {
           tags.length > 0 && (
-            <div class="mb-4 flex flex-wrap gap-2">
+            <div class="mt-5 flex flex-wrap gap-2">
               {tags.map((tag) => <Tag>{tag}</Tag>)}
             </div>
           )
         }
-        <h1 class="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">{title}</h1>
-        <p class="mt-4 text-lg text-ink-muted">{summary}</p>
         {
           confidential && (
             <p class="mt-4 text-sm text-ink-muted">
@@ -39,35 +41,16 @@ const { title, summary, cover, coverAlt, tags, problem, outcome, confidential } 
         }
       </div>
 
-      <div class="mt-10">
+      <div class="mt-10" data-reveal>
         <ProjectMeta project={project} />
       </div>
     </Container>
 
-    <Container class="mt-12">
+    <Container class="mt-12" data-reveal>
       <Image src={cover} alt={coverAlt} width={1600} class="w-full rounded-2xl" priority />
     </Container>
 
-    {
-      (problem || outcome) && (
-        <Container class="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-3">
-          {problem && (
-            <div>
-              <h2 class="text-xs font-medium uppercase tracking-wide text-ink-muted">El reto</h2>
-              <p class="mt-2 text-ink">{problem}</p>
-            </div>
-          )}
-          {outcome && (
-            <div class="sm:col-span-2">
-              <h2 class="text-xs font-medium uppercase tracking-wide text-ink-muted">Impacto</h2>
-              <p class="mt-2 text-ink">{outcome}</p>
-            </div>
-          )}
-        </Container>
-      )
-    }
-
-    <Container class="prose prose-neutral mt-16 max-w-[var(--prose-width)] dark:prose-invert prose-headings:font-display">
+    <Container class="prose prose-neutral mt-16 max-w-[var(--prose-width)] dark:prose-invert prose-headings:font-display prose-headings:tracking-tightest">
       <slot />
     </Container>
 

@@ -2,11 +2,12 @@
 interface Props {
   class?: string;
   as?: keyof HTMLElementTagNameMap;
+  'data-reveal'?: boolean | string;
 }
 
-const { class: className = '', as: Tag = 'div' } = Astro.props;
+const { class: className = '', as: Tag = 'div', ...rest } = Astro.props;
 ---
 
-<Tag class:list={['mx-auto w-full max-w-[var(--content-width)] px-6 sm:px-8', className]}>
+<Tag class:list={['mx-auto w-full max-w-[var(--content-width)] px-6 sm:px-8', className]} {...rest}>
   <slot />
 </Tag>

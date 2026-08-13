@@ -1,0 +1,57 @@
+---
+import Container from '../ui/Container.astro';
+import { site } from '../../content-data/site';
+---
+
+<section
+  data-pin-hero
+  class="relative flex flex-col justify-center bg-paper pt-8 pb-16 text-ink sm:pt-12 sm:pb-20"
+>
+  <Container>
+    <p class="text-sm font-medium text-accent" data-reveal>{site.role}</p>
+    <h1
+      class="mt-4 max-w-4xl font-display text-4xl font-bold tracking-tightest text-ink sm:text-6xl lg:text-7xl"
+      data-reveal
+    >
+      {site.tagline}
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg text-ink-muted sm:text-xl" data-reveal>
+      {site.subheading}
+    </p>
+  </Container>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  function setupPin() {
+    const hero = document.querySelector<HTMLElement>('[data-pin-hero]');
+    const content = hero?.querySelector<HTMLElement>(':scope > div');
+    if (!hero || !content) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+    // Duración del pin acotada a una fracción de la altura del hero (no el
+    // 100%): un pin de un viewport completo sin nada atado al scroll se
+    // siente como "scroll muerto" antes de revelar el siguiente bloque.
+    // El fade + translateY en scrub le da feedback continuo al usuario
+    // durante ese tramo, en vez de dejar el hero congelado.
+    ScrollTrigger.create({
+      trigger: hero,
+      start: 'top top',
+      end: () => `+=${hero.offsetHeight * 0.4}`,
+      pin: true,
+      pinSpacing: true,
+      scrub: 0.3,
+      onUpdate: (self) => {
+        gsap.set(content, {
+          opacity: 1 - self.progress * 0.9,
+          y: self.progress * -40,
+        });
+      },
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupPin);
+</script>
