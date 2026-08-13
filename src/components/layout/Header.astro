@@ -14,14 +14,11 @@ import { site } from '../../content-data/site';
       <span class="font-display text-lg font-bold">{site.name}</span>
     </a>
     <div class="flex flex-wrap items-center gap-x-4 gap-y-3 sm:gap-x-6">
-      <Button
-        href="/cv/Antonio-Martinez-CV.pdf"
-        download
-        variant="secondary"
-        class="hidden px-3 text-xs sm:inline-flex sm:px-5 sm:text-sm"
-      >
-        Descargar CV
-      </Button>
+      <div class="hidden sm:block">
+        <Button href="/cv/Antonio-Martinez-CV.pdf" download variant="secondary" class="px-5 text-sm">
+          Descargar CV
+        </Button>
+      </div>
       <ThemeToggle client:load />
       <MenuOverlay />
     </div>
