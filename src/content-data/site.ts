@@ -5,7 +5,7 @@ export const site = {
   subheading:
     'Los grandes productos no nacen de juntar pantallas, sino de conectar las necesidades del usuario con las metas del negocio.',
   description:
-    'Transformar procesos operativos complejos —con múltiples actores, alto volumen y baja visibilidad— en productos digitales que reducen pérdidas y generan confianza entre las partes.',
+    'Me he especializado en transformar procesos operativos complejos con múltiples actores, en productos digitales.',
   email: 'anton.mtinez@gmail.com',
   phone: '+57 350 497 57 85',
   whatsappUrl: 'https://wa.me/573504975785',
