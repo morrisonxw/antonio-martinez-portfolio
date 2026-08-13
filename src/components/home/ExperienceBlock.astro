@@ -66,6 +66,7 @@ const { period, company, companyUrl, description, projects } = Astro.props;
                 href={href}
                 target={project.data.externalUrl ? '_blank' : undefined}
                 rel={project.data.externalUrl ? 'noopener noreferrer' : undefined}
+                aria-labelledby={`exp-project-${project.id}`}
                 class="group block w-[320px] shrink-0 sm:w-[420px]"
               >
                 <div class="overflow-hidden rounded-2xl bg-paper-muted">
@@ -77,9 +78,12 @@ const { period, company, companyUrl, description, projects } = Astro.props;
                     class="aspect-[344/197] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                   />
                 </div>
-                <p class="mt-5 font-display text-lg font-semibold text-ink sm:mt-6 sm:text-xl">
+                <h3
+                  id={`exp-project-${project.id}`}
+                  class="mt-5 font-display text-lg font-semibold text-ink sm:mt-6 sm:text-xl"
+                >
                   {project.data.title}
-                </p>
+                </h3>
                 {
                   project.data.tags.length > 0 && (
                     <div class="mt-3 flex flex-wrap gap-2">

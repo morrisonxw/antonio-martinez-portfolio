@@ -16,6 +16,7 @@ const href = externalUrl ?? `/proyectos/${project.id}`;
   href={href}
   target={externalUrl ? '_blank' : undefined}
   rel={externalUrl ? 'noopener noreferrer' : undefined}
+  aria-labelledby={`project-card-${project.id}`}
   class="group block"
   data-reveal
 >
@@ -38,7 +39,10 @@ const href = externalUrl ?? `/proyectos/${project.id}`;
           ambas siga arrancando a la misma altura.
         */
       }
-      <h3 class="flex min-h-[4rem] items-start gap-1.5 font-display text-2xl font-bold tracking-tightest text-ink group-hover:text-accent">
+      <h3
+        id={`project-card-${project.id}`}
+        class="flex min-h-[4rem] items-start gap-1.5 font-display text-2xl font-bold tracking-tightest text-ink group-hover:text-accent"
+      >
         {title}
         {externalUrl && <span class="text-lg">↗</span>}
       </h3>

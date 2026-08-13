@@ -12,7 +12,7 @@ const { href, variant = 'primary', class: className = '', ...rest } = Astro.prop
 const Tag = href ? 'a' : 'button';
 
 const base =
-  'inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors';
+  'inline-flex items-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium transition-colors';
 const variants = {
   // Sin overrides dark: a propósito. bg-ink/text-paper ya se invierten
   // solos en dark mode porque --ink/--paper cambian de valor en .dark
