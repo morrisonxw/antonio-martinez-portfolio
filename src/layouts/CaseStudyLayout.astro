@@ -5,6 +5,7 @@ import Container from '../components/ui/Container.astro';
 import Tag from '../components/ui/Tag.astro';
 import ProjectMeta from '../components/project/ProjectMeta.astro';
 import ProjectNav from '../components/project/ProjectNav.astro';
+import Lightbox from '../components/ui/Lightbox.astro';
 import type { ProjectEntry } from '../lib/content-types';
 import { t, type Locale } from '../i18n/ui';
 import { projectsHref } from '../i18n/paths';
@@ -71,4 +72,6 @@ const eyebrow = company ?? tags[0] ?? t(locale, 'caseStudy.fallbackEyebrow');
       <ProjectNav prev={prev} next={next} />
     </Container>
   </article>
+
+  <Lightbox />
 </PageLayout>
