@@ -43,7 +43,7 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
 
   {
     projects.length > 0 && (
-      <div class="mx-auto mt-16 w-full max-w-[var(--content-width)] sm:mt-20">
+      <div class="mt-16 w-full sm:mt-20">
         {
           /*
             Sin scroll-snap: Chromium "corrige" el scrollLeft inicial hacia
@@ -54,13 +54,20 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
             queda scroll libre nativo, ya cubierto por la rueda del mouse
             de más abajo. El inset inicial/final es simplemente el padding
             del contenedor (sin snap ya no se "salta").
+
+            Sangrado a los bordes reales de la pantalla (no al ancho del
+            texto/Container): el padding izquierdo/derecho se calcula para
+            coincidir exactamente con el inset que usa Container en cada
+            viewport, así la primera card queda alineada con el heading de
+            arriba pero la fila sigue de largo hasta el borde real de la
+            ventana en vez de cortarse en el mismo ancho máximo del texto.
           */
         }
         <div
           data-project-scroller
           role="region"
           aria-label={`${t(locale, 'experience.projectsIn')} ${company}`}
-          class="flex cursor-grab gap-8 overflow-x-auto px-6 [scrollbar-width:none] active:cursor-grabbing sm:gap-10 sm:px-8 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          class="flex cursor-grab gap-8 overflow-x-auto px-[max(1.5rem,calc((100vw-var(--content-width))/2+1.5rem))] [scrollbar-width:none] active:cursor-grabbing sm:gap-10 sm:px-[max(2rem,calc((100vw-var(--content-width))/2+2rem))] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {projects.map((project) => {
             const href = project.data.externalUrl ?? projectHref(locale, project.id);
@@ -106,28 +113,6 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
 </DarkSection>
 
 <script>
-  // Fundido en los bordes del carrusel: sin esto, la card parcial que
-  // asoma en el borde se corta a la mitad del texto (título/tags), lo que
-  // se ve como un bug en vez de una pista de "hay más para scrollear".
-  // Se recalcula en cada scroll porque solo debe aparecer del lado que
-  // efectivamente tiene más contenido — al llegar al principio/final ese
-  // borde deja de desvanecerse.
-  const FADE = 56;
-  function updateEdgeFade(el: HTMLElement) {
-    const canScrollLeft = el.scrollLeft > 1;
-    const canScrollRight = el.scrollLeft + el.clientWidth < el.scrollWidth - 1;
-    let gradient: string | null = null;
-    if (canScrollLeft && canScrollRight) {
-      gradient = `linear-gradient(to right, transparent, black ${FADE}px, black calc(100% - ${FADE}px), transparent)`;
-    } else if (canScrollRight) {
-      gradient = `linear-gradient(to right, black, black calc(100% - ${FADE}px), transparent)`;
-    } else if (canScrollLeft) {
-      gradient = `linear-gradient(to right, transparent, black ${FADE}px, black)`;
-    }
-    el.style.maskImage = gradient ?? '';
-    el.style.webkitMaskImage = gradient ?? '';
-  }
-
   // Convierte scroll vertical de mouse en scroll horizontal mientras el
   // cursor está sobre el carrusel, y solo mientras haya algo hacia donde
   // desplazarse en esa dirección: al llegar al principio/final, el evento
@@ -136,10 +121,6 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
   // (deltaX ya presente) se ignoran acá y los maneja el scroll nativo.
   function setupProjectScrollers() {
     document.querySelectorAll<HTMLElement>('[data-project-scroller]').forEach((el) => {
-      updateEdgeFade(el);
-      el.addEventListener('scroll', () => updateEdgeFade(el), { passive: true });
-      window.addEventListener('resize', () => updateEdgeFade(el));
-
       el.addEventListener(
         'wheel',
         (e) => {
