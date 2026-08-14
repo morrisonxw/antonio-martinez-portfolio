@@ -59,15 +59,6 @@ const showAnalytics = import.meta.env.PROD && gaId;
       rel="stylesheet"
     />
 
-    <script is:inline>
-      // Evita FOUC: aplica el tema guardado (o preferencia del sistema) antes del primer paint.
-      const stored = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (stored === 'dark' || (!stored && prefersDark)) {
-        document.documentElement.classList.add('dark');
-      }
-    </script>
-
     {
       showAnalytics && (
         <>

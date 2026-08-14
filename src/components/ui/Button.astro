@@ -14,13 +14,6 @@ const Tag = href ? 'a' : 'button';
 const base =
   'inline-flex items-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium transition-colors';
 const variants = {
-  // Sin overrides dark: a propósito. bg-ink/text-paper ya se invierten
-  // solos en dark mode porque --ink/--paper cambian de valor en .dark
-  // (tokens.css). Un `dark:bg-paper` explícito aquí fue el bug real: paper
-  // en dark mode ES el fondo de la página, así que el botón quedaba del
-  // mismo color que el fondo — sin relleno ni borde visibles, un botón
-  // "invisible". bg-ink ya resuelve a ink-dark (casi blanco) automáticamente,
-  // dando el pill claro-sobre-navy correcto sin ninguna clase extra.
   primary: 'bg-ink text-paper hover:bg-accent',
   // Borde en --ink (no --border) a propósito: un botón es un componente
   // interactivo y su límite necesita >=3:1 de contraste (WCAG 1.4.11), algo

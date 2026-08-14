@@ -15,20 +15,11 @@
     blanco, insuficiente para texto normal)
   - paper sobre accent (texto de botón):          4.8:1
 
-  Verificaciones clave (dark / .on-dark):
+  Verificaciones clave (.on-dark):
   - ink #f3f6f5 sobre paper #091723:              17.9:1
   - ink-muted #96a3ac sobre paper #091723:         7.0:1
   - accent #ff8a75 sobre paper #091723:            7.9:1
-
-  --accent-on-dark: mismo valor que el accent de dark mode (#ff8a75), pero
-  como token FIJO (no cambia con el toggle claro/oscuro). Existe porque hay
-  bloques que son oscuros por diseño incluso en el sitio en modo claro (ej.
-  ProductDivider, bg-ink) — ahí el accent normal (pensado para fondo claro)
-  no tiene contraste suficiente sobre un fondo oscuro, así que esos bloques
-  usan este token en vez de --accent/text-accent.
 */
-
-@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --ink: #091723;
@@ -36,7 +27,6 @@
   --paper: #ffffff;
   --paper-muted: #f2f8f3;
   --accent: #d6371f;
-  --accent-on-dark: #ff8a75;
   --accent-muted: #ffe4de;
   --border: #dde3e6;
 
@@ -44,21 +34,10 @@
   --prose-width: 42rem;
 }
 
-.dark {
-  --ink: #f3f6f5;
-  --ink-muted: #96a3ac;
-  --paper: #091723;
-  --paper-muted: #122536;
-  --accent: #ff8a75;
-  --accent-muted: #352128;
-  --border: #223240;
-}
-
 /*
-  .on-dark: bloque estructural siempre oscuro (independiente del toggle de
-  tema claro/oscuro), usado en secciones full-bleed como la experiencia
-  laboral o el CTA final. Reutiliza los mismos valores que .dark para no
-  introducir color nuevo — solo cambia el alcance en que se aplican.
+  .on-dark: bloque estructural siempre oscuro por diseño (no hay toggle de
+  tema — el sitio es siempre claro), usado en secciones full-bleed como la
+  experiencia laboral o el CTA final.
 
   Nota: las utilidades de Tailwind (bg-paper, text-ink, ...) consumen
   --color-ink/--color-paper/etc, no --ink/--paper directamente. Esas
@@ -95,7 +74,6 @@
   --color-paper: var(--paper);
   --color-paper-muted: var(--paper-muted);
   --color-accent: var(--accent);
-  --color-accent-on-dark: var(--accent-on-dark);
   --color-accent-muted: var(--accent-muted);
   --color-border: var(--border);
 

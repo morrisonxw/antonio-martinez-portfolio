@@ -4,7 +4,6 @@ import Button from '../ui/Button.astro';
 import Logo from '../ui/Logo.astro';
 import LanguageSwitch from '../ui/LanguageSwitch.astro';
 import MenuOverlay from './MenuOverlay.astro';
-import ThemeToggle from '../islands/ThemeToggle';
 import { site } from '../../content-data/site';
 import { t, type Locale } from '../../i18n/ui';
 import { homeHref } from '../../i18n/paths';
@@ -20,14 +19,11 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
     </a>
     <div class="ml-auto flex flex-wrap items-center gap-x-3 gap-y-3 sm:gap-x-6">
       <div class="hidden sm:block">
-        <LanguageSwitch />
-      </div>
-      <div class="hidden sm:block">
         <Button href="/cv/Antonio-Martinez-CV.pdf" download variant="secondary" class="px-5 text-sm">
           {t(locale, 'header.downloadCv')}
         </Button>
       </div>
-      <ThemeToggle client:load locale={locale} />
+      <LanguageSwitch />
       <MenuOverlay />
     </div>
   </Container>

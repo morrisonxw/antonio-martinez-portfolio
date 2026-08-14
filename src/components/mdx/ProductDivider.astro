@@ -9,17 +9,14 @@ const { eyebrow, label } = Astro.props;
 
 {
   /*
-    Light mode: fondo fijo #FDEFEA. Dark mode: se mantiene el tratamiento
-    oscuro original (bg-paper-muted), sin cambios.
-
     Contraste verificado (WCAG 2.1 AA, luminancia relativa):
     - #091723 (label) sobre #FDEFEA:  ~18:1
     - #c53420 (eyebrow) sobre #FDEFEA: ~4.8:1 — el --accent estándar
       (#d6371f) da ~4.2:1 sobre este fondo, insuficiente para texto
-      normal, por eso se usa este tono levemente más oscuro solo en light.
+      normal, por eso se usa este tono levemente más oscuro.
   */
 }
-<div class="relative my-14 -mx-6 rounded-md bg-[#FDEFEA] px-6 py-6 sm:-mx-8 sm:px-8 dark:bg-paper-muted" data-reveal>
-  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#c53420] dark:text-accent-on-dark">{eyebrow}</p>
-  <p class="mt-1 font-display text-xl font-bold tracking-tightest text-[#091723] sm:text-2xl dark:text-ink">{label}</p>
+<div class="relative my-14 -mx-6 rounded-md bg-[#FDEFEA] px-6 py-6 sm:-mx-8 sm:px-8" data-reveal>
+  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#c53420]">{eyebrow}</p>
+  <p class="mt-1 font-display text-xl font-bold tracking-tightest text-[#091723] sm:text-2xl">{label}</p>
 </div>
