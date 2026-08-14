@@ -22,7 +22,7 @@ const { stats } = Astro.props;
     partir palabras a mitad de sílaba para que quepan.
   */
 }
-<div class="my-10 grid grid-cols-1 gap-x-8 gap-y-8 border-t border-border pt-8 sm:grid-cols-2">
+<div class="my-10 grid grid-cols-1 gap-x-8 border-t border-border pt-8 sm:grid-cols-2">
   {
     stats.map((stat, index) => {
       const isRightCol = index % 2 === 1;
@@ -30,7 +30,7 @@ const { stats } = Astro.props;
       return (
         <div
           class:list={[
-            'min-w-0',
+            'grid min-w-0 grid-rows-[subgrid] row-span-2 gap-y-0',
             index > 0 && 'border-t border-border pt-6',
             isFirstRow ? 'sm:border-t-0 sm:pt-0' : 'sm:border-t sm:pt-6',
             isRightCol && 'sm:border-l sm:pl-8',
@@ -38,25 +38,28 @@ const { stats } = Astro.props;
         >
           {
             /*
-              min-h reserva el alto de 2 líneas (con leading-tight, no el
-              leading-none por defecto de text-4xl/text-5xl que solapa
-              líneas si un valor envuelve) e items-end ancla el valor al
-              fondo de ese espacio, para que el label de abajo arranque a
-              la misma altura entre las 2 columnas de cada fila. El flex
-              vive en este div envolvente y no en el <p> del valor: si el
-              <p> fuera el contenedor flex, su texto pasaría a ser un flex
-              item anónimo con min-width:auto (no se encoge por debajo del
-              ancho de su contenido). break-words queda como red de
+              Cada stat es en sí mismo un grid de 2 filas (valor, label) que
+              se subordina (subgrid) a las filas del grid padre. row-span-2
+              hace que el auto-placement del padre reserve esas 2 filas por
+              cada par de stats, y subgrid comparte esos mismos row-tracks
+              entre las 2 columnas: el track del valor se dimensiona según
+              el valor más alto de la fila (1 o 2 líneas) y el track del
+              label arranca justo después, a la misma altura en ambas
+              columnas, sin importar cuántas líneas ocupe cada valor o cada
+              label por separado (a diferencia de centrar manualmente con
+              flexbox, que solo alinea bien si los labels también miden
+              igual). items-center en el div del valor lo centra dentro de
+              ese track compartido. break-words queda como red de
               seguridad para el caso extremo de un valor que aun así no
               quepa.
             */
           }
-          <div class="flex min-h-[5.625rem] items-end sm:min-h-[7.5rem]">
+          <div class="flex items-center">
             <p class="min-w-0 break-words font-display text-4xl leading-tight font-bold tracking-tightest text-accent sm:text-5xl">
               {stat.value}
             </p>
           </div>
-          <p class="mt-2 text-sm text-ink-muted">{stat.label}</p>
+          <p class="mt-2 self-start text-sm text-ink-muted">{stat.label}</p>
         </div>
       );
     })

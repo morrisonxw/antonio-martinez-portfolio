@@ -1,6 +1,6 @@
 ---
 title: "Prefacturas: de caja negra a un solo documento claro"
-summary: "Rediseñé la prefactura de Mercado Libre para responder cuánto, cuándo y con qué soporte, y consolidé ahí los pagos complementarios que antes vivían en liquidaciones paralelas desarticuladas."
+summary: "Trabajé en el rediseño de la prefactura de Mercado Libre para responder cuánto, cuándo y cómo avanzar con el pago, y diseñé los módulos que consolidaron los pagos complementarios."
 cover: "../../assets/projects/mercadolibre-prefacturas/cover.png"
 coverAlt: "Vista de detalle de la prefactura en Mercado Libre, con comprobantes, resumen y total a pagar"
 tags: ["Product Design", "B2B Enterprise", "Facturación", "UX Writing"]
@@ -29,7 +29,7 @@ import cargaConceptos from '../../assets/projects/mercadolibre-prefacturas/carga
 
 ## Contexto de negocio
 
-Los proveedores logísticos percibían la prefactura como una caja negra incomprensible, lo que saturaba los canales de soporte con consultas sobre fechas y montos que el producto debería haber respondido por sí solo. A eso se sumaba que los pagos extraordinarios (peajes adicionales, sobrecargas por peso, esperas) se liquidaban aparte, en documentos paralelos y desarticulados del ciclo de facturación regular: más incertidumbre para el proveedor, parches contables y doble trabajo de reclamación para Mercado Libre.
+Los usuarios de los proveedores logísticos percibían la prefactura como una caja negra difícil de comprender, lo que llevaba a que saturaran los canales de soporte con consultas sobre fechas de pago y montos que no evidenciaban: eran preguntas que el producto debería haber respondido por sí solo, pero no lo hacía. A eso se sumaba una modalidad de pagos extraordinarios (peajes adicionales, sobrecargas por peso, esperas) que se liquidaban aparte, en prefacturas paralelas y desarticuladas del ciclo de facturación regular, sumando más incertidumbre para el proveedor, desgaste contable y doble trabajo de reclamación para Mercado Libre y nuestros proveedores.
 
 {/*
 ## Mi rol
@@ -43,26 +43,26 @@ Como Especialista UX SSR, lideré la investigación y el rediseño de la vista p
   stats={[
     { value: "Disminución drástica", label: "En solicitudes de soporte sobre estados de pago." },
     { value: "15%", label: "Menos disputas asociadas a cobros adicionales." },
-    { value: "0 liquidaciones extemporáneas", label: "Tras consolidar los pagos complementarios en la Factura Única." },
+    { value: "Pagos complementarios reducidos", label: "Tras consolidarlos en la Factura Única, solo se acude a esta modalidad en casos borde." },
     { value: "Cierre más simple", label: "Del proceso contable para los proveedores, al consolidar todo en un solo documento." },
   ]}
 />
 
 ## Research
 
-La investigación mostró que el 95% de los transportistas no consultaba el detalle línea por línea en el navegador: entraba a la prefactura buscando exactamente tres cosas: el monto total a cobrar, la fecha estimada de pago, y la posibilidad de descargar el archivo completo en formatos compatibles con su software contable. Todo lo demás en pantalla era ruido que competía por atención con esas tres respuestas.
+La investigación realizada por el equipo de research mostró que el 95% de los transportistas no consultaba el detalle línea por línea en el navegador: buscaban entrar a la prefactura solamente para obtener tres cosas: el monto total a cobrar, la fecha estimada de pago, y la posibilidad de descargar el archivo completo en formatos compatibles con su propio software contable. Todo lo demás en pantalla era ruido de poco valor que competía por atención con esas tres respuestas.
 
 Por otro lado, la gestión de pagos adicionales fuera del ciclo regular generaba facturas complementarias continuas que alteraban los cierres fiscales y representaban alertas para los auditores internos.
 
-<ProductDivider eyebrow="Insight" label="El 95% de los usuarios solo quería confirmar cuánto, cuándo, y tener el soporte para comprobarlo." />
+<ProductDivider eyebrow="Insight" label="El 95% de los usuarios solo quería confirmar cuánto les estábamos reconociendo en la prefactura, una fecha aproximada de pago y un detalle claro de los servicios para poder identificar internamente las diferencias." />
 
 ## Decisiones de diseño
 
-Eliminamos las tablas recargadas que dominaban la pantalla e incorporamos un tracker visual con las etapas claras del proceso de liquidación (prefactura emitida, período de revisión, aprobación y orden de pago enviada), reemplazando los modismos internos confusos por un lenguaje que un transportista pudiera seguir sin contexto previo de Mercado Libre. También reestructuramos el archivo de liquidación descargable para que fuera legible sin depender de soporte, y hicimos UX writing sobre cada mensaje del flujo.
+Eliminamos las tablas recargadas que dominaban la pantalla y mejoramos, a nivel de contenido, la línea de tiempo con wordings claros sobre las etapas del proceso de liquidación (prefactura emitida, período de revisión, aprobación y orden de pago enviada), reemplazando los modismos internos confusos por un lenguaje que un transportista pudiera seguir sin contexto previo de Mercado Libre. También reestructuramos el archivo de liquidación descargable para que fuera legible sin depender de soporte, y hicimos UX writing sobre cada mensaje del flujo.
 
 ## Consolidando los pagos complementarios: Factura Única
 
-Mientras clarificábamos la vista, identificamos que los pagos extraordinarios se gestionaban aparte, en liquidaciones paralelas que el proveedor tenía que reconciliar por su cuenta. Diseñamos la integración de estos conceptos, ya aprobados, directamente dentro de la misma prefactura, discriminando con claridad el pago regular base de los ajustes aprobados, para consolidar el modelo de Factura Única: un solo documento, una sola fecha de pago, sin liquidaciones sueltas.
+Mientras clarificábamos la vista, identificamos una oportunidad en los pagos extraordinarios que se gestionaban aparte, en liquidaciones paralelas que el proveedor tenía que reconciliar por flujos independientes. Diseñamos la integración de estos conceptos, ya aprobados, directamente dentro de la misma prefactura, discriminando con claridad el pago regular base de los ajustes aprobados, para consolidar el modelo de Factura Única: un solo documento, una sola fecha de pago, sin liquidaciones sueltas.
 
 <ProductDivider eyebrow="Decisión de diseño" label="Cada liquidación paralela era una pregunta más que el proveedor tenía que hacerle a soporte. Consolidar el documento eliminó la pregunta." />
 
