@@ -1,0 +1,108 @@
+---
+title: "Claims Billing 2.0: from 20,000 individual claims to batch management"
+summary: "I redesigned Mercado Libre's billing claims system, moving from case-by-case review to a standardized queue integrated with the Solver rules engine."
+cover: "../../assets/projects/mercadolibre-reclamos/cover.png"
+coverAlt: "Detail of a billing claims window at Mercado Libre, showing the status of each request (under review, approved, rejected)"
+thumbnail: "../../assets/projects/mercadolibre-reclamos/thumbnail.png"
+tags: ["Product Design", "B2B Enterprise", "Billing", "Operations"]
+year: 2022
+yearLabel: "2022–2026"
+featured: true
+order: 4
+draft: false
+
+role: "Semi-Senior UX Specialist"
+team: "1 PM, 1 Business Analyst, Tech Lead, UX team, and developers"
+company: "Mercado Libre"
+industry: "B2B billing claims module and internal help desk"
+scope: ["Product Design", "UX Writing", "As-Is/To-Be Mapping"]
+tools: ["Figma", "Jira Service Management", "As-Is/To-Be Mapping"]
+confidential: false
+---
+
+import Figure from '../../components/mdx/Figure.astro';
+import ImpactStats from '../../components/mdx/ImpactStats.astro';
+import ProductDivider from '../../components/mdx/ProductDivider.astro';
+import exploracionCards from '../../assets/projects/mercadolibre-reclamos/exploracion-cards.png';
+import configVentanas from '../../assets/projects/mercadolibre-reclamos/config-ventanas-reclamos.png';
+
+## Business context
+
+Over 20,000 billing claims came in per period through unstandardized forms, creating an unsustainable operational load for the business-control team.
+
+{/*
+## My role
+
+I designed the system end-to-end, from as-is/to-be process mapping to the final UI, working with a PM, a business analyst, the tech lead, and developers.
+*/}
+
+## Impact
+
+<ImpactStats
+  stats={[
+    { value: "Automatic filtering", label: "Of invalid claims, resolved before ever reaching an analyst." },
+    { value: "Less time", label: "In internal response, after moving from individual to batch management." },
+  ]}
+/>
+
+## Claims queue
+
+We built a standardized, parameterized claims queue — the one shown on this project's cover — integrated with the Solver rules engine, to process in batches and resolve direct refunds without case-by-case manual intervention.
+
+<figure class="my-10">
+  <img
+    src="/projects/mercadolibre-pase/crear-reclamo.gif"
+    alt="Flow for creating a billing claim"
+    class="w-full rounded-xl"
+  />
+  <figcaption class="mt-3 text-sm text-ink-muted">Claim-creation flow.</figcaption>
+</figure>
+
+<figure class="my-10">
+  <img
+    src="/projects/mercadolibre-pase/cargar-desde-detalle.gif"
+    alt="Filing a claim directly from a trip's detail view"
+    class="w-full rounded-xl"
+  />
+  <figcaption class="mt-3 text-sm text-ink-muted">Filing a claim directly from a trip's detail view.</figcaption>
+</figure>
+
+<ProductDivider eyebrow="Claims system" label="The process only became sustainable once we stopped designing it case by case and started designing it by batch." />
+
+Before arriving at this version, we explored different ways to organize the information and give analysts access to configure claims windows:
+
+<Figure
+  src={exploracionCards}
+  alt="Card exploration for managing claims on executed routes"
+  caption="Exploring different card formats to prioritize and resolve claims."
+/>
+
+<Figure
+  src={configVentanas}
+  alt="Flow for configuring a new claims window"
+  caption="Internal flow for analysts to configure new claims windows."
+/>
+
+Part of iterating on this flow leaned on AI tools to prototype and validate interface variants without waiting for final development:
+
+<figure class="my-10">
+  <video
+    src="/projects/mercadolibre-pase/prototipo-claude.mp4"
+    autoplay
+    loop
+    muted
+    playsinline
+    class="w-full rounded-xl"
+  />
+  <figcaption class="mt-3 text-sm text-ink-muted">Iteration of the claims-management flow, prototyped with Claude.</figcaption>
+</figure>
+
+## UX writing in notifications
+
+We redesigned rejection notifications, replacing system codes with clear explanations tied to the applicable contract clauses, so a rejected claim could be understood without escalating to an analyst.
+
+## Learning: the MVP-to-batch tradeoff
+
+We initially shipped an individual-management MVP, designed to guarantee systemic traceability from day one. It became unsustainable at the technology level, and the experience for the Business Control team wasn't a good one. We made the tradeoff of cutting features we internally saw as valuable but users didn't perceive that way, and pivoted to the batch upload and management model that ended up sustaining the real volume.
+
+<ProductDivider eyebrow="Learning" label="Building traceability case by case felt more responsible, but it was the reason the system couldn't scale." />

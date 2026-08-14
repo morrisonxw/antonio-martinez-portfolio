@@ -1,19 +1,22 @@
 ---
 import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
 import Container from '../ui/Container.astro';
 import DarkSection from '../ui/DarkSection.astro';
 import Tag from '../ui/Tag.astro';
+import type { ProjectEntry } from '../../lib/content-types';
+import { t, type Locale } from '../../i18n/ui';
+import { projectHref } from '../../i18n/paths';
 
 interface Props {
   period: string;
   company: string;
   companyUrl?: string;
   description: string;
-  projects: CollectionEntry<'projects'>[];
+  projects: ProjectEntry[];
 }
 
 const { period, company, companyUrl, description, projects } = Astro.props;
+const locale = (Astro.currentLocale ?? 'es') as Locale;
 ---
 
 <DarkSection class="border-t border-border py-20 sm:py-28" data-reveal>
@@ -56,11 +59,11 @@ const { period, company, companyUrl, description, projects } = Astro.props;
         <div
           data-project-scroller
           role="region"
-          aria-label={`Proyectos en ${company}`}
+          aria-label={`${t(locale, 'experience.projectsIn')} ${company}`}
           class="flex cursor-grab gap-8 overflow-x-auto px-6 [scrollbar-width:none] active:cursor-grabbing sm:gap-10 sm:px-8 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {projects.map((project) => {
-            const href = project.data.externalUrl ?? `/proyectos/${project.id}`;
+            const href = project.data.externalUrl ?? projectHref(locale, project.id);
             return (
               <a
                 href={href}

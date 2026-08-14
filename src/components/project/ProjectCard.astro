@@ -1,15 +1,18 @@
 ---
 import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
 import Tag from '../ui/Tag.astro';
+import type { ProjectEntry } from '../../lib/content-types';
+import type { Locale } from '../../i18n/ui';
+import { projectHref } from '../../i18n/paths';
 
 interface Props {
-  project: CollectionEntry<'projects'>;
+  project: ProjectEntry;
 }
 
 const { project } = Astro.props;
 const { title, summary, cover, thumbnail, coverAlt, tags, year, yearLabel, externalUrl } = project.data;
-const href = externalUrl ?? `/proyectos/${project.id}`;
+const locale = (Astro.currentLocale ?? 'es') as Locale;
+const href = externalUrl ?? projectHref(locale, project.id);
 ---
 
 <a

@@ -1,7 +1,12 @@
 ---
 import { nav } from '../../content-data/nav';
+import { nav as navEn } from '../../content-data/nav.en';
 import { site } from '../../content-data/site';
+import LanguageSwitch from '../ui/LanguageSwitch.astro';
+import { t, type Locale } from '../../i18n/ui';
 
+const locale = (Astro.currentLocale ?? 'es') as Locale;
+const navItems = locale === 'en' ? navEn : nav;
 const current = Astro.url.pathname;
 ---
 
@@ -13,7 +18,7 @@ const current = Astro.url.pathname;
   aria-controls="menu-panel"
   class="group inline-flex items-center gap-1.5 text-xs font-medium text-ink sm:gap-2 sm:text-sm"
 >
-  Menú
+  {t(locale, 'menu.toggle')}
   <span class="relative flex h-3 w-6 flex-col justify-between">
     <span class="h-px w-full origin-center bg-ink transition-transform duration-300 group-aria-expanded:translate-y-[5px] group-aria-expanded:rotate-45"
     ></span>
@@ -39,7 +44,7 @@ const current = Astro.url.pathname;
       <button
         type="button"
         data-menu-close
-        aria-label="Cerrar menú"
+        aria-label={t(locale, 'menu.close')}
         class="flex h-9 w-9 items-center justify-center rounded-full border border-border text-ink transition-colors hover:border-accent hover:text-accent"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" class="h-4 w-4">
@@ -48,9 +53,9 @@ const current = Astro.url.pathname;
       </button>
     </div>
 
-    <nav aria-label="Principal" class="mt-16 flex flex-1 flex-col gap-3">
+    <nav aria-label={t(locale, 'menu.nav')} class="mt-16 flex flex-1 flex-col gap-3">
       {
-        nav.map((item) => {
+        navItems.map((item) => {
           const active = current === item.href || current.startsWith(`${item.href}/`);
           return (
             <a
@@ -68,8 +73,12 @@ const current = Astro.url.pathname;
       }
     </nav>
 
+    <div class="mt-8">
+      <LanguageSwitch />
+    </div>
+
     <div class="mt-10 space-y-3 border-t border-border pt-8 text-sm">
-      <p class="text-xs font-medium tracking-wide text-ink-muted uppercase">Contacto</p>
+      <p class="text-xs font-medium tracking-wide text-ink-muted uppercase">{t(locale, 'menu.contact')}</p>
       <a href={`mailto:${site.email}`} class="block text-ink hover:text-accent">{site.email}</a>
       <a
         href={site.social.linkedin}

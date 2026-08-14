@@ -1,29 +1,32 @@
 ---
 import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
 import PageLayout from './PageLayout.astro';
 import Container from '../components/ui/Container.astro';
 import Tag from '../components/ui/Tag.astro';
 import ProjectMeta from '../components/project/ProjectMeta.astro';
 import ProjectNav from '../components/project/ProjectNav.astro';
+import type { ProjectEntry } from '../lib/content-types';
+import { t, type Locale } from '../i18n/ui';
+import { projectsHref } from '../i18n/paths';
 
 interface Props {
-  project: CollectionEntry<'projects'>;
-  prev?: CollectionEntry<'projects'>;
-  next?: CollectionEntry<'projects'>;
+  project: ProjectEntry;
+  prev?: ProjectEntry;
+  next?: ProjectEntry;
 }
 
 const { project, prev, next } = Astro.props;
 const { title, summary, cover, coverAlt, tags, company, confidential } = project.data;
-const eyebrow = company ?? tags[0] ?? 'Case study';
+const locale = (Astro.currentLocale ?? 'es') as Locale;
+const eyebrow = company ?? tags[0] ?? t(locale, 'caseStudy.fallbackEyebrow');
 ---
 
 <PageLayout title={title} description={summary} image={cover.src}>
   <article>
     <Container class="pt-12 sm:pt-16">
       <a
-        href="/proyectos"
-        aria-label="Volver a proyectos"
+        href={projectsHref(locale)}
+        aria-label={t(locale, 'caseStudy.back')}
         class="mb-8 flex h-9 w-9 items-center justify-center rounded-full border border-border text-ink transition-colors hover:border-accent hover:text-accent"
         data-reveal
       >
@@ -45,7 +48,7 @@ const eyebrow = company ?? tags[0] ?? 'Case study';
         {
           confidential && (
             <p class="mt-4 text-sm text-ink-muted">
-              Algunos detalles de este proyecto se mantienen confidenciales por acuerdo con el cliente/empresa.
+              {t(locale, 'caseStudy.confidential')}
             </p>
           )
         }

@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
+import { t, type Locale } from '../../i18n/ui';
 
-export default function ThemeToggle() {
+interface Props {
+  locale?: Locale;
+}
+
+export default function ThemeToggle({ locale = 'es' }: Props) {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -18,7 +23,7 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      aria-label={isDark ? 'Activar modo claro' : 'Activar modo oscuro'}
+      aria-label={isDark ? t(locale, 'theme.activateLight') : t(locale, 'theme.activateDark')}
       aria-pressed={isDark}
       className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-ink transition-colors hover:border-accent hover:text-accent"
     >

@@ -13,5 +13,22 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [mdx(), sitemap(), react()]
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
+
+  integrations: [
+    mdx(),
+    sitemap({
+      i18n: {
+        defaultLocale: 'es',
+        locales: { es: 'es', en: 'en' },
+      },
+    }),
+    react(),
+  ]
 });

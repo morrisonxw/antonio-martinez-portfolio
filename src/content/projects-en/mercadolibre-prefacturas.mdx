@@ -1,0 +1,79 @@
+---
+title: "Pre-invoices: from black box to a single clear document"
+summary: "I redesigned Mercado Libre's pre-invoice to answer how much, when, and with what supporting proof, and consolidated the complementary payments that used to live in disconnected, parallel settlements."
+cover: "../../assets/projects/mercadolibre-prefacturas/cover.png"
+coverAlt: "Detail view of the pre-invoice at Mercado Libre, with receipts, summary, and total due"
+tags: ["Product Design", "B2B Enterprise", "Billing", "UX Writing"]
+year: 2022
+yearLabel: "2022–2026"
+featured: true
+order: 3
+draft: false
+
+role: "Semi-Senior UX Specialist"
+team: "Product triad, Billing stakeholders, financial/operations analysts, and User Research"
+company: "Mercado Libre"
+industry: "Mercado Envíos Providers · B2B financial services portal"
+scope: ["UX Research", "UX Writing", "Flow Integration", "Benchmarking", "UI Design"]
+tools: ["Figma", "Mixpanel", "User Testing", "Data Analysis"]
+confidential: false
+---
+
+import Figure from '../../components/mdx/Figure.astro';
+import ImpactStats from '../../components/mdx/ImpactStats.astro';
+import ProductDivider from '../../components/mdx/ProductDivider.astro';
+import prefacturaResultadoFinal from '../../assets/projects/mercadolibre-prefacturas/prefactura-resultado-final.png';
+import cargaConceptos from '../../assets/projects/mercadolibre-prefacturas/carga-conceptos-complementarias.png';
+
+## Business context
+
+Logistics providers saw the pre-invoice as an incomprehensible black box, which flooded support channels with questions about dates and amounts the product should have answered on its own. On top of that, extraordinary payments — extra tolls, surcharges, waiting time — were settled separately, in parallel documents disconnected from the regular billing cycle: more uncertainty for the provider, and double accounting work for Mercado Libre.
+
+{/*
+## My role
+
+As Semi-Senior UX Specialist, I led the research and redesign of the pre-invoice preview and architecture — including consolidating the complementary payments — working alongside Billing stakeholders, financial/operations analysts, and the User Research team.
+*/}
+
+## Impact
+
+<ImpactStats
+  stats={[
+    { value: "Drastic decrease", label: "In support requests about payment status." },
+    { value: "15%", label: "Fewer disputes tied to additional charges." },
+    { value: "Higher satisfaction", label: "Reported by carriers in post-launch measurements." },
+    { value: "Simpler close", label: "Of the accounting process for providers, by consolidating everything into one document." },
+  ]}
+/>
+
+## Research
+
+Research showed that 95% of users came to the pre-invoice looking for exactly three things: the total amount due, the estimated payment date, and the ability to download the full supporting file. Everything else on screen was noise competing for attention with those three answers.
+
+<ProductDivider eyebrow="Insight" label="95% of users just wanted to confirm how much, when, and have the proof to back it up." />
+
+## Design decisions
+
+We removed the heavy tables that dominated the screen, added a visual tracker with clear stages of the settlement process, and restructured the downloadable settlement file to be readable without relying on support. In parallel, we did UX writing on every message in the flow, replacing internal technical language with explanations a carrier could understand with no prior context on Mercado Libre.
+
+## Consolidating complementary payments: Single Invoice
+
+While clarifying the view, we found that extraordinary payments were managed separately, in parallel settlements the provider had to reconcile on their own. We designed the integration of these already-approved items directly into the same pre-invoice, consolidating the Single Invoice model: one document, one payment date, no loose settlements.
+
+<ProductDivider eyebrow="Design decision" label="Every parallel settlement was one more question the provider had to ask support. Consolidating the document removed the question." />
+
+<Figure
+  src={cargaConceptos}
+  alt="Internal panel for loading complementary line items into pre-invoices, with record, site/mile, and batch creation status"
+  caption="Internal panel where the Billing team configures and loads the complementary items that feed the Single Invoice."
+/>
+
+<Figure
+  src={prefacturaResultadoFinal}
+  alt="Pre-invoice view with complementary items (tolls, surcharges, waiting time) integrated into the regular breakdown"
+  caption="Single Invoice: complementary payments now integrated into the pre-invoice's regular breakdown."
+/>
+
+## Result
+
+Clarifying the pre-invoice and consolidating complementary payments into a single document reduced reliance on support, lowered disputes over charges that used to arrive disconnected from the rest of billing, and simplified the accounting close for logistics providers, at a point in the process that used to generate distrust.

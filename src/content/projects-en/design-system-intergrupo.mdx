@@ -1,0 +1,53 @@
+---
+title: "From a static PDF to a component library"
+summary: "How I built the first design system for the EPM account, moving from a static PDF to a living component library."
+cover: "../../assets/projects/design-system-intergrupo/cover.png"
+coverAlt: "Sample of EPM's UI Kit components: buttons, inputs, cards, and text styles on a dark background"
+tags: ["Design System", "B2B", "Enterprise", "Public Sector"]
+year: 2021
+yearLabel: "2021–2022"
+featured: true
+order: 6
+draft: false
+
+role: "Senior UX Specialist / Lead UX Squad"
+team: "Squad of 4 UX/UI designers on the Empresas Públicas de Medellín account"
+company: "Intergrupo / SoftwareOne"
+industry: "B2B Enterprise design system · Public sector (client: EPM)"
+scope: ["Design Systems", "UI Design", "Documentation", "Governance", "Accessibility"]
+tools: ["Adobe XD", "Figma", "Design Tokens", "WCAG accessibility guidelines"]
+confidential: false
+
+problem: "Design and development teams were building solutions from static brand guidelines in PDF format, causing visual inconsistencies and duplicated effort."
+outcome: "A significant increase in the team's design and implementation speed, ensuring consistency and interoperability."
+---
+
+import ImpactStats from '../../components/mdx/ImpactStats.astro';
+import BeforeAfter from '../../components/mdx/BeforeAfter.astro';
+import pdfBotones from '../../assets/projects/design-system-intergrupo/pdf-botones.png';
+import libreriaFuncional from '../../assets/projects/design-system-intergrupo/libreria-funcional.png';
+
+## Context
+
+On the EPM account, design and development teams were building solutions from static brand guidelines in PDF format: every time a component was needed, it had to be rebuilt from scratch, causing visual inconsistencies and duplicated effort across vendors. I built and documented the account's first master library of living components.
+
+<BeforeAfter
+  before={pdfBotones}
+  beforeAlt="A page from a static PDF specifying the structure and states of buttons in EPM's design system"
+  after={libreriaFuncional}
+  afterAlt="Functional component library in Figma, with button, input, and style atoms organized in layers"
+/>
+
+## Impact
+
+<ImpactStats
+  stats={[
+    { value: "4", label: "UX/UI designers building on the same library instead of rebuilding every component." },
+    { value: "50%+", label: "Of the account's UI patterns, normalized into the library." },
+    { value: "Faster builds", label: "By building on already-documented components instead of redoing them." },
+  ]}
+/>
+
+## Leadership and governance
+
+I catalogued every component across EPM's active applications to build the parameterized digital library, normalizing over 50% of the account's UI patterns. I led alignment sessions with external technology vendors to drive adoption of the system beyond our own squad, and mentored junior designers into a culture of scalable systems instead of one-off, screen-by-screen solutions.

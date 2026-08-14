@@ -1,20 +1,22 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type { ProjectEntry } from '../../lib/content-types';
+import { t, type Locale } from '../../i18n/ui';
 
 interface Props {
-  project: CollectionEntry<'projects'>;
+  project: ProjectEntry;
 }
 
 const { project } = Astro.props;
 const { role, team, duration, industry, scope, tools, liveUrl } = project.data;
+const locale = (Astro.currentLocale ?? 'es') as Locale;
 
 const items = [
-  { label: 'Industria', value: industry },
-  { label: 'Rol', value: role },
-  { label: 'Duración', value: duration },
-  { label: 'Equipo', value: team },
-  { label: 'Alcance', value: scope.length > 0 ? scope.join(', ') : undefined },
-  { label: 'Herramientas', value: tools.length > 0 ? tools.join(', ') : undefined },
+  { label: t(locale, 'projectMeta.industry'), value: industry },
+  { label: t(locale, 'projectMeta.role'), value: role },
+  { label: t(locale, 'projectMeta.duration'), value: duration },
+  { label: t(locale, 'projectMeta.team'), value: team },
+  { label: t(locale, 'projectMeta.scope'), value: scope.length > 0 ? scope.join(', ') : undefined },
+  { label: t(locale, 'projectMeta.tools'), value: tools.length > 0 ? tools.join(', ') : undefined },
 ].filter((item) => Boolean(item.value));
 ---
 
@@ -30,10 +32,10 @@ const items = [
   {
     liveUrl && (
       <div>
-        <dt class="text-xs font-medium uppercase tracking-wide text-ink-muted">Enlace</dt>
+        <dt class="text-xs font-medium uppercase tracking-wide text-ink-muted">{t(locale, 'projectMeta.link')}</dt>
         <dd class="mt-1 text-sm">
           <a href={liveUrl} target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">
-            Ver producto ↗
+            {t(locale, 'projectMeta.viewProduct')}
           </a>
         </dd>
       </div>

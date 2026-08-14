@@ -1,0 +1,88 @@
+---
+title: "PASE: from reactive claims to daily operational reconciliation"
+summary: "I designed PASE, the platform where Mercado Libre and its logistics providers reconcile executed routes daily, catching capital leaks before they reach billing."
+cover: "../../assets/projects/mercadolibre-pase/cover.png"
+coverAlt: "Control panel for executed routes in PASE, with adjustments and claims per route"
+thumbnail: "../../assets/projects/mercadolibre-pase/thumbnail.png"
+tags: ["Product Design", "B2B Enterprise", "Logistics", "Reconciliation"]
+year: 2022
+yearLabel: "2022–2026"
+featured: true
+order: 1
+draft: false
+
+role: "Semi-Senior UX Specialist"
+team: "Product triad — 1 PM, 1 Tech Lead, 1 Semi-Senior UX Specialist, frontend/backend engineers, and User Research"
+company: "Mercado Libre"
+industry: "Shipping / B2B Transportation"
+scope: ["UX Research", "UX Strategy", "Information Architecture", "UI Design", "Prototyping"]
+tools: ["Figma", "FigJam", "Claude Code", "Gemini", "Figma Make", "NotebookLM"]
+confidential: false
+---
+
+import ImpactStats from '../../components/mdx/ImpactStats.astro';
+import ProductDivider from '../../components/mdx/ProductDivider.astro';
+
+## Business context
+
+Mercado Libre faced high-impact capital leaks from divergences that went undetected between the transport services third parties executed in the field and what the billing system recorded. Reconciliation happened reactively, weeks after trips were completed, creating two critical bottlenecks: carriers had no transparency into penalties or deviations, and part of the overpayments wasn't recoverable due to contractual barriers with large carriers that blocked retroactive deductions.
+
+{/*
+## My role
+
+I worked within the product triad — PM, Tech Lead, and me as UX — alongside frontend/backend engineers and the User Research team, covering UX strategy, research, information architecture, and end-to-end UI design.
+*/}
+
+## Impact
+
+<ImpactStats
+  stats={[
+    { value: "70%", label: "Fewer unrecoverable financial divergences and late claims at the initial rollout sites (Mexico and Brazil)." },
+    { value: "48 hours", label: "Dispute resolution time, previously measured in weeks." },
+    { value: "-50%", label: "Late claims after PASE launched." },
+  ]}
+/>
+
+## Research and insights
+
+Qualitative testing and contextual interviews in Mexico and Brazil revealed that reviewing a trip weeks old required manually rebuilding a trail with coordinators who no longer remembered the incident.
+
+<ProductDivider eyebrow="Research" label="Reviewing a weeks-old trip meant reconstructing from memory something that should have been logged the same day." />
+
+## Business rules and design decisions
+
+That finding led to the contractual **Positive Silence** rule: a service not disputed within the stipulated window is automatically accepted. We rigorously separated the acceptance of physical attributes (routes, kilometers, plate, driver, facility) from rate and penalty management.
+
+To keep the panel from collapsing under a massive volume of data, I ruled out item-by-item on-screen auditing in favor of an executive panel with advanced filters and parameterized CSV/Excel template downloads compatible with providers' accounting software.
+
+<ProductDivider eyebrow="Design decision" label="Moving the review from the end of the process into day-to-day operations was what changed the nature of the problem, not just its speed." />
+
+Part of iterating on this panel leaned on AI tools to prototype faster and validate interface variants without waiting for final development:
+
+<figure class="my-10">
+  <video
+    src="/projects/mercadolibre-pase/prototipo-claude.mp4"
+    autoplay
+    loop
+    muted
+    playsinline
+    class="w-full rounded-xl"
+  />
+  <figcaption class="mt-3 text-sm text-ink-muted">Prototype of claims management for executed routes, built with Claude Code.</figcaption>
+</figure>
+
+<figure class="my-10">
+  <video
+    src="/projects/mercadolibre-pase/prototipo-figma-make.mp4"
+    autoplay
+    loop
+    muted
+    playsinline
+    class="w-full rounded-xl"
+  />
+  <figcaption class="mt-3 text-sm text-ink-muted">Iteration of the executed-routes control panel, prototyped with Figma Make.</figcaption>
+</figure>
+
+## Result
+
+The initiative returned financial predictability to the logistics chain: fewer unrecoverable divergences, and disputes resolved in hours instead of weeks.

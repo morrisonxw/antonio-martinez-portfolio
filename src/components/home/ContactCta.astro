@@ -2,15 +2,21 @@
 import DarkSection from '../ui/DarkSection.astro';
 import Container from '../ui/Container.astro';
 import Button from '../ui/Button.astro';
+import { t, type Locale } from '../../i18n/ui';
+import { contactHref } from '../../i18n/paths';
+
+const locale = (Astro.currentLocale ?? 'es') as Locale;
 ---
 
 <DarkSection class="bg-grain flex min-h-[70svh] items-center justify-center border-t border-border py-24 text-center" data-reveal>
   <Container>
     <h2 class="mx-auto max-w-3xl font-display text-4xl font-bold tracking-tightest text-ink sm:text-6xl">
-      ¿Tienes un proyecto en mente?
+      {t(locale, 'contactCta.heading')}
     </h2>
     <div class="mt-10 flex justify-center">
-      <Button href="/contacto" variant="secondary" class="px-8 py-3 text-base">Hablemos</Button>
+      <Button href={contactHref(locale)} variant="secondary" class="px-8 py-3 text-base">
+        {t(locale, 'contactCta.button')}
+      </Button>
     </div>
   </Container>
 </DarkSection>

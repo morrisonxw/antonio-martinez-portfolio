@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../../layouts/PageLayout.astro';
+import Container from '../../../components/ui/Container.astro';
+import SectionHeading from '../../../components/ui/SectionHeading.astro';
+import ProjectGrid from '../../../components/project/ProjectGrid.astro';
+import { t } from '../../../i18n/ui';
+
+const allProjects = (await getCollection('projectsEn', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.year - a.data.year || a.data.order - b.data.order,
+);
+---
+
+<PageLayout title={t('en', 'projects.title')} description={t('en', 'projects.description')}>
+  <Container class="pt-16 pb-24 sm:pt-20">
+    <SectionHeading as="h1" eyebrow={t('en', 'projects.eyebrow')} class="mb-12" data-reveal>
+      {t('en', 'projects.heading')}
+    </SectionHeading>
+    <ProjectGrid projects={allProjects} />
+  </Container>
+</PageLayout>

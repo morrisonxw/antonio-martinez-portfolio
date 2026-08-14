@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import Container from '../../components/ui/Container.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import ProjectGrid from '../../components/project/ProjectGrid.astro';
+import PinnedHero from '../../components/home/PinnedHero.astro';
+import ExperienceBlock from '../../components/home/ExperienceBlock.astro';
+import ContactCta from '../../components/home/ContactCta.astro';
+import { site } from '../../content-data/site.en';
+import { experience } from '../../content-data/experience.en';
+import { t } from '../../i18n/ui';
+
+const allProjects = await getCollection('projectsEn', ({ data }) => !data.draft);
+const projectsById = new Map(allProjects.map((project) => [project.id, project]));
+
+const timeline = experience
+  .map((item) => ({
+    ...item,
+    projects: item.projectSlugs
+      .map((slug) => projectsById.get(slug))
+      .filter((project) => project !== undefined),
+  }))
+  .filter((item) => item.projects.length > 0);
+
+const slugsInTimeline = new Set(experience.flatMap((item) => item.projectSlugs));
+const featured = allProjects
+  .filter((p) => p.data.featured && !slugsInTimeline.has(p.id))
+  .sort((a, b) => a.data.order - b.data.order);
+const projectsToShow = featured.length > 0 ? featured : allProjects.filter((p) => !slugsInTimeline.has(p.id)).slice(0, 4);
+---
+
+<PageLayout title={site.name} description={site.description}>
+  <PinnedHero />
+
+  {timeline.map((item) => <ExperienceBlock {...item} />)}
+
+  {
+    projectsToShow.length > 0 && (
+      <Container class="py-24 sm:py-28">
+        <SectionHeading eyebrow={t('en', 'home.moreWorkEyebrow')} class="mb-10" data-reveal>
+          {t('en', 'home.moreWorkHeading')}
+        </SectionHeading>
+        <ProjectGrid projects={projectsToShow} />
+      </Container>
+    )
+  }
+
+  <ContactCta />
+</PageLayout>

@@ -1,6 +1,11 @@
 ---
 import Container from '../ui/Container.astro';
-import { site } from '../../content-data/site';
+import { site as siteEs } from '../../content-data/site';
+import { site as siteEn } from '../../content-data/site.en';
+import type { Locale } from '../../i18n/ui';
+
+const locale = (Astro.currentLocale ?? 'es') as Locale;
+const site = locale === 'en' ? siteEn : siteEs;
 ---
 
 <section

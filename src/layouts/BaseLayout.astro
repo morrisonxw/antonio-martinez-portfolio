@@ -2,6 +2,9 @@
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
 import { buildSeo } from '../lib/seo';
+import { site } from '../content-data/site';
+import { t, locales, type Locale } from '../i18n/ui';
+import { localizePath } from '../i18n/paths';
 
 interface Props {
   title: string;
@@ -11,19 +14,29 @@ interface Props {
 }
 
 const { title, description, image, path } = Astro.props;
-const seo = buildSeo({ title, description, image, path: path ?? Astro.url.pathname });
+const currentPath = path ?? Astro.url.pathname;
+const seo = buildSeo({ title, description, image, path: currentPath });
+
+const locale = (Astro.currentLocale ?? 'es') as Locale;
+const alternates = locales.map((l) => ({
+  locale: l,
+  url: new URL(localizePath(currentPath, l), site.url).toString(),
+}));
+const defaultAlternateUrl = new URL(localizePath(currentPath, 'es'), site.url).toString();
 
 const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 const showAnalytics = import.meta.env.PROD && gaId;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={seo.url} />
+    {alternates.map((alt) => <link rel="alternate" hreflang={alt.locale} href={alt.url} />)}
+    <link rel="alternate" hreflang="x-default" href={defaultAlternateUrl} />
     <ClientRouter />
 
     <title>{seo.title}</title>
@@ -76,7 +89,7 @@ const showAnalytics = import.meta.env.PROD && gaId;
       href="#main"
       class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-accent focus:px-4 focus:py-2 focus:text-paper"
     >
-      Saltar al contenido
+      {t(locale, 'skip-to-content')}
     </a>
     <slot />
     <script>

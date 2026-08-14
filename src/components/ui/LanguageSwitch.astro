@@ -1,0 +1,31 @@
+---
+// Switch ES/EN de dos segmentos. Semánticamente son dos links de
+// navegación a rutas distintas (no un toggle de estado in-page), por eso
+// es un grupo de links en vez de role="switch" — ese rol ARIA implica un
+// on/off booleano, no una elección entre dos destinos. El segmento activo
+// se marca con relleno sólido + aria-current, nunca solo con color.
+import { t, type Locale } from '../../i18n/ui';
+import { localizePath } from '../../i18n/paths';
+
+const locale = (Astro.currentLocale ?? 'es') as Locale;
+const pathname = Astro.url.pathname;
+const esHref = localizePath(pathname, 'es');
+const enHref = localizePath(pathname, 'en');
+
+const segmentBase = 'rounded-full px-2.5 py-1 transition-colors';
+const active = 'bg-ink text-paper';
+const inactive = 'text-ink-muted hover:text-accent';
+---
+
+<div
+  class="inline-flex items-center rounded-full border border-border p-0.5 text-xs font-semibold"
+  role="group"
+  aria-label={t(locale, 'header.langSwitchLabel')}
+>
+  <a href={esHref} aria-current={locale === 'es' ? 'true' : undefined} class:list={[segmentBase, locale === 'es' ? active : inactive]}>
+    ESP
+  </a>
+  <a href={enHref} aria-current={locale === 'en' ? 'true' : undefined} class:list={[segmentBase, locale === 'en' ? active : inactive]}>
+    ENG
+  </a>
+</div>
