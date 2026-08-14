@@ -44,7 +44,7 @@ export const ui = {
     'contact.description': 'Ponte en contacto con',
     'contact.heading': 'Hablemos',
     'contact.body':
-      '¿Tienes un proyecto en mente o quieres charlar? Prefiero el contacto directo — escríbeme por WhatsApp o encuéntrame en cualquiera de estos canales.',
+      '¿Tienes un proyecto en mente o quieres charlar? Prefiero el contacto directo: escríbeme por WhatsApp o encuéntrame en cualquiera de estos canales.',
     'contact.whatsapp': 'WhatsApp',
     'contact.phone': 'Teléfono',
     'contact.email': 'Email',
@@ -104,7 +104,7 @@ export const ui = {
     'contact.description': 'Get in touch with',
     'contact.heading': "Let's talk",
     'contact.body':
-      "Have a project in mind, or just want to chat? I prefer direct contact — reach me on WhatsApp or through any of these channels.",
+      "Have a project in mind, or just want to chat? I prefer direct contact: reach me on WhatsApp or through any of these channels.",
     'contact.whatsapp': 'WhatsApp',
     'contact.phone': 'Phone',
     'contact.email': 'Email',

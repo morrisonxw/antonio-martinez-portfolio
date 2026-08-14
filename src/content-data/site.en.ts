@@ -3,7 +3,7 @@ export const site = {
   role: 'Product Designer',
   tagline: "I'm Antonio Martínez, a digital product designer",
   subheading:
-    "Great products aren't born from stitching screens together — they come from connecting what users need with what the business needs.",
+    "Great products aren't born from stitching screens together, but from connecting what users need with what the business needs.",
   description:
     "I've specialized in turning complex operational processes with multiple stakeholders into digital products.",
   email: 'anton.mtinez@gmail.com',

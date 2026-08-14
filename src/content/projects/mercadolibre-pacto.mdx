@@ -29,30 +29,30 @@ import homeMisTarifas from '../../assets/projects/mercadolibre-pacto/home-mis-ta
 
 ## Contexto de negocio
 
-Cada modalidad de transporte (primera, media y última milla) opera bajo esquemas tarifarios heterogéneos —por kilómetro, por paquete, esquemas mixtos o adendas locales—, y el registro de esos acuerdos entre Mercado Libre y miles de transportistas se gestionaba de forma manual e informal, por correo y hojas de cálculo desarticuladas. Cada analista destinaba hasta 6 horas diarias a procesar esos esquemas, alternando entre múltiples herramientas no integradas.
+Cada modalidad de transporte (primera, media y última milla) opera bajo esquemas tarifarios heterogéneos: por kilómetro, por paquete, esquemas mixtos o adendas locales, y el registro de esos acuerdos entre Mercado Libre y miles de transportistas se gestionaba de forma manual e informal, por correo y hojas de cálculo desarticuladas. Cada analista destinaba hasta 6 horas diarias a procesar esos esquemas, alternando entre múltiples herramientas no integradas.
 
 {/*
 ## Mi rol
 
-Dirigí la iniciativa desde la perspectiva de diseño UX/UI en dos etapas clave —definición inicial de hipótesis del producto junto a producto/tecnología, y adaptación madura a las casuísticas de cada país y milla—, además de guiar y hacer mentoría a una diseñadora UX Junior durante el proceso.
+Dirigí la iniciativa desde la perspectiva de diseño UX/UI en dos etapas clave: definición inicial de hipótesis del producto junto a producto/tecnología, y adaptación madura a las casuísticas de cada país y milla, además de guiar y hacer mentoría a una diseñadora UX Junior durante el proceso.
 */}
 
 ## Impacto
 
 <ImpactStats
   stats={[
-    { value: "83%", label: "Menos tiempo de procesamiento operativo por analista — de 6 horas a 1 hora diarias." },
+    { value: "83%", label: "Menos tiempo de procesamiento operativo por analista: de 6 horas a 1 hora diarias." },
     { value: "0 desfases", label: "En facturación por tarifas desactualizadas, eliminados tras la digitalización del ciclo de vida completo." },
   ]}
 />
 
 ## Research y decisión de diseño
 
-Durante el discovery identificamos que el mayor margen de error e inversión de tiempo no ocurría en la creación de una tarifa individual, sino en las modificaciones masivas derivadas de fluctuaciones de combustible e inflación —precisamente porque se hacían a mano, fila por fila, en una hoja de cálculo compartida.
+Durante el discovery identificamos que el mayor margen de error e inversión de tiempo no ocurría en la creación de una tarifa individual, sino en las modificaciones masivas derivadas de fluctuaciones de combustible e inflación, precisamente porque se hacían a mano, fila por fila, en una hoja de cálculo compartida.
 
 <ProductDivider eyebrow="Insight" label="El mayor riesgo no estaba en negociar una tarifa nueva, sino en actualizar miles de tarifas existentes sin introducir un error." />
 
-Digitalizamos y centralizamos el ciclo de vida completo de los acuerdos comerciales —alta, modificación, indexación por inflación o combustible, renovación y baja— con validaciones de reglas de negocio en tiempo real. Para las actualizaciones masivas, diseñé un módulo de carga por matriz que identifica celdas erróneas (formatos de moneda, fechas superpuestas) directamente en la interfaz, antes de impactar las bases de datos financieras backend, en vez de descubrir el error después de que ya afectó una factura.
+Digitalizamos y centralizamos el ciclo de vida completo de los acuerdos comerciales (alta, modificación, indexación por inflación o combustible, renovación y baja) con validaciones de reglas de negocio en tiempo real. Para las actualizaciones masivas, diseñé un módulo de carga por matriz que identifica celdas erróneas (formatos de moneda, fechas superpuestas) directamente en la interfaz, antes de impactar las bases de datos financieras backend, en vez de descubrir el error después de que ya afectó una factura.
 
 <Figure
   src={homeMisTarifas}
