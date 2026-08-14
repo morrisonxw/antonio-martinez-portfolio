@@ -22,6 +22,8 @@ confidential: false
 
 import ImpactStats from '../../components/mdx/ImpactStats.astro';
 import ProductDivider from '../../components/mdx/ProductDivider.astro';
+import Figure from '../../components/mdx/Figure.astro';
+import exploracionCards from '../../assets/projects/mercadolibre-pase/exploracion-cards.png';
 
 ## Contexto de negocio
 
@@ -54,6 +56,12 @@ Las pruebas cualitativas y entrevistas contextuales en México y Brasil revelaro
 De ese hallazgo surgió la regla contractual de **Silencio Positivo**: un servicio no cuestionado dentro de la ventana estipulada se da por aceptado automáticamente. Separamos con rigurosidad la aceptación de atributos físicos (rutas, kilómetros, placa/patente, conductor, facility) de la gestión de tarifas y penalidades.
 
 Para evitar que el panel colapsara bajo un volumen masivo de datos, descarté la auditoría ítem por ítem en pantalla a favor de un panel ejecutivo con filtros avanzados y descarga parametrizada de plantillas CSV/Excel compatibles con el software contable de los proveedores.
+
+<Figure
+  src={exploracionCards}
+  alt="Exploración de cards para la gestión de reclamos de rutas ejecutadas"
+  caption="Exploración de distintos formatos de card para priorizar y resolver reclamos por ruta."
+/>
 
 <ProductDivider eyebrow="Decisión de diseño" label="Mover la revisión del final del proceso al día a día fue lo que cambió la naturaleza del problema, no solo su velocidad." />
 

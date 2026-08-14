@@ -22,6 +22,8 @@ confidential: false
 
 import ImpactStats from '../../components/mdx/ImpactStats.astro';
 import ProductDivider from '../../components/mdx/ProductDivider.astro';
+import Figure from '../../components/mdx/Figure.astro';
+import exploracionCards from '../../assets/projects/mercadolibre-pase/exploracion-cards.png';
 
 ## Business context
 
@@ -54,6 +56,12 @@ Qualitative testing and contextual interviews in Mexico and Brazil revealed that
 That finding led to the contractual **Positive Silence** rule: a service not disputed within the stipulated window is automatically accepted. We rigorously separated the acceptance of physical attributes (routes, kilometers, plate, driver, facility) from rate and penalty management.
 
 To keep the panel from collapsing under a massive volume of data, I ruled out item-by-item on-screen auditing in favor of an executive panel with advanced filters and parameterized CSV/Excel template downloads compatible with providers' accounting software.
+
+<Figure
+  src={exploracionCards}
+  alt="Card exploration for managing claims on executed routes"
+  caption="Exploring different card formats to prioritize and resolve claims per route."
+/>
 
 <ProductDivider eyebrow="Design decision" label="Moving the review from the end of the process into day-to-day operations was what changed the nature of the problem, not just its speed." />
 
