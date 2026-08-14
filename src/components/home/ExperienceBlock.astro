@@ -106,6 +106,28 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
 </DarkSection>
 
 <script>
+  // Fundido en los bordes del carrusel: sin esto, la card parcial que
+  // asoma en el borde se corta a la mitad del texto (título/tags), lo que
+  // se ve como un bug en vez de una pista de "hay más para scrollear".
+  // Se recalcula en cada scroll porque solo debe aparecer del lado que
+  // efectivamente tiene más contenido — al llegar al principio/final ese
+  // borde deja de desvanecerse.
+  const FADE = 56;
+  function updateEdgeFade(el: HTMLElement) {
+    const canScrollLeft = el.scrollLeft > 1;
+    const canScrollRight = el.scrollLeft + el.clientWidth < el.scrollWidth - 1;
+    let gradient: string | null = null;
+    if (canScrollLeft && canScrollRight) {
+      gradient = `linear-gradient(to right, transparent, black ${FADE}px, black calc(100% - ${FADE}px), transparent)`;
+    } else if (canScrollRight) {
+      gradient = `linear-gradient(to right, black, black calc(100% - ${FADE}px), transparent)`;
+    } else if (canScrollLeft) {
+      gradient = `linear-gradient(to right, transparent, black ${FADE}px, black)`;
+    }
+    el.style.maskImage = gradient ?? '';
+    el.style.webkitMaskImage = gradient ?? '';
+  }
+
   // Convierte scroll vertical de mouse en scroll horizontal mientras el
   // cursor está sobre el carrusel, y solo mientras haya algo hacia donde
   // desplazarse en esa dirección: al llegar al principio/final, el evento
@@ -114,6 +136,10 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
   // (deltaX ya presente) se ignoran acá y los maneja el scroll nativo.
   function setupProjectScrollers() {
     document.querySelectorAll<HTMLElement>('[data-project-scroller]').forEach((el) => {
+      updateEdgeFade(el);
+      el.addEventListener('scroll', () => updateEdgeFade(el), { passive: true });
+      window.addEventListener('resize', () => updateEdgeFade(el));
+
       el.addEventListener(
         'wheel',
         (e) => {

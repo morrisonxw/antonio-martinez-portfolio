@@ -1,10 +1,10 @@
 ---
-// Lightbox de las imágenes de un case study. En vez de que cada
-// componente (Figure, BeforeAfter, cover, <img> crudo en MDX) implemente
-// su propio zoom, este componente vive una sola vez en CaseStudyLayout y
-// delega clicks/teclado sobre cualquier <img> dentro de <article> — así
-// cualquier imagen del proyecto queda ampliable sin tocar esos
-// componentes ni el contenido MDX.
+// Lightbox de las imágenes y videos de un case study. En vez de que cada
+// componente (Figure, BeforeAfter, cover, <img>/<video> crudo en MDX)
+// implemente su propio zoom, este componente vive una sola vez en
+// CaseStudyLayout y delega clicks/teclado sobre cualquier <img> o <video>
+// dentro de <article> — así cualquier imagen o video del proyecto queda
+// ampliable sin tocar esos componentes ni el contenido MDX.
 import { t, type Locale } from '../../i18n/ui';
 
 const locale = (Astro.currentLocale ?? 'es') as Locale;
@@ -40,7 +40,8 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
     data-state="closed"
     class="flex h-full w-full scale-95 items-center justify-center p-4 opacity-0 transition-all duration-300 ease-out data-[state=open]:scale-100 data-[state=open]:opacity-100 sm:p-10"
   >
-    <img data-lightbox-image src="" alt="" class="max-h-full max-w-full rounded-lg object-contain" />
+    <img data-lightbox-image src="" alt="" class="hidden max-h-full max-w-full rounded-lg object-contain" />
+    <video data-lightbox-video class="hidden max-h-full max-w-full rounded-lg" loop playsinline controls></video>
   </div>
 </div>
 
@@ -51,8 +52,9 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
     const content = lightbox?.querySelector<HTMLElement>('[data-lightbox-content]');
     const closeBtn = lightbox?.querySelector<HTMLElement>('[data-lightbox-close]');
     const imgEl = lightbox?.querySelector<HTMLImageElement>('[data-lightbox-image]');
+    const videoEl = lightbox?.querySelector<HTMLVideoElement>('[data-lightbox-video]');
     const article = document.querySelector('article');
-    if (!lightbox || !backdrop || !content || !closeBtn || !imgEl || !article) return;
+    if (!lightbox || !backdrop || !content || !closeBtn || !imgEl || !videoEl || !article) return;
 
     let lastFocused: HTMLElement | null = null;
 
@@ -62,10 +64,31 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
       content!.dataset.state = state;
     }
 
-    function open(src: string, alt: string) {
+    function openImage(src: string, alt: string) {
       lastFocused = document.activeElement as HTMLElement;
+      videoEl!.pause();
+      videoEl!.removeAttribute('src');
+      videoEl!.classList.add('hidden');
       imgEl!.src = src;
       imgEl!.alt = alt;
+      imgEl!.classList.remove('hidden');
+      setState('open');
+      document.documentElement.classList.add('overflow-hidden');
+      document.addEventListener('keydown', onKeydown);
+      closeBtn!.focus();
+    }
+
+    function openVideo(src: string) {
+      lastFocused = document.activeElement as HTMLElement;
+      imgEl!.removeAttribute('src');
+      imgEl!.classList.add('hidden');
+      videoEl!.src = src;
+      videoEl!.muted = false;
+      videoEl!.classList.remove('hidden');
+      videoEl!.play().catch(() => {
+        // Si el navegador bloquea el autoplay con audio, el usuario ya tiene
+        // los controles nativos visibles para darle play manualmente.
+      });
       setState('open');
       document.documentElement.classList.add('overflow-hidden');
       document.addEventListener('keydown', onKeydown);
@@ -74,6 +97,7 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
 
     function close() {
       setState('closed');
+      videoEl!.pause();
       document.documentElement.classList.remove('overflow-hidden');
       document.removeEventListener('keydown', onKeydown);
       lastFocused?.focus();
@@ -85,8 +109,16 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
 
     closeBtn.addEventListener('click', close);
     backdrop.addEventListener('click', close);
+    // El wrapper de contenido cubre toda la pantalla (para centrar la imagen/video),
+    // así que un click en el área "vacía" alrededor del media cae sobre este
+    // elemento y no sobre el backdrop de abajo. Se cierra igual, salvo que el
+    // click haya sido directamente sobre la imagen o el video.
+    content.addEventListener('click', (e) => {
+      if (e.target === content) close();
+    });
 
     const expandLabel = lightbox.dataset.expandLabel ?? 'Ampliar imagen';
+
     article.querySelectorAll<HTMLImageElement>('img').forEach((img) => {
       img.classList.add('cursor-zoom-in');
       img.tabIndex = 0;
@@ -94,11 +126,26 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
       if (!img.getAttribute('aria-label')) {
         img.setAttribute('aria-label', img.alt || expandLabel);
       }
-      img.addEventListener('click', () => open(img.currentSrc || img.src, img.alt));
+      img.addEventListener('click', () => openImage(img.currentSrc || img.src, img.alt));
       img.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          open(img.currentSrc || img.src, img.alt);
+          openImage(img.currentSrc || img.src, img.alt);
+        }
+      });
+    });
+
+    article.querySelectorAll<HTMLVideoElement>('video').forEach((video) => {
+      const label = video.closest('figure')?.querySelector('figcaption')?.textContent?.trim() || expandLabel;
+      video.classList.add('cursor-zoom-in');
+      video.tabIndex = 0;
+      video.setAttribute('role', 'button');
+      video.setAttribute('aria-label', label);
+      video.addEventListener('click', () => openVideo(video.currentSrc || video.src));
+      video.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openVideo(video.currentSrc || video.src);
         }
       });
     });
