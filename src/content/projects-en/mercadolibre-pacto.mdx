@@ -1,6 +1,6 @@
 ---
 title: "PACTO: digitizing rate negotiation with thousands of carriers"
-summary: "I centralized the full lifecycle of commercial agreements between Mercado Libre and its carriers, replacing emails and spreadsheets with a system driven by real-time business rules."
+summary: "We centralized the full lifecycle of commercial agreements between Mercado Libre and its carriers, replacing emails and spreadsheets with a system driven by real-time business rules."
 cover: "../../assets/projects/mercadolibre-pacto/cover.png"
 coverAlt: "Cover of the PACTO project, a rate-negotiation platform for carriers"
 thumbnail: "../../assets/projects/mercadolibre-pacto/thumbnail.png"
@@ -31,18 +31,16 @@ import homeMisTarifas from '../../assets/projects/mercadolibre-pacto/home-mis-ta
 
 Each transport mode (first-, mid-, and last-mile) runs on heterogeneous rate schemes: per kilometer, per package, mixed schemes, or local addenda, and recording those agreements between Mercado Libre and thousands of carriers was managed manually and informally, over email and disconnected spreadsheets. Each analyst spent up to 6 hours a day processing those schemes, switching between multiple non-integrated tools.
 
-{/*
 ## My role
 
-I led the initiative from a UX/UI design perspective across two key stages: initial product hypothesis definition alongside product/tech, and mature adaptation to each country's and mile's specific cases, while also mentoring a Junior UX designer throughout the process.
-*/}
+**UX/UI Design Lead / Mentor.** I led the initiative from a UX/UI design perspective across two stages: initially with high involvement, defining the product's early hypotheses alongside product and engineering; later, once the product had matured, I adapted the solution to each country's and mile's specific cases. Throughout the process, I mentored a Junior designer, from the earliest explorations through the product's maturity.
 
 ## Impact
 
 <ImpactStats
   stats={[
     { value: "83%", label: "Less operational processing time per analyst: from 6 hours to 1 hour a day." },
-    { value: "0 gaps", label: "In billing caused by outdated rates, eliminated after digitizing the full lifecycle." },
+    { value: "Discrepancies under control", label: "Outside of the rare human error during data entry, the system fully covered gaps caused by outdated rates; we added a loading audit as an extra safeguard." },
   ]}
 />
 
@@ -52,7 +50,7 @@ Discovery showed that the biggest source of error and time investment wasn't cre
 
 <ProductDivider eyebrow="Insight" label="The biggest risk wasn't negotiating a new rate: it was updating thousands of existing rates without introducing an error." />
 
-We digitized and centralized the full lifecycle of commercial agreements (creation, modification, indexing by inflation or fuel, renewal, and termination) with real-time business-rule validation. For mass updates, I designed a matrix-upload module that flags erroneous cells (currency formats, overlapping dates) directly in the interface, before they hit backend financial databases, instead of surfacing the error after it had already affected an invoice.
+We digitized and centralized the full lifecycle of commercial agreements, equipping the system to handle cases like the operating-cost adjustments carriers face from inflation or fuel increases, plus real-time business-rule validation. For mass updates, we worked on a flow that shaped the matrix upload and flagged erroneous cells (currency formats, overlapping dates) directly in the interface, before they hit backend financial databases: that let us catch the error before it affected an invoice.
 
 <Figure
   src={homeMisTarifas}
@@ -62,4 +60,4 @@ We digitized and centralized the full lifecycle of commercial agreements (creati
 
 ## Result
 
-The team went from hours of manual processing per analyst to a real-time validated flow, and billing stopped carrying gaps caused by outdated rates. For analysts, that meant leaving behind repetitive row-by-row data entry, and gaining time for work that called for more professional judgment. The solution also structured a commercial audit trail and freed up internal teams' capacity to focus on strategic cost analysis.
+The team went from hours of manual processing per analyst to a real-time validated flow, and billing stopped carrying gaps caused by outdated rates. For analysts, that meant leaving behind repetitive row-by-row data entry and auditing their peers' uploads, freeing up time for other processes in the area that had been getting less attention. The solution also structured a commercial audit trail and freed up internal teams' capacity to focus on strategic cost analysis.

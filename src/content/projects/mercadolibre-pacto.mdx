@@ -1,6 +1,6 @@
 ---
 title: "PACTO: digitalizar la negociación de tarifas con miles de transportistas"
-summary: "Centralicé el ciclo de vida completo de los acuerdos comerciales entre Mercado Libre y sus transportistas, reemplazando correos y hojas de cálculo por un sistema con reglas de negocio en tiempo real."
+summary: "Centralizamos el ciclo de vida completo de los acuerdos comerciales entre Mercado Libre y sus transportistas, reemplazando correos y hojas de cálculo por reglas de negocio en tiempo real."
 cover: "../../assets/projects/mercadolibre-pacto/cover.png"
 coverAlt: "Portada del proyecto PACTO, plataforma de negociación de tarifas con transportistas"
 thumbnail: "../../assets/projects/mercadolibre-pacto/thumbnail.png"
@@ -12,7 +12,7 @@ order: 2
 draft: false
 
 role: "Especialista UX SSR"
-team: "Product Manager, Business Lead, Tech Lead, 3 developers y yo como Especialista UX SSR, con mentoría a una diseñadora UX Junior"
+team: "Product Manager, Business Lead, Tech Lead, 3 developers y yo como Especialista UX SSR, con mentoría a un diseñador UX Junior"
 company: "Mercado Libre"
 industry: "Mercado Envíos · Rates & Procurement"
 scope: ["Service Design", "UX Research", "Arquitectura de Información", "UI Design"]
@@ -31,18 +31,16 @@ import homeMisTarifas from '../../assets/projects/mercadolibre-pacto/home-mis-ta
 
 Cada modalidad de transporte (primera, media y última milla) opera bajo esquemas tarifarios heterogéneos: por kilómetro, por paquete, esquemas mixtos o adendas locales, y el registro de esos acuerdos entre Mercado Libre y miles de transportistas se gestionaba de forma manual e informal, por correo y hojas de cálculo desarticuladas. Cada analista destinaba hasta 6 horas diarias a procesar esos esquemas, alternando entre múltiples herramientas no integradas.
 
-{/*
 ## Mi rol
 
-Dirigí la iniciativa desde la perspectiva de diseño UX/UI en dos etapas clave: definición inicial de hipótesis del producto junto a producto/tecnología, y adaptación madura a las casuísticas de cada país y milla, además de guiar y hacer mentoría a una diseñadora UX Junior durante el proceso.
-*/}
+**UX/UI Design Lead / Mentor.** Dirigí la iniciativa desde la perspectiva de diseño UX/UI en dos etapas: inicialmente con alta participación, definiendo las hipótesis iniciales del producto junto a producto y tecnología; más adelante, con el producto ya maduro, adapté la solución a las casuísticas de cada país y milla. A lo largo de todo el proceso, guié y ejercí mentoría a un diseñador Junior, desde las primeras exploraciones hasta la madurez del producto.
 
 ## Impacto
 
 <ImpactStats
   stats={[
     { value: "83%", label: "Menos tiempo de procesamiento operativo por analista: de 6 horas a 1 hora diarias." },
-    { value: "0 desfases", label: "En facturación por tarifas desactualizadas, eliminados tras la digitalización del ciclo de vida completo." },
+    { value: "Desfases bajo control", label: "Fuera de un eventual error humano en la carga, el sistema cubría totalmente los desfases por tarifas desactualizadas; por eso sumamos una auditoría de carga como resguardo adicional." },
   ]}
 />
 
@@ -52,7 +50,7 @@ Durante el discovery identificamos que el mayor margen de error e inversión de 
 
 <ProductDivider eyebrow="Insight" label="El mayor riesgo no estaba en negociar una tarifa nueva, sino en actualizar miles de tarifas existentes sin introducir un error." />
 
-Digitalizamos y centralizamos el ciclo de vida completo de los acuerdos comerciales (alta, modificación, indexación por inflación o combustible, renovación y baja) con validaciones de reglas de negocio en tiempo real. Para las actualizaciones masivas, diseñé un módulo de carga por matriz que identifica celdas erróneas (formatos de moneda, fechas superpuestas) directamente en la interfaz, antes de impactar las bases de datos financieras backend, en vez de descubrir el error después de que ya afectó una factura.
+Digitalizamos y centralizamos el ciclo de vida completo de los acuerdos comerciales, dotando al sistema para cubrir casuísticas como la modificación de los costos de operación que sufren los transportistas por inflación o aumentos de combustible, además de validaciones de reglas de negocio en tiempo real. Para las actualizaciones masivas, trabajamos en un flujo que moldeara la carga por matriz e identificara celdas erróneas (formatos de moneda, fechas superpuestas) directamente en la interfaz, antes de impactar las bases de datos financieras backend: así logramos poner barreras para detectar el error antes de que afectara una factura.
 
 <Figure
   src={homeMisTarifas}
@@ -62,4 +60,4 @@ Digitalizamos y centralizamos el ciclo de vida completo de los acuerdos comercia
 
 ## Resultado
 
-El equipo pasó de horas de procesamiento manual por analista a un flujo validado en tiempo real, y la facturación dejó de arrastrar desfases por tarifas desactualizadas. Para los analistas, esto significó dejar atrás jornadas repetitivas de carga fila por fila, y ganar tiempo para un trabajo de mayor criterio profesional. La solución además estructuró el historial de auditoría comercial y liberó capacidad operativa en los equipos internos para dedicarse al análisis estratégico de costos.
+El equipo pasó de horas de procesamiento manual por analista a un flujo validado en tiempo real, y la facturación dejó de arrastrar desfases por tarifas desactualizadas. Para los analistas, esto significó dejar atrás jornadas repetitivas de carga fila por fila y de auditar las cargas de sus compañeros, ganando tiempo para dedicarse a otros procesos más descuidados del área. La solución además estructuró el historial de auditoría comercial y liberó capacidad operativa en los equipos internos para dedicarse al análisis estratégico de costos.
