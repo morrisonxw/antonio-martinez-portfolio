@@ -27,5 +27,5 @@ export const about = {
   experienceIntro:
     'Five stages that reflect a transversal path: from brand communication to service design, and from service design to product design, passing through branding, design systems, and B2B projects of different scale.',
   philosophy:
-    "Function precedes form. A product can look good and still solve nothing; the design I care about is the kind that holds up because it answers a real problem for the business and for the people living it every day.",
+    "It wasn't raining when Noah built the ark.",
 };
