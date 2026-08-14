@@ -1,6 +1,6 @@
 ---
-title: "Claims Billing 2.0: from 20,000 individual claims to batch management"
-summary: "I redesigned Mercado Libre's billing claims system, moving from case-by-case review to a standardized queue integrated with the Solver rules engine."
+title: "Claims system: improving the claims experience and process transparency"
+summary: "We systematized Mercado Libre's billing claims process for carriers, centralizing information and reducing the financial impact caused by a lack of clarity and traceability."
 cover: "../../assets/projects/mercadolibre-reclamos/cover.png"
 coverAlt: "Detail of a billing claims window at Mercado Libre, showing the status of each request (under review, approved, rejected)"
 thumbnail: "../../assets/projects/mercadolibre-reclamos/thumbnail.png"
@@ -29,7 +29,7 @@ import configVentanas from '../../assets/projects/mercadolibre-reclamos/config-v
 
 ## Business context
 
-Over 20,000 billing claims came in per period, through unstandardized Excel forms sent over email and Jira. That flow overwhelmed internal analysts, lost information along the way, and left carriers with no visibility into their claim's status.
+We systematized Mercado Libre's billing claims process for transportation providers, moving from an unstructured, hard-to-manage as-is to a system that centralized all the information and helped reduce the financial impact Mercado Libre suffered from a lack of clarity and traceability in claims. Over 20,000 claims came in per period, through unstandardized Excel forms sent over email and Jira, a flow that overwhelmed internal analysts, lost information along the way, and left carriers with no visibility into their claim's status.
 
 {/*
 ## My role
@@ -41,9 +41,9 @@ I designed and implemented the experience and interface strategy across two evol
 
 <ImpactStats
   stats={[
-    { value: "Automatic filtering", label: "Of invalid claims, resolved before ever reaching an analyst." },
-    { value: "Less time", label: "In internal response, after moving from individual to batch management." },
-    { value: "Proprietary tech", label: "Eliminated dependency on the inherited third-party tool, gaining full ownership of the code." },
+    { value: "100% traceability", label: "Every claim was systematized, considerably speeding up the validation of existing or already-resolved claims." },
+    { value: "TTR made transparent", label: "The new system made claims' Time to Resolution (TTR) transparent across the process." },
+    { value: "Claims centralized", label: "Every claim lived in a single database that Meli analysts could query and manage directly, instead of searching across different places." },
   ]}
 />
 

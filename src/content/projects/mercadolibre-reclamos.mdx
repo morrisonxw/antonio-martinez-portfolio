@@ -1,6 +1,6 @@
 ---
-title: "Claims Billing 2.0: de 20.000 reclamos individuales a gestión por lotes"
-summary: "Rediseñé el sistema de reclamos de facturación de Mercado Libre pasando de una revisión caso por caso a una bandeja estandarizada integrada al motor de reglas Solver."
+title: "Sistema de reclamos: mejorando la experiencia de reclamación y la transparencia de los procesos"
+summary: "Sistematizamos el proceso de reclamos de facturación de Mercado Libre para transportistas, centralizando la información y reduciendo el impacto financiero por falta de claridad y trazabilidad."
 cover: "../../assets/projects/mercadolibre-reclamos/cover.png"
 coverAlt: "Detalle de una ventana de reclamos de facturación en Mercado Libre, con el estado de cada solicitud (en revisión, aprobado, rechazado)"
 thumbnail: "../../assets/projects/mercadolibre-reclamos/thumbnail.png"
@@ -29,7 +29,7 @@ import configVentanas from '../../assets/projects/mercadolibre-reclamos/config-v
 
 ## Contexto de negocio
 
-Más de 20.000 reclamos de facturación ingresaban por periodo, vía formularios de Excel desestandarizados enviados por correo y Jira. Ese flujo desbordaba a los analistas internos, generaba pérdida de información en el camino y dejaba a los transportistas sin ninguna trazabilidad sobre el estado de su reclamo.
+Sistematizamos el proceso de reclamos de facturación de Mercado Libre para proveedores de transporte, pasando de un as-is desestructurado y difícil de gestionar a un sistema que centralizó toda la información y ayudó a reducir el impacto financiero que Mercado Libre sufría por falta de claridad y trazabilidad de los reclamos. Más de 20.000 reclamos ingresaban por periodo, vía formularios de Excel desestandarizados enviados por correo y Jira, un flujo que desbordaba a los analistas internos, generaba pérdida de información en el camino y dejaba a los transportistas sin ninguna trazabilidad sobre el estado de su reclamo.
 
 {/*
 ## Mi rol
@@ -41,9 +41,9 @@ Diseñé e implementé la estrategia de experiencia e interfaz en dos momentos e
 
 <ImpactStats
   stats={[
-    { value: "Filtrado automático", label: "De reclamos improcedentes, resueltos antes de llegar a un analista." },
-    { value: "Menos tiempo", label: "De respuesta interno, tras pasar de gestión individual a gestión por lotes." },
-    { value: "Tecnología propia", label: "Eliminamos la dependencia de la herramienta de terceros heredada, ganando control total del código." },
+    { value: "100% de trazabilidad", label: "Todos los reclamos se sistematizaron, agilizando considerablemente la validación de reclamos existentes o ya resueltos." },
+    { value: "TTR transparente", label: "El nuevo sistema hizo transparente el Time to Resolution (TTR) de los procesos de reclamos." },
+    { value: "Reclamos centralizados", label: "Todos los reclamos quedaron en una sola base de datos que los analistas de Meli podían consultar y gestionar mediante queries, sin buscar en distintos lugares." },
   ]}
 />
 
