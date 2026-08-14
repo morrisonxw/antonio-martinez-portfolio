@@ -2,17 +2,27 @@
 interface Props {
   href?: string;
   variant?: 'primary' | 'secondary';
+  size?: 'md' | 'sm';
   class?: string;
   download?: boolean | string;
   target?: string;
   rel?: string;
 }
 
-const { href, variant = 'primary', class: className = '', ...rest } = Astro.props;
+const { href, variant = 'primary', size = 'md', class: className = '', ...rest } = Astro.props;
 const Tag = href ? 'a' : 'button';
 
-const base =
-  'inline-flex items-center gap-2 whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-medium transition-colors';
+const base = 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-colors';
+const sizes = {
+  md: 'px-5 py-2.5 text-sm',
+  // h-9 (36px) a propósito: es la altura ya establecida en el sitio para
+  // controles de header/nav (botón cerrar del menú, flecha de volver en
+  // case studies) — este tamaño existe para que el CTA de header quede a
+  // la misma altura que esos controles, no para reemplazar el tamaño
+  // "md" por defecto de los demás botones (CTAs de página sí quieren ser
+  // más altos/prominentes).
+  sm: 'h-9 px-4 text-sm',
+};
 const variants = {
   primary: 'bg-ink text-paper hover:bg-accent',
   // Borde en --ink (no --border) a propósito: un botón es un componente
@@ -23,6 +33,6 @@ const variants = {
 };
 ---
 
-<Tag href={href} class:list={[base, variants[variant], className]} {...rest}>
+<Tag href={href} class:list={[base, sizes[size], variants[variant], className]} {...rest}>
   <slot />
 </Tag>

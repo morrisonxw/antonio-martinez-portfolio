@@ -10,7 +10,7 @@ const site = locale === 'en' ? siteEn : siteEs;
 
 <section
   data-pin-hero
-  class="relative flex flex-col justify-center bg-paper pt-8 pb-16 text-ink sm:pt-12 sm:pb-20"
+  class="relative flex flex-col justify-center bg-paper pt-8 pb-8 text-ink sm:pt-12 sm:pb-20"
 >
   <Container>
     <p class="text-sm font-medium text-accent" data-reveal>{site.role}</p>
@@ -42,10 +42,14 @@ const site = locale === 'en' ? siteEn : siteEs;
     // siente como "scroll muerto" antes de revelar el siguiente bloque.
     // El fade + translateY en scrub le da feedback continuo al usuario
     // durante ese tramo, en vez de dejar el hero congelado.
+    // En mobile el hero es más alto (el texto envuelve en más líneas), así
+    // que el mismo 40% se traduce en bastante más scroll muerto en
+    // términos absolutos — se usa una fracción menor por debajo de sm.
+    const pinFraction = window.matchMedia('(min-width: 640px)').matches ? 0.4 : 0.15;
     ScrollTrigger.create({
       trigger: hero,
       start: 'top top',
-      end: () => `+=${hero.offsetHeight * 0.4}`,
+      end: () => `+=${hero.offsetHeight * pinFraction}`,
       pin: true,
       pinSpacing: true,
       scrub: 0.3,
