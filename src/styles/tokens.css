@@ -1,14 +1,14 @@
 /*
   Design tokens — fuente única de verdad.
-  Paleta inspirada en monzo.com: navy #091723 como ink, coral como acento
-  de marca, blanco/menta pálido como superficies. Todos los pares
-  texto/fondo listados abajo fueron verificados contra WCAG 2.1 AA
-  (>=4.5:1 para texto normal, >=3:1 para texto grande/componentes UI)
-  usando la fórmula de luminancia relativa estándar. Ajustar aquí; todo
-  lo demás (Tailwind utilities, componentes) hereda de estas variables.
+  Paleta: gris neutro #1A1A1A como ink, coral como acento de marca,
+  blanco/menta pálido como superficies. Todos los pares texto/fondo
+  listados abajo fueron verificados contra WCAG 2.1 AA (>=4.5:1 para
+  texto normal, >=3:1 para texto grande/componentes UI) usando la
+  fórmula de luminancia relativa estándar. Ajustar aquí; todo lo demás
+  (Tailwind utilities, componentes) hereda de estas variables.
 
   Verificaciones clave (light):
-  - ink #091723 sobre paper #ffffff:            18.1:1
+  - ink #1A1A1A sobre paper #ffffff:            17.4:1
   - ink-muted #6b747b sobre paper #ffffff:        4.8:1
   - accent #d6371f sobre paper #ffffff:           4.8:1  (accent es una versión
     más oscura del coral de marca #ff4f40 —el coral vívido da solo 3.3:1 sobre
@@ -16,13 +16,13 @@
   - paper sobre accent (texto de botón):          4.8:1
 
   Verificaciones clave (.on-dark):
-  - ink #f3f6f5 sobre paper #091723:              17.9:1
-  - ink-muted #96a3ac sobre paper #091723:         7.0:1
-  - accent #ff8a75 sobre paper #091723:            7.9:1
+  - ink #f3f6f5 sobre paper #1A1A1A:              16.0:1
+  - ink-muted #96a3ac sobre paper #1A1A1A:         6.7:1
+  - accent #ff8a75 sobre paper #1A1A1A:            7.6:1
 */
 
 :root {
-  --ink: #091723;
+  --ink: #1A1A1A;
   --ink-muted: #6b747b;
   --paper: #ffffff;
   --paper-muted: #f2f8f3;
@@ -50,11 +50,11 @@
 .on-dark {
   --ink: #f3f6f5;
   --ink-muted: #96a3ac;
-  --paper: #091723;
-  --paper-muted: #122536;
+  --paper: #1A1A1A;
+  --paper-muted: #282828;
   --accent: #ff8a75;
   --accent-muted: #352128;
-  --border: #223240;
+  --border: #353535;
 
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
