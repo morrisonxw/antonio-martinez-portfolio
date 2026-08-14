@@ -14,9 +14,9 @@ draft: false
 role: "Especialista UX SSR"
 team: "1 PM, 1 Business Analyst, Tech Lead, equipo UX y desarrolladores"
 company: "Mercado Libre"
-industry: "Módulo B2B de reclamaciones y mesa de ayuda interna"
+industry: "Mercado Envíos Billing · módulo B2B de reclamaciones y mesa de ayuda interna"
 scope: ["Product Design", "UX Writing", "Mapeo As-Is/To-Be"]
-tools: ["Figma", "Jira Service Management", "Mapeo As-Is/To-Be"]
+tools: ["Figma", "Jira Service Management", "Mapeo As-Is/To-Be", "Pruebas de usabilidad"]
 confidential: false
 ---
 
@@ -27,12 +27,12 @@ import configVentanas from '../../assets/projects/mercadolibre-reclamos/config-v
 
 ## Contexto de negocio
 
-Más de 20.000 reclamos de facturación ingresaban por periodo, vía formularios desestandarizados, generando una carga operativa insostenible para el equipo de control de negocio.
+Más de 20.000 reclamos de facturación ingresaban por periodo, vía formularios de Excel desestandarizados enviados por correo y Jira. Ese flujo desbordaba a los analistas internos, generaba pérdida de información en el camino y dejaba a los transportistas sin ninguna trazabilidad sobre el estado de su reclamo.
 
 {/*
 ## Mi rol
 
-Diseñé el sistema end-to-end, desde el mapeo as-is/to-be del proceso hasta la UI final, trabajando con un PM, un business analyst, el tech lead y desarrolladores.
+Diseñé e implementé la estrategia de experiencia e interfaz en dos momentos evolutivos del producto: desde el discovery inicial del proceso as-is/to-be hasta la reconstrucción sistémica sobre tecnología propia, trabajando con un PM, un business analyst, el tech lead y desarrolladores.
 */}
 
 ## Impacto
@@ -41,12 +41,19 @@ Diseñé el sistema end-to-end, desde el mapeo as-is/to-be del proceso hasta la 
   stats={[
     { value: "Filtrado automático", label: "De reclamos improcedentes, resueltos antes de llegar a un analista." },
     { value: "Menos tiempo", label: "De respuesta interno, tras pasar de gestión individual a gestión por lotes." },
+    { value: "Tecnología propia", label: "Eliminamos la dependencia de la herramienta de terceros heredada, ganando control total del código." },
   ]}
 />
 
+## Evolución del producto
+
+El proyecto se abordó en dos etapas distintas. En la primera —sistematización e integración— hice el discovery con analistas y proveedores para mapear el proceso as-is y definir el to-be, y lideré el análisis comparativo de herramientas internas existentes para acelerar la implementación, adaptando el diseño a un sistema de tickets ya existente en la compañía.
+
+Tras dos años de operación bajo ese esquema, detectamos que la herramienta heredada tenía limitaciones técnicas, problemas de rendimiento y generaba fatiga en los analistas al intentar gestionar miles de casos de forma individual. Eso llevó a la segunda etapa: reconstruir el sistema sobre tecnología propia, para ganar propiedad del código, eliminar flujos en desuso y agregar funciones de seguimiento detallado.
+
 ## Bandeja de reclamos
 
-Creamos una bandeja de reclamaciones estandarizada y parametrizada —la que se ve en la portada de este proyecto—, integrada al motor de reglas Solver, para procesar por lotes y resolver reembolsos directos sin intervención manual caso por caso.
+Creamos una bandeja de reclamaciones estandarizada y parametrizada —la que se ve en la portada de este proyecto—, con validaciones automáticas de contrato e integrada al motor de reglas Solver, para procesar por lotes y resolver reembolsos directos sin intervención manual caso por caso.
 
 <figure class="my-10">
   <img
@@ -78,7 +85,7 @@ Antes de llegar a esta versión, exploramos distintas formas de dar acceso a los
 
 ## UX writing en las notificaciones
 
-Rediseñamos las notificaciones de rechazo sustituyendo códigos sistémicos por explicaciones claras alineadas a las cláusulas contractuales vigentes, para que un reclamo rechazado se entendiera sin necesidad de escalar a un analista.
+Pivotamos de la vista de tickets individuales hacia un modelo de carga masiva de reclamos por plantillas, con gestión por lotes mediante consultas parametrizadas para los analistas. En paralelo, rediseñamos las notificaciones de rechazo sustituyendo códigos sistémicos por explicaciones claras alineadas a las cláusulas contractuales vigentes, para que un reclamo rechazado se entendiera sin necesidad de escalar a un analista.
 
 ## Aprendizaje: el tradeoff de MVP a batch
 

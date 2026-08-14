@@ -14,9 +14,9 @@ draft: false
 role: "Semi-Senior UX Specialist"
 team: "1 PM, 1 Business Analyst, Tech Lead, UX team, and developers"
 company: "Mercado Libre"
-industry: "B2B billing claims module and internal help desk"
+industry: "Mercado Envíos Billing · B2B claims module and internal help desk"
 scope: ["Product Design", "UX Writing", "As-Is/To-Be Mapping"]
-tools: ["Figma", "Jira Service Management", "As-Is/To-Be Mapping"]
+tools: ["Figma", "Jira Service Management", "As-Is/To-Be Mapping", "Usability testing"]
 confidential: false
 ---
 
@@ -27,12 +27,12 @@ import configVentanas from '../../assets/projects/mercadolibre-reclamos/config-v
 
 ## Business context
 
-Over 20,000 billing claims came in per period through unstandardized forms, creating an unsustainable operational load for the business-control team.
+Over 20,000 billing claims came in per period, through unstandardized Excel forms sent over email and Jira. That flow overwhelmed internal analysts, lost information along the way, and left carriers with no visibility into their claim's status.
 
 {/*
 ## My role
 
-I designed the system end-to-end, from as-is/to-be process mapping to the final UI, working with a PM, a business analyst, the tech lead, and developers.
+I designed and implemented the experience and interface strategy across two evolutionary stages of the product: from the initial as-is/to-be process discovery to the systemic rebuild on proprietary technology, working with a PM, a business analyst, the tech lead, and developers.
 */}
 
 ## Impact
@@ -41,12 +41,19 @@ I designed the system end-to-end, from as-is/to-be process mapping to the final 
   stats={[
     { value: "Automatic filtering", label: "Of invalid claims, resolved before ever reaching an analyst." },
     { value: "Less time", label: "In internal response, after moving from individual to batch management." },
+    { value: "Proprietary tech", label: "Eliminated dependency on the inherited third-party tool, gaining full ownership of the code." },
   ]}
 />
 
+## Product evolution
+
+The project went through two distinct stages. In the first — systematization and integration — I ran discovery with analysts and providers to map the as-is process and define the to-be, and led a comparative analysis of existing internal tools to speed up implementation, adapting the design to a ticketing system the company already had.
+
+After two years running on that setup, we found the inherited tool had technical limitations, performance issues, and was wearing analysts down as they tried to manage thousands of cases individually. That led to the second stage: rebuilding the system on proprietary technology, to gain ownership of the code, remove unused flows, and add detailed tracking features.
+
 ## Claims queue
 
-We built a standardized, parameterized claims queue — the one shown on this project's cover — integrated with the Solver rules engine, to process in batches and resolve direct refunds without case-by-case manual intervention.
+We built a standardized, parameterized claims queue — the one shown on this project's cover — with automatic contract validations, integrated with the Solver rules engine, to process in batches and resolve direct refunds without case-by-case manual intervention.
 
 <figure class="my-10">
   <img
@@ -78,7 +85,7 @@ Before arriving at this version, we explored different ways to give analysts acc
 
 ## UX writing in notifications
 
-We redesigned rejection notifications, replacing system codes with clear explanations tied to the applicable contract clauses, so a rejected claim could be understood without escalating to an analyst.
+We pivoted from an individual-ticket view toward a template-based bulk claims model, with batch management via parameterized queries for analysts. In parallel, we redesigned rejection notifications, replacing system codes with clear explanations tied to the applicable contract clauses, so a rejected claim could be understood without escalating to an analyst.
 
 ## Learning: the MVP-to-batch tradeoff
 

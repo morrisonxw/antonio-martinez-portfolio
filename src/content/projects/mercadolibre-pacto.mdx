@@ -12,11 +12,11 @@ order: 2
 draft: false
 
 role: "Especialista UX SSR"
-team: "Product Manager, Business Lead, Tech Lead, 3 developers y Product Designer"
+team: "Product Manager, Business Lead, Tech Lead, 3 developers y yo como Especialista UX SSR, con mentoría a una diseñadora UX Junior"
 company: "Mercado Libre"
 industry: "Mercado Envíos · Rates & Procurement"
 scope: ["Service Design", "UX Research", "Arquitectura de Información", "UI Design"]
-tools: ["Figma", "FigJam", "Claude", "Mapas de servicio"]
+tools: ["Figma", "FigJam", "Consultas SQL", "Service Blueprints", "Matriz de priorización"]
 confidential: false
 ---
 
@@ -27,30 +27,30 @@ import homeMisTarifas from '../../assets/projects/mercadolibre-pacto/home-mis-ta
 
 ## Contexto de negocio
 
-La negociación y el registro de acuerdos tarifarios entre Mercado Libre y miles de transportistas se gestionaba de forma fragmentada, por correo y en hojas de cálculo locales. Cada analista destinaba varias horas diarias a procesar manualmente esquemas de tarifa por kilómetro, por paquete, esquemas mixtos e impuestos locales.
+Cada modalidad de transporte (primera, media y última milla) opera bajo esquemas tarifarios heterogéneos —por kilómetro, por paquete, esquemas mixtos o adendas locales—, y el registro de esos acuerdos entre Mercado Libre y miles de transportistas se gestionaba de forma manual e informal, por correo y hojas de cálculo desarticuladas. Cada analista destinaba hasta 6 horas diarias a procesar esos esquemas, alternando entre múltiples herramientas no integradas.
 
 {/*
 ## Mi rol
 
-Trabajé como product designer dentro de un equipo compacto —PM, business lead, tech lead y tres developers— cubriendo service design, research y la arquitectura de información del sistema completo.
+Dirigí la iniciativa desde la perspectiva de diseño UX/UI en dos etapas clave —definición inicial de hipótesis del producto junto a producto/tecnología, y adaptación madura a las casuísticas de cada país y milla—, además de guiar y hacer mentoría a una diseñadora UX Junior durante el proceso.
 */}
 
 ## Impacto
 
 <ImpactStats
   stats={[
-    { value: "83%", label: "Menos tiempo de procesamiento operativo por analista." },
+    { value: "83%", label: "Menos tiempo de procesamiento operativo por analista — de 6 horas a 1 hora diarias." },
     { value: "0 desfases", label: "En facturación por tarifas desactualizadas, eliminados tras la digitalización del ciclo de vida completo." },
   ]}
 />
 
 ## Research y decisión de diseño
 
-El descubrimiento mostró que las modificaciones masivas de tarifas —por variaciones de combustible o inflación— eran las que más errores provocaban, precisamente porque se hacían a mano, fila por fila, en una hoja de cálculo compartida.
+Durante el discovery identificamos que el mayor margen de error e inversión de tiempo no ocurría en la creación de una tarifa individual, sino en las modificaciones masivas derivadas de fluctuaciones de combustible e inflación —precisamente porque se hacían a mano, fila por fila, en una hoja de cálculo compartida.
 
 <ProductDivider eyebrow="Insight" label="El mayor riesgo no estaba en negociar una tarifa nueva, sino en actualizar miles de tarifas existentes sin introducir un error." />
 
-Digitalizamos y centralizamos el ciclo de vida completo de los acuerdos comerciales —alta, modificación, indexación y baja— con validaciones de reglas de negocio en tiempo real. Para las actualizaciones masivas, diseñé un sistema de carga por matriz que valida inconsistencias en la interfaz antes de impactar las bases de datos financieras backend, en vez de descubrir el error después de que ya afectó una factura.
+Digitalizamos y centralizamos el ciclo de vida completo de los acuerdos comerciales —alta, modificación, indexación por inflación o combustible, renovación y baja— con validaciones de reglas de negocio en tiempo real. Para las actualizaciones masivas, diseñé un módulo de carga por matriz que identifica celdas erróneas (formatos de moneda, fechas superpuestas) directamente en la interfaz, antes de impactar las bases de datos financieras backend, en vez de descubrir el error después de que ya afectó una factura.
 
 <Figure
   src={homeMisTarifas}
@@ -60,4 +60,4 @@ Digitalizamos y centralizamos el ciclo de vida completo de los acuerdos comercia
 
 ## Resultado
 
-El equipo pasó de horas de procesamiento manual por analista a un flujo validado en tiempo real, y la facturación dejó de arrastrar desfases por tarifas desactualizadas.
+El equipo pasó de horas de procesamiento manual por analista a un flujo validado en tiempo real, y la facturación dejó de arrastrar desfases por tarifas desactualizadas. La solución además estructuró el historial de auditoría comercial y liberó capacidad operativa en los equipos internos para dedicarse al análisis estratégico de costos.

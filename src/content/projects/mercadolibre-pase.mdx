@@ -12,11 +12,11 @@ order: 1
 draft: false
 
 role: "Especialista UX SSR"
-team: "Triada de producto — 1 PM, 1 Tech Lead, 1 Especialista UX SSR, ingenieros frontend/backend y equipo de User Research"
+team: "Triada de producto — 1 PM, 2 Tech Leads, 1 UX Expert, yo como UX Designer, equipo de desarrollo backend/frontend, Business Analyst y Business Control"
 company: "Mercado Libre"
-industry: "Envíos / Transporte B2B"
-scope: ["UX Research", "Estrategia UX", "Arquitectura de Información", "UI Design", "Prototipado"]
-tools: ["Figma", "FigJam", "Claude Code", "Gemini", "Figma Make", "NotebookLM"]
+industry: "Mercado Envíos / Transporte B2B"
+scope: ["UX Research", "Estrategia UX", "Service Design", "Arquitectura de Información", "UI Design", "Prototipado"]
+tools: ["Figma", "FigJam", "Claude Code", "Gemini", "Figma Make", "NotebookLM", "Workshops de co-creación", "User Testing"]
 confidential: false
 ---
 
@@ -27,35 +27,35 @@ import exploracionCards from '../../assets/projects/mercadolibre-pase/exploracio
 
 ## Contexto de negocio
 
-Mercado Libre enfrentaba fugas de capital de alto impacto por divergencias no detectadas a tiempo entre los servicios de transporte que terceros ejecutaban en campo y lo que el sistema de facturación registraba. La conciliación se hacía de forma reactiva, semanas después de ejecutados los viajes, lo que generaba dos cuellos de botella críticos: los transportistas no tenían transparencia sobre penalizaciones o desvíos, y una parte de los sobrepagos no era recuperable por barreras contractuales con grandes carriers que impedían aplicar descuentos retroactivos.
+En la operación de transporte de primera, media y última milla en Latinoamérica, la conciliación financiera se ejecutaba de forma reactiva, semanas después de concluidos los viajes. Ese desfase generaba pérdidas financieras de alto impacto para Mercado Libre: opacidad para los transportistas sobre las rutas registradas o penalizaciones aplicadas —lo que saturaba los canales de soporte—, y sobrepagos no recuperables por restricciones contractuales que impedían aplicar descuentos retroactivos a los grandes carriers.
 
 {/*
 ## Mi rol
 
-Trabajé dentro de la triada de producto —PM, Tech Lead y yo como UX— junto a ingenieros de frontend/backend y el equipo de User Research, cubriendo estrategia UX, investigación, arquitectura de información y UI design de punta a punta.
+Trabajé en la iniciativa desde la perspectiva de diseño de producto end-to-end, en colaboración estrecha con la gerencia de producto, negocio, desarrollo y un UX Expert de la compañía.
 */}
 
 ## Impacto
 
 <ImpactStats
   stats={[
-    { value: "70%", label: "Menos divergencias financieras no recuperables y reclamos extemporáneos en los sites de despliegue inicial (México y Brasil)." },
+    { value: "90%", label: "Menos diferencias de facturación y reclamos extemporáneos en los sites de despliegue inicial (México y Brasil)." },
     { value: "48 horas", label: "Tiempo de resolución de disputas, antes medido en semanas." },
-    { value: "-50%", label: "Reclamos extemporáneos tras el lanzamiento de PASE." },
+    { value: "Sobrepagos eliminados", label: "Los que antes eran irrecuperables por restricciones contractuales con grandes carriers." },
   ]}
 />
 
 ## Research e insights
 
-Las pruebas cualitativas y entrevistas contextuales en México y Brasil revelaron que revisar un viaje con semanas de antigüedad exigía reconstruir trazabilidades manuales con coordinadores que no recordaban la novedad.
+Mediante entrevistas contextuales y análisis de datos de soporte en México y Brasil, identificamos que la fricción principal era la asimetría de información entre Mercado Libre y los transportistas, y la pérdida de trazabilidad con el paso del tiempo: revisar un viaje con semanas de antigüedad exigía reconstruir trazabilidades manuales con coordinadores que ya no recordaban la novedad.
 
 <ProductDivider eyebrow="Research" label="Revisar un viaje con semanas de antigüedad exigía reconstruir de memoria algo que debió quedar registrado el mismo día." />
 
 ## Reglas de negocio y decisiones de diseño
 
-De ese hallazgo surgió la regla contractual de **Silencio Positivo**: un servicio no cuestionado dentro de la ventana estipulada se da por aceptado automáticamente. Separamos con rigurosidad la aceptación de atributos físicos (rutas, kilómetros, placa/patente, conductor, facility) de la gestión de tarifas y penalidades.
+De ese hallazgo surgió la regla contractual de **Silencio Positivo**: las rutas no objetadas dentro de una ventana de 24 a 48 horas desde su publicación se consideran aceptadas automáticamente. Establecimos además una separación estricta de dominios: el sistema valida únicamente atributos físicos del servicio (rutas, kilómetros, placa/patente, conductor, facility), dejando la gestión de tarifas y penalizaciones complejas a las instancias comerciales y financieras.
 
-Para evitar que el panel colapsara bajo un volumen masivo de datos, descarté la auditoría ítem por ítem en pantalla a favor de un panel ejecutivo con filtros avanzados y descarga parametrizada de plantillas CSV/Excel compatibles con el software contable de los proveedores.
+Debido al volumen masivo de datos que colapsaba la interfaz al intentar auditar viajes de forma individual en pantalla, optamos por un panel ejecutivo con filtrado avanzado y descarga parametrizada en formatos estructurados (CSV/Excel) compatibles con los sistemas contables de los proveedores.
 
 <Figure
   src={exploracionCards}
@@ -65,7 +65,7 @@ Para evitar que el panel colapsara bajo un volumen masivo de datos, descarté la
 
 <ProductDivider eyebrow="Decisión de diseño" label="Mover la revisión del final del proceso al día a día fue lo que cambió la naturaleza del problema, no solo su velocidad." />
 
-Parte de la iteración de este panel la hice apoyándome en herramientas de IA para prototipar más rápido y validar variantes de la interfaz sin esperar a tener el desarrollo final:
+También diseñamos un flujo asistido por IA para clasificar automáticamente las evidencias cargadas por los transportistas y recomendar resoluciones preconfiguradas a los analistas internos. Parte de esa iteración se apoyó en herramientas de IA para prototipar más rápido y validar variantes de la interfaz sin esperar al desarrollo final:
 
 <figure class="my-10">
   <video
@@ -93,4 +93,4 @@ Parte de la iteración de este panel la hice apoyándome en herramientas de IA p
 
 ## Resultado
 
-La iniciativa devolvió predictibilidad financiera a la cadena logística: menos divergencias no recuperables y disputas resueltas en horas en lugar de semanas.
+La iniciativa devolvió predictibilidad financiera a la cadena logística: menos diferencias no recuperables y disputas resueltas en horas en lugar de semanas. El aprendizaje de fondo fue que, en herramientas B2B complejas, el diseño de interfaz no alcanza por sí solo — tiene que articularse con la reestructuración de incentivos contractuales y la gobernanza operativa en el mundo físico.

@@ -11,11 +11,11 @@ order: 3
 draft: false
 
 role: "Especialista UX SSR"
-team: "Triada de producto, stakeholders de Billing, analistas financieros/operativos y User Research"
+team: "Triada de producto, stakeholders de Finanzas, Facturación, Operaciones y User Research"
 company: "Mercado Libre"
-industry: "Mercado Envíos Providers · Portal B2B de servicios financieros"
+industry: "Mercado Envíos Providers · Billing"
 scope: ["UX Research", "UX Writing", "Integración de flujos", "Benchmarking", "UI Design"]
-tools: ["Figma", "Mixpanel", "User Testing", "Análisis de datos"]
+tools: ["Figma", "Mixpanel", "User Testing", "Benchmarking competitivo", "Análisis de datos"]
 confidential: false
 ---
 
@@ -27,12 +27,12 @@ import cargaConceptos from '../../assets/projects/mercadolibre-prefacturas/carga
 
 ## Contexto de negocio
 
-Los proveedores logísticos percibían la prefactura como una caja negra incomprensible, lo que saturaba los canales de soporte con consultas sobre fechas y montos que el producto debería haber respondido por sí solo. A eso se sumaba que los pagos extraordinarios —peajes adicionales, sobrecargas, esperas— se liquidaban aparte, en documentos paralelos y desarticulados del ciclo de facturación regular: más incertidumbre para el proveedor, y doble trabajo contable para Mercado Libre.
+Los proveedores logísticos percibían la prefactura como una caja negra incomprensible, lo que saturaba los canales de soporte con consultas sobre fechas y montos que el producto debería haber respondido por sí solo. A eso se sumaba que los pagos extraordinarios —peajes adicionales, sobrecargas por peso, esperas— se liquidaban aparte, en documentos paralelos y desarticulados del ciclo de facturación regular: más incertidumbre para el proveedor, parches contables y doble trabajo de reclamación para Mercado Libre.
 
 {/*
 ## Mi rol
 
-Como Especialista UX SSR, lideré la investigación y el rediseño de la vista previa y la arquitectura de la prefactura —incluyendo la consolidación de los pagos complementarios—, trabajando junto a stakeholders de Billing, analistas financieros/operativos y el equipo de User Research.
+Como Especialista UX SSR, lideré la investigación y el rediseño de la vista previa y la arquitectura de la prefactura —incluyendo la consolidación de los pagos complementarios—, trabajando junto a stakeholders de Finanzas, Facturación, Operaciones y el equipo de User Research.
 */}
 
 ## Impacto
@@ -41,24 +41,26 @@ Como Especialista UX SSR, lideré la investigación y el rediseño de la vista p
   stats={[
     { value: "Disminución drástica", label: "En solicitudes de soporte sobre estados de pago." },
     { value: "15%", label: "Menos disputas asociadas a cobros adicionales." },
-    { value: "Más satisfacción", label: "Percibida por los transportistas en las mediciones post-lanzamiento." },
+    { value: "0 liquidaciones extemporáneas", label: "Tras consolidar los pagos complementarios en la Factura Única." },
     { value: "Cierre más simple", label: "Del proceso contable para los proveedores, al consolidar todo en un solo documento." },
   ]}
 />
 
 ## Research
 
-La investigación mostró que el 95% de los usuarios entraba a la prefactura buscando exactamente tres cosas: el monto total a cobrar, la fecha estimada de pago, y la posibilidad de descargar el archivo completo de soporte. Todo lo demás en pantalla era ruido que competía por atención con esas tres respuestas.
+La investigación mostró que el 95% de los transportistas no consultaba el detalle línea por línea en el navegador: entraba a la prefactura buscando exactamente tres cosas —el monto total a cobrar, la fecha estimada de pago, y la posibilidad de descargar el archivo completo en formatos compatibles con su software contable. Todo lo demás en pantalla era ruido que competía por atención con esas tres respuestas.
+
+Por otro lado, la gestión de pagos adicionales fuera del ciclo regular generaba facturas complementarias continuas que alteraban los cierres fiscales y representaban alertas para los auditores internos.
 
 <ProductDivider eyebrow="Insight" label="El 95% de los usuarios solo quería confirmar cuánto, cuándo, y tener el soporte para comprobarlo." />
 
 ## Decisiones de diseño
 
-Eliminamos las tablas recargadas que dominaban la pantalla, incorporamos un tracker visual con etapas claras del proceso de liquidación, y reestructuramos el archivo de liquidación descargable para que fuera legible sin depender de soporte. En paralelo, hicimos UX writing sobre cada mensaje del flujo, sustituyendo el lenguaje técnico interno por explicaciones que un transportista pudiera entender sin contexto previo de Mercado Libre.
+Eliminamos las tablas recargadas que dominaban la pantalla e incorporamos un tracker visual con las etapas claras del proceso de liquidación —prefactura emitida, período de revisión, aprobación y orden de pago enviada—, reemplazando los modismos internos confusos por un lenguaje que un transportista pudiera seguir sin contexto previo de Mercado Libre. También reestructuramos el archivo de liquidación descargable para que fuera legible sin depender de soporte, y hicimos UX writing sobre cada mensaje del flujo.
 
 ## Consolidando los pagos complementarios: Factura Única
 
-Mientras clarificábamos la vista, identificamos que los pagos extraordinarios se gestionaban aparte, en liquidaciones paralelas que el proveedor tenía que reconciliar por su cuenta. Diseñamos la integración de estos conceptos —ya aprobados— directamente dentro de la misma prefactura, consolidando el modelo de Factura Única: un solo documento, una sola fecha de pago, sin liquidaciones sueltas.
+Mientras clarificábamos la vista, identificamos que los pagos extraordinarios se gestionaban aparte, en liquidaciones paralelas que el proveedor tenía que reconciliar por su cuenta. Diseñamos la integración de estos conceptos —ya aprobados— directamente dentro de la misma prefactura, discriminando con claridad el pago regular base de los ajustes aprobados, para consolidar el modelo de Factura Única: un solo documento, una sola fecha de pago, sin liquidaciones sueltas.
 
 <ProductDivider eyebrow="Decisión de diseño" label="Cada liquidación paralela era una pregunta más que el proveedor tenía que hacerle a soporte. Consolidar el documento eliminó la pregunta." />
 

@@ -12,11 +12,11 @@ order: 2
 draft: false
 
 role: "Semi-Senior UX Specialist"
-team: "Product Manager, Business Lead, Tech Lead, 3 developers, and Product Designer"
+team: "Product Manager, Business Lead, Tech Lead, 3 developers, and me as Semi-Senior UX Specialist, mentoring a Junior UX designer"
 company: "Mercado Libre"
 industry: "Mercado Envíos · Rates & Procurement"
 scope: ["Service Design", "UX Research", "Information Architecture", "UI Design"]
-tools: ["Figma", "FigJam", "Claude", "Service maps"]
+tools: ["Figma", "FigJam", "SQL queries", "Service blueprints", "Prioritization matrix"]
 confidential: false
 ---
 
@@ -27,30 +27,30 @@ import homeMisTarifas from '../../assets/projects/mercadolibre-pacto/home-mis-ta
 
 ## Business context
 
-Negotiating and recording rate agreements between Mercado Libre and thousands of carriers was managed in a fragmented way, over email and local spreadsheets. Each analyst spent several hours a day manually processing per-kilometer rate schemes, per-package schemes, mixed schemes, and local taxes.
+Each transport mode (first-, mid-, and last-mile) runs on heterogeneous rate schemes — per kilometer, per package, mixed schemes, or local addenda — and recording those agreements between Mercado Libre and thousands of carriers was managed manually and informally, over email and disconnected spreadsheets. Each analyst spent up to 6 hours a day processing those schemes, switching between multiple non-integrated tools.
 
 {/*
 ## My role
 
-I worked as product designer within a compact team — PM, business lead, tech lead, and three developers — covering service design, research, and the information architecture of the full system.
+I led the initiative from a UX/UI design perspective across two key stages — initial product hypothesis definition alongside product/tech, and mature adaptation to each country's and mile's specific cases — while also mentoring a Junior UX designer throughout the process.
 */}
 
 ## Impact
 
 <ImpactStats
   stats={[
-    { value: "83%", label: "Less operational processing time per analyst." },
+    { value: "83%", label: "Less operational processing time per analyst — from 6 hours to 1 hour a day." },
     { value: "0 gaps", label: "In billing caused by outdated rates, eliminated after digitizing the full lifecycle." },
   ]}
 />
 
 ## Research and design decision
 
-Discovery showed that mass rate updates — driven by fuel price swings or inflation — caused the most errors, precisely because they were done by hand, row by row, in a shared spreadsheet.
+Discovery showed that the biggest source of error and time investment wasn't creating a single new rate — it was mass updates driven by fuel price swings or inflation, precisely because they were done by hand, row by row, in a shared spreadsheet.
 
 <ProductDivider eyebrow="Insight" label="The biggest risk wasn't negotiating a new rate — it was updating thousands of existing rates without introducing an error." />
 
-We digitized and centralized the full lifecycle of commercial agreements — creation, modification, indexing, and termination — with real-time business-rule validation. For mass updates, I designed a matrix-upload system that flags inconsistencies in the interface before they hit backend financial databases, instead of surfacing the error after it had already affected an invoice.
+We digitized and centralized the full lifecycle of commercial agreements — creation, modification, indexing by inflation or fuel, renewal, and termination — with real-time business-rule validation. For mass updates, I designed a matrix-upload module that flags erroneous cells (currency formats, overlapping dates) directly in the interface, before they hit backend financial databases, instead of surfacing the error after it had already affected an invoice.
 
 <Figure
   src={homeMisTarifas}
@@ -60,4 +60,4 @@ We digitized and centralized the full lifecycle of commercial agreements — cre
 
 ## Result
 
-The team went from hours of manual processing per analyst to a real-time validated flow, and billing stopped carrying gaps caused by outdated rates.
+The team went from hours of manual processing per analyst to a real-time validated flow, and billing stopped carrying gaps caused by outdated rates. The solution also structured a commercial audit trail and freed up internal teams' capacity to focus on strategic cost analysis.

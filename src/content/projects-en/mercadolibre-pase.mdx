@@ -12,11 +12,11 @@ order: 1
 draft: false
 
 role: "Semi-Senior UX Specialist"
-team: "Product triad — 1 PM, 1 Tech Lead, 1 Semi-Senior UX Specialist, frontend/backend engineers, and User Research"
+team: "Product triad — 1 PM, 2 Tech Leads, 1 UX Expert, me as UX Designer, backend/frontend engineering, Business Analyst, and Business Control"
 company: "Mercado Libre"
-industry: "Shipping / B2B Transportation"
-scope: ["UX Research", "UX Strategy", "Information Architecture", "UI Design", "Prototyping"]
-tools: ["Figma", "FigJam", "Claude Code", "Gemini", "Figma Make", "NotebookLM"]
+industry: "Mercado Envíos / B2B Transportation"
+scope: ["UX Research", "UX Strategy", "Service Design", "Information Architecture", "UI Design", "Prototyping"]
+tools: ["Figma", "FigJam", "Claude Code", "Gemini", "Figma Make", "NotebookLM", "Co-creation workshops", "User Testing"]
 confidential: false
 ---
 
@@ -27,35 +27,35 @@ import exploracionCards from '../../assets/projects/mercadolibre-pase/exploracio
 
 ## Business context
 
-Mercado Libre faced high-impact capital leaks from divergences that went undetected between the transport services third parties executed in the field and what the billing system recorded. Reconciliation happened reactively, weeks after trips were completed, creating two critical bottlenecks: carriers had no transparency into penalties or deviations, and part of the overpayments wasn't recoverable due to contractual barriers with large carriers that blocked retroactive deductions.
+Across first-, mid-, and last-mile transportation in Latin America, financial reconciliation happened reactively, weeks after trips were completed. That lag created high-impact financial losses for Mercado Libre: carriers had no transparency into logged routes or applied penalties — which flooded support channels — and part of the overpayments wasn't recoverable due to contractual restrictions that blocked retroactive deductions with large carriers.
 
 {/*
 ## My role
 
-I worked within the product triad — PM, Tech Lead, and me as UX — alongside frontend/backend engineers and the User Research team, covering UX strategy, research, information architecture, and end-to-end UI design.
+I worked on the initiative from an end-to-end product design perspective, in close collaboration with product management, business, engineering, and a UX Expert at the company.
 */}
 
 ## Impact
 
 <ImpactStats
   stats={[
-    { value: "70%", label: "Fewer unrecoverable financial divergences and late claims at the initial rollout sites (Mexico and Brazil)." },
+    { value: "90%", label: "Fewer billing discrepancies and late claims at the initial rollout sites (Mexico and Brazil)." },
     { value: "48 hours", label: "Dispute resolution time, previously measured in weeks." },
-    { value: "-50%", label: "Late claims after PASE launched." },
+    { value: "Overpayments eliminated", label: "The ones that used to be unrecoverable due to contractual restrictions with large carriers." },
   ]}
 />
 
 ## Research and insights
 
-Qualitative testing and contextual interviews in Mexico and Brazil revealed that reviewing a trip weeks old required manually rebuilding a trail with coordinators who no longer remembered the incident.
+Through contextual interviews and support-data analysis in Mexico and Brazil, we found the core friction was an information asymmetry between Mercado Libre and carriers, compounded by traceability that degraded over time: reviewing a weeks-old trip meant manually rebuilding a trail with coordinators who no longer remembered the incident.
 
 <ProductDivider eyebrow="Research" label="Reviewing a weeks-old trip meant reconstructing from memory something that should have been logged the same day." />
 
 ## Business rules and design decisions
 
-That finding led to the contractual **Positive Silence** rule: a service not disputed within the stipulated window is automatically accepted. We rigorously separated the acceptance of physical attributes (routes, kilometers, plate, driver, facility) from rate and penalty management.
+That finding led to the contractual **Positive Silence** rule: routes not disputed within a 24-to-48-hour window from publication are automatically accepted. We also established a strict separation of domains: the system validates only physical service attributes (routes, kilometers, plate, driver, facility), leaving complex rate and penalty management to the commercial and financial systems.
 
-To keep the panel from collapsing under a massive volume of data, I ruled out item-by-item on-screen auditing in favor of an executive panel with advanced filters and parameterized CSV/Excel template downloads compatible with providers' accounting software.
+Because the massive data volume collapsed the interface whenever we tried auditing trips one by one on screen, we opted for an executive panel with advanced filtering and parameterized downloads in structured formats (CSV/Excel) compatible with providers' accounting software.
 
 <Figure
   src={exploracionCards}
@@ -65,7 +65,7 @@ To keep the panel from collapsing under a massive volume of data, I ruled out it
 
 <ProductDivider eyebrow="Design decision" label="Moving the review from the end of the process into day-to-day operations was what changed the nature of the problem, not just its speed." />
 
-Part of iterating on this panel leaned on AI tools to prototype faster and validate interface variants without waiting for final development:
+We also designed an AI-assisted flow to automatically classify the evidence carriers uploaded and recommend pre-configured resolutions to internal analysts. Part of that iteration leaned on AI tools to prototype faster and validate interface variants without waiting for final development:
 
 <figure class="my-10">
   <video
@@ -93,4 +93,4 @@ Part of iterating on this panel leaned on AI tools to prototype faster and valid
 
 ## Result
 
-The initiative returned financial predictability to the logistics chain: fewer unrecoverable divergences, and disputes resolved in hours instead of weeks.
+The initiative returned financial predictability to the logistics chain: fewer unrecoverable discrepancies, and disputes resolved in hours instead of weeks. The underlying lesson was that in complex B2B tools, interface design alone isn't enough — it has to work hand in hand with restructuring contractual incentives and operational governance in the physical world.
