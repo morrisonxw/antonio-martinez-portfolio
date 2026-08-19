@@ -9,6 +9,16 @@ interface Props {
 const { projects } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 gap-x-10 gap-y-16 sm:grid-cols-2">
-  {projects.map((project) => <ProjectCard project={project} />)}
+{
+  /*
+    gap-y vive en cada ProjectCard (mt-16 condicional), no acá: cada card
+    es en sí misma un subgrid de 3 filas (imagen, título, resumen+tags) que
+    comparte esas filas con su vecina de la misma fila del grid padre, para
+    que el resumen de ambas arranque a la misma altura sin importar cuántas
+    líneas ocupe el título de cada una. Un gap-y acá se aplicaría también
+    entre esas 3 filas internas, no solo entre pares de cards.
+  */
+}
+<div class="grid grid-cols-1 gap-x-10 sm:grid-cols-2">
+  {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
 </div>

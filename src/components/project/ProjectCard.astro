@@ -7,12 +7,14 @@ import { projectHref } from '../../i18n/paths';
 
 interface Props {
   project: ProjectEntry;
+  index: number;
 }
 
-const { project } = Astro.props;
+const { project, index } = Astro.props;
 const { title, summary, cover, thumbnail, coverAlt, tags, year, yearLabel, externalUrl } = project.data;
 const locale = (Astro.currentLocale ?? 'es') as Locale;
 const href = externalUrl ?? projectHref(locale, project.id);
+const isFirstRow = index < 2;
 ---
 
 <a
@@ -20,9 +22,23 @@ const href = externalUrl ?? projectHref(locale, project.id);
   target={externalUrl ? '_blank' : undefined}
   rel={externalUrl ? 'noopener noreferrer' : undefined}
   aria-labelledby={`project-card-${project.id}`}
-  class="group block"
+  class:list={[
+    'group grid grid-rows-[subgrid] grid-cols-1 row-span-3',
+    index > 0 && 'mt-16',
+    isFirstRow && 'sm:mt-0',
+  ]}
   data-reveal
 >
+  {
+    /*
+      row-span-3 + grid-rows-[subgrid]: la card comparte sus 3 filas
+      (imagen, título, resumen+tags) con las filas del grid padre. Así, si
+      el título de la card vecina en la misma fila ocupa 1 línea o 3, esta
+      fila de título se dimensiona según la más alta de las dos y el
+      resumen de ambas arranca exactamente a la misma altura, sin depender
+      de adivinar cuántas líneas caben en un min-h fijo.
+    */
+  }
   <div class="overflow-hidden rounded-2xl bg-paper-muted">
     <Image
       src={thumbnail ?? cover}
@@ -32,32 +48,24 @@ const href = externalUrl ?? projectHref(locale, project.id);
       class="aspect-[3/2] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
     />
   </div>
-  <div class="mt-5 flex items-start justify-between gap-4 sm:mt-6">
-    <div>
-      {
-        /*
-          min-h reserva 2 líneas de título (2 × line-height de text-2xl) para
-          que, cuando una card vecina en la misma fila de la grilla tenga un
-          título más corto (1 línea) o más largo (2 líneas), el summary de
-          ambas siga arrancando a la misma altura.
-        */
-      }
-      <h3
-        id={`project-card-${project.id}`}
-        class="flex min-h-[4rem] items-start gap-1.5 font-display text-2xl font-bold tracking-tightest text-ink group-hover:text-accent"
-      >
-        {title}
-        {externalUrl && <span class="text-lg">↗</span>}
-      </h3>
-      <p class="mt-2 text-base text-ink-muted">{summary}</p>
-    </div>
+  <div class="mt-5 flex items-start justify-between gap-4 self-start sm:mt-6">
+    <h3
+      id={`project-card-${project.id}`}
+      class="flex items-start gap-1.5 font-display text-2xl font-bold tracking-tightest text-ink group-hover:text-accent"
+    >
+      {title}
+      {externalUrl && <span class="text-lg">↗</span>}
+    </h3>
     {!externalUrl && <span class="shrink-0 text-sm text-ink-muted">{yearLabel ?? year}</span>}
   </div>
-  {
-    tags.length > 0 && (
-      <div class="mt-4 flex flex-wrap gap-2">
-        {tags.map((tag) => <Tag>{tag}</Tag>)}
-      </div>
-    )
-  }
+  <div class="self-start">
+    <p class="mt-2 text-base text-ink-muted">{summary}</p>
+    {
+      tags.length > 0 && (
+        <div class="mt-4 flex flex-wrap gap-2">
+          {tags.map((tag) => <Tag>{tag}</Tag>)}
+        </div>
+      )
+    }
+  </div>
 </a>
