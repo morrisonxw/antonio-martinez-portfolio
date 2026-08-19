@@ -8,6 +8,14 @@ import { site } from '../content-data/site';
 import { experience } from '../content-data/experience';
 import { about } from '../content-data/about';
 import profilePhoto from '../assets/profile/antonio.jpg';
+import { homeHref } from '../i18n/paths';
+
+// Sección temporalmente fuera del sitio público mientras se rediseña.
+// Sigue completa en `astro dev`; en cualquier build (prod o preview local)
+// redirige al inicio. Quitar este bloque para volver a publicarla.
+if (!import.meta.env.DEV) {
+  return Astro.redirect(homeHref('es'));
+}
 ---
 
 <PageLayout title="Sobre mí" description={`Conoce más sobre ${site.name}, ${site.role}.`}>

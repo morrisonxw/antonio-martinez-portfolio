@@ -4,6 +4,14 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import Container from '../../components/ui/Container.astro';
 import SectionHeading from '../../components/ui/SectionHeading.astro';
 import ProjectGrid from '../../components/project/ProjectGrid.astro';
+import { homeHref } from '../../i18n/paths';
+
+// Sección temporalmente fuera del sitio público mientras se rediseña.
+// Sigue completa en `astro dev`; en cualquier build (prod o preview local)
+// redirige al inicio. Quitar este bloque para volver a publicarla.
+if (!import.meta.env.DEV) {
+  return Astro.redirect(homeHref('es'));
+}
 
 const allProjects = (await getCollection('projects', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.year - a.data.year || a.data.order - b.data.order,
