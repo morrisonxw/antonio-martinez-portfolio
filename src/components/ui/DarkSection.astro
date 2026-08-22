@@ -8,6 +8,14 @@ interface Props {
 const { class: className = '', as: Tag = 'section', ...rest } = Astro.props;
 ---
 
-<Tag class:list={['on-dark w-full bg-paper text-ink', className]} {...rest}>
+{
+  /*
+    El sitio entero es oscuro ahora (ver tokens.css), así que bg-paper
+    text-ink acá es redundante con el fondo de <body> — se deja explícito
+    de todas formas porque esta sección es full-bleed y puede sentarse
+    sobre markup con su propio color heredado más arriba en el árbol.
+  */
+}
+<Tag class:list={['w-full bg-paper text-ink', className]} {...rest}>
   <slot />
 </Tag>

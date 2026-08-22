@@ -14,7 +14,7 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
 <header class="fixed inset-x-0 top-0 z-[60] border-b border-border bg-paper py-5 sm:py-6">
   <Container class="flex flex-nowrap items-center justify-between gap-x-2 gap-y-3 sm:gap-x-4">
     <a href={homeHref(locale)} class="flex shrink-0 items-center gap-2 whitespace-nowrap text-ink">
-      <Logo class="h-6 w-6" />
+      <Logo class="h-6 w-6 text-accent" />
       <span class="font-display text-sm font-bold sm:text-lg">{site.name}</span>
     </a>
     <div class="ml-auto flex flex-wrap items-center gap-x-3 gap-y-3 sm:gap-x-6">

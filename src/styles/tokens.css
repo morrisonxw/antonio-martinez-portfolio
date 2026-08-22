@@ -1,68 +1,39 @@
 /*
   Design tokens — fuente única de verdad.
-  Paleta: gris neutro #1A1A1A como ink, coral como acento de marca,
-  blanco/menta pálido como superficies. Todos los pares texto/fondo
-  listados abajo fueron verificados contra WCAG 2.1 AA (>=4.5:1 para
-  texto normal, >=3:1 para texto grande/componentes UI) usando la
-  fórmula de luminancia relativa estándar. Ajustar aquí; todo lo demás
-  (Tailwind utilities, componentes) hereda de estas variables.
+  El sitio es siempre oscuro (no hay toggle de tema ni variante clara):
+  fondo casi negro #060606 (no negro absoluto), texto principal blanco
+  puro, escala de grises neutros sin matiz para texto/UI secundarios, y
+  coral-naranja como acento de marca y color del logo. Todos los pares
+  texto/fondo listados abajo fueron verificados contra WCAG 2.1 AA
+  (>=4.5:1 para texto normal, >=3:1 para texto grande/componentes UI)
+  usando la fórmula de luminancia relativa estándar. Ajustar acá; todo lo
+  demás (Tailwind utilities, componentes) hereda de estas variables.
 
-  Verificaciones clave (light):
-  - ink #1A1A1A sobre paper #ffffff:            17.4:1
-  - ink-muted #6b747b sobre paper #ffffff:        4.8:1
-  - accent #d6371f sobre paper #ffffff:           4.8:1  (accent es una versión
-    más oscura del coral de marca #ff4f40 —el coral vívido da solo 3.3:1 sobre
-    blanco, insuficiente para texto normal)
-  - paper sobre accent (texto de botón):          4.8:1
-
-  Verificaciones clave (.on-dark):
-  - ink #f3f6f5 sobre paper #1A1A1A:              16.0:1
-  - ink-muted #96a3ac sobre paper #1A1A1A:         6.7:1
-  - accent #ff8a75 sobre paper #1A1A1A:            7.6:1
+  Verificaciones clave:
+  - ink #ffffff sobre paper #060606:             20.3:1
+  - ink-muted #989898 sobre paper #060606:         7.0:1  (texto de cuerpo y enlaces)
+  - ink-soft #cccccc sobre paper #060606:         12.6:1  (texto de apoyo)
+  - accent #ff5e00 sobre paper #060606:            6.6:1
+  - paper (texto) sobre accent (botón en hover):   6.6:1
+  - ink sobre accent-muted:                       17.2:1
+  - accent sobre accent-muted:                     5.6:1
+  - border #595959 sobre paper #060606:            2.9:1  (bajo 3:1 a propósito:
+    --border es solo para separadores decorativos, nunca para el límite de un
+    componente interactivo — esos usan --ink, como ya hace el botón secondary)
 */
 
 :root {
-  --ink: #1A1A1A;
-  --ink-muted: #6b747b;
-  --paper: #ffffff;
-  --paper-muted: #f2f8f3;
-  --accent: #d6371f;
-  --accent-muted: #ffe4de;
-  --border: #dde3e6;
+  --ink: #ffffff;
+  --ink-muted: #989898;
+  --ink-soft: #cccccc;
+  --paper: #060606;
+  --paper-muted: #141414;
+  --accent: #ff5e00;
+  --accent-muted: #2b1608;
+  --border: #595959;
 
   --content-width: 72rem;
   --prose-width: 42rem;
-}
-
-/*
-  .on-dark: bloque estructural siempre oscuro por diseño (no hay toggle de
-  tema — el sitio es siempre claro), usado en secciones full-bleed como la
-  experiencia laboral o el CTA final.
-
-  Nota: las utilidades de Tailwind (bg-paper, text-ink, ...) consumen
-  --color-ink/--color-paper/etc, no --ink/--paper directamente. Esas
-  variables --color-* se declaran una sola vez en :root como var(--ink),
-  y las custom properties heredan el VALOR YA RESUELTO del ancestro que
-  las declara — no se re-evalúan en cada descendiente. Por eso hay que
-  redeclarar aquí también las --color-* (no solo --ink/--paper) para que
-  se recalculen usando los valores oscuros de este mismo elemento.
-*/
-.on-dark {
-  --ink: #f3f6f5;
-  --ink-muted: #96a3ac;
-  --paper: #1A1A1A;
-  --paper-muted: #282828;
-  --accent: #ff8a75;
-  --accent-muted: #352128;
-  --border: #353535;
-
-  --color-ink: var(--ink);
-  --color-ink-muted: var(--ink-muted);
-  --color-paper: var(--paper);
-  --color-paper-muted: var(--paper-muted);
-  --color-accent: var(--accent);
-  --color-accent-muted: var(--accent-muted);
-  --color-border: var(--border);
 }
 
 @theme {
@@ -71,6 +42,7 @@
 
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
+  --color-ink-soft: var(--ink-soft);
   --color-paper: var(--paper);
   --color-paper-muted: var(--paper-muted);
   --color-accent: var(--accent);
