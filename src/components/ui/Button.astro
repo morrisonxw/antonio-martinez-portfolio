@@ -24,7 +24,14 @@ const sizes = {
   sm: 'h-9 px-4 text-sm',
 };
 const variants = {
-  primary: 'bg-ink text-paper hover:bg-accent',
+  // relative isolate + before:-z-10: el pseudo-elemento pinta por encima del
+  // bg-ink propio pero por debajo del contenido en flujo normal (el slot),
+  // sin necesitar envolver el slot en un span con z-index — así el barrido
+  // de color queda como una capa entre el fondo base y el texto/ícono.
+  // isolate asegura que ese z-index negativo compare solo contra este botón,
+  // no contra otros elementos con z-index negativo en la página.
+  primary:
+    'relative isolate overflow-hidden bg-ink text-paper before:absolute before:inset-0 before:-z-10 before:bg-accent before:-translate-x-full before:transition-transform before:duration-500 before:ease-[cubic-bezier(0.16,1,0.3,1)] hover:before:translate-x-0',
   // Borde en --ink (no --border) a propósito: un botón es un componente
   // interactivo y su límite necesita >=3:1 de contraste (WCAG 1.4.11), algo
   // que un hairline decorativo no garantiza. También es más consistente con
@@ -33,6 +40,6 @@ const variants = {
 };
 ---
 
-<Tag href={href} class:list={[base, sizes[size], variants[variant], className]} {...rest}>
+<Tag href={href} data-magnetic class:list={[base, sizes[size], variants[variant], className]} {...rest}>
   <slot />
 </Tag>

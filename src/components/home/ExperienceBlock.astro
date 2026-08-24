@@ -77,9 +77,10 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
                 target={project.data.externalUrl ? '_blank' : undefined}
                 rel={project.data.externalUrl ? 'noopener noreferrer' : undefined}
                 aria-labelledby={`exp-project-${project.id}`}
-                class="group block w-[340px] shrink-0 sm:w-[480px] lg:w-[540px]"
+                class="group block w-[340px] shrink-0 [perspective:800px] sm:w-[480px] lg:w-[540px]"
+                data-tilt
               >
-                <div class="overflow-hidden rounded-2xl bg-paper-muted">
+                <div class="overflow-hidden rounded-2xl bg-paper-muted" data-tilt-target>
                   <Image
                     src={project.data.thumbnail ?? project.data.cover}
                     alt={project.data.coverAlt}

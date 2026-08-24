@@ -23,11 +23,12 @@ const isFirstRow = index < 2;
   rel={externalUrl ? 'noopener noreferrer' : undefined}
   aria-labelledby={`project-card-${project.id}`}
   class:list={[
-    'group grid grid-rows-[subgrid] grid-cols-1 row-span-3',
+    'group grid grid-rows-[subgrid] grid-cols-1 row-span-3 [perspective:800px]',
     index > 0 && 'mt-16',
     isFirstRow && 'sm:mt-0',
   ]}
   data-reveal
+  data-tilt
 >
   {
     /*
@@ -39,7 +40,7 @@ const isFirstRow = index < 2;
       de adivinar cuántas líneas caben en un min-h fijo.
     */
   }
-  <div class="overflow-hidden rounded-2xl bg-paper-muted">
+  <div class="overflow-hidden rounded-2xl bg-paper-muted" data-tilt-target>
     <Image
       src={thumbnail ?? cover}
       alt={coverAlt}

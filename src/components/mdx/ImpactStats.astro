@@ -55,7 +55,10 @@ const { stats } = Astro.props;
             */
           }
           <div class="flex items-center">
-            <p class="min-w-0 break-words font-display text-4xl leading-tight font-bold tracking-tightest text-accent sm:text-5xl">
+            <p
+              class="min-w-0 break-words font-display text-4xl leading-tight font-bold tracking-tightest text-accent sm:text-5xl"
+              data-count-up
+            >
               {stat.value}
             </p>
           </div>
