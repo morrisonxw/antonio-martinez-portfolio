@@ -12,7 +12,7 @@ order: 4
 draft: false
 
 role: "Especialista UX SSR"
-team: "1 PM, 1 Business Analyst, Tech Lead, equipo UX y desarrolladores"
+team: "Equipo de producto: liderazgo de producto, negocio, tech lead, UX y desarrollo"
 company: "Mercado Libre"
 industry: "Mercado Envíos Billing · módulo B2B de reclamaciones y mesa de ayuda interna"
 scope: ["Product Design", "UX Writing", "Mapeo As-Is/To-Be"]
@@ -23,19 +23,16 @@ confidential: false
 import Figure from '../../components/mdx/Figure.astro';
 import ImpactStats from '../../components/mdx/ImpactStats.astro';
 import ProductDivider from '../../components/mdx/ProductDivider.astro';
-import configVentanas from '../../assets/projects/mercadolibre-reclamos/config-ventanas-reclamos.png';
 
 *Se modificaron datos e información de las pantallas mostradas a continuación para proteger la información sensible de la empresa y la confidencialidad del proyecto.*
 
-## Contexto de negocio
+## Contexto
 
-Sistematizamos el proceso de reclamos de facturación de Mercado Libre para proveedores de transporte, pasando de un as-is desestructurado y difícil de gestionar a un sistema que centralizó toda la información y ayudó a reducir el impacto financiero que Mercado Libre sufría por falta de claridad y trazabilidad de los reclamos. Más de 20.000 reclamos ingresaban por periodo, vía formularios de Excel desestandarizados enviados por correo y Jira, un flujo que desbordaba a los analistas internos, generaba pérdida de información en el camino y dejaba a los transportistas sin ninguna trazabilidad sobre el estado de su reclamo.
+Miles de reclamos de facturación llegaban por formularios desestandarizados, sin trazabilidad para los transportistas ni control real para los analistas.
 
-{/*
 ## Mi rol
 
-Diseñé e implementé la estrategia de experiencia e interfaz en dos momentos evolutivos del producto: desde el discovery inicial del proceso as-is/to-be hasta la reconstrucción sistémica sobre tecnología propia, trabajando con un PM, un business analyst, el tech lead y desarrolladores.
-*/}
+Fue el primer proyecto grande que tomé en la compañía, en dos etapas, cubriendo el proceso de UX completo: discovery, diseño de flujos e interfaz, prototipado y testeo. En la primera etapa hice discovery con los equipos de gestión y de proveedores para mapear el proceso existente y diseñar el nuevo, de la mano de un rol de producto y un manager de tecnología. Cuando identificamos las limitaciones de esa primera versión, volví a tomar la iniciativa para diseñar la reconstrucción sobre tecnología propia junto al equipo.
 
 ## Impacto
 
@@ -47,15 +44,11 @@ Diseñé e implementé la estrategia de experiencia e interfaz en dos momentos e
   ]}
 />
 
-## Evolución del producto
+## Cómo trabajé
 
-El proyecto se abordó en dos etapas distintas. En la primera, sistematización e integración, hice el discovery con analistas y proveedores para mapear el proceso as-is y definir el to-be, y lideré el análisis comparativo de herramientas internas existentes para acelerar la implementación, adaptando el diseño a un sistema de tickets ya existente en la compañía.
+Empezamos mapeando el proceso existente junto a analistas y proveedores para definir el nuevo, priorizando adaptar una herramienta ya existente en la compañía para salir rápido. Con el tiempo, esa base heredada mostró límites técnicos y generaba fatiga al gestionar miles de casos uno por uno — la señal de que el equipo necesitaba repensar la solución desde cero, no solo iterarla.
 
-Tras dos años de operación bajo ese esquema, detectamos que la herramienta heredada tenía limitaciones técnicas, problemas de rendimiento y generaba fatiga en los analistas al intentar gestionar miles de casos de forma individual. Eso llevó a la segunda etapa: reconstruir el sistema sobre tecnología propia, para ganar propiedad del código, eliminar flujos en desuso y agregar funciones de seguimiento detallado.
-
-## Bandeja de reclamos
-
-Creamos una bandeja de reclamaciones estandarizada y parametrizada (la que se ve en la portada de este proyecto), con validaciones automáticas de contrato e integrada al motor de reglas Solver, para procesar por lotes y resolver reembolsos directos sin intervención manual caso por caso. Esto le devolvió tiempo a los analistas para los casos que sí requerían criterio humano, y a los transportistas, la tranquilidad de ver el estado de su reclamo sin depender de escalarlo por correo.
+Armé los flujos y prototipé una bandeja estandarizada con validaciones automáticas, pensada para procesar por lotes en vez de caso por caso, y la testeamos con analistas hasta liberarlos para los casos que sí requerían criterio humano.
 
 <figure class="my-10">
   <video
@@ -69,34 +62,12 @@ Creamos una bandeja de reclamaciones estandarizada y parametrizada (la que se ve
   <figcaption class="mt-3 text-sm text-ink-muted">Flujo de creación de un reclamo.</figcaption>
 </figure>
 
-<figure class="my-10">
-  <video
-    src="/projects/mercadolibre-reclamos/cargar-desde-detalle.mp4"
-    autoplay
-    loop
-    muted
-    playsinline
-    class="w-full rounded-xl"
-  />
-  <figcaption class="mt-3 text-sm text-ink-muted">Carga de un reclamo directamente desde el detalle de un viaje.</figcaption>
-</figure>
-
 <ProductDivider eyebrow="Sistema de reclamos" label="El proceso solo se volvió sostenible cuando dejamos de diseñarlo caso por caso y empezamos a diseñarlo por lotes." />
 
-Antes de llegar a esta versión, exploramos distintas formas de dar acceso a los analistas para configurar las ventanas de reclamos:
+También rediseñé las notificaciones de rechazo, reemplazando lenguaje técnico interno por explicaciones que un transportista pudiera entender sin escalar a un analista.
 
-<Figure
-  src={configVentanas}
-  alt="Flujo de configuración de una nueva ventana de reclamos"
-  caption="Flujo interno para que los analistas configuraran nuevas ventanas de reclamos."
-/>
+## Aprendizaje
 
-## UX writing en las notificaciones
-
-Pivotamos de la vista de tickets individuales hacia un modelo de carga masiva de reclamos por plantillas, con gestión por lotes mediante consultas parametrizadas para los analistas. En paralelo, rediseñamos las notificaciones de rechazo sustituyendo códigos sistémicos por explicaciones claras alineadas a las cláusulas contractuales vigentes, para que un reclamo rechazado se entendiera sin necesidad de escalar a un analista.
-
-## Aprendizaje: el tradeoff de MVP a batch
-
-Inicialmente salimos con un MVP de gestión individual, pensado para garantizar trazabilidad sistémica desde el día uno. A nivel de tecnología se volvió insostenible, y la experiencia de cara al equipo de Control de Negocio no fue favorable. Hicimos el tradeoff de eliminar funcionalidades que internamente entendíamos como valiosas, pero que los usuarios no percibían así, y pivotamos hacia el esquema de carga y gestión por lotes (batch processing) que terminó sosteniendo el volumen real.
+La primera versión priorizó trazabilidad individual desde el día uno, pero eso resultó insostenible a nivel técnico y de experiencia. Con el equipo, aprendimos a soltar funcionalidades que internamente parecían valiosas pero que los usuarios no percibían así, y a pivotar hacia el esquema que sí sostenía el volumen real.
 
 <ProductDivider eyebrow="Aprendizaje" label="Construir trazabilidad caso por caso se sentía más responsable, pero era la razón por la que el sistema no podía escalar." />

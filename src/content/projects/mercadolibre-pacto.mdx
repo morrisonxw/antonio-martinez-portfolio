@@ -27,37 +27,37 @@ import homeMisTarifas from '../../assets/projects/mercadolibre-pacto/home-mis-ta
 
 *Se modificaron datos e información de las pantallas mostradas a continuación para proteger la información sensible de la empresa y la confidencialidad del proyecto.*
 
-## Contexto de negocio
+## Contexto
 
-Cada modalidad de transporte (primera, media y última milla) opera bajo esquemas tarifarios heterogéneos: por kilómetro, por paquete, esquemas mixtos o adendas locales, y el registro de esos acuerdos entre Mercado Libre y miles de transportistas se gestionaba de forma manual e informal, por correo y hojas de cálculo desarticuladas. Cada analista destinaba hasta 6 horas diarias a procesar esos esquemas, alternando entre múltiples herramientas no integradas.
+Los acuerdos comerciales con miles de transportistas se gestionaban a mano, por correo y hojas de cálculo, consumiendo horas diarias por analista.
 
 ## Mi rol
 
-**UX/UI Designer / Mentor.** Participé en la etapa inicial de PACTO, definiendo las hipótesis iniciales del producto junto a producto y tecnología, y guiando a un diseñador Junior. Salí del proyecto al finalizar esa etapa; mi compañero quedó a cargo y llevó el producto a su madurez. Más adelante volví a participar, adaptándolo a las casuísticas que se iban identificando en cada país y milla que se incorporaba al proyecto.
+Participé en dos momentos, cubriendo research, diseño de flujos e interfaz: al inicio, alineando con producto y tecnología las primeras definiciones a partir de hipótesis, y guiando a un diseñador junior en diseñar y tangibilizarlas; ya con el producto maduro, volví para adaptar el diseño a las particularidades de cada país y modalidad de transporte.
 
 ## Impacto
 
 <ImpactStats
   stats={[
-    { value: "83%", label: "Menos tiempo de procesamiento operativo por analista: de 6 horas a 1 hora diarias." },
-    { value: "Desfases bajo control", label: "Fuera de un eventual error humano en la carga, el sistema cubría totalmente los desfases por tarifas desactualizadas; por eso sumamos una auditoría de carga como resguardo adicional." },
+    { value: "83%", label: "Menos tiempo de procesamiento operativo por analista." },
+    { value: "Desfases bajo control", label: "El sistema redujo casi por completo los desfases por tarifas desactualizadas, con una capa de auditoría como resguardo adicional." },
   ]}
 />
 
-## Research y decisión de diseño
+## Cómo trabajé
 
-Durante el discovery identificamos que el mayor margen de error e inversión de tiempo no ocurría en la creación de una tarifa individual, sino en las modificaciones masivas derivadas de fluctuaciones de combustible e inflación, precisamente porque se hacían a mano, fila por fila, en una hoja de cálculo compartida.
+El discovery, hecho junto al equipo de negocio, mostró que el mayor riesgo no estaba en crear una tarifa nueva, sino en las actualizaciones masivas hechas a mano, fila por fila, en una hoja compartida.
 
 <ProductDivider eyebrow="Insight" label="El mayor riesgo no estaba en negociar una tarifa nueva, sino en actualizar miles de tarifas existentes sin introducir un error." />
 
-Digitalizamos y centralizamos el ciclo de vida completo de los acuerdos comerciales, dotando al sistema para cubrir casuísticas como la modificación de los costos de operación que sufren los transportistas por inflación o aumentos de combustible, además de validaciones de reglas de negocio en tiempo real. Para las actualizaciones masivas, trabajamos en un flujo que moldeara la carga por matriz e identificara celdas erróneas (formatos de moneda, fechas superpuestas) directamente en la interfaz, antes de impactar las bases de datos financieras backend: así logramos poner barreras para detectar el error antes de que afectara una factura.
+Partimos de la hipótesis de que el error se prevenía mejor en la interfaz que después de cargado el dato. Armé el flujo de carga masiva, prototipé las variantes que identificaban errores de formato antes de que llegaran a impactar la facturación, y las testeamos con analistas hasta dejarlo listo para reemplazar la hoja de cálculo compartida.
 
 <Figure
   src={homeMisTarifas}
-  alt="Pantalla principal de Mis Tarifas en PACTO, con el listado de acuerdos vigentes por transportista"
-  caption="Home de Mis Tarifas: el punto de partida para consultar y gestionar el ciclo de vida completo de cada acuerdo."
+  alt="Pantalla principal de gestión de tarifas, con el listado de acuerdos vigentes por transportista"
+  caption="Punto de partida para consultar y gestionar el ciclo de vida completo de cada acuerdo comercial."
 />
 
 ## Resultado
 
-El equipo pasó de horas de procesamiento manual por analista a un flujo validado en tiempo real, y la facturación dejó de arrastrar desfases por tarifas desactualizadas. Para los analistas, esto significó dejar atrás jornadas repetitivas de carga fila por fila y de auditar las cargas de sus compañeros, ganando tiempo para dedicarse a otros procesos más descuidados del área. La solución además estructuró el historial de auditoría comercial y liberó capacidad operativa en los equipos internos para dedicarse al análisis estratégico de costos.
+De horas de procesamiento manual a un flujo validado en tiempo real, con analistas liberados de la carga y auditoría fila por fila para dedicarse al análisis estratégico.
