@@ -9,6 +9,9 @@ import { t, type Locale } from '../../i18n/ui';
 import { homeHref } from '../../i18n/paths';
 
 const locale = (Astro.currentLocale ?? 'es') as Locale;
+// Un CV por idioma: el botón de descarga siempre apunta a la versión en el
+// idioma en el que se está navegando el sitio, no a un único PDF fijo.
+const cvHref = locale === 'en' ? '/cv/Antonio-Martinez-CV-EN.pdf' : '/cv/Antonio-Martinez-CV-ES.pdf';
 ---
 
 <header class="fixed inset-x-0 top-0 z-[60] border-b border-border bg-paper py-5 sm:py-6">
@@ -19,7 +22,7 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
     </a>
     <div class="ml-auto flex flex-wrap items-center gap-x-3 gap-y-3 sm:gap-x-6">
       <div class="hidden sm:block">
-        <Button href="/cv/Antonio-Martinez-CV.pdf" download variant="secondary" size="sm">
+        <Button href={cvHref} download variant="secondary" size="sm">
           {t(locale, 'header.downloadCv')}
         </Button>
       </div>
