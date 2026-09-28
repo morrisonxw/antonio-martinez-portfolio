@@ -33,28 +33,26 @@ Los proveedores veían la prefactura como una caja negra, lo que saturaba soport
 
 ## Mi rol
 
-Lideré el proceso de UX completo: tomé los hallazgos del discovery del equipo de research y los convertí en flujos y pantallas de producto. Alineé con el rol de producto la forma de trabajar del área de facturación, hice research con analistas y negocio, y diseñé y prototipé hipótesis que iteramos juntos hasta encontrar una definición que apuntara al objetivo y fuera viable para los equipos — un proceso que tuvo que convivir con procesos manuales y regulatorios que no se podían simplemente eliminar.
+Lideré el proceso de UX completo: tomé los hallazgos del discovery del equipo de research y los convertí en flujos y pantallas de producto. Alineé con el rol de producto la forma de trabajar del área de facturación, hice research con analistas y negocio, y diseñé y prototipé hipótesis que iteramos juntos hasta encontrar una definición que apuntara al objetivo y fuera viable para los equipos, un proceso que tuvo que convivir con procesos manuales y regulatorios que no se podían simplemente eliminar.
 
 ## Impacto
 
 <ImpactStats
   stats={[
-    { value: "Disminución drástica", label: "En solicitudes de soporte sobre estados de pago." },
     { value: "15%", label: "Menos disputas asociadas a cobros adicionales." },
-    { value: "Pagos complementarios reducidos", label: "Tras consolidarlos en un documento único, solo se acude a la modalidad paralela en casos borde." },
     { value: "Cierre más simple", label: "Del proceso contable para los proveedores, al consolidar todo en un solo documento." },
   ]}
 />
 
 ## Cómo trabajé
 
-La investigación mostró que la mayoría de los usuarios solo buscaba tres cosas: el monto, la fecha de pago, y poder descargar un archivo compatible con su propio software contable. Todo lo demás competía por atención con esas tres respuestas.
+La investigación mostró que la mayoría de los usuarios buscaba tres cosas: conocer el monto, saber la fecha de pago y descargar un archivo compatible con su software contable. Todo lo demás competía por la atención que requerían esas respuestas.
 
 <ProductDivider eyebrow="Insight" label="La mayoría de los usuarios solo quería confirmar cuánto se les reconocía, cuándo se les pagaba, y un detalle claro para identificar diferencias por su cuenta." />
 
-Prioricé simplificar antes que agregar: eliminé tablas recargadas, reescribí la línea de tiempo del proceso con lenguaje que no diera por sentado contexto interno, y reestructuré el archivo descargable para que fuera legible sin depender de soporte.
+Prioricé simplificar antes que agregar: eliminé tablas recargadas, reescribí la línea de tiempo con un lenguaje comprensible para los proveedores y reestructuré el archivo descargable para que pudiera leerse sin recurrir a soporte. Estas decisiones redujeron las consultas sobre los estados de pago.
 
-También identificamos, junto al equipo de facturación, una oportunidad fuera del alcance original: había pagos que se gestionaban aparte, en documentos paralelos. Armé los flujos y prototipé la integración directa en la misma prefactura, discriminando el pago base de los ajustes, y los testeamos hasta consolidar todo en un documento único.
+También identificamos, junto al equipo de facturación, una oportunidad fuera del alcance original: algunos pagos se gestionaban por separado, en documentos paralelos. Diseñé los flujos y prototipé su integración en la prefactura, diferenciando el pago base de los ajustes. Probamos la propuesta hasta consolidar ambos en un solo documento; la modalidad paralela quedó reservada casi exclusivamente para casos límite.
 
 <ProductDivider eyebrow="Decisión de diseño" label="Cada liquidación paralela era una pregunta más que el proveedor tenía que hacerle a soporte. Consolidar el documento eliminó la pregunta." />
 
@@ -72,4 +70,4 @@ También identificamos, junto al equipo de facturación, una oportunidad fuera d
 
 ## Resultado
 
-Menos dependencia de soporte, menos disputas, y un cierre contable más simple para los proveedores — la tranquilidad de entender su propio pago sin ayuda externa.
+El resultado fue una menor dependencia del soporte, menos disputas y un cierre contable más sencillo para los proveedores, que podían entender su pago sin ayuda externa.

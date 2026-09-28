@@ -14,16 +14,23 @@ interface Props {
   project: ProjectEntry;
   prev?: ProjectEntry;
   next?: ProjectEntry;
+  // Minutos estimados de lectura, calculados en build time por el remark
+  // plugin `remarkReadingTime` a partir del cuerpo MDX (ver astro.config.mjs
+  // y src/lib/remark-reading-time.mjs). Opcional porque, en teoría, un
+  // consumidor futuro de este layout podría no pasar por `render()`.
+  readingTime?: number;
 }
 
-const { project, prev, next } = Astro.props;
+const { project, prev, next, readingTime } = Astro.props;
 const { title, summary, cover, coverAlt, tags, company, confidential } = project.data;
 const locale = (Astro.currentLocale ?? 'es') as Locale;
 const eyebrow = company ?? tags[0] ?? t(locale, 'caseStudy.fallbackEyebrow');
 ---
 
 <PageLayout title={title} description={summary} image={cover.src}>
-  <article>
+  <div class="reading-progress" data-reading-progress aria-hidden="true"></div>
+
+  <article data-case-study data-project-id={project.id}>
     <Container class="pt-12 sm:pt-16">
       <a
         href={projectsHref(locale)}
@@ -36,7 +43,21 @@ const eyebrow = company ?? tags[0] ?? t(locale, 'caseStudy.fallbackEyebrow');
         </svg>
       </a>
       <div class="max-w-[var(--prose-width)]" data-reveal>
-        <p class="text-xs font-medium tracking-wide text-accent uppercase">{eyebrow}</p>
+        <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+          <p class="text-xs font-medium tracking-wide text-accent-strong uppercase">{eyebrow}</p>
+          {
+            readingTime && (
+              <>
+                <span class="text-xs text-ink-muted" aria-hidden="true">
+                  ·
+                </span>
+                <p class="text-xs text-ink-muted">
+                  {readingTime} {t(locale, 'caseStudy.readingTimeSuffix')}
+                </p>
+              </>
+            )
+          }
+        </div>
         <h1 class="mt-3 font-display text-4xl font-bold tracking-tightest text-ink sm:text-6xl">{title}</h1>
         <p class="mt-5 text-lg text-ink-muted">{summary}</p>
         {

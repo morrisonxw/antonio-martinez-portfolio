@@ -1,4 +1,5 @@
-import { defineCollection, z, reference } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
+import { z } from 'astro/zod';
 import type { SchemaContext } from 'astro:content';
 import { glob } from 'astro/loaders';
 
@@ -31,15 +32,12 @@ const projectSchema = ({ image }: SchemaContext) =>
     industry: z.string().optional(),
     scope: z.array(z.string()).default([]),
     tools: z.array(z.string()).default([]),
-    liveUrl: z.string().url().optional(),
+    liveUrl: z.url().optional(),
     confidential: z.boolean().default(false),
-
-    problem: z.string().optional(),
-    outcome: z.string().optional(),
 
     // Si se define, la card enlaza directo a esta URL (ej. un portafolio externo
     // como Behance) en vez de generar una página de case study interna.
-    externalUrl: z.string().url().optional(),
+    externalUrl: z.url().optional(),
 
     ogImage: image().optional(),
     relatedProjects: z.array(reference('projects')).optional(),

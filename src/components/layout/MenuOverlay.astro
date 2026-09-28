@@ -3,6 +3,7 @@ import { nav } from '../../content-data/nav';
 import { nav as navEn } from '../../content-data/nav.en';
 import { site } from '../../content-data/site';
 import { t, type Locale } from '../../i18n/ui';
+import { homeHref } from '../../i18n/paths';
 
 const locale = (Astro.currentLocale ?? 'es') as Locale;
 const navItems = locale === 'en' ? navEn : nav;
@@ -27,7 +28,7 @@ const current = Astro.url.pathname;
   </span>
 </button>
 
-<div id="menu-panel" data-state="closed" class="fixed inset-0 z-[70] pointer-events-none data-[state=open]:pointer-events-auto">
+<div id="menu-panel" data-state="closed" inert aria-hidden="true" role="dialog" aria-modal="true" aria-label={t(locale, 'menu.nav')} class="fixed inset-0 z-[70] pointer-events-none data-[state=open]:pointer-events-auto">
   <div
     data-menu-backdrop
     data-state="closed"
@@ -40,12 +41,12 @@ const current = Astro.url.pathname;
     class="absolute inset-y-0 right-0 flex w-full max-w-lg translate-x-full flex-col overflow-y-auto bg-paper px-8 py-8 shadow-2xl transition-transform duration-500 ease-out data-[state=open]:translate-x-0 sm:px-12 sm:py-10"
   >
     <div class="flex items-center justify-between">
-      <a href="/" class="font-display text-lg font-bold text-ink">{site.name}</a>
+      <a href={homeHref(locale)} class="font-display text-lg font-bold text-ink">{site.name}</a>
       <button
         type="button"
         data-menu-close
         aria-label={t(locale, 'menu.close')}
-        class="flex h-9 w-9 items-center justify-center rounded-full border border-border text-ink transition-colors hover:border-accent hover:text-accent"
+        class="flex h-9 w-9 items-center justify-center rounded-full border border-border text-ink transition-colors hover:border-accent hover:text-accent-strong"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" class="h-4 w-4">
           <path d="M6 6l12 12M18 6L6 18" />
@@ -75,12 +76,12 @@ const current = Astro.url.pathname;
 
     <div class="mt-10 space-y-3 border-t border-border pt-8 text-sm">
       <p class="text-xs font-medium tracking-wide text-ink-muted uppercase">{t(locale, 'menu.contact')}</p>
-      <a href={`mailto:${site.email}`} class="block text-ink hover:text-accent">{site.email}</a>
+      <a href={`mailto:${site.email}`} class="block text-ink hover:text-accent-strong">{site.email}</a>
       <a
         href={site.social.linkedin}
         target="_blank"
         rel="noopener noreferrer"
-        class="block text-ink hover:text-accent"
+        class="block text-ink hover:text-accent-strong"
       >
         LinkedIn
       </a>
@@ -88,7 +89,7 @@ const current = Astro.url.pathname;
         href={site.social.behance}
         target="_blank"
         rel="noopener noreferrer"
-        class="block text-ink hover:text-accent"
+        class="block text-ink hover:text-accent-strong"
       >
         Behance
       </a>
@@ -109,6 +110,8 @@ const current = Astro.url.pathname;
 
     function setState(state: 'open' | 'closed') {
       panel!.dataset.state = state;
+      panel!.inert = state === 'closed';
+      panel!.setAttribute('aria-hidden', String(state === 'closed'));
       backdrop!.dataset.state = state;
       content!.dataset.state = state;
       toggle!.setAttribute('aria-expanded', String(state === 'open'));

@@ -1,0 +1,73 @@
+---
+interface Row {
+  label: string;
+  tone: 'before' | 'after';
+  steps: string[];
+}
+
+interface Props {
+  rows: Row[];
+  caption?: string;
+}
+
+const { rows, caption } = Astro.props;
+---
+
+{
+  /*
+    Recorrido "antes / después" como secuencia de pasos. El contraste no se
+    apoya solo en el color: "antes" usa contorno punteado y texto atenuado,
+    "después" usa relleno sólido; además cada fila lleva su etiqueta escrita.
+  */
+}
+<div class="not-prose my-10 space-y-4" data-reveal>
+  {
+    rows.map((row) => (
+      <section
+        class:list={[
+          'rounded-2xl border p-5 sm:p-6',
+          row.tone === 'before' ? 'border-border/60 bg-paper-muted' : 'border-accent/40 bg-paper',
+        ]}
+      >
+        <p
+          class:list={[
+            'text-xs font-semibold tracking-[0.2em] uppercase',
+            row.tone === 'before' ? 'text-ink-muted' : 'text-accent',
+          ]}
+        >
+          {row.label}
+        </p>
+        <ol class="mt-4 flex flex-wrap items-center gap-y-3">
+          {row.steps.map((step, index) => (
+            <li class="flex items-center">
+              <span
+                class:list={[
+                  'rounded-lg px-3 py-2 text-sm leading-snug',
+                  row.tone === 'before'
+                    ? 'border border-dashed border-border text-ink-muted'
+                    : 'bg-accent-muted font-medium text-ink',
+                ]}
+              >
+                {step}
+              </span>
+              {index < row.steps.length - 1 && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  class="mx-1.5 h-4 w-4 shrink-0 text-ink-muted"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              )}
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))
+  }
+  {caption && <p class="text-sm text-ink-muted">{caption}</p>}
+</div>

@@ -9,11 +9,21 @@ const site = locale === 'en' ? siteEn : siteEs;
 ---
 
 <section
-  data-pin-hero
-  class="relative flex flex-col justify-center bg-paper pt-8 pb-8 text-ink sm:pt-12 sm:pb-20"
+  data-hero-grid-section
+  class="relative flex min-h-[480px] flex-col justify-center overflow-hidden bg-paper py-12 text-ink sm:min-h-[540px] sm:py-16 lg:min-h-[560px]"
 >
-  <Container>
-    <p class="text-sm font-medium text-accent" data-reveal>{site.role}</p>
+  {
+    /*
+      Grilla de puntos reactiva al cursor (src/lib/motion/hero-grid.ts):
+      referencia visual a "los sistemas que sostienen un producto", en línea
+      con "entiendo el producto más allá del píxel". Solo se monta con mouse
+      fino y sin prefers-reduced-motion; si no, el canvas queda vacío y el
+      hero se ve limpio, sin hueco.
+    */
+  }
+  <canvas data-hero-grid class="pointer-events-none absolute inset-0 z-0" aria-hidden="true"></canvas>
+
+  <Container class="relative z-[1]">
     <h1
       class="mt-4 max-w-4xl font-display text-4xl font-bold tracking-tightest text-ink sm:text-6xl lg:text-7xl"
       data-reveal
@@ -25,42 +35,3 @@ const site = locale === 'en' ? siteEn : siteEs;
     </p>
   </Container>
 </section>
-
-<script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  function setupPin() {
-    const hero = document.querySelector<HTMLElement>('[data-pin-hero]');
-    const content = hero?.querySelector<HTMLElement>(':scope > div');
-    if (!hero || !content) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    gsap.registerPlugin(ScrollTrigger);
-    // Duración del pin acotada a una fracción de la altura del hero (no el
-    // 100%): un pin de un viewport completo sin nada atado al scroll se
-    // siente como "scroll muerto" antes de revelar el siguiente bloque.
-    // El fade + translateY en scrub le da feedback continuo al usuario
-    // durante ese tramo, en vez de dejar el hero congelado.
-    // En mobile el hero es más alto (el texto envuelve en más líneas), así
-    // que el mismo 40% se traduce en bastante más scroll muerto en
-    // términos absolutos — se usa una fracción menor por debajo de sm.
-    const pinFraction = window.matchMedia('(min-width: 640px)').matches ? 0.4 : 0.15;
-    ScrollTrigger.create({
-      trigger: hero,
-      start: 'top top',
-      end: () => `+=${hero.offsetHeight * pinFraction}`,
-      pin: true,
-      pinSpacing: true,
-      scrub: 0.3,
-      onUpdate: (self) => {
-        gsap.set(content, {
-          opacity: 1 - self.progress * 0.9,
-          y: self.progress * -40,
-        });
-      },
-    });
-  }
-
-  document.addEventListener('astro:page-load', setupPin);
-</script>

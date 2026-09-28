@@ -40,15 +40,14 @@ Fue el primer proyecto grande que tomé en la compañía, en dos etapas, cubrien
   stats={[
     { value: "100% de trazabilidad", label: "Todos los reclamos se sistematizaron, agilizando considerablemente la validación de reclamos existentes o ya resueltos." },
     { value: "TTR transparente", label: "El nuevo sistema hizo transparente el Time to Resolution (TTR) de los procesos de reclamos." },
-    { value: "Reclamos centralizados", label: "Todos los reclamos quedaron en una sola base de datos que los analistas de Meli podían consultar y gestionar mediante queries, sin buscar en distintos lugares." },
   ]}
 />
 
 ## Cómo trabajé
 
-Empezamos mapeando el proceso existente junto a analistas y proveedores para definir el nuevo, priorizando adaptar una herramienta ya existente en la compañía para salir rápido. Con el tiempo, esa base heredada mostró límites técnicos y generaba fatiga al gestionar miles de casos uno por uno — la señal de que el equipo necesitaba repensar la solución desde cero, no solo iterarla.
+Empezamos por mapear el proceso existente con analistas y proveedores para definir el nuevo, priorizando adaptar una herramienta de la compañía y acelerar la salida. Con el tiempo, esa base heredada mostró límites técnicos y generó fatiga al gestionar miles de casos uno por uno. Esto indicó que el equipo necesitaba repensar la solución, no solo iterarla.
 
-Armé los flujos y prototipé una bandeja estandarizada con validaciones automáticas, pensada para procesar por lotes en vez de caso por caso, y la testeamos con analistas hasta liberarlos para los casos que sí requerían criterio humano.
+Armé los flujos y prototipé una bandeja estandarizada con validaciones automáticas y procesamiento por lotes. Centralizamos los reclamos, antes dispersos entre correos y tickets, y probamos la propuesta con analistas para que pudieran concentrarse en los casos que sí requerían criterio humano.
 
 <figure class="my-10">
   <video
@@ -68,6 +67,6 @@ También rediseñé las notificaciones de rechazo, reemplazando lenguaje técnic
 
 ## Aprendizaje
 
-La primera versión priorizó trazabilidad individual desde el día uno, pero eso resultó insostenible a nivel técnico y de experiencia. Con el equipo, aprendimos a soltar funcionalidades que internamente parecían valiosas pero que los usuarios no percibían así, y a pivotar hacia el esquema que sí sostenía el volumen real.
+La primera versión priorizó la trazabilidad individual desde el inicio, pero resultó insostenible desde el punto de vista técnico y de la experiencia. Con el equipo aprendimos a dejar de lado funcionalidades que parecían valiosas internamente, pero que los usuarios no percibían del mismo modo, y a cambiar de rumbo hacia una solución que soportara el volumen real.
 
 <ProductDivider eyebrow="Aprendizaje" label="Construir trazabilidad caso por caso se sentía más responsable, pero era la razón por la que el sistema no podía escalar." />

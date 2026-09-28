@@ -1,0 +1,122 @@
+---
+interface Outcome {
+  label: string;
+  note: string;
+  // `done` = resultado logrado (check); `returned` = cierre por devolución.
+  kind: 'done' | 'returned';
+}
+
+interface State {
+  title: string;
+  question: string;
+  note?: string;
+  tone: 'open' | 'wait' | 'closed';
+  count?: string;
+  outcomes?: Outcome[];
+}
+
+interface Props {
+  states: State[];
+  // Etiqueta sobre la flecha que une cada estado con el siguiente.
+  transitions: string[];
+  footnote?: string;
+}
+
+const { states, transitions, footnote } = Astro.props;
+
+const toneClass = {
+  open: 'border-accent/40 bg-accent-muted',
+  wait: 'border-border/60 bg-paper-muted',
+  closed: 'border-ink bg-paper',
+};
+---
+
+<div class="not-prose my-10" data-reveal>
+  <ol class="flex flex-col items-stretch md:flex-row">
+    {
+      states.map((state, index) => (
+        <>
+          <li class:list={['flex flex-1 flex-col rounded-2xl border p-5', toneClass[state.tone]]}>
+            <div class="flex items-baseline justify-between gap-3">
+              <h3 class="font-display text-xl font-bold tracking-tightest text-ink">{state.title}</h3>
+              {state.count && <span class="text-xs font-medium text-ink-muted">{state.count}</span>}
+            </div>
+            <p class="mt-2 text-sm font-medium text-ink">{state.question}</p>
+            {state.note && <p class="mt-1 text-sm text-ink-muted">{state.note}</p>}
+            {state.outcomes && (
+              <ul class="mt-4 space-y-2">
+                {state.outcomes.map((outcome) => (
+                  <li
+                    class:list={[
+                      'flex items-start gap-2 rounded-lg px-3 py-2 text-sm',
+                      // Texto siempre en tinta (el naranja de marca con texto chico no llega a 4.5:1);
+                      // la diferencia entre resultados la dan el ícono y el contorno.
+                      'border text-ink',
+                      outcome.kind === 'done' ? 'border-accent/50 bg-accent-muted' : 'border-ink bg-paper',
+                    ]}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class:list={['mt-0.5 h-4 w-4 shrink-0', outcome.kind === 'done' && 'text-accent']}
+                      aria-hidden="true"
+                    >
+                      {outcome.kind === 'done' ? <path d="m5 12 4 4L19 6" /> : <path d="M9 14 4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3" />}
+                    </svg>
+                    <span>
+                      <strong class="font-semibold">{outcome.label}</strong>
+                      <span class="block text-xs opacity-90">{outcome.note}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+          {index < states.length - 1 && (
+            <li
+              class="flex items-center justify-center gap-2 py-3 text-xs font-medium text-ink-muted md:w-28 md:flex-col md:px-2 md:py-0 md:text-center"
+              aria-hidden="true"
+            >
+              <span class="leading-tight">{transitions[index]}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.75"
+                class="h-5 w-5 shrink-0 rotate-90 md:rotate-0"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </li>
+          )}
+        </>
+      ))
+    }
+  </ol>
+  {
+    footnote && (
+      <p class="mt-4 flex items-start gap-2 text-sm text-ink-muted">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="mt-0.5 h-4 w-4 shrink-0"
+          aria-hidden="true"
+        >
+          <path d="M9 14 4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3" />
+        </svg>
+        <span>{footnote}</span>
+      </p>
+    )
+  }
+</div>

@@ -10,7 +10,7 @@ export const about = {
     },
     {
       heading: 'Mi forma de trabajar',
-      body: 'Empiezo por entender el proceso real, no el ideal: converso con quienes lo viven a diario, cruzo eso con la data disponible y solo entonces propongo cambios. Trabajo en dupla cercana con producto y tecnología, itero rápido apoyado en prototipado, incluyendo herramientas de IA, y considero un proyecto terminado cuando su impacto es visible en el negocio, no solo en la interfaz.',
+      body: 'Empiezo por entender el proceso real, no el ideal: converso con quienes lo viven a diario, cruzo sus perspectivas con los datos disponibles y solo entonces propongo cambios. Trabajo en colaboración estrecha con producto y tecnología, itero con rapidez mediante prototipos y considero un proyecto terminado cuando su impacto es visible en el negocio, no solo en la interfaz.',
     },
   ],
   skills: [
@@ -22,10 +22,11 @@ export const about = {
     'Prototipado (Figma, Figma Make, Cursor)',
     'Facilitación de design thinking y sprints',
     'Definición de capacidades de IA aplicadas a producto',
+    'Promoción de adopción temprana de IA en equipos',
     'Mentoría de perfiles junior en UX',
   ],
   experienceIntro:
     'Cinco etapas que reflejan una trayectoria transversal: de la comunicación de marca al diseño de servicios, y del diseño de servicios al diseño de producto, pasando por branding, sistemas de diseño y proyectos B2B de distinta escala.',
   philosophy:
-    'No estaba lloviendo cuando Noé construyó el arca.',
+    'Entiendo el producto más allá del píxel.',
 };

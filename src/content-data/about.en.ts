@@ -22,10 +22,11 @@ export const about = {
     'Prototyping (Figma, Figma Make, Cursor)',
     'Facilitating design thinking and sprints',
     'Defining AI capabilities applied to product',
+    'Promoting early AI adoption within teams',
     'Mentoring junior UX profiles',
   ],
   experienceIntro:
     'Five stages that reflect a transversal path: from brand communication to service design, and from service design to product design, passing through branding, design systems, and B2B projects of different scale.',
   philosophy:
-    "It wasn't raining when Noah built the ark.",
+    'I understand product beyond the pixel.',
 };

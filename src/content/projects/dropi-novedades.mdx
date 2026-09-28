@@ -1,0 +1,474 @@
+---
+title: "Novedades de entrega: de un reporte confuso a una decisión clara"
+summary: "Diseñé una herramienta para que los dropshippers de Dropi entiendan qué pasó con una entrega, sepan qué hacer y distingan una gestión en curso de un resultado confirmado."
+cover: "../../assets/projects/dropi-novedades/cover.png"
+coverAlt: "Panel de Novedades de entrega de Dropi con la lista de novedades pendientes y el detalle de un caso: no había nadie para recibir, con la acción sugerida Programar segunda entrega"
+thumbnail: "../../assets/projects/dropi-novedades/thumbnail.png"
+tags: ["Product Design", "UX Writing", "IA aplicada", "Logística e-commerce"]
+year: 2026
+featured: true
+order: 0
+draft: false
+
+role: "Product Designer (estrategia, UX y UX writing)"
+team: "Proyecto individual, con asistencia de IA para explorar, redactar y prototipar"
+company: "Dropi"
+industry: "Dropshipping y logística de e-commerce · Reto de diseño"
+scope: ["Estrategia de Producto", "Discovery documental", "Diseño de interacción", "UX Writing", "Prototipado", "QA visual y funcional"]
+tools: ["Figma Make", "Prototipo React", "Investigación documental", "Playwright (QA)"]
+confidential: false
+---
+
+import Figure from '../../components/mdx/Figure.astro';
+import FigurePair from '../../components/mdx/FigurePair.astro';
+import ImpactStats from '../../components/mdx/ImpactStats.astro';
+import ProductDivider from '../../components/mdx/ProductDivider.astro';
+import DataTable from '../../components/mdx/DataTable.astro';
+import JourneyCompare from '../../components/mdx/JourneyCompare.astro';
+import StateFlow from '../../components/mdx/StateFlow.astro';
+import MappingDiagram from '../../components/mdx/MappingDiagram.astro';
+import StackedBars from '../../components/mdx/StackedBars.astro';
+import ConfidenceStrip from '../../components/mdx/ConfidenceStrip.astro';
+import tarjetaCarlos from '../../assets/projects/dropi-novedades/tarjeta-carlos.png';
+import tarjetaFelipe from '../../assets/projects/dropi-novedades/tarjeta-felipe.png';
+import modalProgramar from '../../assets/projects/dropi-novedades/modal-programar.png';
+import modalContactar from '../../assets/projects/dropi-novedades/modal-contactar.png';
+import gestionadas from '../../assets/projects/dropi-novedades/gestionadas.png';
+import cierreEntregada from '../../assets/projects/dropi-novedades/cierre-entregada.png';
+import cierreCancelada from '../../assets/projects/dropi-novedades/cierre-cancelada.png';
+import mobileLista from '../../assets/projects/dropi-novedades/mobile-lista.png';
+import mobileDetalle from '../../assets/projects/dropi-novedades/mobile-detalle.png';
+import modalAutomatizacion from '../../assets/projects/dropi-novedades/modal-automatizacion.png';
+
+*Este es un reto de diseño planteado por Dropi, no un proyecto en producción. Todo lo que se ve en las pantallas (compradores, pedidos, plazos, transportadoras y resultados) son escenarios sintéticos que construí para diseñar y revisar la experiencia. No hay datos reales, ni entrevistas con vendedores, ni conexión con transportadoras.*
+
+## El reto de negocio
+
+Dropi conecta vendedores, compradores y transportadoras. Cuando una entrega falla, la transportadora reporta una **novedad**, y cada una lo hace con sus propias palabras: "no había nadie", "dirección no existe", "el comprador no quiso recibir". Hay decenas de estados que muchas veces significan lo mismo, y el dropshipper se queda frente a un mensaje técnico o incompleto sin saber qué hacer, a menudo escribiéndole a soporte.
+
+El reto era diseñar una experiencia que ayudara a **aumentar las entregas exitosas**, con una advertencia explícita: hoy la mayoría de las novedades aparecen como "resueltas" pero pocas terminan entregadas, porque "resolver" casi siempre significa devolver el paquete. Medir el éxito con esa etiqueta es la métrica trampa.
+
+<DataTable
+  columns={["Lo que pedía el reto", "Cómo lo respondí"]}
+  rows={[
+    ["Traducir el estado crudo a una acción concreta", "Una capa de interpretación de Dropi convierte cada reporte en un verbo que el vendedor reconoce, en vez de mostrarle un código con palabras más simples."],
+    ["Priorizar: no todas las novedades urgen igual", "Cada caso muestra el tiempo restante para actuar y la pantalla resume cuántos vencen hoy; la urgencia aparece sólo cuando hay una condición concreta."],
+    ["Multi transportadora, sin estándar", "La unidad de diseño es la situación que el vendedor debe decidir, no el código ni el vocabulario de cada operador."],
+    ["Cuidado con la métrica trampa", "Gestionada nunca significa entregada: sólo una evidencia de entrega o de devolución cierra el caso, y los cierres se muestran por separado."],
+  ]}
+  caption="El brief pedía como mínimo traducir y priorizar. Las otras dos condiciones fueron las que más cambiaron el diseño."
+/>
+
+## Objetivos
+
+### Objetivos de negocio
+
+- Aumentar la tasa de entregas exitosas, sin contar las devoluciones como entregas recuperadas.
+- Reducir la dependencia de soporte para gestionar cada novedad.
+
+### Objetivos de producto
+
+- Convertir reportes heterogéneos en una decisión clara y consistente entre transportadoras.
+- Separar el progreso de la gestión del resultado del envío.
+- Dejar una base que escale hacia prioridades, asignación y automatización.
+
+### Objetivos de usuario
+
+- Entender qué ocurrió sin descifrar códigos de transporte.
+- Saber qué puede hacer ahora, y qué depende de otra persona.
+- Saber cómo terminó el pedido: entregado o devuelto.
+
+## Mi contribución
+
+Llevé el proyecto de punta a punta: encuadre estratégico, discovery documental, arquetipos y journeys, ideación con behavioral design, prototipo de fidelidad media-alta, UX writing y QA. Trabajé con asistencia de IA para organizar, explorar, redactar e implementar el prototipo; las decisiones de producto y la revisión editorial fueron mías.
+
+## El dropshipper no es un especialista logístico
+
+Una decisión de enfoque cambió el resto del proyecto: no tratar al dropshipper como un operador experto en envíos. Su trabajo es vender y obtener ganancias. La logística es una condición para que esa venta se complete, no el motivo por el que entra a Dropi.
+
+Por eso el problema no se planteó como "enseñarle a interpretar los estados de las transportadoras", sino como una interrupción de su trabajo principal que le exige una decisión rápida. El job que guió el diseño:
+
+> **Cuando una entrega tiene un problema, quiero saber rápidamente qué puedo hacer para proteger la venta, para no perder tiempo descifrando procesos logísticos ni depender de soporte para cada caso.**
+
+Este criterio tiene una consecuencia práctica: la interfaz no enseña conceptos de transporte salvo que sean indispensables para decidir. Convierte la complejidad en una recomendación, explica sólo lo necesario y conecta cada acción con el avance de la venta.
+
+## Lo que aprendimos
+
+El discovery fue **documental**: revisé fuentes públicas de transportadoras colombianas y dos referencias de plataformas de envíos. No sustituye entrevistas con usuarios y lo traté así, separando fuentes, inferencias, supuestos y preguntas abiertas.
+
+El hallazgo más importante es que bajo una misma novedad hay barreras distintas: a veces el problema es entender el reporte; otras, falta información, hay contradicciones o la acción depende de la transportadora. Traducir códigos no alcanzaba: había que mostrar quién puede hacer qué y qué sigue pendiente.
+
+<DataTable
+  columns={["Lo que dicen las fuentes públicas", "Qué implica para el diseño"]}
+  rows={[
+    ["Coordinadora: el remitente solicita corregir una dirección y la transportadora la valida, aprobando o rechazando.", "Una solicitud no es un cambio aprobado. La interfaz no puede decir \"dirección corregida\" al enviarla."],
+    ["TCC: ante un intento fallido atribuible al destinatario, primero se busca una solución, luego una instrucción, y un tercer intento sólo a solicitud y con cobro.", "No son tres intentos automáticos. El sistema no puede prometer otra visita."],
+    ["Servientrega: su contrato publicado permite contar comunicaciones previas, como un mensaje por WhatsApp, como intento.", "\"Intento\" no siempre significa visita física. Comparar \"dos\" o \"tres\" intentos entre operadores engaña."],
+    ["Inter Rapidísimo: el retiro en oficina tiene un máximo de 10 días calendario desde el arribo del envío.", "Cada ventana mide un fenómeno distinto. Un número visible no basta para hablar de urgencia."],
+  ]}
+  caption="Fuentes oficiales abiertas consultadas en septiembre de 2026. Son condiciones declaradas por cada operador, no pruebas de cómo se ejecutan ni reglas de Dropi."
+/>
+
+Para no diseñar sólo para el caso sencillo, construí tres arquetipos sintéticos que representan contextos de trabajo, no segmentos confirmados ni porcentajes de usuarios:
+
+- Quien atiende **una excepción concreta** y debe decidir sobre un solo pedido.
+- Quien **reparte atención entre muchos casos** y necesita elegir cuál revisar primero.
+- Quien encuentra **información contradictoria** y necesita saber qué dato puede sostener una acción.
+
+## Decisiones de producto
+
+### 1. Traducir el reporte en una decisión
+
+Los accionables no son los estados de la transportadora con palabras más simples: son una interpretación propia de Dropi. La propuesta incorpora una capa de inteligencia que cruza el reporte con la información del pedido y del comprador, el historial de gestiones, las resoluciones similares y otras señales disponibles, y agrupa los reportes según la decisión que el vendedor necesita tomar, no según el código de cada operador.
+
+<MappingDiagram
+  sourceHeading="Lo que reporta la transportadora"
+  targetHeading="Lo que decide el vendedor"
+  dashedNote="Línea punteada: la acción aparece cuando se confirma el rechazo o el daño"
+  caption="Ocho situaciones reportadas por cuatro transportadoras se traducen en cinco acciones. Los escenarios son sintéticos."
+  sources={[
+    { id: "nadie", label: "No había nadie para recibir", meta: "Servientrega · envía" },
+    { id: "pago", label: "Pago pendiente al recibir", meta: "Coordinadora" },
+    { id: "direccion", label: "No se encontró la dirección", meta: "envía" },
+    { id: "docs", label: "Retenido por documentos faltantes", meta: "DHL" },
+    { id: "retraso", label: "Entrega retrasada", meta: "envía" },
+    { id: "dano", label: "Posible daño en el paquete", meta: "Servientrega" },
+    { id: "retiro", label: "Pedido listo para retirar", meta: "Coordinadora" },
+    { id: "rechazo", label: "Rechazo del comprador", meta: "Servientrega" },
+  ]}
+  targets={[
+    { id: "segunda", label: "Programar segunda entrega" },
+    { id: "direccion", label: "Revisar la dirección" },
+    { id: "consultar", label: "Consultar a la transportadora" },
+    { id: "contactar", label: "Contactar al comprador" },
+    { id: "devolucion", label: "Solicitar devolución" },
+  ]}
+  links={[
+    { from: "nadie", to: "segunda" },
+    { from: "pago", to: "segunda" },
+    { from: "direccion", to: "direccion" },
+    { from: "docs", to: "consultar" },
+    { from: "retraso", to: "consultar" },
+    { from: "dano", to: "consultar" },
+    { from: "retiro", to: "contactar" },
+    { from: "rechazo", to: "contactar" },
+    { from: "rechazo", to: "devolucion", dashed: true },
+    { from: "dano", to: "devolucion", dashed: true },
+  ]}
+/>
+
+La IA se plantea como una capacidad de interpretación y recomendación, no como una autoridad incuestionable. Cuando la información es insuficiente o contradictoria, la experiencia debe mostrar la incertidumbre, pedir confirmación o derivar la gestión. En el prototipo esta capa está representada por escenarios y datos estáticos; no hay conexión con un motor real.
+
+### 2. Diferenciar acción, apoyo y espera
+
+"Esperar al comprador" o "esperar a la transportadora" no son accionables: son dependencias que explican por qué el caso sigue abierto. La interfaz puede informarlas, pero no las convierte en el siguiente paso del vendedor. El accionable expresa una decisión que él puede tomar y que hace avanzar el envío.
+
+Ante "no había nadie para recibir", contactar al comprador puede ser necesario para acordar la fecha, pero es un medio, no el resultado. El paso principal es **programar la segunda entrega**, y no obliga a registrar una conversación que pudo ocurrir por teléfono o WhatsApp.
+
+<JourneyCompare
+  rows={[
+    {
+      label: "Ejemplo: no había nadie para recibir",
+      tone: "after",
+      steps: ["Novedad de la transportadora", "Contactar al comprador (apoyo)", "Acordar una fecha", "Programar segunda entrega", "Entrega reprogramada"],
+    },
+  ]}
+/>
+
+### 3. Una herramienta exclusiva para novedades
+
+Las novedades viven en un panel propio dentro de la gestión de ventas, no como una tarjeta más del monitoreo general. El monitoreo ayuda a entender cómo va el negocio; esta herramienta ayuda a intervenir sobre pedidos con un problema específico de entrega. Mezclarlos obligaría al vendedor a filtrar métricas comerciales justo cuando debe decidir, y la separación deja lugar para crecer hacia prioridades, asignación y automatización sin convertir el tablero de ventas en una bandeja de excepciones.
+
+### 4. Gestionada no significa entregada
+
+Después de una acción, la novedad no se cierra. Pasa a **Gestionadas** y comunica qué resultado falta confirmar. Sólo una evidencia de entrega o devolución la lleva a **Cerradas**, donde los dos desenlaces se separan.
+
+<StateFlow
+  states={[
+    {
+      title: "Pendientes",
+      tone: "open",
+      count: "9 en el prototipo",
+      question: "Todavía hay una acción principal por tomar.",
+      note: "Muestra un verbo: revisar la dirección, programar una segunda entrega, consultar o solicitar la devolución.",
+    },
+    {
+      title: "Gestionadas",
+      tone: "wait",
+      count: "1 en el prototipo",
+      question: "Ya se actuó, pero falta confirmar el resultado.",
+      note: "Explica quién debe responder. La espera es una dependencia, no una tarea.",
+    },
+    {
+      title: "Cerradas",
+      tone: "closed",
+      count: "10 en el prototipo",
+      question: "El resultado ya fue confirmado.",
+      outcomes: [
+        { kind: "done", label: "Entregada", note: "Hay evidencia de entrega al comprador." },
+        { kind: "returned", label: "Cancelada", note: "El paquete regresó al remitente." },
+      ],
+    },
+  ]}
+  transitions={["Acción ejecutada", "Evidencia de entrega o devolución"]}
+  footnote="Si la transportadora reporta una nueva dificultad, la novedad vuelve a Pendientes con la acción que corresponda; el vendedor no tiene que avisarlo."
+/>
+
+### 5. Lo que decidí quitar
+
+También retiré lo que no ayudaba a resolver la novedad: valores monetarios, indicadores de dinero recuperado, formularios obligatorios, promesas de éxito y controles de gestión masiva. La gestión masiva queda como oportunidad futura, pero primero había que comprobar que la unidad básica (un caso, una decisión, una acción y un seguimiento) fuera clara. Dos novedades pueden compartir una etiqueta y requerir decisiones distintas cuando cambia el comprador, el historial o la transportadora.
+
+<JourneyCompare
+  rows={[
+    {
+      label: "Antes: el recorrido que quería superar",
+      tone: "before",
+      steps: ["Reporte técnico de la transportadora", "Búsqueda de significado", "Consulta a soporte o interpretación propia", "Acción incierta", "Estado \"resuelto\"", "Resultado real confuso"],
+    },
+    {
+      label: "Después: el recorrido propuesto",
+      tone: "after",
+      steps: ["Novedad pendiente", "Acción concreta", "Mensaje o solicitud revisados", "Espera visible", "Respuesta o evidencia", "Entrega o cancelación confirmada"],
+    },
+  ]}
+  caption="La dificultad no era sólo la cantidad de datos: la interfaz mezclaba el reporte, la decisión, la acción y el resultado."
+/>
+
+<ProductDivider eyebrow="Decisión central" label="La unidad de la experiencia dejó de ser el estado técnico de la transportadora y pasó a ser la secuencia situación, acción, seguimiento y resultado." />
+
+## La solución
+
+La pantalla organiza el trabajo por el estado de la gestión. En el detalle, el panel derecho abre con una tarjeta destacada: el tiempo restante, la situación entendida por Dropi, una explicación breve y la acción sugerida. La acción alternativa, como **Cancelar entrega**, vive en el menú del botón dividido. Los datos del comprador, del envío, el reporte de origen y el historial quedan en niveles secundarios: no se eliminan, se ordenan según la decisión.
+
+<FigurePair
+  items={[
+    {
+      src: tarjetaCarlos,
+      alt: "Tarjeta de detalle de la novedad No había nadie para recibir, con 2 horas 12 minutos restantes y la acción sugerida Programar segunda entrega",
+      caption: "El comprador no estaba: se sugiere programar la segunda entrega, con Contactar al comprador como apoyo.",
+    },
+    {
+      src: tarjetaFelipe,
+      alt: "Tarjeta de detalle de la novedad Rechazo del comprador, con 3 horas 59 minutos restantes y la acción sugerida Contactar al comprador",
+      caption: "El comprador habría rechazado el pedido: sin confirmación suya, se le escribe una sola vez, sin insistir.",
+    },
+  ]}
+/>
+
+Los modales se reservan para lo que requiere información adicional: editar y enviar un mensaje, acordar una fecha o confirmar una cancelación. Ninguna respuesta es obligatoria para avanzar, y el texto aclara qué cambia y qué no: programar una entrega no confirma que se entregó, y enviar un mensaje no cambia la fecha.
+
+<FigurePair
+  framed
+  align="center"
+  items={[
+    {
+      src: modalProgramar,
+      alt: "Modal Programar segunda entrega con selector de día y horario, y el aviso de que programarla no confirma que el pedido haya sido entregado",
+      caption: "Programar segunda entrega: día y horario, con la aclaración de que no confirma la entrega.",
+    },
+    {
+      src: modalContactar,
+      alt: "Modal Contactar a Carlos con un mensaje sugerido editable antes de enviarlo",
+      caption: "Contactar al comprador: mensaje sugerido, editable, que no cambia la fecha de entrega.",
+    },
+  ]}
+/>
+
+Después de enviar el mensaje, la novedad se queda en el sistema y pasa a **Gestionadas**. La pantalla dice que la entrega sigue pendiente y qué falta: la respuesta del comprador. Registrarla es opcional.
+
+<Figure
+  src={gestionadas}
+  alt="Pestaña Gestionadas con la novedad de Carlos en estado Esperando al comprador y el siguiente paso Registrar respuesta del comprador"
+  caption="Gestionadas: el caso sigue abierto y explica quién debe responder."
+/>
+
+Los cierres tienen un tono distinto al de una tarea pendiente: una imagen, una frase que explica cómo terminó y el historial plegado para quien quiera profundizar. Una devolución nunca se presenta como una entrega lograda.
+
+<FigurePair
+  align="center"
+  items={[
+    {
+      src: cierreEntregada,
+      alt: "Panel de cierre Una entrega más lograda con un paquete y un check",
+      caption: "Entregada: hay evidencia de que el comprador recibió el pedido.",
+    },
+    {
+      src: cierreCancelada,
+      alt: "Panel de cierre El pedido fue devuelto con un paquete y una flecha de retorno",
+      caption: "Cancelada: el paquete regresó al remitente y el envío quedó cerrado.",
+    },
+  ]}
+/>
+
+La experiencia también funciona en móvil: la lista y el detalle se alternan en una sola columna.
+
+<FigurePair
+  items={[
+    {
+      src: mobileLista,
+      alt: "Pantalla móvil de Novedades de entrega con el resumen y las pestañas Pendientes, Gestionadas y Cerradas",
+      caption: "Resumen y estados en una sola columna.",
+    },
+    {
+      src: mobileDetalle,
+      alt: "Pantalla móvil con el detalle de una novedad, el tiempo restante y la acción sugerida",
+      caption: "Detalle con la acción sugerida a la vista.",
+    },
+  ]}
+/>
+
+### Una taxonomía accionable
+
+Cada situación tiene un mensaje pensado para el vendedor y una acción principal. Ese trabajo de escritura sostiene la experiencia tanto como la interfaz.
+
+<DataTable
+  columns={["Situación", "Lo que se le dice al vendedor", "Acción principal"]}
+  minWidth="38rem"
+  rows={[
+    ["No había nadie para recibir", "La transportadora no encontró al comprador. Contáctalo para acordar cuándo puede recibir y después programa la segunda entrega.", "Programar segunda entrega"],
+    ["Pago pendiente al recibir", "El comprador no pudo pagar al recibir. Confirma cuándo tendrá el pago listo y programa la segunda entrega.", "Programar segunda entrega"],
+    ["No se encontró la dirección", "Pide que la confirme con barrio, apartamento o una referencia, sin asumir cuál es el error.", "Revisar la dirección"],
+    ["Documentos faltantes", "Antes de pedirle documentos al comprador, aclara con la transportadora cuáles faltan, quién los aporta y por qué canal.", "Consultar a la transportadora"],
+    ["Entrega retrasada", "Pasó la fecha prevista y no hay actualización. Pide la ubicación y la próxima fecha estimada.", "Consultar a la transportadora"],
+    ["Posible daño", "Consulta el estado del paquete; todavía no corresponde pedir otro intento.", "Consultar a la transportadora"],
+    ["Pedido listo para retirar", "Envía las indicaciones para que pueda retirarlo dentro del plazo.", "Contactar al comprador"],
+    ["Rechazo del comprador", "No hay confirmación suya. Escríbele una sola vez, sin insistir.", "Contactar al comprador"],
+  ]}
+/>
+
+### UX writing: decir sólo lo que se sabe
+
+La regla fue sencilla: el usuario debe poder anticipar qué ocurrirá al activar un control sin tener que interpretarlo. Se prefirieron verbos que describen la decisión que hace avanzar el caso y se evitó presentar hipótesis como hechos.
+
+<DataTable
+  columns={["Evité", "Escribí", "Por qué"]}
+  minWidth="36rem"
+  rows={[
+    ["\"Contacta al comprador\" como resultado principal", "\"Programa una segunda entrega\"", "El contacto es el medio para acordar la fecha; la decisión es reprogramar."],
+    ["\"Reprograma la entrega\"", "\"Solicita un nuevo intento\"", "Mientras la transportadora no lo acepta, sólo hay una solicitud. \"Entrega reprogramada\" se usa después de un evento confirmado."],
+    ["Explicar por qué no estaba el comprador (\"salió al trabajo\")", "\"La transportadora no encontró a Carlos\"", "Comunica lo que se sabe, qué puede hacer el vendedor y qué queda pendiente."],
+    ["\"Resuelta\"", "\"Gestionada\", \"Entregada\" o \"Cancelada\"", "Cada palabra corresponde a un hecho distinto y ninguna promete un éxito."],
+  ]}
+/>
+
+## Cómo trabajé
+
+<StackedBars
+  title="Los escenarios cubren la misma situación con finales distintos"
+  totalLabel="Total"
+  series={[
+    { label: "Pendiente", tone: "open" },
+    { label: "Gestionada", tone: "waiting" },
+    { label: "Entregada", tone: "done" },
+    { label: "Cancelada", tone: "returned" },
+  ]}
+  rows={[
+    { label: "No había nadie / pago pendiente", values: [3, 1, 2, 0] },
+    { label: "Rechazo del comprador", values: [1, 0, 1, 1] },
+    { label: "Posible daño", values: [1, 0, 1, 1] },
+    { label: "Dirección no encontrada", values: [1, 0, 1, 0] },
+    { label: "Documentos faltantes", values: [1, 0, 1, 0] },
+    { label: "Pedido para retirar", values: [1, 0, 1, 0] },
+    { label: "Entrega retrasada", values: [1, 0, 1, 0] },
+  ]}
+  caption="Los 20 escenarios sintéticos del prototipo por tipo de situación y estado. Un rechazo puede terminar en entrega o en cancelación: por eso la etiqueta no decide la acción ni el cierre."
+/>
+
+El trabajo siguió una secuencia donde cada etapa dejó explícito qué era evidencia y qué era construcción:
+
+1. **Encuadre estratégico.** Fijé el norte antes de decidir interfaz: aumentar las entregas exitosas, con el dropshipper como usuario principal. Dejé escritas las preguntas que podían cambiar la solución: qué puede hacer realmente el vendedor, qué novedades son recuperables y qué significa hoy "resuelta".
+2. **Discovery documental y arquetipos.** Fuentes, contrastes entre transportadoras y tres contextos sintéticos de uso para no diseñar sólo para el caso más sencillo.
+3. **Ideación con behavioral design.** Lo traté como hipótesis de diseño, no como afirmación sobre la psicología de los usuarios: pocas acciones reconocibles, urgencia sólo cuando existe una condición concreta y control del vendedor cuando una acción tiene consecuencias. El concepto elegido fue **pocas acciones, sin descifrar novedades**.
+4. **Prototipo de fidelidad media-alta.** Convirtió la definición en una experiencia navegable para revisar estados y recorridos de contacto, reprogramación, consulta, devolución y cierre.
+5. **QA visual y funcional.** Corrigió la jerarquía del detalle, la consistencia de los CTA, la accesibilidad de los botones y la diferencia entre una acción ejecutada y un resultado confirmado.
+
+## Evolución del producto: automatización con criterio
+
+La siguiente oportunidad es pasar de recomendaciones asistidas a **automatización controlada**. En el prototipo la exploré con un selector de perfiles y una confianza de interpretación estática por escenario, para probar la idea, no para afirmar una precisión real.
+
+<ConfidenceStrip
+  title="Qué ejecutaría cada perfil, según la confianza de la interpretación"
+  valueLabel="Confianza"
+  legend={{
+    both: "Ejecuta con ambos perfiles",
+    some: "Ejecuta sólo con Entusiasta",
+    below: "Automatizable, pero no llega al umbral",
+    never: "Nunca se automatiza: decide la persona",
+  }}
+  thresholds={[
+    { value: 92, label: "Entusiasta ≥ 92 %", position: "top" },
+    { value: 98, label: "Conservador ≥ 98 %", position: "bottom" },
+  ]}
+  items={[
+    { label: "Pedido listo para retirar", sub: "Marcela", value: 99, kind: "both" },
+    { label: "Entrega retrasada", sub: "Paula", value: 98, kind: "both" },
+    { label: "No había nadie para recibir", sub: "Carlos", value: 97, kind: "some" },
+    { label: "Pago pendiente al recibir", sub: "Valentina", value: 96, kind: "some" },
+    { label: "No había nadie para recibir", sub: "Santiago", value: 95, kind: "some" },
+    { label: "No se encontró la dirección", sub: "Andrés", value: 93, kind: "some" },
+    { label: "Documentos faltantes", sub: "Luisa", value: 88, kind: "below" },
+    { label: "Posible daño", sub: "Nora", value: 82, kind: "never" },
+    { label: "Rechazo del comprador", sub: "Felipe", value: 71, kind: "never" },
+  ]}
+  caption="Con el perfil Conservador se ejecutarían 2 pasos; con el Entusiasta, 6. La confianza es un dato inventado para el escenario. Las acciones de bajo riesgo (un mensaje al comprador o una consulta a la transportadora) son las únicas automatizables."
+/>
+
+<Figure
+  src={modalAutomatizacion}
+  alt="Modal Automatización de novedades con los perfiles Manual, Conservador y Entusiasta y la lista de pasos que se ejecutarían con el perfil Entusiasta"
+  caption="Perfiles de control: el modal muestra de antemano qué pasos se ejecutarían y aclara que rechazos, daños y devoluciones nunca se automatizan."
+  size="md"
+  framed
+/>
+
+Las reglas de diseño para esta evolución son tres: la automatización debe ser **granular** (por tipo de novedad, acción, transportadora o nivel de confianza), **trazable** (informa qué entendió, qué hizo y qué resultado sigue pendiente) y **reversible** cuando se pueda. Y nunca cierra una novedad sólo porque ejecutó una acción. Tampoco conviene tomar "conservador" o "entusiasta" como etiquetas fijas de persona: nadie necesariamente quiere automatizarlo todo.
+
+## Impacto
+
+<ImpactStats
+  stats={[
+    { value: "8 → 5", label: "Ocho situaciones reportadas por las transportadoras se traducen en cinco acciones que el vendedor reconoce." },
+    { value: "20 escenarios", label: "Casuísticas sintéticas de cuatro transportadoras cubren siete tipos de situación, desde el primer aviso hasta el cierre." },
+    { value: "0 formularios", label: "Ninguna respuesta es obligatoria para avanzar; el registro manual es sólo un apoyo opcional." },
+    { value: "3 estados", label: "Pendientes, Gestionadas y Cerradas separan la acción por tomar del resultado confirmado." },
+  ]}
+/>
+
+Estas cifras describen el diseño y el prototipo, no el negocio. El resultado es un prototipo navegable de una herramienta exclusiva de novedades, con escenarios sintéticos, estados de gestión, acciones diferenciadas, modales para mensajes y confirmaciones, historial y cierres separados para entregas y devoluciones. **No demuestra que la tasa de entregas haya aumentado.**
+
+### Qué fue evidencia y qué fue construcción
+
+<DataTable
+  columns={["Elemento", "Qué representa", "Límite"]}
+  minWidth="36rem"
+  rows={[
+    ["Brief del reto", "Contexto, problema y objetivo de negocio.", "No describe toda la operación real."],
+    ["Discovery documental", "Fuentes públicas, contrastes y análisis.", "No reemplaza entrevistas ni datos internos."],
+    ["Arquetipos", "Contextos sintéticos de uso.", "No son personas entrevistadas."],
+    ["Casos del prototipo", "Escenarios construidos para probar lectura y estados.", "No son pedidos ni resultados reales."],
+    ["QA del prototipo", "Verificación funcional y visual en navegador.", "No demuestra comprensión, adopción ni impacto de negocio."],
+    ["Concepto final", "Decisión de diseño revisada durante el ejercicio.", "Requiere validación con dropshippers."],
+  ]}
+/>
+
+### Lo que falta comprobar
+
+El prototipo no integra transportadoras, no contacta compradores y no ejecuta un motor de IA real. El siguiente paso es una prueba moderada de usabilidad con dropshippers para comprobar:
+
+- Si entienden la acción sin descifrar el reporte.
+- Si distinguen una espera de un resultado.
+- Si la jerarquía Pendientes, Gestionadas y Cerradas coincide con su forma de trabajar.
+
+También falta verificar qué acciones y eventos existen realmente en Dropi y en cada transportadora. Después vendría una definición operativa de la beta: comparar pedidos con novedad tratados con la experiencia contra una referencia acordada, sin contar devoluciones como entregas recuperadas y sin prometer una cifra de mejora antes de tener línea base.
+
+## Aprendizajes
+
+La decisión más importante no fue diseñar una bandeja más ordenada, sino cambiar la unidad de la experiencia: de un estado técnico que el vendedor debe descifrar a una decisión que puede reconocer, ejecutar y seguir hasta conocer el resultado.
+
+El diseño mantiene visible la incertidumbre. Cuando sólo se envió un mensaje, el caso sigue abierto; cuando falta una respuesta, la pantalla lo dice; cuando el pedido regresó, se muestra como cancelado y no como una gestión exitosa. Esa separación protege la comprensión del usuario y evita medir el éxito con una etiqueta administrativa.
+
+Y aprendí a mantener la honestidad del alcance: un prototipo listo para probarse no es una prueba de impacto. Documentar qué es evidencia y qué es construcción hizo el trabajo más defendible.
+
+<ProductDivider eyebrow="Aprendizaje" label="Cuando sólo se envió un mensaje, el caso sigue abierto: el diseño protege la diferencia entre haber actuado y haber logrado el resultado." />
+
+*El concepto, las decisiones de producto, la escritura y el prototipo fueron desarrollados por Antonio Martínez con asistencia de IA. No se realizaron entrevistas con vendedores reales ni integraciones con transportadoras. Las capacidades de IA y automatización son una dirección de producto que requiere validación técnica, operativa y con usuarios.*

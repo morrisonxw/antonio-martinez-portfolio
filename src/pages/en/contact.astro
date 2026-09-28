@@ -27,7 +27,7 @@ const links = [
       />
 
       <div class="max-w-[var(--prose-width)]" data-reveal>
-        <p class="text-sm font-medium text-accent">{t('en', 'contact.eyebrow')}</p>
+        <p class="text-sm font-medium text-accent-strong">{t('en', 'contact.eyebrow')}</p>
         <h1 class="mt-3 font-display text-4xl font-bold tracking-tightest text-ink sm:text-6xl">
           {t('en', 'contact.heading')}
         </h1>
@@ -53,7 +53,7 @@ const links = [
                   href={item.href}
                   target={item.href.startsWith('http') ? '_blank' : undefined}
                   rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  class="font-medium text-ink hover:text-accent"
+                  class="font-medium text-ink hover:text-accent-strong"
                 >
                   {item.value}
                 </a>

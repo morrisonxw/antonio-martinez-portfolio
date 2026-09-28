@@ -11,9 +11,10 @@ interface Props {
   description: string;
   image?: string;
   path?: string;
+  noindex?: boolean;
 }
 
-const { title, description, image, path } = Astro.props;
+const { title, description, image, path, noindex = false } = Astro.props;
 const currentPath = path ?? Astro.url.pathname;
 const seo = buildSeo({ title, description, image, path: currentPath });
 
@@ -34,9 +35,9 @@ const showAnalytics = import.meta.env.PROD && gaId;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="canonical" href={seo.url} />
-    {alternates.map((alt) => <link rel="alternate" hreflang={alt.locale} href={alt.url} />)}
-    <link rel="alternate" hreflang="x-default" href={defaultAlternateUrl} />
+    {noindex ? <meta name="robots" content="noindex, nofollow" /> : <link rel="canonical" href={seo.url} />}
+    {!noindex && alternates.map((alt) => <link rel="alternate" hreflang={alt.locale} href={alt.url} />)}
+    {!noindex && <link rel="alternate" hreflang="x-default" href={defaultAlternateUrl} />}
     <ClientRouter />
 
     <title>{seo.title}</title>
@@ -62,7 +63,7 @@ const showAnalytics = import.meta.env.PROD && gaId;
     {
       showAnalytics && (
         <>
-          <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+          <script async is:inline src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
           <script is:inline define:vars={{ gaId }}>
             window.dataLayer = window.dataLayer || [];
             function gtag() {
@@ -78,7 +79,7 @@ const showAnalytics = import.meta.env.PROD && gaId;
   <body class="font-sans antialiased">
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-accent focus:px-4 focus:py-2 focus:text-paper"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-accent-strong focus:px-4 focus:py-2 focus:text-paper"
     >
       {t(locale, 'skip-to-content')}
     </a>

@@ -1,36 +1,49 @@
 /*
   Design tokens — fuente única de verdad.
-  El sitio es siempre oscuro (no hay toggle de tema ni variante clara):
-  fondo casi negro #060606 (no negro absoluto), texto principal blanco
-  puro, escala de grises neutros sin matiz para texto/UI secundarios, y
-  coral-naranja como acento de marca y color del logo. Todos los pares
-  texto/fondo listados abajo fueron verificados contra WCAG 2.1 AA
-  (>=4.5:1 para texto normal, >=3:1 para texto grande/componentes UI)
-  usando la fórmula de luminancia relativa estándar. Ajustar acá; todo lo
-  demás (Tailwind utilities, componentes) hereda de estas variables.
+  El sitio es siempre claro (sigue sin toggle): fondo casi blanco #FAF8F5
+  con un leve sesgo cálido, texto principal casi negro con el mismo sesgo,
+  escala de grises neutros para texto/UI secundarios, naranja de marca
+  (--accent, tomado del CV: #E55800), un tono accesible para texto pequeño
+  (--accent-strong: #B84400) y un azul secundario (--accent-blue,
+  también del CV: #0F62FE) reservado para un solo uso puntual — marcar
+  enlaces externos/"salís del sitio" (flecha ↗ y "Ver producto") — para no
+  competir con el naranja como acento principal.
+
+  Los pares de texto normal se verifican contra WCAG 2.2 AA (>=4.5:1) y los
+  controles/gráficos no textuales contra >=3:1. --accent conserva el naranja
+  de marca para superficies, iconos y texto grande; --accent-strong se usa
+  para texto pequeño y estados sobre fondos claros o naranjas.
 
   Verificaciones clave:
-  - ink #ffffff sobre paper #060606:             20.3:1
-  - ink-muted #989898 sobre paper #060606:         7.0:1  (texto de cuerpo y enlaces)
-  - ink-soft #cccccc sobre paper #060606:         12.6:1  (texto de apoyo)
-  - accent #ff5e00 sobre paper #060606:            6.6:1
-  - paper (texto) sobre accent (botón en hover):   6.6:1
-  - ink sobre accent-muted:                       17.2:1
-  - accent sobre accent-muted:                     5.6:1
-  - border #595959 sobre paper #060606:            2.9:1  (bajo 3:1 a propósito:
+  - ink #1a1714 sobre paper #faf8f5:              16.8:1
+  - ink-muted #6e675c sobre paper #faf8f5:          5.3:1  (texto de cuerpo y enlaces)
+  - ink-soft #3d3830 sobre paper #faf8f5:          11.0:1  (texto de apoyo)
+  - accent #e55800 sobre paper #faf8f5:             3.5:1  (solo texto grande,
+    iconos y límites de controles; no usar para texto normal)
+  - accent-strong #b84400 sobre paper #faf8f5:      5.1:1  (texto normal)
+  - paper sobre accent-strong (botón en hover):     5.4:1
+  - ink sobre accent-muted:                        14.1:1
+  - accent sobre accent-muted:                      2.9:1  (no usar para texto)
+  - accent-blue #0f62fe sobre paper #faf8f5:        4.7:1  (pasa AA en texto
+    normal — se usa solo para enlaces externos, ver arriba)
+  - border #9c9284 sobre paper #faf8f5:             2.9:1  (bajo 3:1 a propósito:
     --border es solo para separadores decorativos, nunca para el límite de un
     componente interactivo — esos usan --ink, como ya hace el botón secondary)
+  - paper-muted vs paper:                           1.11:1 (diferencia sutil de
+    superficie, no de texto)
 */
 
 :root {
-  --ink: #ffffff;
-  --ink-muted: #989898;
-  --ink-soft: #cccccc;
-  --paper: #060606;
-  --paper-muted: #141414;
-  --accent: #ff5e00;
-  --accent-muted: #2b1608;
-  --border: #595959;
+  --ink: #1a1714;
+  --ink-muted: #6e675c;
+  --ink-soft: #3d3830;
+  --paper: #faf8f5;
+  --paper-muted: #f0ece6;
+  --accent: #e55800;
+  --accent-strong: #b84400;
+  --accent-muted: #fbe0cb;
+  --accent-blue: #0f62fe;
+  --border: #9c9284;
 
   --content-width: 72rem;
   --prose-width: 42rem;
@@ -46,7 +59,9 @@
   --color-paper: var(--paper);
   --color-paper-muted: var(--paper-muted);
   --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
   --color-accent-muted: var(--accent-muted);
+  --color-accent-blue: var(--accent-blue);
   --color-border: var(--border);
 
   --container-content: var(--content-width);

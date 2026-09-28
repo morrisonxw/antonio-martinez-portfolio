@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Item {
+  src: ImageMetadata;
+  alt: string;
+  caption: string;
+}
+
+interface Props {
+  items: Item[];
+  // Alinea las imágenes por arriba (default) o las centra: los recortes de
+  // altura desigual (dos pantallas móviles, dos tarjetas) se ven mejor
+  // arriba; los paneles de cierre, centrados.
+  align?: 'start' | 'center';
+  // Igual que en Figure: sobre superficie suave, para recortes de modales.
+  framed?: boolean;
+}
+
+const { items, align = 'start', framed = false } = Astro.props;
+---
+
+<div
+  class:list={[
+    'my-10 grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2',
+    align === 'center' ? 'items-center' : 'items-start',
+  ]}
+  data-reveal
+>
+  {
+    items.map((item) => (
+      <figure class="m-0">
+        {framed ? (
+          <div class="rounded-2xl bg-paper-muted px-4 py-6 sm:px-6 sm:py-8">
+            <Image src={item.src} alt={item.alt} width={800} class="w-full !my-0 rounded-3xl shadow-lg" />
+          </div>
+        ) : (
+          <Image src={item.src} alt={item.alt} width={800} class="w-full !my-0 rounded-xl border border-border/30" />
+        )}
+        <figcaption class="mt-3 text-sm text-ink-muted">{item.caption}</figcaption>
+      </figure>
+    ))
+  }
+</div>

@@ -1,6 +1,5 @@
 ---
 import Container from '../ui/Container.astro';
-import Button from '../ui/Button.astro';
 import Logo from '../ui/Logo.astro';
 import LanguageSwitch from '../ui/LanguageSwitch.astro';
 import MenuOverlay from './MenuOverlay.astro';
@@ -9,9 +8,6 @@ import { t, type Locale } from '../../i18n/ui';
 import { homeHref } from '../../i18n/paths';
 
 const locale = (Astro.currentLocale ?? 'es') as Locale;
-// Un CV por idioma: el botón de descarga siempre apunta a la versión en el
-// idioma en el que se está navegando el sitio, no a un único PDF fijo.
-const cvHref = locale === 'en' ? '/cv/Antonio-Martinez-CV-EN.pdf' : '/cv/Antonio-Martinez-CV-ES.pdf';
 ---
 
 <header class="fixed inset-x-0 top-0 z-[60] border-b border-border bg-paper py-5 sm:py-6">
@@ -21,11 +17,6 @@ const cvHref = locale === 'en' ? '/cv/Antonio-Martinez-CV-EN.pdf' : '/cv/Antonio
       <span class="font-display text-sm font-bold sm:text-lg">{site.name}</span>
     </a>
     <div class="ml-auto flex flex-wrap items-center gap-x-3 gap-y-3 sm:gap-x-6">
-      <div class="hidden sm:block">
-        <Button href={cvHref} download variant="secondary" size="sm">
-          {t(locale, 'header.downloadCv')}
-        </Button>
-      </div>
       <LanguageSwitch />
       <MenuOverlay />
     </div>

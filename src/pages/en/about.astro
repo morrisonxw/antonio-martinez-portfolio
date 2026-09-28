@@ -8,15 +8,8 @@ import { site } from '../../content-data/site.en';
 import { experience } from '../../content-data/experience.en';
 import { about } from '../../content-data/about.en';
 import { t } from '../../i18n/ui';
-import { contactHref, projectsHref, homeHref } from '../../i18n/paths';
+import { contactHref, projectsHref } from '../../i18n/paths';
 import profilePhoto from '../../assets/profile/antonio.jpg';
-
-// Sección temporalmente fuera del sitio público mientras se rediseña.
-// Sigue completa en `astro dev`; en cualquier build (prod o preview local)
-// redirige al inicio. Quitar este bloque para volver a publicarla.
-if (!import.meta.env.DEV) {
-  return Astro.redirect(homeHref('en'));
-}
 ---
 
 <PageLayout title={t('en', 'about.title')} description={`${t('en', 'about.description')} ${site.name}, ${site.role}.`}>
@@ -30,7 +23,7 @@ if (!import.meta.env.DEV) {
         class="h-32 w-32 rounded-full object-cover sm:h-40 sm:w-40"
       />
       <div>
-        <p class="text-sm font-medium text-accent">{t('en', 'about.eyebrow')}</p>
+        <p class="text-sm font-medium text-accent-strong">{t('en', 'about.eyebrow')}</p>
         <h1 class="mt-3 font-display text-4xl font-bold tracking-tightest text-ink sm:text-6xl">
           {t('en', 'about.greeting')} {site.name}.
         </h1>

@@ -1,0 +1,72 @@
+---
+interface Band {
+  name: string;
+  description: string;
+}
+
+interface Props {
+  bands: Band[];
+  preferred: Band;
+  language?: 'es' | 'en';
+  caption?: string;
+}
+
+const { bands, preferred, language = 'es', caption } = Astro.props;
+const en = language === 'en';
+---
+
+<figure class="not-prose my-12" data-reveal>
+  <div class="overflow-x-auto rounded-2xl border border-border/60 bg-paper p-3 sm:p-5">
+    <svg viewBox="0 0 1020 520" class="block h-auto min-w-[820px] w-full" role="img" aria-label={en ? `Voros-inspired futures cone from the projected future to possible futures, with a separate preferable trajectory. ${bands.map((band) => `${band.name}: ${band.description}`).join(' ')}` : `Cono de futuros inspirado en Voros, del futuro proyectado a los futuros posibles, con una trayectoria preferible independiente. ${bands.map((band) => `${band.name}: ${band.description}`).join(' ')}`}>
+      <defs>
+        <marker id="futures-axis-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+          <path d="M1 1 L7 4 L1 7" class="fill-none stroke-ink-muted" stroke-width="1.4" />
+        </marker>
+        <marker id="preferred-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+          <path d="M1 1 L7 4 L1 7" class="fill-none stroke-accent" stroke-width="1.5" />
+        </marker>
+      </defs>
+
+      <text x="130" y="34" class="fill-ink text-[12px] font-semibold tracking-[0.12em]">{en ? 'FUTURES CONE · ALTERNATIVE FUTURES' : 'CONO DE FUTUROS · FUTUROS ALTERNATIVOS'}</text>
+
+      <!-- Nested possibility bands widen from the present toward the horizon. -->
+      <path d="M145 250 C330 244 540 130 790 72 L790 428 C540 370 330 256 145 250 Z" class="fill-paper-muted stroke-ink-muted" stroke-width="1.5" />
+      <path d="M145 250 C340 246 550 168 790 132 L790 368 C550 332 340 254 145 250 Z" class="fill-paper stroke-ink-muted" stroke-width="1.5" stroke-dasharray="6 5" />
+      <path d="M145 250 C350 248 560 204 790 190 L790 310 C560 296 350 252 145 250 Z" class="fill-accent-muted/60 stroke-border" stroke-width="1.4" />
+      <path d="M145 250 C360 250 570 235 790 226 L790 274 C570 265 360 250 145 250 Z" class="fill-paper stroke-ink-muted" stroke-width="1.2" />
+
+      <!-- Preposterous is shown as an extension beyond the possible boundary, not as another likelihood band. -->
+      <path d="M145 250 C360 220 575 65 842 31 M145 250 C360 280 575 435 842 469" fill="none" class="stroke-ink-muted" stroke-width="1.3" stroke-dasharray="3 6" />
+
+      <!-- The preferred future is normative and may sit within any likelihood band. -->
+      <path d="M145 250 C345 286 555 332 784 350" fill="none" class="stroke-accent" stroke-width="3" marker-end="url(#preferred-arrow)" />
+      <circle cx="145" cy="250" r="6" class="fill-accent" />
+
+      <text x="536" y="246" class="fill-ink text-[10px] font-bold tracking-wide">{bands[0]?.name.toLocaleUpperCase()}</text>
+      <text x="588" y="218" class="fill-ink text-[10px] font-bold tracking-wide">{bands[1]?.name.toLocaleUpperCase()}</text>
+      <text x="611" y="183" class="fill-ink text-[10px] font-bold tracking-wide">{bands[2]?.name.toLocaleUpperCase()}</text>
+      <text x="620" y="145" class="fill-ink text-[10px] font-bold tracking-wide">{bands[3]?.name.toLocaleUpperCase()}</text>
+      <text x="796" y="24" class="fill-ink text-[10px] font-bold tracking-wide">{bands[4]?.name.toLocaleUpperCase()}</text>
+      <text x="796" y="40" class="fill-ink-muted text-[9px]">{en ? 'beyond the possible boundary' : 'fuera del límite de lo posible'}</text>
+      <text x="646" y="343" class="fill-accent-strong text-[11px] font-bold tracking-wide">{preferred.name.toLocaleUpperCase()}</text>
+
+      <line x1="145" y1="480" x2="790" y2="480" class="stroke-ink-muted" stroke-width="1.3" marker-end="url(#futures-axis-arrow)" />
+      <text x="122" y="506" class="fill-ink text-[11px] font-semibold">{en ? 'NOW · 2026' : 'HOY · 2026'}</text>
+      <text x="744" y="506" class="fill-ink text-[11px] font-semibold">2028</text>
+      <text x="857" y="490" class="fill-ink-muted text-[10px]">{en ? 'beyond 2028' : 'más allá de 2028'}</text>
+      <path d="M790 480h100" class="stroke-ink-muted" stroke-width="1.2" stroke-dasharray="4 5" marker-end="url(#futures-axis-arrow)" />
+    </svg>
+  </div>
+
+  <div class="mt-5 grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
+    {bands.map((band) => <div class="border-l-2 border-border pl-3">
+      <p class="text-xs font-semibold uppercase tracking-wide text-ink">{band.name}</p>
+      <p class="mt-1 text-sm leading-relaxed text-ink-muted">{band.description}</p>
+    </div>)}
+    <div class="border-l-2 border-accent pl-3">
+      <p class="text-xs font-semibold uppercase tracking-wide text-accent-strong">{preferred.name}</p>
+      <p class="mt-1 text-sm leading-relaxed text-ink-muted">{preferred.description}</p>
+    </div>
+  </div>
+  {caption && <figcaption class="mt-4 text-sm text-ink-muted">{caption}</figcaption>}
+</figure>

@@ -41,7 +41,7 @@ export const experience = [
     role: 'Brand Designer · UX & Service Designer',
     period: 'Septiembre 2016 – Diciembre 2020',
     description:
-      'Cuatro años de branding, comunicación visual y diseño de servicios: la etapa donde empecé a moverme entre identidad de marca y experiencias más complejas.',
+      'Cuatro años de branding, comunicación visual y diseño de servicios: una etapa en la que empecé a trabajar entre la identidad de marca y experiencias más complejas.',
     projectSlugs: ['behance'],
   },
 ];

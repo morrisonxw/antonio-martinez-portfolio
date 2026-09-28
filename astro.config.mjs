@@ -4,6 +4,8 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import { unified } from '@astrojs/markdown-remark';
+import { remarkReadingTime } from './src/lib/remark-reading-time.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,6 +20,12 @@ export default defineConfig({
     routing: {
       prefixDefaultLocale: false,
     },
+  },
+
+  markdown: {
+    // MDX hereda este processor por defecto (mdx()'s extendMarkdownConfig),
+    // así que un solo remark plugin acá cubre tanto .md como .mdx.
+    processor: unified({ remarkPlugins: [remarkReadingTime] }),
   },
 
   integrations: [

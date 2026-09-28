@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+  <title id="title">Zubank: diseñar el futuro del acompañamiento Pyme</title>
+  <desc id="desc">Señal de negocio, preparación con IA y conversación entre asesora y pyme.</desc>
+  <rect width="1440" height="900" fill="#f5f3ef"/>
+  <path d="M0 680C250 570 390 810 650 680S1050 560 1440 690V900H0Z" fill="#e8e5de"/>
+  <text x="104" y="126" fill="#ef5b20" font-family="Arial,sans-serif" font-size="24" font-weight="700" letter-spacing="4">DISEÑO DE FUTUROS · SERVICIOS FINANCIEROS</text>
+  <text x="104" y="232" fill="#1e1c1a" font-family="Arial,sans-serif" font-size="66" font-weight="700">Zubank</text>
+  <text x="104" y="304" fill="#1e1c1a" font-family="Arial,sans-serif" font-size="43" font-weight="600">El asesor Pyme aumentado</text>
+  <text x="104" y="362" fill="#1e1c1a" font-family="Arial,sans-serif" font-size="43" font-weight="600">con inteligencia artificial</text>
+  <text x="108" y="426" fill="#67635e" font-family="Arial,sans-serif" font-size="23">Un futuro plausible: llegar antes, sin reemplazar el criterio humano.</text>
+  <g font-family="Arial,sans-serif">
+    <rect x="106" y="540" width="315" height="172" rx="24" fill="#fff" stroke="#d3cec5" stroke-width="2"/>
+    <circle cx="148" cy="584" r="11" fill="#ef5b20"/>
+    <text x="174" y="592" fill="#77716a" font-size="16" font-weight="700" letter-spacing="2">SEÑAL</text>
+    <text x="140" y="642" fill="#1e1c1a" font-size="24" font-weight="700">Un cambio en</text>
+    <text x="140" y="675" fill="#1e1c1a" font-size="24" font-weight="700">el negocio Pyme</text>
+    <path d="M446 626h86m-15-15 15 15-15 15" fill="none" stroke="#ef5b20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="560" y="540" width="315" height="172" rx="24" fill="#fff" stroke="#d3cec5" stroke-width="2"/>
+    <circle cx="602" cy="584" r="11" fill="#ef5b20"/>
+    <text x="628" y="592" fill="#77716a" font-size="16" font-weight="700" letter-spacing="2">PREPARACIÓN</text>
+    <text x="594" y="642" fill="#1e1c1a" font-size="24" font-weight="700">Wanda organiza;</text>
+    <text x="594" y="675" fill="#1e1c1a" font-size="24" font-weight="700">Laura interpreta</text>
+    <path d="M900 626h86m-15-15 15 15-15 15" fill="none" stroke="#ef5b20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="1014" y="540" width="315" height="172" rx="24" fill="#1e1c1a"/>
+    <circle cx="1056" cy="584" r="11" fill="#f8a77f"/>
+    <text x="1082" y="592" fill="#d8d3cc" font-size="16" font-weight="700" letter-spacing="2">CONVERSACIÓN</text>
+    <text x="1048" y="642" fill="#fff" font-size="24" font-weight="700">La relación sigue</text>
+    <text x="1048" y="675" fill="#fff" font-size="24" font-weight="700">siendo humana</text>
+  </g>
+  <text x="108" y="808" fill="#67635e" font-family="Arial,sans-serif" font-size="18">ESCENARIO CONCEPTUAL · HORIZONTE 2026 A 2028</text>
+</svg>

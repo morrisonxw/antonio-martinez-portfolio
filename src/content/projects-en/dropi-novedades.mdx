@@ -1,0 +1,474 @@
+---
+title: "Delivery exceptions: from a confusing report to a clear decision"
+summary: "I designed a tool that helps Dropi's dropshippers understand what happened to a delivery, know what to do next, and tell work in progress apart from a confirmed outcome."
+cover: "../../assets/projects/dropi-novedades/cover.png"
+coverAlt: "Dropi's Delivery exceptions panel with the list of pending cases and the detail of one case: nobody was home to receive, with the suggested action Schedule a second delivery"
+thumbnail: "../../assets/projects/dropi-novedades/thumbnail.png"
+tags: ["Product Design", "UX Writing", "Applied AI", "E-commerce Logistics"]
+year: 2026
+featured: true
+order: 0
+draft: false
+
+role: "Product Designer (strategy, UX, and UX writing)"
+team: "Solo project, with AI assistance to explore, write, and prototype"
+company: "Dropi"
+industry: "Dropshipping and e-commerce logistics · Design challenge"
+scope: ["Product Strategy", "Desk research", "Interaction Design", "UX Writing", "Prototyping", "Visual and functional QA"]
+tools: ["Figma Make", "React prototype", "Desk research", "Playwright (QA)"]
+confidential: false
+---
+
+import Figure from '../../components/mdx/Figure.astro';
+import FigurePair from '../../components/mdx/FigurePair.astro';
+import ImpactStats from '../../components/mdx/ImpactStats.astro';
+import ProductDivider from '../../components/mdx/ProductDivider.astro';
+import DataTable from '../../components/mdx/DataTable.astro';
+import JourneyCompare from '../../components/mdx/JourneyCompare.astro';
+import StateFlow from '../../components/mdx/StateFlow.astro';
+import MappingDiagram from '../../components/mdx/MappingDiagram.astro';
+import StackedBars from '../../components/mdx/StackedBars.astro';
+import ConfidenceStrip from '../../components/mdx/ConfidenceStrip.astro';
+import tarjetaCarlos from '../../assets/projects/dropi-novedades/tarjeta-carlos.png';
+import tarjetaFelipe from '../../assets/projects/dropi-novedades/tarjeta-felipe.png';
+import modalProgramar from '../../assets/projects/dropi-novedades/modal-programar.png';
+import modalContactar from '../../assets/projects/dropi-novedades/modal-contactar.png';
+import gestionadas from '../../assets/projects/dropi-novedades/gestionadas.png';
+import cierreEntregada from '../../assets/projects/dropi-novedades/cierre-entregada.png';
+import cierreCancelada from '../../assets/projects/dropi-novedades/cierre-cancelada.png';
+import mobileLista from '../../assets/projects/dropi-novedades/mobile-lista.png';
+import mobileDetalle from '../../assets/projects/dropi-novedades/mobile-detalle.png';
+import modalAutomatizacion from '../../assets/projects/dropi-novedades/modal-automatizacion.png';
+
+*This is a design challenge set by Dropi, not a production project. Everything shown on screen (buyers, orders, deadlines, carriers, and outcomes) is a synthetic scenario I built to design and review the experience. There is no real data, no interviews with sellers, and no connection to carriers. The prototype interface is in Spanish; labels are translated in the text.*
+
+## The business challenge
+
+Dropi connects sellers, buyers, and carriers. When a delivery fails, the carrier reports an **exception**, and each one words it differently: "nobody was there," "address doesn't exist," "the buyer refused it." There are dozens of statuses that often mean the same thing, and the dropshipper is left with a technical or incomplete message and no clear next step, often writing to support.
+
+The challenge was to design an experience that helps **increase successful deliveries**, with one explicit warning: today most exceptions show up as "resolved," yet few end up delivered, because "resolving" almost always means returning the package. Measuring success with that label is the metric trap.
+
+<DataTable
+  columns={["What the brief asked for", "How I answered it"]}
+  rows={[
+    ["Translate the raw status into a concrete action", "A Dropi interpretation layer turns each report into a verb the seller recognizes, instead of showing a code in simpler words."],
+    ["Prioritize: not every exception is equally urgent", "Each case shows the time left to act and the screen summarizes how many are due today; urgency appears only when there is a concrete condition."],
+    ["Many carriers, no standard", "The design unit is the situation the seller has to decide on, not each carrier's code or vocabulary."],
+    ["Beware the metric trap", "Managed never means delivered: only proof of delivery or return closes a case, and the two closures are shown separately."],
+  ]}
+  caption="The brief asked for translation and prioritization at a minimum. The other two conditions changed the design the most."
+/>
+
+## Goals
+
+### Business goals
+
+- Increase the successful delivery rate, without counting returns as recovered deliveries.
+- Reduce dependence on support to handle each exception.
+
+### Product goals
+
+- Turn heterogeneous reports into a clear decision that stays consistent across carriers.
+- Separate management progress from the shipment outcome.
+- Lay a foundation that scales toward priorities, assignment, and automation.
+
+### User goals
+
+- Understand what happened without decoding shipping codes.
+- Know what they can do now, and what depends on someone else.
+- Know how the order ended: delivered or returned.
+
+## My contribution
+
+I took the project end to end: strategic framing, desk research, archetypes and journeys, ideation with behavioral design, a mid-to-high-fidelity prototype, UX writing, and QA. I worked with AI assistance to organize, explore, write, and implement the prototype; the product decisions and editorial review were mine.
+
+## The dropshipper is not a logistics specialist
+
+One framing decision changed the rest of the project: not treating the dropshipper as an expert in shipping. Their job is to sell and earn a profit. Logistics is a condition for that sale to close, not the reason they come to Dropi.
+
+So the problem was not framed as "teach them to read carrier statuses," but as an interruption to their main work that demands a quick decision. The job that guided the design:
+
+> **When a delivery has a problem, I want to know quickly what I can do to protect the sale, so I don't waste time decoding logistics processes or depend on support for every case.**
+
+This has a practical consequence: the interface doesn't teach transport concepts unless they are essential to decide. It turns complexity into a recommendation, explains only what is needed, and ties each action to the progress of the sale.
+
+## What we learned
+
+The discovery was **desk research**: I reviewed public sources from Colombian carriers and two shipping-platform references. It does not replace user interviews, and I treated it that way, separating sources, inferences, assumptions, and open questions.
+
+The most important finding is that different barriers hide under the same exception: sometimes the problem is understanding the report; other times information is missing, contradictory, or the action depends on the carrier. Translating codes was not enough: the design had to show who can do what and what is still pending.
+
+<DataTable
+  columns={["What the public sources say", "What it means for the design"]}
+  rows={[
+    ["Coordinadora: the sender requests an address correction and the carrier validates it, approving or rejecting.", "A request is not an approved change. The interface can't say \"address corrected\" when it is submitted."],
+    ["TCC: after a failed attempt attributable to the recipient, a solution is sought first, then an instruction, and a third attempt only on request and for a fee.", "These are not three automatic attempts. The system can't promise another visit."],
+    ["Servientrega: its published contract allows earlier communications, such as a WhatsApp message, to count as an attempt.", "\"Attempt\" doesn't always mean a physical visit. Comparing \"two\" or \"three\" attempts across carriers is misleading."],
+    ["Inter Rapidísimo: office pickup has a maximum of 10 calendar days from the shipment's arrival.", "Each window measures a different thing. A visible number isn't enough to talk about urgency."],
+  ]}
+  caption="Official public sources consulted in September 2026. They are conditions declared by each carrier, not proof of how they are executed or Dropi rules."
+/>
+
+To avoid designing only for the easy case, I built three synthetic archetypes that represent work contexts, not confirmed segments or user percentages:
+
+- Someone handling **one specific exception** who must decide about a single order.
+- Someone **splitting attention across many cases** who needs to choose which to review first.
+- Someone who finds **contradictory information** and needs to know which fact can support an action.
+
+## Product decisions
+
+### 1. Translate the report into a decision
+
+The actionable items are not carrier statuses in simpler words: they are Dropi's own interpretation. The proposal adds an intelligence layer that cross-references the report with order and buyer information, management history, similar resolutions, and other available signals, and groups reports by the decision the seller needs to make, not by each carrier's code.
+
+<MappingDiagram
+  sourceHeading="What the carrier reports"
+  targetHeading="What the seller decides"
+  dashedNote="Dashed line: the action appears once the refusal or the damage is confirmed"
+  caption="Eight reported situations from four carriers translate into five actions. The scenarios are synthetic."
+  sources={[
+    { id: "nadie", label: "Nobody was there to receive", meta: "Servientrega · envía" },
+    { id: "pago", label: "Payment pending on delivery", meta: "Coordinadora" },
+    { id: "direccion", label: "Address not found", meta: "envía" },
+    { id: "docs", label: "Held for missing documents", meta: "DHL" },
+    { id: "retraso", label: "Delayed delivery", meta: "envía" },
+    { id: "dano", label: "Possible package damage", meta: "Servientrega" },
+    { id: "retiro", label: "Order ready for pickup", meta: "Coordinadora" },
+    { id: "rechazo", label: "Buyer refusal", meta: "Servientrega" },
+  ]}
+  targets={[
+    { id: "segunda", label: "Schedule a second delivery" },
+    { id: "direccion", label: "Review the address" },
+    { id: "consultar", label: "Ask the carrier" },
+    { id: "contactar", label: "Contact the buyer" },
+    { id: "devolucion", label: "Request a return" },
+  ]}
+  links={[
+    { from: "nadie", to: "segunda" },
+    { from: "pago", to: "segunda" },
+    { from: "direccion", to: "direccion" },
+    { from: "docs", to: "consultar" },
+    { from: "retraso", to: "consultar" },
+    { from: "dano", to: "consultar" },
+    { from: "retiro", to: "contactar" },
+    { from: "rechazo", to: "contactar" },
+    { from: "rechazo", to: "devolucion", dashed: true },
+    { from: "dano", to: "devolucion", dashed: true },
+  ]}
+/>
+
+AI is framed as an interpretation and recommendation capability, not an unquestionable authority. When information is insufficient or contradictory, the experience must show the uncertainty, ask for confirmation, or hand the case off. In the prototype this layer is represented by static scenarios and data; there is no connection to a real engine.
+
+### 2. Tell action, support, and waiting apart
+
+"Waiting for the buyer" or "waiting for the carrier" are not actionable: they are dependencies that explain why a case is still open. The interface can report them, but it doesn't turn them into the seller's next step. An actionable item expresses a decision the seller can make that moves the shipment forward.
+
+For "nobody was there to receive," contacting the buyer may be necessary to agree on a date, but it is a means, not the outcome. The main step is to **schedule the second delivery**, and it doesn't force the seller to log a conversation that may have happened by phone or WhatsApp.
+
+<JourneyCompare
+  rows={[
+    {
+      label: "Example: nobody was there to receive",
+      tone: "after",
+      steps: ["Carrier exception", "Contact the buyer (support)", "Agree on a date", "Schedule second delivery", "Delivery rescheduled"],
+    },
+  ]}
+/>
+
+### 3. A dedicated tool for exceptions
+
+Exceptions live in their own panel within sales management, not as one more card in general monitoring. Monitoring helps understand how the business is doing; this tool helps intervene on orders with a specific delivery problem. Mixing them would force the seller to filter out commercial metrics right when they need to decide, and the separation leaves room to grow toward priorities, assignment, and automation without turning the sales dashboard into an exceptions inbox.
+
+### 4. Managed doesn't mean delivered
+
+After an action, the case is not closed. It moves to **Managed** and states which outcome is still to be confirmed. Only proof of delivery or return moves it to **Closed**, where the two outcomes are kept apart.
+
+<StateFlow
+  states={[
+    {
+      title: "Pending",
+      tone: "open",
+      count: "9 in the prototype",
+      question: "There is still a main action to take.",
+      note: "Shows a verb: review the address, schedule a second delivery, ask the carrier, or request the return.",
+    },
+    {
+      title: "Managed",
+      tone: "wait",
+      count: "1 in the prototype",
+      question: "An action was taken, but the outcome still needs confirming.",
+      note: "Explains who has to respond. Waiting is a dependency, not a task.",
+    },
+    {
+      title: "Closed",
+      tone: "closed",
+      count: "10 in the prototype",
+      question: "The outcome has been confirmed.",
+      outcomes: [
+        { kind: "done", label: "Delivered", note: "There is proof of delivery to the buyer." },
+        { kind: "returned", label: "Canceled", note: "The package went back to the sender." },
+      ],
+    },
+  ]}
+  transitions={["Action taken", "Proof of delivery or return"]}
+  footnote="If the carrier reports a new difficulty, the case goes back to Pending with the matching action; the seller doesn't have to report it."
+/>
+
+### 5. What I decided to remove
+
+I also removed what didn't help resolve the exception: monetary values, recovered-money indicators, mandatory forms, success promises, and bulk-management controls. Bulk management stays as a future opportunity, but first I had to check that the basic unit (one case, one decision, one action, and one follow-up) was clear. Two exceptions can share a label and still require different decisions when the buyer, history, or carrier changes.
+
+<JourneyCompare
+  rows={[
+    {
+      label: "Before: the journey I wanted to overcome",
+      tone: "before",
+      steps: ["Technical carrier report", "Search for meaning", "Ask support or guess", "Uncertain action", "\"Resolved\" status", "Confusing real outcome"],
+    },
+    {
+      label: "After: the proposed journey",
+      tone: "after",
+      steps: ["Pending exception", "Concrete action", "Message or request reviewed", "Visible waiting", "Reply or proof", "Delivery or cancellation confirmed"],
+    },
+  ]}
+  caption="The difficulty wasn't only the amount of data: the interface mixed the report, the decision, the action, and the outcome."
+/>
+
+<ProductDivider eyebrow="Core decision" label="The unit of the experience stopped being the carrier's technical status and became the sequence situation, action, follow-up, and outcome." />
+
+## The solution
+
+The screen organizes work by management status. In the detail view, the right panel opens with a highlighted card: the time left, the situation as understood by Dropi, a short explanation, and the suggested action. The alternative action, such as **Cancel delivery**, lives in the split button's menu. The buyer data, shipment details, the source report, and the history stay on secondary levels: they aren't removed, they are ordered by the decision.
+
+<FigurePair
+  items={[
+    {
+      src: tarjetaCarlos,
+      alt: "Detail card for the exception Nobody was there to receive, with 2 hours 12 minutes left and the suggested action Schedule a second delivery",
+      caption: "The buyer wasn't home: scheduling the second delivery is suggested, with Contact the buyer as support.",
+    },
+    {
+      src: tarjetaFelipe,
+      alt: "Detail card for the exception Buyer refusal, with 3 hours 59 minutes left and the suggested action Contact the buyer",
+      caption: "The buyer may have refused the order: without their confirmation, they are messaged once, without pushing.",
+    },
+  ]}
+/>
+
+Modals are reserved for what needs extra information: editing and sending a message, agreeing on a date, or confirming a cancellation. No answer is required to move forward, and the text makes clear what changes and what doesn't: scheduling a delivery doesn't confirm it was delivered, and sending a message doesn't change the date.
+
+<FigurePair
+  framed
+  align="center"
+  items={[
+    {
+      src: modalProgramar,
+      alt: "Schedule second delivery modal with day and time slot pickers, and a note that scheduling it doesn't confirm the order was delivered",
+      caption: "Schedule second delivery: day and time slot, with a note that it doesn't confirm delivery.",
+    },
+    {
+      src: modalContactar,
+      alt: "Contact Carlos modal with an editable suggested message to review before sending",
+      caption: "Contact the buyer: a suggested, editable message that doesn't change the delivery date.",
+    },
+  ]}
+/>
+
+After the message is sent, the case stays in the system and moves to **Managed**. The screen says the delivery is still pending and what is missing: the buyer's reply. Logging it is optional.
+
+<Figure
+  src={gestionadas}
+  alt="Managed tab with Carlos's exception in the Waiting for the buyer state and the next step Log the buyer's reply"
+  caption="Managed: the case stays open and explains who has to respond."
+/>
+
+Closures have a different tone from a pending task: an illustration, a sentence explaining how it ended, and the history collapsed for anyone who wants to dig in. A return is never presented as a successful delivery.
+
+<FigurePair
+  align="center"
+  items={[
+    {
+      src: cierreEntregada,
+      alt: "Closure panel One more delivery achieved, with a package and a checkmark",
+      caption: "Delivered: there is proof that the buyer received the order.",
+    },
+    {
+      src: cierreCancelada,
+      alt: "Closure panel The order was returned, with a package and a return arrow",
+      caption: "Canceled: the package went back to the sender and the shipment is closed.",
+    },
+  ]}
+/>
+
+The experience also works on mobile: the list and the detail alternate in a single column.
+
+<FigurePair
+  items={[
+    {
+      src: mobileLista,
+      alt: "Mobile Delivery exceptions screen with the summary and the Pending, Managed, and Closed tabs",
+      caption: "Summary and statuses in a single column.",
+    },
+    {
+      src: mobileDetalle,
+      alt: "Mobile screen with an exception's detail, the time left, and the suggested action",
+      caption: "Detail with the suggested action in view.",
+    },
+  ]}
+/>
+
+### An actionable taxonomy
+
+Each situation has a message written for the seller and one main action. That writing work holds up the experience as much as the interface does.
+
+<DataTable
+  columns={["Situation", "What the seller is told", "Main action"]}
+  minWidth="38rem"
+  rows={[
+    ["Nobody was there to receive", "The carrier didn't find the buyer. Contact them to agree on when they can receive, then schedule the second delivery.", "Schedule second delivery"],
+    ["Payment pending on delivery", "The buyer couldn't pay on delivery. Confirm when the payment will be ready and schedule the second delivery.", "Schedule second delivery"],
+    ["Address not found", "Ask them to confirm it with neighborhood, apartment, or a reference, without assuming what the error is.", "Review the address"],
+    ["Missing documents", "Before asking the buyer for documents, clarify with the carrier which ones are missing, who provides them, and through which channel.", "Ask the carrier"],
+    ["Delayed delivery", "The expected date has passed and there is no update. Ask for the location and the next estimated date.", "Ask the carrier"],
+    ["Possible damage", "Check the package's condition; it's not yet time to ask for another attempt.", "Ask the carrier"],
+    ["Order ready for pickup", "Send the instructions so they can pick it up within the deadline.", "Contact the buyer"],
+    ["Buyer refusal", "There is no confirmation from them. Write once, without pushing.", "Contact the buyer"],
+  ]}
+/>
+
+### UX writing: say only what is known
+
+The rule was simple: the user should be able to anticipate what will happen when they activate a control without having to interpret it. Verbs that describe the decision moving the case forward were preferred, and hypotheses were never presented as facts.
+
+<DataTable
+  columns={["I avoided", "I wrote", "Why"]}
+  minWidth="36rem"
+  rows={[
+    ["\"Contact the buyer\" as the main outcome", "\"Schedule a second delivery\"", "Contact is the means to agree on the date; the decision is to reschedule."],
+    ["\"Reschedule the delivery\"", "\"Request a new attempt\"", "Until the carrier accepts it, there is only a request. \"Delivery rescheduled\" is used after a confirmed event."],
+    ["Explaining why the buyer wasn't home (\"left for work\")", "\"The carrier didn't find Carlos\"", "It states what is known, what the seller can do, and what remains pending."],
+    ["\"Resolved\"", "\"Managed,\" \"Delivered,\" or \"Canceled\"", "Each word matches a different fact, and none promises success."],
+  ]}
+/>
+
+## How I worked
+
+<StackedBars
+  title="The scenarios cover the same situation with different endings"
+  totalLabel="Total"
+  series={[
+    { label: "Pending", tone: "open" },
+    { label: "Managed", tone: "waiting" },
+    { label: "Delivered", tone: "done" },
+    { label: "Canceled", tone: "returned" },
+  ]}
+  rows={[
+    { label: "Nobody there / payment pending", values: [3, 1, 2, 0] },
+    { label: "Buyer refusal", values: [1, 0, 1, 1] },
+    { label: "Possible damage", values: [1, 0, 1, 1] },
+    { label: "Address not found", values: [1, 0, 1, 0] },
+    { label: "Missing documents", values: [1, 0, 1, 0] },
+    { label: "Order for pickup", values: [1, 0, 1, 0] },
+    { label: "Delayed delivery", values: [1, 0, 1, 0] },
+  ]}
+  caption="The prototype's 20 synthetic scenarios by situation type and status. A refusal can end in delivery or in cancellation: that's why the label decides neither the action nor the closure."
+/>
+
+The work followed a sequence in which every stage made explicit what was evidence and what was construction:
+
+1. **Strategic framing.** I set the north star before deciding on any interface: increase successful deliveries, with the dropshipper as the main user. I wrote down the questions that could change the solution: what the seller can actually do, which exceptions are recoverable, and what "resolved" means today.
+2. **Desk research and archetypes.** Sources, contrasts between carriers, and three synthetic usage contexts so I wouldn't design only for the simplest case.
+3. **Ideation with behavioral design.** I treated it as a design hypothesis, not a claim about user psychology: few recognizable actions, urgency only when a concrete condition exists, and seller control when an action has consequences. The chosen concept was **few actions, no decoding exceptions**.
+4. **Mid-to-high-fidelity prototype.** It turned the definition into a navigable experience to review statuses and journeys for contact, rescheduling, inquiry, return, and closure.
+5. **Visual and functional QA.** It fixed the detail hierarchy, CTA consistency, button accessibility, and the difference between an executed action and a confirmed outcome.
+
+## Product evolution: automation with judgment
+
+The next opportunity is moving from assisted recommendations to **controlled automation**. In the prototype I explored it with a profile selector and a static interpretation confidence per scenario, to test the idea, not to claim real accuracy.
+
+<ConfidenceStrip
+  title="What each profile would run, by interpretation confidence"
+  valueLabel="Confidence"
+  legend={{
+    both: "Runs with both profiles",
+    some: "Runs only with Enthusiast",
+    below: "Automatable, but below the threshold",
+    never: "Never automated: the person decides",
+  }}
+  thresholds={[
+    { value: 92, label: "Enthusiast ≥ 92%", position: "top" },
+    { value: 98, label: "Conservative ≥ 98%", position: "bottom" },
+  ]}
+  items={[
+    { label: "Order ready for pickup", sub: "Marcela", value: 99, kind: "both" },
+    { label: "Delayed delivery", sub: "Paula", value: 98, kind: "both" },
+    { label: "Nobody was there to receive", sub: "Carlos", value: 97, kind: "some" },
+    { label: "Payment pending on delivery", sub: "Valentina", value: 96, kind: "some" },
+    { label: "Nobody was there to receive", sub: "Santiago", value: 95, kind: "some" },
+    { label: "Address not found", sub: "Andrés", value: 93, kind: "some" },
+    { label: "Missing documents", sub: "Luisa", value: 88, kind: "below" },
+    { label: "Possible damage", sub: "Nora", value: 82, kind: "never" },
+    { label: "Buyer refusal", sub: "Felipe", value: 71, kind: "never" },
+  ]}
+  caption="The Conservative profile would run 2 steps; the Enthusiast, 6. The confidence is made-up data for the scenario. Low-risk actions (a message to the buyer or a question to the carrier) are the only automatable ones."
+/>
+
+<Figure
+  src={modalAutomatizacion}
+  alt="Exception automation modal with Manual, Conservative, and Enthusiast profiles and the list of steps that would run with the Enthusiast profile"
+  caption="Control profiles: the modal shows in advance which steps would run and states that refusals, damage, and returns are never automated."
+  size="md"
+  framed
+/>
+
+There are three design rules for this evolution: automation must be **granular** (by exception type, action, carrier, or confidence level), **traceable** (it reports what it understood, what it did, and which outcome is still pending), and **reversible** when possible. And it never closes an exception just because it ran an action. It's also best not to treat "conservative" or "enthusiast" as fixed labels for people: not everyone wants to automate everything.
+
+## Impact
+
+<ImpactStats
+  stats={[
+    { value: "8 → 5", label: "Eight situations reported by carriers translate into five actions the seller recognizes." },
+    { value: "20 scenarios", label: "Synthetic cases from four carriers cover seven situation types, from the first notice to closure." },
+    { value: "0 forms", label: "No answer is required to move forward; manual logging is only an optional aid." },
+    { value: "3 statuses", label: "Pending, Managed, and Closed separate the action to take from the confirmed outcome." },
+  ]}
+/>
+
+These figures describe the design and the prototype, not the business. The result is a navigable prototype of a dedicated exceptions tool, with synthetic scenarios, management statuses, differentiated actions, modals for messages and confirmations, history, and separate closures for deliveries and returns. **It does not prove that the delivery rate has increased.**
+
+### What was evidence and what was construction
+
+<DataTable
+  columns={["Element", "What it represents", "Limit"]}
+  minWidth="36rem"
+  rows={[
+    ["Challenge brief", "Context, problem, and business goal.", "Doesn't describe the whole real operation."],
+    ["Desk research", "Public sources, contrasts, and analysis.", "Doesn't replace interviews or internal data."],
+    ["Archetypes", "Synthetic usage contexts.", "They aren't interviewed people."],
+    ["Prototype cases", "Scenarios built to test reading and statuses.", "They aren't real orders or outcomes."],
+    ["Prototype QA", "Functional and visual verification in a browser.", "Doesn't show comprehension, adoption, or business impact."],
+    ["Final concept", "A design decision reviewed during the exercise.", "Needs validation with dropshippers."],
+  ]}
+/>
+
+### What still needs checking
+
+The prototype doesn't integrate with carriers, doesn't contact buyers, and doesn't run a real AI engine. The next step is a moderated usability test with dropshippers to check:
+
+- Whether they understand the action without decoding the report.
+- Whether they tell waiting apart from an outcome.
+- Whether the Pending, Managed, and Closed hierarchy matches how they work.
+
+It's also necessary to verify which actions and events actually exist in Dropi and at each carrier. After that would come an operational definition of the beta: comparing orders with exceptions handled through the experience against an agreed reference, without counting returns as recovered deliveries and without promising an improvement figure before there is a baseline.
+
+## Lessons learned
+
+The most important decision wasn't designing a tidier inbox, but changing the unit of the experience: from a technical status the seller has to decode to a decision they can recognize, execute, and follow until the outcome is known.
+
+The design keeps uncertainty visible. When only a message was sent, the case stays open; when a reply is missing, the screen says so; when the order came back, it shows as canceled and not as a successful management. That separation protects the user's understanding and avoids measuring success with an administrative label.
+
+And I learned to keep the scope honest: a prototype ready to be tested is not proof of impact. Documenting what is evidence and what is construction made the work more defensible.
+
+<ProductDivider eyebrow="Lesson" label="When only a message was sent, the case stays open: the design protects the difference between having acted and having achieved the outcome." />
+
+*The concept, product decisions, writing, and prototype were developed by Antonio Martínez with AI assistance. No interviews were held with real sellers and no carriers were integrated. The AI and automation capabilities are a product direction that requires technical, operational, and user validation.*

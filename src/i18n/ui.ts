@@ -30,6 +30,7 @@ export const ui = {
     'caseStudy.fallbackEyebrow': 'Case study',
     'caseStudy.confidential':
       'Algunos detalles de este proyecto se mantienen confidenciales por acuerdo con el cliente/empresa.',
+    'caseStudy.readingTimeSuffix': 'min de lectura',
     'beforeAfter.before': 'Antes',
     'beforeAfter.after': 'Después',
     'lightbox.expand': 'Ampliar imagen',
@@ -53,7 +54,7 @@ export const ui = {
     'projects.eyebrow': 'Trabajo',
     'projects.heading': 'Proyectos',
     'home.moreWorkEyebrow': 'Selección',
-    'home.moreWorkHeading': 'Más trabajo',
+    'home.moreWorkHeading': 'Otros proyectos',
     'about.title': 'Sobre mí',
     'about.description': 'Conoce más sobre',
     'about.eyebrow': 'Sobre mí',
@@ -90,6 +91,7 @@ export const ui = {
     'caseStudy.fallbackEyebrow': 'Case study',
     'caseStudy.confidential':
       'Some details of this project remain confidential per agreement with the client/company.',
+    'caseStudy.readingTimeSuffix': 'min read',
     'beforeAfter.before': 'Before',
     'beforeAfter.after': 'After',
     'lightbox.expand': 'Enlarge image',
@@ -113,7 +115,7 @@ export const ui = {
     'projects.eyebrow': 'Work',
     'projects.heading': 'Projects',
     'home.moreWorkEyebrow': 'Selected',
-    'home.moreWorkHeading': 'More work',
+    'home.moreWorkHeading': 'Other projects',
     'about.title': 'About',
     'about.description': 'Learn more about',
     'about.eyebrow': 'About me',

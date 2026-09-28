@@ -11,8 +11,8 @@ const year = new Date().getFullYear();
   <Container class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
     <p class="text-sm text-ink-muted">© {year} {site.name}. {t(locale, 'footer.rights')}</p>
     <div class="flex items-center gap-4 text-sm text-ink-muted">
-      <a href={`mailto:${site.email}`} class="hover:text-accent">{site.email}</a>
-      <a href={site.social.linkedin} class="hover:text-accent" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href={`mailto:${site.email}`} class="hover:text-accent-strong">{site.email}</a>
+      <a href={site.social.linkedin} class="hover:text-accent-strong" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
   </Container>
 </footer>

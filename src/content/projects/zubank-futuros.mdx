@@ -1,0 +1,211 @@
+---
+title: "Zubank: imaginar un asesor Pyme aumentado con IA"
+summary: "Diseño de futuros para evolucionar el acompañamiento a pymes: una IA prepara al asesor para llegar antes, sin sustituir su criterio ni la relación humana."
+cover: "../../assets/projects/zubank-cover.svg"
+coverAlt: "Diagrama del servicio futuro: señales de negocio, preparación con IA y conversación entre asesora y pyme"
+tags: ["Diseño de futuros", "Service Design", "IA responsable", "Banca Pyme"]
+year: 2026
+yearLabel: "Horizonte: de 2026 a 2028"
+featured: true
+order: 1
+draft: false
+
+role: "Product Designer (estrategia, diseño de servicios y futuros)"
+team: "Proyecto individual, con asistencia de IA para explorar, estructurar y producir artefactos"
+company: "Zubank (seudónimo)"
+industry: "Servicios financieros · Reto conceptual"
+scope: ["Diseño de futuros", "Service Design", "Backcasting", "Estrategia de producto", "IA responsable"]
+tools: ["Service blueprints", "Escenarios", "Prototipo diegético", "Árbol de métricas"]
+confidential: true
+---
+
+import ImpactStats from '../../components/mdx/ImpactStats.astro';
+import ProductDivider from '../../components/mdx/ProductDivider.astro';
+import DataTable from '../../components/mdx/DataTable.astro';
+import FuturesCone from '../../components/mdx/FuturesCone.astro';
+import ServiceBlueprint from '../../components/mdx/ServiceBlueprint.astro';
+import ScenarioMatrix from '../../components/mdx/ScenarioMatrix.astro';
+import BackcastingTimeline from '../../components/mdx/BackcastingTimeline.astro';
+import ServiceSystemMap from '../../components/mdx/ServiceSystemMap.astro';
+
+*Este es un reto conceptual desarrollado de forma individual. Zubank es un seudónimo. El escenario de 2028 y sus indicadores describen una propuesta de futuro y una forma de validarla; no son resultados observados.*
+
+## En 2028, el asesor llega antes
+
+Laura revisa con Wanda tres señales de negocio, decide cuál amerita una conversación y llama a Carlos antes de que él solicite financiación. Wanda organiza información y prepara alternativas; Laura interpreta, pregunta y recomienda. Meses después, Carlos vuelve a llamarla antes de tomar otra decisión de crecimiento.
+
+La propuesta no busca reemplazar la relación comercial con IA. Busca reducir el trabajo operativo que le quita tiempo al asesor para que pueda aplicar mejor su criterio. Diseñé cómo podría evolucionar el servicio y qué condiciones permitirían avanzar hacia ese escenario.
+
+<ProductDivider eyebrow="La apuesta" label="Wanda prepara el contexto. Laura decide cómo convertirlo en una conversación útil." />
+
+## El reto: pasar de atender solicitudes a acompañar decisiones
+
+En el servicio descrito por el reto, el asesor reúne información en varios sistemas, prepara reuniones, consulta especialistas y hace seguimiento a oportunidades. La pyme resuelve sus tareas cotidianas en canales digitales, pero busca orientación humana cuando debe decidir cómo crecer. En ese momento, el banco puede tener una relación valiosa con el cliente y aun así llegar tarde o sin suficiente contexto.
+
+La pregunta de diseño fue: **¿cómo anticipar una conversación útil sin convertir los datos de la pyme en vigilancia ni sumar otra tarea al día del asesor?** La respuesta fue rediseñar el servicio alrededor de los momentos en que el criterio y la relación de una persona hacen la diferencia.
+
+## Diseñar desde un futuro plausible
+
+Partí de una escena de 2028: el cliente vuelve a buscar a su asesora antes de tomar una decisión. Desde ese futuro trabajé hacia atrás para identificar las capacidades, los permisos y las decisiones que habría que desarrollar. El horizonte es una herramienta de diseño, no un pronóstico. La propuesta avanza desde una ficha de preparación acotada hacia pruebas controladas y, más adelante, capacidades mejor integradas. Cada etapa depende de la evidencia y del gobierno de datos.
+
+<BackcastingTimeline
+  milestones={[
+    { year: "2026", label: "Habilitar", outcome: "Consentimiento y fuentes|confiables", condition: "Definir roles, límites y|gobierno de datos" },
+    { year: "2027", label: "Probar y aprender", outcome: "Validar señales, preparación|y acompañamiento", condition: "Piloto controlado con|criterios de avance" },
+    { year: "2028", label: "Futuro preferible", outcome: "La pyme busca a Laura|antes de decidir", condition: "Confianza recíproca y|tiempo protegido" },
+  ]}
+  directionLabel="BACKCASTING · DEL FUTURO DESEADO A LAS CONDICIONES PRESENTES"
+  caption="La lectura parte del resultado deseado en 2028 y retrocede hacia capacidades intermedias y condiciones que deben habilitarse primero."
+/>
+
+### El cono de futuros: abrir opciones antes de elegir
+
+La versión anterior reducía el cono a tres escenarios y ubicaba lo preferible como si fuera otra banda de probabilidad. El marco distingue futuros proyectados, probables, plausibles y posibles; “preferible” expresa una elección de valor y puede atravesar cualquiera de esas categorías. “Descabellado” aparece en algunas extensiones del modelo, fuera del límite de lo posible, como provocación y no como pronóstico. Aquí se muestra separado del cono.
+
+<FuturesCone
+  bands={[
+    { name: "Proyectado", description: "Si nada cambia, la operación fragmentada persiste y la pyme resuelve su necesidad de financiación por fuera del banco." },
+    { name: "Probable", description: "Se incorporan asistentes de IA, pero las metas no cambian; el tiempo liberado se convierte en más gestión comercial y la relación sigue siendo reactiva." },
+    { name: "Plausible", description: "Cuatro escenarios resultan de cruzar el acceso a datos externos con la velocidad de la competencia que ofrece asesoría basada en IA." },
+    { name: "Posible", description: "Más allá de 2028, agentes del banco y de la pyme podrían asumir parte de la operación y la negociación financiera." },
+    { name: "Descabellado · extensión exploratoria", description: "Como prueba de límites, agentes autónomos negocian y ejecutan toda la financiación sin intervención humana. Esta extrapolación no estaba desarrollada en el reto." },
+  ]}
+  preferred={{ name: "Preferible", description: "La IA prepara y coordina; Laura conserva el criterio, y el tiempo liberado se protege para conversaciones que aportan valor a la pyme." }}
+  caption="Adaptación del cono de Voros al horizonte del reto. Las bandas expresan alcance e incertidumbre, no probabilidades calculadas. La trayectoria preferible es normativa, no una categoría de probabilidad."
+/>
+
+El cono base de Voros distingue futuros posibles, plausibles y probables, junto con los preferibles como una dimensión normativa. El futuro proyectado funciona aquí como línea de continuidad del presente. La zona descabellada es una ampliación contemporánea, no una categoría de la formulación original. <a href="https://foresightinternational.com.au/wp-content/uploads/2020/03/Voros-Primer-on-FS-2001-Final.pdf" target="_blank" rel="noreferrer">Voros, A Primer on Futures Studies (2001)</a>; <a href="https://file.go.gov.sg/thinkingabouttomorrow-digitalcopy.pdf" target="_blank" rel="noreferrer">Centre for Strategic Futures, Thinking About Tomorrow</a>.
+
+### Escenarios plausibles: matriz de dos incertidumbres
+
+El reto sitúa cuatro escenarios en la zona plausible. El eje horizontal representa cuánto se abre el acceso a datos; el vertical, qué tan rápido la competencia incorpora asesoría apoyada en IA. Son condiciones del entorno, no variables que el banco controle directamente. La adopción de los asesores queda fuera de los ejes porque el diseño organizacional puede influir en ella y es una palanca del futuro preferible.
+
+<ScenarioMatrix
+  axisX="Acceso a datos externos"
+  axisXLow="Restringido a datos internos"
+  axisXHigh="Abierto con autorización"
+  axisY="Velocidad de la competencia con asesoría IA"
+  axisYLow="Lenta"
+  axisYHigh="Rápida"
+  quadrants={[
+    { x: "left", y: "top", title: "La fintech que aconseja", description: "Con datos propios, las plataformas aconsejan a la pyme; el banco pierde el momento central." },
+    { x: "right", y: "top", title: "Carrera por la anticipación", description: "Todos acceden a señales; confianza y criterio humano diferencian el servicio." },
+    { x: "left", y: "bottom", title: "Copiloto de puertas adentro", description: "La IA prepara con datos internos. La anticipación es parcial; la relación sigue diferenciando." },
+    { x: "right", y: "bottom", title: "El asesor que llega antes", description: "El acceso autorizado y la competencia lenta abren una ventana para contactar primero." },
+  ]}
+  caption="Matriz de escenarios plausibles del reto. Las descripciones son futuros exploratorios, no resultados observados."
+/>
+
+### Método: del horizonte a decisiones de diseño
+
+El trabajo avanzó en cuatro movimientos. Primero, encuadré el reto como una tensión entre la promesa de acompañamiento y un servicio que puede llegar tarde. Después exploré fuerzas sociales, tecnológicas, económicas, ambientales y político-regulatorias, distinguiendo tendencias consolidadas de señales emergentes. Con esas fuerzas construí futuros posibles y elegí uno preferible por su valor para la relación, no por su certeza. Por último, usé backcasting para traducirlo en capacidades, condiciones y experimentos progresivos.
+
+La exploración consideró las cinco dimensiones STEEP. Separó tendencias de señales y usó las dos incertidumbres externas para construir escenarios. El backcasting desde el futuro preferible orientó capacidades, condiciones y experimentos progresivos. Los métodos se conectan entre sí, pero no constituyen evidencia de que el servicio propuesto haya sido validado.
+
+<DataTable
+  columns={["Dimensión STEEP", "Fuerza de cambio considerada", "Implicación para el servicio", "Horizonte"]}
+  rows={[
+    ["Social", "Las pymes esperan claridad y rapidez; sus dueños tienen poco tiempo.", "El contacto debe llegar cuando ayuda, no solo cuando la agenda del asesor lo permite.", "Presente"],
+    ["Tecnológica", "Asistentes generativos y datos de facturación casi en tiempo real; primeros agentes internos.", "Mostrar las fuentes y apoyar la preparación antes de ampliar la autonomía.", "Presente a 2028"],
+    ["Económica", "Fintech ofrecen crédito Pyme claro y rápido; las finanzas integradas pueden mover decisiones a otras plataformas.", "Competir con asesoría útil y relación, no solo con velocidad.", "Presente a más allá de 2028"],
+    ["Ambiental", "Grandes compradores empiezan a preguntar a proveedores Pyme por sostenibilidad.", "Una extensión futura podría incluir financiación verde y adaptación de la cadena.", "Más allá de 2028"],
+    ["Política y regulatoria", "Finanzas abiertas y mayor exigencia de explicar y supervisar la IA.", "Consentimiento, trazabilidad y responsabilidad humana condicionan el diseño.", "2027 a 2028"],
+  ]}
+  caption="Selección de fuerzas del análisis STEEP del reto. Son insumos para construir escenarios, no hallazgos de investigación de campo de este caso."
+/>
+
+### Priorización de oportunidades
+
+El reto priorizó con una matriz ponderada de seis criterios: impacto en cliente y NPS (25 %), impacto en negocio (25 %), impacto en el asesor (15 %), factibilidad y alineamiento interno (20 %), riesgo regulatorio (10 %) y evidencia (5 %). El siguiente recorte conserva las oportunidades de prioridad alta y la de aprobación más rápida, incluida por decisión del líder pese a su factibilidad y riesgo. Las calificaciones son el juicio del equipo del reto; no son mediciones de usuarios.
+
+<DataTable
+  columns={["Oportunidad", "Cliente", "Negocio", "Asesor", "Factibilidad y alineamiento", "Riesgo", "Evidencia", "Puntaje ponderado", "Prioridad"]}
+  rows={[
+    ["Detectar señales", "5", "5", "3", "4", "3", "4", "4,25", "Alta"],
+    ["Conversación de negocio", "5", "4", "4", "4", "4", "4", "4,25", "Alta"],
+    ["Visibilidad y plazo", "5", "4", "4", "3", "5", "4", "4,15", "Alta"],
+    ["Llegar antes que la fintech", "5", "5", "3", "3", "3", "4", "4,05", "Alta"],
+    ["Aprobación más rápida", "5", "5", "2", "2", "2", "4", "3,60", "Media, incluida por decisión"],
+  ]}
+  minWidth="72rem"
+  caption="Extracto de la matriz ponderada del reto. Escala de calificación de 1 a 5; en riesgo regulatorio, una calificación alta representa un riesgo bajo."
+/>
+
+### Blueprint: conectar la promesa con la operación
+
+El blueprint hace visible que llegar antes no depende solo de una pantalla. En el servicio actual, la señal del negocio puede no estar disponible para el asesor, la preparación requiere buscar información en distintos lugares y el seguimiento del crédito deja al cliente sin claridad. En el servicio propuesto, el consentimiento habilita una señal, Wanda prepara contexto y Laura decide si existe una razón válida para iniciar la conversación. Riesgo y operaciones mantienen sus responsabilidades sobre la evaluación y el estado de la solicitud.
+
+<ServiceBlueprint
+  stages={[
+    { title: "Surge la necesidad", timing: "" },
+    { title: "Carlos explora opciones", timing: "" },
+    { title: "Primer contacto", timing: "" },
+    { title: "Laura prepara la reunión", timing: "" },
+    { title: "Reunión y solicitud", timing: "" },
+    { title: "Estudio del crédito", timing: "" },
+    { title: "Decisión", timing: "" },
+    { title: "Seguimiento", timing: "" },
+  ]}
+  lanes={[
+    { kind: "time", title: "Tiempo", entries: ["Día 0", "Días 0 a 1", "Día 1", "Días 1 a 2", "Día 3", "Días 3 a 10 · 5 hábiles", "Día 10", "Semanas y meses" ] },
+    { kind: "evidence", title: "Evidencia física y digital", entries: ["Facturas de la cadena con consentimiento", "Oferta de fintech aún sin firmar", "Llamada de Laura sobre el nuevo contrato", "Solicitud con documentos pendientes", "Presentación, viabilidad y autorización explicada", "Estado y plazo visibles en la app", "Notificación y contrato", "Consejo de Laura sobre el uso del crédito" ] },
+    { kind: "customer", title: "Carlos · acciones de la pyme", lineAfter: "interaction", entries: ["Consigue un contrato y anticipa que su capacidad no alcanza", "Compara opciones, incluida la fintech, sin decidir aún", "Recibe la llamada y acepta conversar", "Carga solo documentos faltantes o vencidos", "Con su contadora, conversa y confirma la solicitud", "Consulta el estado sin repetir lo ya informado", "Elige al banco si el plazo y las condiciones le sirven", "Recibe consejo y vuelve ante otra decisión" ] },
+    { kind: "frontstage", title: "Laura frente al cliente", lineAfter: "visibility", entries: ["Sin contacto todavía", "Sin contacto todavía", "Llama con una lectura del negocio, no con un producto", "Pide únicamente documentos pendientes", "Conduce la conversación y explica datos y alternativas", "Avisa antes de que Carlos pregunte si hay demoras", "Confirma la decisión y acuerda el siguiente paso", "Hace seguimiento con un consejo, no una campaña" ] },
+    { kind: "backstage", title: "Wanda · trabajo interno", entries: ["Detecta cambio en facturación y nuevo cliente relevante", "Estima necesidad y prioriza la bandeja", "Sugiere momento y enfoque del contacto", "Compila lectura, vigencia, documentos y memoria de relación", "Precarga solicitud y registra acuerdos con confirmación de Laura", "Comparte lectura con riesgo y alerta bloqueos", "Actualiza la memoria de relación", "Sugiere el próximo contacto según lo acordado" ] },
+    { kind: "backstage", title: "Laura · trabajo interno", lineAfter: "internal", entries: ["—", "Revisa señales y prioriza a quién contactar", "Decide llamar a Carlos", "Ajusta la lectura y revisa materiales", "Confirma la solicitud sin volver a digitar", "Interviene cuando Wanda alerta", "—", "Registra aprendizajes en Wanda" ] },
+    { kind: "support", title: "Soporte interno y gobierno", entries: ["Consentimiento vigente para leer facturación", "—", "—", "Lecturas sectoriales y especialistas disponibles", "Compliance define uso y explicación de datos", "Riesgo estudia el caso; operación publica el plazo", "Riesgo decide dentro del plazo", "Liderazgo revisa indicadores de acompañamiento" ] },
+    { kind: "systems", title: "Sistemas", entries: ["Facturación electrónica autorizada", "Bandeja de señales", "Wanda, mensajería y agenda", "CRM, core, documentos y riesgo", "Wanda, CRM y originación de crédito", "Flujo de crédito, app y alertas", "Originación y aplicación del banco", "Memoria de relación y tablero de gestión" ] },
+    { kind: "moment", title: "Momento de verdad", entries: ["—", "El banco llega antes que la fintech", "Carlos siente que Laura entiende el negocio", "—", "Carlos decide si confía en el banco", "—", "Carlos elige al banco", "Carlos busca a Laura por iniciativa propia" ] },
+    { kind: "opportunity", title: "Oportunidad que materializa", entries: ["Detectar señales · Consentimiento con valor", "Llegar antes que la fintech", "Llegar antes que la fintech", "Preparación en minutos · Memoria", "Conversación de negocio · Sin doble digitación", "Visibilidad del plazo · Aprobación más rápida", "Aprobación más rápida", "Seguimiento útil · Indicadores para el líder" ] },
+  ]}
+  interactionLabel="Línea de interacción"
+  visibilityLabel="Línea de visibilidad"
+  internalLabel="Línea de interacción interna"
+  caption="Blueprint futuro del reto, con las ocho etapas conservadas para comparación directa con el servicio actual. El recorrido objetivo pasa de 32 a 10 días en el escenario diseñado; Wanda queda tras la línea de visibilidad y Carlos nunca interactúa con ella."
+/>
+
+El blueprint conserva la secuencia temporal y diferencia evidencia, acciones de Carlos, interacción visible de Laura, trabajo interno de Wanda y Laura, soporte, sistemas, momentos de verdad y oportunidades. Las líneas de interacción, visibilidad e interacción interna delimitan los traspasos. En móvil se recorre horizontalmente para mantener legibles los carriles.
+
+La estructura sigue la convención del blueprint de servicio: evidencia, acciones del cliente, interacción visible, trabajo interno y procesos de soporte, alineados en una secuencia; sus líneas marcan las fronteras del servicio. <a href="https://www.ontario.ca/page/service-blueprints" target="_blank" rel="noreferrer">Ontario Digital Service, Service Blueprints</a>; <a href="https://guides.18f.org/methods/decide/service-blueprint/" target="_blank" rel="noreferrer">18F, Service blueprint</a>.
+
+## Un sistema aumentado, con responsabilidad humana
+
+Wanda acompaña al asesor en su espacio de trabajo. Reúne señales y sus fuentes, prepara una lectura del negocio, organiza alternativas y alerta si un trámite se detiene. Laura decide si contacta al cliente, revisa la información y responde por la recomendación. El cliente no conversa con Wanda ni recibe decisiones tomadas por el sistema.
+
+<ServiceSystemMap caption="Mapa del sistema de servicio. Los flujos distinguen la relación cliente-asesora del apoyo interno de Wanda y muestran las capacidades organizacionales que deben habilitarlo." />
+
+El prototipo narrativo muestra un martes de ese futuro a través de una tarjeta de señal, una ficha de preparación, una propuesta y el estado de una solicitud de crédito. Así se entiende cómo cambiarían los puntos de contacto. La historia también deja claros los límites: Wanda solo usa datos autorizados, muestra sus fuentes y no se comunica directamente con el cliente.
+
+## Cómo sabríamos si el futuro merece escalar
+
+El marco de medición relaciona señales tempranas con la experiencia y los resultados del negocio. En un piloto observaría si el asesor llega antes a los momentos de decisión, si reduce su carga operativa y si la pyme percibe un acompañamiento más útil. A más largo plazo mediría la recomendación de los clientes, la confianza, la experiencia de los asesores y la participación del banco en las decisiones de financiación. Son indicadores propuestos; el proyecto no produjo resultados de impacto.
+
+<ImpactStats
+  stats={[
+    { value: "Llegar antes", label: "Señales útiles que se convierten en conversaciones oportunas." },
+    { value: "Tiempo útil", label: "Carga operativa, preparación y experiencia de los asesores, incluido el eNPS." },
+    { value: "Confianza", label: "Percepción de acompañamiento, claridad y control del uso de datos." },
+    { value: "Resultados", label: "Decisiones de financiación y evolución del negocio a lo largo del tiempo." },
+  ]}
+/>
+
+<DataTable
+  columns={["Nivel", "Qué observar", "Lectura conjunta"]}
+  rows={[
+    ["Señal de actividad", "Tiempo de preparación, consultas repetidas y alertas revisadas por el asesor.", "Indica si la herramienta reduce fricción sin añadir trabajo de supervisión."],
+    ["Calidad de la relación", "Conversaciones iniciadas con contexto, utilidad percibida y continuidad elegida por la pyme.", "Permite comprobar si llegar antes se traduce en acompañamiento relevante."],
+    ["Experiencia y confianza", "Claridad sobre fuentes y permisos, control de datos y experiencia de asesores y clientes.", "Funciona como salvaguarda: una mejora operativa no compensa una pérdida de confianza."],
+    ["Resultado de negocio", "Participación en decisiones de financiación y evolución de la relación a lo largo del tiempo.", "Se interpreta junto con condiciones de crédito, tiempos y otros factores del servicio."],
+  ]}
+  caption="Árbol de medición propuesto. Antes de un piloto habría que definir línea base, fuentes, frecuencia y criterios de comparación."
+/>
+
+El servicio solo avanzaría si los asesores adoptan la herramienta voluntariamente, las señales son confiables y trazables, los permisos siguen vigentes y la confianza no se deteriora. Los cambios se compararían con un grupo que no use Wanda. Si aparece un efecto adverso, el despliegue se detiene aunque mejoren los indicadores operativos.
+
+## Lo que deja el ejercicio
+
+El ejercicio llevó la IA del plano de la interfaz al del servicio completo. Para que este futuro funcione, también hacen falta incentivos adecuados, gobierno de datos, integración operativa y un compromiso organizacional: que el tiempo liberado vuelva a las conversaciones con las pymes.
+
+El paso siguiente sería revisar el escenario con asesores, pymes, los equipos de riesgo y cumplimiento. Después probaría la ficha de preparación con tareas reales y establecería una línea base para evaluar los cambios. Ese aprendizaje permitiría decidir qué capacidades desarrollar y cuáles descartar.
+
+*El concepto, la estrategia, los artefactos y la narrativa fueron desarrollados por Antonio Martínez con asistencia de IA. No se realizaron entrevistas con usuarios reales ni se implementó el servicio descrito.*

@@ -82,6 +82,35 @@ body {
   z-index: 1;
 }
 
+/* Barra de progreso de lectura (solo en case studies, ver CaseStudyLayout.astro
+   y src/lib/motion/reading-progress.ts). scaleX en vez de width: evita
+   recalcular layout en cada scroll, solo compone en el compositor. No se
+   gatea por prefers-reduced-motion: no es una animación decorativa, es un
+   reflejo 1:1 de la posición de scroll, igual que una scrollbar nativa. */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 70;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+}
+
+/* Badge de "caso revisado" sobre la miniatura de un proyecto (ver
+   src/lib/motion/visited.ts). Oculto por defecto; el script agrega
+   .is-visited al link de la card cuando el slug ya está en localStorage. */
+.visited-badge {
+  display: none;
+}
+
+.is-visited .visited-badge {
+  display: flex;
+}
+
 /* Cursor custom (solo con pointer fino y sin prefers-reduced-motion,
    activado por src/lib/motion/cursor.ts) */
 .mk-cursor {
@@ -146,4 +175,5 @@ html.has-custom-cursor button {
   ::view-transition-new(*) {
     animation: none !important;
   }
+
 }

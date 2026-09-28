@@ -4,9 +4,11 @@ import { initSmoothScroll, destroySmoothScroll } from './lenis';
 import { initReveals } from './reveal';
 import { initCursor, destroyCursor } from './cursor';
 import { playAutoplayVideos } from './autoplay-videos';
-import { initMagnetic, destroyMagnetic } from './magnetic';
 import { initTilt, destroyTilt } from './tilt';
 import { initCountUp, destroyCountUp } from './count-up';
+import { initReadingProgress, destroyReadingProgress } from './reading-progress';
+import { initVisitedTracking, destroyVisitedTracking } from './visited';
+import { initHeroGrid, destroyHeroGrid } from './hero-grid';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,18 +16,22 @@ function start() {
   initSmoothScroll();
   initReveals();
   initCursor();
-  initMagnetic();
   initTilt();
   initCountUp();
+  initReadingProgress();
+  initVisitedTracking();
+  initHeroGrid();
   playAutoplayVideos();
   requestAnimationFrame(() => ScrollTrigger.refresh());
 }
 
 function stop() {
   destroyCursor();
-  destroyMagnetic();
   destroyTilt();
   destroyCountUp();
+  destroyReadingProgress();
+  destroyVisitedTracking();
+  destroyHeroGrid();
   ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
   destroySmoothScroll();
 }

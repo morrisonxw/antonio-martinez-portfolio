@@ -1,0 +1,157 @@
+---
+interface Source {
+  id: string;
+  label: string;
+  meta?: string;
+}
+
+interface Target {
+  id: string;
+  label: string;
+}
+
+interface Link {
+  from: string;
+  to: string;
+  // Relación condicionada: la acción sólo aparece cuando se confirma algo.
+  dashed?: boolean;
+}
+
+interface Props {
+  sources: Source[];
+  targets: Target[];
+  links: Link[];
+  sourceHeading: string;
+  targetHeading: string;
+  // Texto que acompaña a las relaciones punteadas (también en la lista móvil).
+  dashedNote: string;
+  caption?: string;
+}
+
+const { sources, targets, links, sourceHeading, targetHeading, dashedNote, caption } = Astro.props;
+
+// Geometría en unidades del viewBox; el SVG escala con el ancho de la prosa.
+const W = 720;
+const ROW = 56;
+const NODE_H = 44;
+const LEFT_W = 316;
+const RIGHT_X = 448;
+const RIGHT_W = W - RIGHT_X;
+const HEADER = 34;
+const bodyH = sources.length * ROW - (ROW - NODE_H);
+const H = HEADER + bodyH;
+
+const sourceY = new Map(sources.map((s, i) => [s.id, HEADER + i * ROW]));
+const targetStep = targets.length > 1 ? (bodyH - NODE_H) / (targets.length - 1) : 0;
+const targetY = new Map(targets.map((t, i) => [t.id, HEADER + i * targetStep]));
+
+const paths = links.map((link) => {
+  const y1 = (sourceY.get(link.from) ?? 0) + NODE_H / 2;
+  const y2 = (targetY.get(link.to) ?? 0) + NODE_H / 2;
+  return {
+    d: `M ${LEFT_W} ${y1} C ${LEFT_W + 64} ${y1}, ${RIGHT_X - 64} ${y2}, ${RIGHT_X} ${y2}`,
+    dashed: !!link.dashed,
+  };
+});
+
+// Vista móvil: una tarjeta por acción con las situaciones que desembocan en ella.
+const grouped = targets.map((target) => ({
+  target,
+  items: links
+    .filter((link) => link.to === target.id)
+    .map((link) => ({ source: sources.find((s) => s.id === link.from)!, dashed: !!link.dashed })),
+}));
+---
+
+<figure class="not-prose my-10" data-reveal>
+  <svg
+    viewBox={`0 0 ${W} ${H}`}
+    class="hidden h-auto w-full sm:block"
+    role="img"
+    aria-label={`${sourceHeading} → ${targetHeading}: ${grouped
+      .map((g) => `${g.target.label} ← ${g.items.map((i) => i.source.label).join(', ')}`)
+      .join('. ')}`}
+  >
+    <text x="0" y="14" class="fill-ink-muted text-[11px] font-semibold tracking-[0.16em] uppercase">{sourceHeading}</text>
+    <text x={RIGHT_X} y="14" class="fill-ink-muted text-[11px] font-semibold tracking-[0.16em] uppercase">
+      {targetHeading}
+    </text>
+
+    {
+      paths.map((path) => (
+        <path
+          d={path.d}
+          fill="none"
+          class={path.dashed ? 'stroke-ink-muted' : 'stroke-accent'}
+          stroke-width={path.dashed ? 1.5 : 2}
+          stroke-dasharray={path.dashed ? '5 5' : undefined}
+          stroke-linecap="round"
+        />
+      ))
+    }
+
+    {
+      sources.map((source) => {
+        const y = sourceY.get(source.id)!;
+        return (
+          <g>
+            <rect x="0.75" y={y + 0.75} width={LEFT_W - 1.5} height={NODE_H - 1.5} rx="10" class="fill-paper stroke-border/60" />
+            <text x="14" y={y + (source.meta ? 19 : 27)} class="fill-ink text-[14px] font-semibold">
+              {source.label}
+            </text>
+            {source.meta && (
+              <text x="14" y={y + 35} class="fill-ink-muted text-[11.5px]">
+                {source.meta}
+              </text>
+            )}
+            <circle cx={LEFT_W} cy={y + NODE_H / 2} r="3.5" class="fill-ink-muted" />
+          </g>
+        );
+      })
+    }
+
+    {
+      targets.map((target) => {
+        const y = targetY.get(target.id)!;
+        return (
+          <g>
+            <rect x={RIGHT_X} y={y} width={RIGHT_W} height={NODE_H} rx="10" class="fill-accent-muted stroke-accent/50" />
+            <text x={RIGHT_X + 16} y={y + 27} class="fill-ink text-[15px] font-bold">
+              {target.label}
+            </text>
+            <circle cx={RIGHT_X} cy={y + NODE_H / 2} r="3.5" class="fill-accent" />
+          </g>
+        );
+      })
+    }
+  </svg>
+
+  <div class="space-y-3 sm:hidden">
+    {
+      grouped.map(({ target, items }) => (
+        <section class="rounded-2xl border border-accent/40 bg-accent-muted p-4">
+          <h3 class="font-display text-base font-bold text-ink">{target.label}</h3>
+          <ul class="mt-2 space-y-1.5">
+            {items.map(({ source, dashed }) => (
+              <li class="rounded-lg bg-paper px-3 py-2 text-sm text-ink">
+                {source.label}
+                {dashed && <span class="block text-xs text-ink-muted">{dashedNote}</span>}
+                {!dashed && source.meta && <span class="block text-xs text-ink-muted">{source.meta}</span>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+
+  <figcaption class="mt-4 text-sm text-ink-muted">
+    <span class="hidden sm:inline">
+      <svg viewBox="0 0 28 6" class="mr-1.5 inline-block h-1.5 w-7 align-middle" aria-hidden="true">
+        <path d="M1 3h26" class="stroke-ink-muted" stroke-width="1.5" stroke-dasharray="5 5" stroke-linecap="round"></path>
+      </svg>
+      {dashedNote}.
+    </span>
+    {caption && <span class="block sm:mt-1">{caption}</span>}
+  </figcaption>
+</figure>

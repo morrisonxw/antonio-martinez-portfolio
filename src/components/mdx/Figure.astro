@@ -6,12 +6,28 @@ interface Props {
   src: ImageMetadata;
   alt: string;
   caption?: string;
+  // `full` ocupa todo el ancho de la prosa (default). `md`/`sm` limitan el
+  // ancho para recortes de modales o pantallas móviles, que se ven forzados
+  // si se estiran a 42rem.
+  size?: 'full' | 'md' | 'sm';
+  // Coloca la imagen sobre un fondo de superficie suave: útil para recortes
+  // de componentes flotantes (modales) que no tienen un marco propio.
+  framed?: boolean;
 }
 
-const { src, alt, caption } = Astro.props;
+const { src, alt, caption, size = 'full', framed = false } = Astro.props;
+const widthClass = { full: '', md: 'mx-auto max-w-xl', sm: 'mx-auto max-w-xs' }[size];
 ---
 
 <figure class="my-10" data-reveal>
-  <Image src={src} alt={alt} width={1200} class="w-full rounded-xl" />
+  {
+    framed ? (
+      <div class="rounded-2xl bg-paper-muted px-4 py-8 sm:px-10 sm:py-12">
+        <Image src={src} alt={alt} width={1200} class:list={['w-full !my-0 rounded-3xl shadow-lg', widthClass]} />
+      </div>
+    ) : (
+      <Image src={src} alt={alt} width={1200} class:list={['w-full rounded-xl', widthClass]} />
+    )
+  }
   {caption && <figcaption class="mt-3 text-sm text-ink-muted">{caption}</figcaption>}
 </figure>

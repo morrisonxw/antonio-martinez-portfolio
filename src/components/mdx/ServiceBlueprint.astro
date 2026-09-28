@@ -1,0 +1,74 @@
+---
+interface Stage {
+  title: string;
+  timing: string;
+}
+
+interface Lane {
+  title: string;
+  kind: 'time' | 'evidence' | 'customer' | 'frontstage' | 'backstage' | 'support' | 'systems' | 'moment' | 'opportunity';
+  entries: string[];
+  lineAfter?: 'interaction' | 'visibility' | 'internal';
+}
+
+interface Props {
+  stages: Stage[];
+  lanes: Lane[];
+  interactionLabel?: string;
+  visibilityLabel?: string;
+  internalLabel?: string;
+  locale?: 'es' | 'en';
+  caption?: string;
+}
+
+const { stages, lanes, interactionLabel = 'LÍNEA DE INTERACCIÓN', visibilityLabel = 'LÍNEA DE VISIBILIDAD', internalLabel = 'LÍNEA DE INTERACCIÓN INTERNA', locale = 'es', caption } = Astro.props;
+const english = locale === 'en';
+const laneStyles = {
+  time: 'bg-paper-muted',
+  evidence: 'bg-paper',
+  customer: 'bg-paper',
+  frontstage: 'bg-accent-muted/50',
+  backstage: 'bg-paper-muted',
+  support: 'bg-paper',
+  systems: 'bg-paper-muted',
+  moment: 'bg-accent-muted/30',
+  opportunity: 'bg-paper',
+};
+---
+
+<figure class="not-prose my-12" data-reveal>
+  <div class="overflow-x-auto rounded-2xl border border-border/60 bg-paper">
+    <table class="w-full min-w-[1720px] border-collapse text-left text-sm">
+      <caption class="sr-only">{english ? 'Future-state service blueprint across eight stages, from the SME experience to supporting systems.' : 'Blueprint del servicio futuro en ocho etapas, desde la experiencia de la pyme hasta los sistemas de soporte.'}</caption>
+      <thead>
+        <tr>
+          <th scope="col" class="sticky left-0 z-10 w-60 border-b-2 border-ink bg-paper px-4 py-3 text-xs font-semibold uppercase tracking-wide text-ink-muted">{english ? 'Service lane' : 'Carril de servicio'}</th>
+          {stages.map((stage, index) => <th scope="col" class="w-[185px] border-b-2 border-ink border-l border-border/60 bg-paper-muted px-3 py-3 align-top">
+            <span class="block text-[10px] font-semibold uppercase tracking-wide text-accent-strong">{english ? 'Stage' : 'Etapa'} {index + 1}</span>
+            <span class="mt-1 block font-display text-sm font-bold leading-snug text-ink">{stage.title}</span>
+          </th>)}
+        </tr>
+      </thead>
+      <tbody>
+        {lanes.map((lane) => <>
+          <tr class={laneStyles[lane.kind]}>
+            <th scope="row" class:list={['sticky left-0 z-[1] w-60 border-b border-border/60 px-4 py-3 align-top font-display font-semibold text-ink', laneStyles[lane.kind]]}>{lane.title}</th>
+            {stages.map((_, stageIndex) => <td class="w-[185px] border-b border-l border-border/60 px-3 py-3 align-top leading-relaxed text-ink" data-stage={stageIndex + 1}>{lane.entries[stageIndex]}</td>)}
+          </tr>
+          {lane.lineAfter && <tr aria-hidden="true">
+            <th colspan={stages.length + 1} class:list={[
+              'border-y-2 border-dashed px-4 py-2 text-left text-[10px] font-bold tracking-[0.12em] text-ink',
+              lane.lineAfter === 'interaction' ? 'border-accent/70 bg-accent-muted/40' : 'border-ink-muted/70 bg-paper-muted',
+            ]}>
+              {lane.lineAfter === 'interaction' && <>{interactionLabel} · {english ? 'the client and service provider interact' : 'separa las acciones de cliente y proveedor'}</>}
+              {lane.lineAfter === 'visibility' && <>{visibilityLabel} · {english ? 'below this line, service work is not visible to the client' : 'separa el trabajo visible del que ocurre tras escena'}</>}
+              {lane.lineAfter === 'internal' && <>{internalLabel} · {english ? 'backstage actions connect to support teams and systems' : 'conecta el trabajo interno con áreas y sistemas de soporte'}</>}
+            </th>
+          </tr>}
+        </>)}
+      </tbody>
+    </table>
+  </div>
+  <p class="mt-3 text-xs text-ink-muted">{english ? 'Scroll horizontally to follow all eight stages. The timeline remains aligned across physical evidence, customer actions, frontstage, backstage, and support.' : 'Desplaza horizontalmente para recorrer las ocho etapas. La secuencia alinea evidencia física, acciones del cliente, interacción visible, trabajo interno y soporte.'}</p>
+  {caption && <figcaption class="mt-3 text-sm text-ink-muted">{caption}</figcaption>}
+</figure>

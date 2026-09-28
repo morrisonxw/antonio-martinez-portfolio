@@ -6,7 +6,6 @@ import SectionHeading from '../components/ui/SectionHeading.astro';
 import ProjectGrid from '../components/project/ProjectGrid.astro';
 import PinnedHero from '../components/home/PinnedHero.astro';
 import ExperienceBlock from '../components/home/ExperienceBlock.astro';
-import ContactCta from '../components/home/ContactCta.astro';
 import { site } from '../content-data/site';
 import { experience } from '../content-data/experience';
 
@@ -33,23 +32,26 @@ const featured = allProjects
   .filter((p) => p.data.featured && !slugsInTimeline.has(p.id))
   .sort((a, b) => a.data.order - b.data.order);
 const projectsToShow = featured.length > 0 ? featured : allProjects.filter((p) => !slugsInTimeline.has(p.id)).slice(0, 4);
+const intergrupoIndex = timeline.findIndex((item) => item.company === 'Intergrupo SoftwareOne');
+const timelineBeforeOtherProjects = intergrupoIndex < 0 ? timeline : timeline.slice(0, intergrupoIndex);
+const timelineAfterOtherProjects = intergrupoIndex < 0 ? [] : timeline.slice(intergrupoIndex);
 ---
 
 <PageLayout title={site.name} description={site.description}>
   <PinnedHero />
 
-  {timeline.map((item) => <ExperienceBlock {...item} />)}
+  {timelineBeforeOtherProjects.map((item) => <ExperienceBlock {...item} />)}
 
   {
     projectsToShow.length > 0 && (
       <Container class="py-24 sm:py-28">
-        <SectionHeading eyebrow="Selección" class="mb-10" data-reveal>
-          Más trabajo
+        <SectionHeading eyebrow="Julio - Septiembre 2026" class="mb-10" data-reveal>
+          Otros proyectos
         </SectionHeading>
         <ProjectGrid projects={projectsToShow} />
       </Container>
     )
   }
 
-  <ContactCta />
+  {timelineAfterOtherProjects.map((item) => <ExperienceBlock {...item} />)}
 </PageLayout>

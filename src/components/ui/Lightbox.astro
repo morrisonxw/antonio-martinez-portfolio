@@ -13,6 +13,8 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
 <div
   id="lightbox"
   data-state="closed"
+  inert
+  aria-hidden="true"
   data-expand-label={t(locale, 'lightbox.expand')}
   class="fixed inset-0 z-[80] pointer-events-none data-[state=open]:pointer-events-auto"
   role="dialog"
@@ -29,7 +31,7 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
     type="button"
     data-lightbox-close
     aria-label={t(locale, 'lightbox.close')}
-    class="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-ink/30 text-ink transition-colors hover:border-accent hover:text-accent sm:right-6 sm:top-6"
+    class="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-ink/30 text-ink transition-colors hover:border-accent hover:text-accent-strong sm:right-6 sm:top-6"
   >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" class="h-4 w-4">
       <path d="M6 6l12 12M18 6L6 18" />
@@ -60,6 +62,8 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
 
     function setState(state: 'open' | 'closed') {
       lightbox!.dataset.state = state;
+      lightbox!.inert = state === 'closed';
+      lightbox!.setAttribute('aria-hidden', String(state === 'closed'));
       backdrop!.dataset.state = state;
       content!.dataset.state = state;
     }

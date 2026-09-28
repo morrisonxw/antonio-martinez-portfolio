@@ -1,0 +1,214 @@
+---
+title: "Zubank: imagining an AI-augmented SME advisor"
+summary: "A futures design project to help SME advisors act earlier with AI support while keeping human judgment and trust at the center."
+cover: "../../assets/projects/zubank-cover.svg"
+coverAlt: "Future service diagram: business signals, AI-supported preparation, and a conversation between advisor and SME"
+tags: ["Futures Design", "Service Design", "Responsible AI", "SME Banking"]
+year: 2026
+yearLabel: "Horizon: 2026 to 2028"
+featured: true
+order: 1
+draft: false
+
+role: "Product Designer, strategy and service futures"
+team: "Independent project, with AI assistance for exploration, structuring, and artifact production"
+company: "Zubank (pseudonym)"
+industry: "Financial services · Conceptual challenge"
+scope: ["Futures Design", "Service Design", "Backcasting", "Product Strategy", "Responsible AI"]
+tools: ["Service blueprints", "Scenarios", "Diegetic prototype", "Metrics tree"]
+confidential: true
+---
+
+import ImpactStats from '../../components/mdx/ImpactStats.astro';
+import ProductDivider from '../../components/mdx/ProductDivider.astro';
+import DataTable from '../../components/mdx/DataTable.astro';
+import FuturesCone from '../../components/mdx/FuturesCone.astro';
+import ServiceBlueprint from '../../components/mdx/ServiceBlueprint.astro';
+import ScenarioMatrix from '../../components/mdx/ScenarioMatrix.astro';
+import BackcastingTimeline from '../../components/mdx/BackcastingTimeline.astro';
+import ServiceSystemMap from '../../components/mdx/ServiceSystemMap.astro';
+
+*This is an independently developed conceptual challenge. Zubank is a pseudonym. The 2028 scenario and its indicators describe a proposed future and a way to test it. They are not observed results.*
+
+## In 2028, the advisor shows up earlier
+
+Laura reviews three business signals with Wanda, decides which one deserves a conversation, and calls Carlos before he applies for financing. Wanda organizes information and prepares alternatives; Laura interprets, asks, and recommends. Months later, Carlos calls her again before making another growth decision.
+
+The proposal does not use AI to replace the commercial relationship. It reduces operational work that leaves advisors with less time to apply their judgment. I designed how the service could evolve and what conditions would support that change.
+
+<ProductDivider eyebrow="The proposition" label="Wanda prepares the context. Laura decides how to turn it into a useful conversation." />
+
+## The challenge: from handling requests to supporting decisions
+
+In the service described by the challenge, advisors gather information across systems, prepare meetings, consult specialists, and follow up on opportunities. SMEs handle everyday needs through digital channels but seek human guidance when deciding how to grow. At that moment, the bank may have a valuable relationship with the client and still arrive too late or without enough context.
+
+The design question was: **How might we anticipate a useful conversation without turning SME data into surveillance or adding another task to the advisor’s day?** The response was to redesign the service around moments when human judgment and relationships make a difference.
+
+## Designing from a plausible future
+
+I started with a 2028 scene: a client returns to their advisor before making a decision. Working backward from that future helped identify the capabilities, permissions, and choices that would need to come first. The horizon is a design tool, not a forecast. The proposal moves from a focused preparation brief to controlled trials and, later, to more integrated capabilities. Each stage depends on evidence and data governance.
+
+<BackcastingTimeline
+  locale="en"
+  directionLabel="BACKCASTING · FROM THE DESIRED FUTURE TO PRESENT CONDITIONS"
+  milestones={[
+    { year: "2026", label: "Enable", outcome: "Consent and reliable|data sources", condition: "Define roles, boundaries,|and data governance" },
+    { year: "2027", label: "Test and learn", outcome: "Validate signals, preparation,|and guidance", condition: "Controlled pilot with|decision gates" },
+    { year: "2028", label: "Preferred future", outcome: "The SME seeks Laura|before making a decision", condition: "Reciprocal trust and|protected time" },
+  ]}
+  caption="Start from the desired outcome in 2028 and work backward to intermediate capabilities and the conditions that must be enabled first."
+/>
+
+### The futures cone: opening options before choosing
+
+The earlier version reduced the cone to three scenarios and treated the preferred future as another probability band. The framework distinguishes projected, probable, plausible, and possible futures; “preferred” expresses a value choice and can cross any of those categories. “Preposterous” appears in some extensions of the model, beyond the boundary of what is considered possible, as a provocation rather than a forecast. It is shown separately here.
+
+<FuturesCone
+  language="en"
+  bands={[
+    { name: "Projected", description: "If nothing changes, fragmented operations persist and the SME seeks financing elsewhere." },
+    { name: "Probable", description: "AI assistants arrive, but targets remain unchanged; saved time becomes more sales activity and the relationship stays reactive." },
+    { name: "Plausible", description: "Four scenarios emerge from combining access to external data with the speed of AI-advisory competition." },
+    { name: "Possible", description: "Beyond 2028, agents from the bank and SME may take on parts of financial operations and negotiation." },
+    { name: "Preposterous · exploratory extension", description: "As a boundary test, autonomous agents negotiate and execute all financing without human involvement. This extrapolation was not developed in the original challenge." },
+  ]}
+  preferred={{ name: "Preferred", description: "AI prepares and coordinates; Laura retains judgment, and the time saved is protected for conversations that help the SME." }}
+  caption="Adaptation of Voros’s futures cone to the challenge horizon. Bands indicate scope and uncertainty, not calculated probabilities. The preferred trajectory is normative, not a probability category."
+/>
+
+The base cone described by Voros distinguishes possible, plausible, and probable futures, with preferable futures as a normative dimension. The projected future serves here as a baseline extrapolation from the present. The preposterous zone is a contemporary extension, not part of the original formulation. <a href="https://foresightinternational.com.au/wp-content/uploads/2020/03/Voros-Primer-on-FS-2001-Final.pdf" target="_blank" rel="noreferrer">Voros, A Primer on Futures Studies (2001)</a>; <a href="https://file.go.gov.sg/thinkingabouttomorrow-digitalcopy.pdf" target="_blank" rel="noreferrer">Centre for Strategic Futures, Thinking About Tomorrow</a>.
+
+### Plausible scenarios: a two-uncertainty matrix
+
+The challenge places four scenarios within the plausible zone. The horizontal axis represents how open access to data becomes; the vertical axis represents how quickly competitors introduce AI-supported advice. These are external conditions, not variables the bank directly controls. Advisor adoption is not one of the axes because organizational design can influence it, making it a lever for the preferred future.
+
+<ScenarioMatrix
+  axisX="Access to external data"
+  axisXLow="Restricted to internal data"
+  axisXHigh="Open with authorization"
+  axisY="Speed of AI-advisory competition"
+  axisYLow="Slow"
+  axisYHigh="Fast"
+  quadrants={[
+    { x: "left", y: "top", title: "Fintech becomes the advisor", description: "With proprietary data, platforms advise SMEs; the bank loses the key decision moment." },
+    { x: "right", y: "top", title: "Race to anticipate", description: "Everyone sees signals; trust and human judgment distinguish the service." },
+    { x: "left", y: "bottom", title: "Internal copilot", description: "AI prepares with internal data. Anticipation is partial; relationships remain the differentiator." },
+    { x: "right", y: "bottom", title: "The advisor arrives first", description: "Authorized data and slower competition open a window for earlier contact." },
+  ]}
+  caption="The challenge’s plausible-scenario matrix. These are exploratory futures, not observed outcomes."
+/>
+
+### Method: from horizon to design decisions
+
+The work moved through four steps. First, I framed the challenge as a tension between the promise of guidance and a service that may arrive too late. Then I explored change forces across social, technological, economic, and regulatory dimensions, distinguishing established trends from emerging signals. From these forces I developed possible futures and selected a preferred direction for its value to the relationship, not its certainty. Finally, backcasting translated that direction into capabilities, conditions, and progressive experiments.
+
+The exploration considered social, technological, economic, environmental, and political-regulatory forces. It separated established trends from emerging signals, then used the two external uncertainties above to build scenarios. Backcasting from the preferred future informed capabilities, conditions, and progressive experiments. The methods informed one another; they are not evidence that the proposed service has been validated.
+
+<DataTable
+  columns={["STEEP dimension", "Change force considered", "Service implication", "Horizon"]}
+  rows={[
+    ["Social", "SMEs expect clarity and faster resolution, while owners have limited time.", "Contact must arrive when it helps, not when the advisor’s calendar allows.", "Present"],
+    ["Technology", "Generative assistants and near-real-time e-invoicing data; early internal AI agents.", "Use sources transparently and assist preparation before expanding autonomy.", "Present to 2028"],
+    ["Economic", "Fintechs offer clear, fast SME credit; embedded finance may move decisions to other platforms.", "Compete through useful advice and a relationship, not speed alone.", "Present to beyond 2028"],
+    ["Environmental", "Large buyers begin asking SME suppliers about sustainability.", "A future extension could include green finance and supply-chain adaptation.", "Beyond 2028"],
+    ["Political and regulatory", "Open finance and increased expectations for explainable, supervised AI.", "Consent, traceability, and human accountability shape what can be designed.", "2027 to 2028"],
+  ]}
+  caption="Selected forces from the challenge’s STEEP scan. These are scenario inputs, not findings from field research conducted for this case."
+/>
+
+### Opportunity prioritization
+
+The challenge ranked opportunities with six weighted criteria: customer and NPS impact (25%), business impact (25%), advisor impact (15%), feasibility and internal alignment (20%), regulatory risk (10%), and evidence (5%). This excerpt keeps the high-priority opportunities and faster approval, included by the project lead despite its feasibility and risk ratings. Scores reflect the challenge team’s judgment, not user measurements.
+
+<DataTable
+  columns={["Opportunity", "Customer", "Business", "Advisor", "Feasibility and alignment", "Risk", "Evidence", "Weighted score", "Priority"]}
+  rows={[
+    ["Detect signals", "5", "5", "3", "4", "3", "4", "4.25", "High"],
+    ["Business conversation", "5", "4", "4", "4", "4", "4", "4.25", "High"],
+    ["Status and timeline visibility", "5", "4", "4", "3", "5", "4", "4.15", "High"],
+    ["Reach the SME before fintechs", "5", "5", "3", "3", "3", "4", "4.05", "High"],
+    ["Faster approval", "5", "5", "2", "2", "2", "4", "3.60", "Medium, included by decision"],
+  ]}
+  minWidth="72rem"
+  caption="Excerpt from the weighted challenge matrix. Scores use a 1 to 5 scale; for regulatory risk, a higher score means lower risk."
+/>
+
+### Blueprint: connecting the promise to operations
+
+The blueprint shows that arriving earlier depends on more than an interface. In the current service, the business signal may not be available to the advisor, preparation requires searching across systems, and credit follow-up can leave the client uncertain. In the proposed service, consent enables a signal, Wanda prepares context, and Laura decides whether there is a valid reason to start a conversation. Risk and operations retain responsibility for assessment and application status.
+
+<ServiceBlueprint
+  locale="en"
+  stages={[
+    { title: "Need emerges", timing: "" },
+    { title: "Carlos explores options", timing: "" },
+    { title: "First contact", timing: "" },
+    { title: "Laura prepares the meeting", timing: "" },
+    { title: "Meeting and application", timing: "" },
+    { title: "Credit assessment", timing: "" },
+    { title: "Decision", timing: "" },
+    { title: "Follow-up", timing: "" },
+  ]}
+  lanes={[
+    { kind: "time", title: "Timing", entries: ["Day 0", "Days 0 to 1", "Day 1", "Days 1 to 2", "Day 3", "Days 3 to 10 · 5 business days", "Day 10", "Weeks and months"] },
+    { kind: "evidence", title: "Physical and digital evidence", entries: ["Chain invoices with consent", "Unsigned fintech offer", "Laura’s call about the new contract", "Application with missing items only", "Business brief, viability, and explained consent", "Status and timeline in the app", "Approval notice and agreement", "Laura’s advice on using the credit"] },
+    { kind: "customer", title: "Carlos · SME actions", lineAfter: "interaction", entries: ["Wins a contract and sees capacity may fall short", "Compares options, including fintech, without deciding", "Receives Laura’s call and agrees to talk", "Uploads only missing or outdated documents", "With his accountant, discusses and confirms the application", "Checks status without repeating information", "Chooses the bank if timing and terms work", "Receives advice and returns before another decision"] },
+    { kind: "frontstage", title: "Laura · frontstage", lineAfter: "visibility", entries: ["No contact yet", "No contact yet", "Calls with a business view, not a product pitch", "Requests only outstanding documents", "Leads the conversation and explains data and alternatives", "Calls before Carlos asks if something is delayed", "Confirms the decision and agrees on next steps", "Follows up with advice, not a campaign"] },
+    { kind: "backstage", title: "Wanda · backstage", entries: ["Detects a billing change and a significant new client", "Estimates need and prioritizes the inbox", "Suggests timing and approach for outreach", "Compiles business view, freshness, documents, and relationship memory", "Pre-fills the application and records agreements after Laura confirms", "Shares business view with risk and flags delays", "Updates relationship memory", "Suggests useful next contact based on the agreement"] },
+    { kind: "backstage", title: "Laura · backstage", lineAfter: "internal", entries: ["—", "Reviews signals and prioritizes whom to contact", "Decides to call Carlos", "Adjusts the business view and reviews materials", "Confirms the application without rekeying", "Steps in when Wanda flags a delay", "—", "Records learning in Wanda"] },
+    { kind: "support", title: "Internal support and governance", entries: ["Current consent to read invoicing data", "—", "—", "Sector insights and specialists available", "Compliance defines data use and client explanation", "Risk assesses the case; operations publish the timeline", "Risk makes the decision within the timeline", "Leadership reviews guidance indicators"] },
+    { kind: "systems", title: "Systems", entries: ["Authorized e-invoicing", "Signal inbox", "Wanda, messaging, and calendar", "CRM, core banking, documents, and risk", "Wanda, CRM, and credit origination", "Credit flow, app, and alerts", "Bank origination and application", "Relationship memory and management dashboard"] },
+    { kind: "moment", title: "Moment of truth", entries: ["—", "The bank gets there before fintech", "Carlos feels Laura understands the business", "—", "Carlos decides whether to trust the bank", "—", "Carlos chooses the bank", "Carlos calls Laura on his own"] },
+    { kind: "opportunity", title: "Opportunity delivered", entries: ["Detect signals · Meaningful consent", "Reach the SME before fintech", "Reach the SME before fintech", "Preparation in minutes · Relationship memory", "Business conversation · No duplicate entry", "Status visibility · Faster approval", "Faster approval", "Useful follow-up · Leadership indicators"] },
+  ]}
+  interactionLabel="Line of interaction"
+  visibilityLabel="Line of visibility"
+  internalLabel="Line of internal interaction"
+  caption="Future-state blueprint from the challenge, retaining all eight stages for direct comparison with the current service. The designed journey moves from 32 to 10 days; Wanda remains below the line of visibility and Carlos never interacts with it."
+/>
+
+The blueprint preserves the timeline and separates evidence, Carlos’s actions, Laura’s visible interaction, the internal work of Wanda and Laura, support, systems, moments of truth, and opportunities. The interaction, visibility, and internal-interaction lines mark service handoffs. On mobile, scroll horizontally to keep the lanes readable.
+
+This follows the service-blueprint convention: evidence, customer actions, visible interaction, backstage work, and support processes aligned to a sequence, with lines marking service boundaries. <a href="https://www.ontario.ca/page/service-blueprints" target="_blank" rel="noreferrer">Ontario Digital Service, Service Blueprints</a>; <a href="https://guides.18f.org/methods/decide/service-blueprint/" target="_blank" rel="noreferrer">18F, Service blueprint</a>.
+
+## An augmented system with human accountability
+
+Wanda works in the advisor’s workspace. It gathers signals and their sources, prepares a view of the business, organizes alternatives, and flags a stalled application. Laura decides whether to contact the client, reviews the information, and owns the recommendation. The client does not talk to Wanda or receive decisions made by the system.
+
+<ServiceSystemMap locale="en" caption="Service system map. The flows distinguish the client-advisor relationship from Wanda’s internal support and show the organizational capabilities required." />
+
+The narrative prototype follows a Tuesday in this future through a signal card, preparation brief, proposal, and loan application status. These artifacts show how touchpoints might change. The story also sets clear boundaries: Wanda uses authorized data, shows its sources, and never contacts the client directly.
+
+## How would we know whether this future deserves to scale?
+
+The measurement framework links early signals to customer experience and business outcomes. A pilot would track whether advisors reach decision moments earlier, operational workload falls, and SMEs find the guidance more useful. Over time, I would measure customer recommendation, trust, advisor experience, and the bank’s role in financing decisions. These are proposed indicators, not project results.
+
+<ImpactStats
+  stats={[
+    { value: "Show up earlier", label: "Useful signals that become timely conversations." },
+    { value: "Time well spent", label: "Advisor workload, preparation, and experience, including eNPS." },
+    { value: "Trust", label: "Perceived guidance, clarity, and control over data use." },
+    { value: "Business outcomes", label: "Financing decisions and business performance over time." },
+  ]}
+/>
+
+<DataTable
+  columns={["Level", "What to observe", "How to interpret it"]}
+  rows={[
+    ["Activity signal", "Preparation time, repeated searches, and alerts reviewed by the advisor.", "Shows whether the tool reduces friction without adding supervision work."],
+    ["Relationship quality", "Contextual conversations, perceived usefulness, and continuity chosen by the SME.", "Tests whether arriving earlier leads to meaningful guidance."],
+    ["Experience and trust", "Clarity of sources and permissions, data control, and advisor and client experience.", "Acts as a safeguard: operational improvement cannot offset loss of trust."],
+    ["Business outcome", "Role in financing decisions and relationship development over time.", "Interpret alongside credit terms, processing time, and other service factors."],
+  ]}
+  caption="Proposed measurement tree. Baseline, data sources, cadence, and comparison criteria would need definition before a pilot."
+/>
+
+The service would advance only if advisors choose to use it, signals are reliable and traceable, permissions remain valid, and trust does not decline. Results would be compared with a group not using Wanda. If an adverse effect appears, expansion stops even if operational indicators improve.
+
+## What this exercise leaves behind
+
+This exercise moved AI from the interface into the wider service. For the future to work, the organization also needs suitable incentives, data governance, operational integration, and a commitment to return saved time to conversations with SMEs.
+
+The next step would be to review the scenario with advisors, SMEs, risk, and compliance. I would then test the preparation brief against real tasks and establish a baseline for evaluating change. That learning would help decide which capabilities to build and which to leave behind.
+
+*The concept, strategy, artifacts, and narrative were developed by Antonio Martínez with AI assistance. No interviews with real users were conducted, and the service described was not implemented.*

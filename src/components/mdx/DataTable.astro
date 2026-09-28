@@ -1,0 +1,60 @@
+---
+interface Props {
+  columns: string[];
+  rows: string[][];
+  caption?: string;
+  // Ancho mínimo antes de activar el scroll horizontal dentro de la tabla
+  // (nunca del documento) en pantallas angostas.
+  minWidth?: string;
+}
+
+const { columns, rows, caption, minWidth = '34rem' } = Astro.props;
+---
+
+{
+  /*
+    `not-prose`: la tabla de @tailwindcss/typography no lee nuestros tokens y
+    fuerza tamaños/márgenes; acá se controla todo con utilidades. La primera
+    columna es <th scope="row"> para que un lector de pantalla asocie cada
+    celda con su fila.
+  */
+}
+<div class="not-prose my-10" data-reveal>
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse text-left text-sm" style={`min-width:${minWidth}`}>
+      {caption && <caption class="sr-only">{caption}</caption>}
+      <thead>
+        <tr>
+          {
+            columns.map((column) => (
+              <th
+                scope="col"
+                class="border-b-2 border-ink px-3 pb-2 text-xs font-semibold tracking-wide text-ink-muted uppercase first:pl-0 last:pr-0"
+              >
+                {column}
+              </th>
+            ))
+          }
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map((row) => (
+            <tr class="border-b border-border/50 align-top">
+              {row.map((cell, index) =>
+                index === 0 ? (
+                  <th scope="row" class="py-3 pr-3 font-display font-semibold text-ink">
+                    {cell}
+                  </th>
+                ) : (
+                  <td class="px-3 py-3 leading-relaxed text-ink-muted last:pr-0">{cell}</td>
+                ),
+              )}
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+  {caption && <p class="mt-3 text-sm text-ink-muted">{caption}</p>}
+</div>

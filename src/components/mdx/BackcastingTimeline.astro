@@ -1,0 +1,47 @@
+---
+interface Milestone {
+  year: string;
+  label: string;
+  outcome: string;
+  condition: string;
+}
+
+interface Props {
+  milestones: Milestone[];
+  directionLabel?: string;
+  locale?: 'es' | 'en';
+  caption?: string;
+}
+
+const { milestones, directionLabel = 'LECTURA HACIA ATRÁS · DEL FUTURO A LAS CONDICIONES', locale = 'es', caption } = Astro.props;
+const en = locale === 'en';
+---
+
+<figure class="not-prose my-10" data-reveal>
+  <div class="overflow-x-auto rounded-2xl border border-border/60 bg-paper p-4 sm:p-6">
+    <svg viewBox="0 0 1050 340" class="block h-auto min-w-[820px] w-full" role="img" aria-label={`${directionLabel}. ${milestones.map((item) => `${item.year}: ${item.label}. ${item.outcome}. ${item.condition}`).join(' ')}`}>
+      <defs><marker id="backcast-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M1 1 L7 4 L1 7" class="fill-none stroke-accent" stroke-width="1.5" /></marker></defs>
+      <text x="54" y="38" class="fill-ink text-[11px] font-semibold tracking-[0.12em]">{directionLabel}</text>
+      <line x1="915" y1="91" x2="128" y2="91" class="stroke-accent" stroke-width="2" marker-end="url(#backcast-arrow)" />
+      {milestones.map((item, index) => {
+        const x = [92, 397, 702][index] ?? 92 + index * 300;
+        const dark = index === milestones.length - 1;
+        return <g>
+          <circle cx={x + 125} cy="91" r="12" class={dark ? 'fill-ink' : 'fill-accent'} />
+          <line x1={x + 125} y1="104" x2={x + 125} y2="125" class="stroke-border" stroke-width="1.5" />
+          <rect x={x} y="125" width="250" height="166" rx="14" class={dark ? 'fill-ink' : 'fill-paper-muted'} />
+          <text x={x + 20} y="154" class={dark ? 'fill-accent-muted text-[10px] font-bold tracking-[0.12em]' : 'fill-accent-strong text-[10px] font-bold tracking-[0.12em]'}>{item.year} · {item.label.toLocaleUpperCase()}</text>
+          <text x={x + 20} y="184" class={dark ? 'fill-paper text-[14px] font-bold' : 'fill-ink text-[14px] font-bold'}>
+            {item.outcome.split('|').map((line, lineIndex) => <tspan x={x + 20} dy={lineIndex === 0 ? 0 : 19}>{line}</tspan>)}
+          </text>
+          <line x1={x + 20} y1="228" x2={x + 230} y2="228" class={dark ? 'stroke-ink-muted' : 'stroke-border'} stroke-width="1" />
+          <text x={x + 20} y="250" class={dark ? 'fill-paper-muted text-[11px]' : 'fill-ink-muted text-[11px]'}>
+            {item.condition.split('|').map((line, lineIndex) => <tspan x={x + 20} dy={lineIndex === 0 ? 0 : 16}>{line}</tspan>)}
+          </text>
+        </g>;
+      })}
+      <text x="54" y="319" class="fill-ink-muted text-[10px]">{en ? 'First define the desired future, then work back to what must be true today.' : 'Primero se define el futuro deseado; después se retrocede hasta las condiciones de hoy.'}</text>
+    </svg>
+  </div>
+  {caption && <figcaption class="mt-3 text-sm text-ink-muted">{caption}</figcaption>}
+</figure>

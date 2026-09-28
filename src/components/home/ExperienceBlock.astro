@@ -29,7 +29,7 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
             href={companyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="underline decoration-2 underline-offset-4 hover:text-accent"
+            class="underline decoration-2 underline-offset-4 hover:text-accent-strong"
           >
             {company}
           </a>
@@ -79,8 +79,9 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
                 aria-labelledby={`exp-project-${project.id}`}
                 class="group block w-[340px] shrink-0 [perspective:800px] sm:w-[480px] lg:w-[540px]"
                 data-tilt
+                data-project-id={project.id}
               >
-                <div class="overflow-hidden rounded-2xl bg-paper-muted" data-tilt-target>
+                <div class="relative overflow-hidden rounded-2xl bg-paper-muted" data-tilt-target>
                   <Image
                     src={project.data.thumbnail ?? project.data.cover}
                     alt={project.data.coverAlt}
@@ -88,6 +89,11 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
                     height={687}
                     class="aspect-[344/197] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                   />
+                  <span class="visited-badge absolute right-3 top-3 h-7 w-7 items-center justify-center rounded-full bg-accent-blue text-paper" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="h-3.5 w-3.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M20 6 9 17l-5-5" />
+                    </svg>
+                  </span>
                 </div>
                 <h3
                   id={`exp-project-${project.id}`}
