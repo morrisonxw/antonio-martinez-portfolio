@@ -19,7 +19,7 @@ const { src, alt, caption, size = 'full', framed = false } = Astro.props;
 const widthClass = { full: '', md: 'mx-auto max-w-xl', sm: 'mx-auto max-w-xs' }[size];
 ---
 
-<figure class="my-10" data-reveal>
+<figure class:list={['my-10', size === 'full' && 'media-bleed']} data-reveal>
   {
     framed ? (
       <div class="rounded-2xl bg-paper-muted px-4 py-8 sm:px-10 sm:py-12">
@@ -29,5 +29,5 @@ const widthClass = { full: '', md: 'mx-auto max-w-xl', sm: 'mx-auto max-w-xs' }[
       <Image src={src} alt={alt} width={1200} class:list={['w-full rounded-xl', widthClass]} />
     )
   }
-  {caption && <figcaption class="mt-3 text-sm text-ink-muted">{caption}</figcaption>}
+  {caption && <figcaption class="media-caption mt-3 text-sm text-ink-muted">{caption}</figcaption>}
 </figure>

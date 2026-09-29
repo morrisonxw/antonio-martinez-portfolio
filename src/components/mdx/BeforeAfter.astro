@@ -14,7 +14,7 @@ const { before, beforeAlt, after, afterAlt } = Astro.props;
 const locale = (Astro.currentLocale ?? 'es') as Locale;
 ---
 
-<div class="my-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
+<div class="media-bleed my-10 grid grid-cols-1 gap-4 sm:grid-cols-2">
   <figure>
     <Image src={before} alt={beforeAlt} width={800} class="w-full rounded-xl" />
     <figcaption class="mt-2 text-sm text-ink-muted">{t(locale, 'beforeAfter.before')}</figcaption>

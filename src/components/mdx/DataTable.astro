@@ -19,7 +19,7 @@ const { columns, rows, caption, minWidth = '34rem' } = Astro.props;
     celda con su fila.
   */
 }
-<div class="not-prose my-10" data-reveal>
+<div class="not-prose media-bleed my-10" data-reveal>
   <div class="overflow-x-auto">
     <table class="w-full border-collapse text-left text-sm" style={`min-width:${minWidth}`}>
       {caption && <caption class="sr-only">{caption}</caption>}
@@ -56,5 +56,5 @@ const { columns, rows, caption, minWidth = '34rem' } = Astro.props;
       </tbody>
     </table>
   </div>
-  {caption && <p class="mt-3 text-sm text-ink-muted">{caption}</p>}
+  {caption && <p class="media-caption mt-3 text-sm text-ink-muted">{caption}</p>}
 </div>

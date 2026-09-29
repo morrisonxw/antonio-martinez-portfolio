@@ -18,7 +18,7 @@ const en = locale === 'en';
 ---
 
 <figure class="not-prose my-10" data-reveal>
-  <div class="relative left-1/2 w-screen max-w-[80rem] -translate-x-1/2 overflow-x-auto">
+  <div class="media-bleed overflow-x-auto">
     <svg viewBox="0 0 1050 340" class="block h-auto min-w-[820px] w-full" role="img" aria-label={`${directionLabel}. ${milestones.map((item) => `${item.year}: ${item.label}. ${item.outcome}. ${item.condition}`).join(' ')}`}>
       <defs><marker id="backcast-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M1 1 L7 4 L1 7" class="fill-none stroke-accent" stroke-width="1.5" /></marker></defs>
       <text x="54" y="38" class="fill-ink text-[11px] font-semibold tracking-[0.12em]">{directionLabel}</text>

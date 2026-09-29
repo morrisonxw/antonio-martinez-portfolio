@@ -3,6 +3,22 @@
 @plugin "@tailwindcss/typography";
 
 @layer components {
+  /* Los artefactos visuales salen de la columna de lectura sin desbordar el viewport. */
+  .media-bleed {
+    box-sizing: border-box;
+    position: relative;
+    left: 50%;
+    width: min(100vw, 80rem);
+    padding-inline: clamp(1.5rem, 4vw, 3rem);
+    transform: translateX(-50%);
+  }
+
+  .media-bleed > figcaption,
+  .media-bleed > .media-caption {
+    width: min(calc(100% - 3rem), var(--prose-width));
+    margin-inline: auto;
+  }
+
   .project-card-media {
     @apply relative overflow-hidden rounded-2xl bg-paper-muted;
   }

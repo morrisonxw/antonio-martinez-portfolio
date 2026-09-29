@@ -39,8 +39,8 @@ const cells = {
 };
 ---
 
-<figure class="not-prose my-10" data-reveal>
-  <div class="overflow-x-auto rounded-2xl border border-border/60 bg-paper p-3 sm:p-5">
+<figure class="not-prose media-bleed my-10" data-reveal>
+  <div class="overflow-x-auto">
     <svg viewBox="0 0 850 500" class="block h-auto min-w-[740px] w-full" role="img" aria-label={`${axisY}: ${axisYHigh} to ${axisYLow}; ${axisX}: ${axisXLow} to ${axisXHigh}. ${quadrants.map((q) => `${q.title}: ${q.description}`).join(' ')}`}>
       <text x="154" y="32" class="fill-ink text-[12px] font-semibold tracking-[0.1em]">ESCENARIOS PLAUSIBLES</text>
       {quadrants.map((q) => {
