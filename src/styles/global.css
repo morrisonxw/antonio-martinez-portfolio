@@ -94,6 +94,15 @@ body {
   transform: none;
 }
 
+/* La entrada vertical no debe anular el centrado de los medios a todo ancho. */
+[data-reveal].media-bleed.reveal-init {
+  transform: translate(-50%, 28px);
+}
+
+[data-reveal].media-bleed.reveal-init.is-revealed {
+  transform: translateX(-50%);
+}
+
 /* Textura grain para secciones oscuras full-bleed (CTA, experiencia) */
 .bg-grain {
   position: relative;
