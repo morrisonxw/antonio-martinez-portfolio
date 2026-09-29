@@ -22,7 +22,9 @@ interface Props {
 }
 
 const { project, prev, next, readingTime } = Astro.props;
-const { title, summary, cover, coverAlt, tags, company, confidential } = project.data;
+const { title, summary, cover, coverAlt, entryImage, entryImageAlt, tags, company, confidential } = project.data;
+const leadImage = entryImage ?? cover;
+const leadImageAlt = entryImageAlt ?? coverAlt;
 const locale = (Astro.currentLocale ?? 'es') as Locale;
 const eyebrow = company ?? tags[0] ?? t(locale, 'caseStudy.fallbackEyebrow');
 ---
@@ -82,7 +84,7 @@ const eyebrow = company ?? tags[0] ?? t(locale, 'caseStudy.fallbackEyebrow');
     </Container>
 
     <Container class="mt-12" data-reveal>
-      <Image src={cover} alt={coverAlt} width={1600} class="w-full rounded-2xl" priority />
+      <Image src={leadImage} alt={leadImageAlt} width={1600} class="w-full rounded-2xl" priority />
     </Container>
 
     <Container class="prose mt-16 max-w-[var(--prose-width)] prose-headings:font-display prose-headings:tracking-tightest">

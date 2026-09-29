@@ -11,6 +11,10 @@ const projectSchema = ({ image }: SchemaContext) =>
     summary: z.string().max(200),
     cover: image(),
     coverAlt: z.string(),
+    // Imagen de apertura opcional del caso; la portada sigue siendo la
+    // miniatura de las tarjetas y la imagen para compartir en redes.
+    entryImage: image().optional(),
+    entryImageAlt: z.string().optional(),
     // Miniatura opcional para las cards del home y de /proyectos. Si no se
     // define, las cards usan `cover`. Existe para poder mostrar una versión
     // recortada/con marco en las cards sin afectar la portada a ancho
