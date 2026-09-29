@@ -8,7 +8,6 @@ import { initTilt, destroyTilt } from './tilt';
 import { initCountUp, destroyCountUp } from './count-up';
 import { initReadingProgress, destroyReadingProgress } from './reading-progress';
 import { initVisitedTracking, destroyVisitedTracking } from './visited';
-import { initHeroGrid, destroyHeroGrid } from './hero-grid';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,7 +19,6 @@ function start() {
   initCountUp();
   initReadingProgress();
   initVisitedTracking();
-  initHeroGrid();
   playAutoplayVideos();
   requestAnimationFrame(() => ScrollTrigger.refresh());
 }
@@ -31,7 +29,6 @@ function stop() {
   destroyCountUp();
   destroyReadingProgress();
   destroyVisitedTracking();
-  destroyHeroGrid();
   ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
   destroySmoothScroll();
 }

@@ -10,17 +10,9 @@ const site = locale === 'en' ? siteEn : siteEs;
 
 <section
   data-hero-grid-section
-  class="relative flex min-h-[480px] flex-col justify-center overflow-hidden bg-paper py-12 text-ink sm:min-h-[540px] sm:py-16 lg:min-h-[560px]"
+  class="relative flex min-h-[max(480px,calc(100svh-5rem))] flex-col justify-center overflow-hidden bg-paper py-12 text-ink sm:min-h-[calc(100svh-5rem)] sm:py-16"
 >
-  {
-    /*
-      Grilla de puntos reactiva al cursor (src/lib/motion/hero-grid.ts):
-      referencia visual a "los sistemas que sostienen un producto", en línea
-      con "entiendo el producto más allá del píxel". Solo se monta con mouse
-      fino y sin prefers-reduced-motion; si no, el canvas queda vacío y el
-      hero se ve limpio, sin hueco.
-    */
-  }
+  {/* Fondo ASCII animado; el texto del canvas es decorativo y el mensaje principal sigue siendo HTML. */}
   <canvas data-hero-grid class="pointer-events-none absolute inset-0 z-0" aria-hidden="true"></canvas>
 
   <Container class="relative z-[1]">

@@ -16,7 +16,7 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
   inert
   aria-hidden="true"
   data-expand-label={t(locale, 'lightbox.expand')}
-  class="fixed inset-0 z-[80] pointer-events-none data-[state=open]:pointer-events-auto"
+  class="invisible fixed inset-0 z-[80] pointer-events-none opacity-0 transition-opacity duration-300 data-[state=open]:visible data-[state=open]:pointer-events-auto data-[state=open]:opacity-100"
   role="dialog"
   aria-modal="true"
   aria-label={t(locale, 'lightbox.expand')}

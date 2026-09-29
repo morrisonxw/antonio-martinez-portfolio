@@ -10,7 +10,7 @@ const { eyebrow, class: className = '', as: Tag = 'h2', ...rest } = Astro.props;
 ---
 
 <div class:list={['max-w-[var(--prose-width)]', className]} {...rest}>
-  {eyebrow && <p class="mb-2 text-sm font-medium text-accent-strong">{eyebrow}</p>}
+  {eyebrow && <p class="mb-2 text-sm font-medium text-ink-muted">{eyebrow}</p>}
   <Tag class="font-display text-3xl font-bold tracking-tightest text-ink sm:text-4xl">
     <slot />
   </Tag>

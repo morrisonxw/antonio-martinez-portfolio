@@ -1,0 +1,10 @@
+node_modules
+dist
+.astro
+.vercel
+.git
+.env*
+.agents
+.claude
+.codex
+dev-server.log

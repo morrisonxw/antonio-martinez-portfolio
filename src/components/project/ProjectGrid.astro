@@ -1,24 +1,265 @@
 ---
 import ProjectCard from './ProjectCard.astro';
 import type { ProjectEntry } from '../../lib/content-types';
+import type { Locale } from '../../i18n/ui';
 
 interface Props {
   projects: ProjectEntry[];
 }
 
 const { projects } = Astro.props;
+const locale = (Astro.currentLocale ?? 'es') as Locale;
+const isEnglish = locale === 'en';
+
+const categoryDefinitions = [
+  { id: 'product', label: isEnglish ? 'Product design' : 'Diseño de producto' },
+  { id: 'b2b', label: 'B2B' },
+  { id: 'operations', label: isEnglish ? 'Operations' : 'Operaciones' },
+  { id: 'future-ai', label: isEnglish ? 'Futures & AI' : 'Futuros e IA' },
+  { id: 'service', label: isEnglish ? 'Service design' : 'Diseño de servicios' },
+  { id: 'systems', label: isEnglish ? 'Design systems' : 'Sistemas de diseño' },
+  { id: 'visual', label: isEnglish ? 'Visual work' : 'Portafolio visual' },
+];
+
+function normalize(value: string): string {
+  return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
+function getCategories(tags: string[]): string[] {
+  const values = tags.map(normalize);
+  const categories: string[] = [];
+  if (values.includes('product design')) categories.push('product');
+  if (values.some((tag) => tag.includes('b2b') || tag.includes('enterprise'))) categories.push('b2b');
+  if (values.some((tag) => /logistic|factur|billing|operation|procurement|tarif|rate|concili|reconcil|field service|adquisicion|acquisition/.test(tag))) {
+    categories.push('operations');
+  }
+  if (values.some((tag) => /futur|applied ai|ia aplicada|responsible ai|ia responsable/.test(tag))) {
+    categories.push('future-ai');
+  }
+  if (values.some((tag) => /service design|servicios de campo|field services/.test(tag))) categories.push('service');
+  if (values.some((tag) => /design system/.test(tag))) categories.push('systems');
+  if (values.some((tag) => /behance|visual portfolio|portafolio visual/.test(tag))) categories.push('visual');
+  return categories;
+}
+
+const categoriesWithCounts = categoryDefinitions
+  .map((category) => ({
+    ...category,
+    count: projects.filter((project) => getCategories(project.data.tags).includes(category.id)).length,
+  }))
+  .filter((category) => category.count > 0);
+const years = [...new Set(projects.map((project) => project.data.year))].sort((a, b) => b - a);
+const labels = isEnglish
+  ? {
+      search: 'Search projects',
+      placeholder: 'Search by project, skill or industry',
+      category: 'Filter projects by category',
+      year: 'Filter by year',
+      allYears: 'All years',
+      sort: 'Sort projects',
+      recent: 'Newest first',
+      oldest: 'Oldest first',
+      alphabetical: 'A to Z',
+      clear: 'Clear filters',
+      results: 'projects found',
+      empty: 'No projects match these filters.',
+    }
+  : {
+      search: 'Buscar proyectos',
+      placeholder: 'Busca por proyecto, habilidad o sector',
+      category: 'Filtrar proyectos por categoría',
+      year: 'Filtrar por año',
+      allYears: 'Todos los años',
+      sort: 'Ordenar proyectos',
+      recent: 'Más recientes',
+      oldest: 'Más antiguos',
+      alphabetical: 'A a Z',
+      clear: 'Limpiar filtros',
+      results: 'proyectos encontrados',
+      empty: 'No hay proyectos que coincidan con estos filtros.',
+    };
 ---
 
-{
-  /*
-    gap-y vive en cada ProjectCard (mt-16 condicional), no acá: cada card
-    es en sí misma un subgrid de 3 filas (imagen, título, resumen+tags) que
-    comparte esas filas con su vecina de la misma fila del grid padre, para
-    que el resumen de ambas arranque a la misma altura sin importar cuántas
-    líneas ocupe el título de cada una. Un gap-y acá se aplicaría también
-    entre esas 3 filas internas, no solo entre pares de cards.
-  */
-}
-<div class="grid grid-cols-1 gap-x-10 sm:grid-cols-2">
-  {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
-</div>
+<section data-project-browser class="w-full min-w-0">
+  <div data-project-controls hidden class="mb-12 w-full min-w-0 space-y-6">
+    <div class="grid w-full min-w-0 gap-4 sm:grid-cols-[minmax(12rem,1fr)_10rem_11rem] sm:items-end">
+      <label class="block min-w-0" for="project-search">
+        <span class="mb-2 block text-xs font-medium text-ink-muted">{labels.search}</span>
+        <span class="flex h-12 w-full min-w-0 items-center gap-3 rounded-full border border-border bg-paper px-4 transition-colors focus-within:border-ink">
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" class="h-4 w-4 shrink-0 text-ink-muted">
+            <circle cx="10.8" cy="10.8" r="6.8" />
+            <path stroke-linecap="round" d="m16 16 4.5 4.5" />
+          </svg>
+          <input
+            id="project-search"
+            data-project-search
+            type="search"
+            autocomplete="off"
+            placeholder={labels.placeholder}
+            class="min-w-0 flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-ink-muted/80"
+          />
+        </span>
+      </label>
+
+      <label class="block min-w-0" for="project-year">
+        <span class="mb-2 block text-xs font-medium text-ink-muted">{labels.year}</span>
+        <select id="project-year" data-project-year class="h-12 w-full min-w-0 max-w-full rounded-full border border-border bg-paper px-4 text-sm text-ink outline-none transition-colors focus:border-ink lg:min-w-40">
+          <option value="all">{labels.allYears}</option>
+          {years.map((year) => <option value={year}>{year}</option>)}
+        </select>
+      </label>
+
+      <label class="block min-w-0" for="project-sort">
+        <span class="mb-2 block text-xs font-medium text-ink-muted">{labels.sort}</span>
+        <select id="project-sort" data-project-sort class="h-12 w-full min-w-0 max-w-full rounded-full border border-border bg-paper px-4 text-sm text-ink outline-none transition-colors focus:border-ink lg:min-w-44">
+          <option value="recent">{labels.recent}</option>
+          <option value="oldest">{labels.oldest}</option>
+          <option value="title">{labels.alphabetical}</option>
+        </select>
+      </label>
+    </div>
+
+    <nav aria-label={labels.category} class="flex min-w-0 max-w-full flex-wrap gap-2 pb-1">
+      <button
+        type="button"
+        data-category-filter="all"
+        aria-pressed="true"
+        class="shrink-0 rounded-full border border-ink bg-ink px-4 py-2 text-sm font-medium text-paper transition-colors aria-pressed:bg-ink aria-pressed:text-paper"
+      >
+        {isEnglish ? 'All' : 'Todos'} <span class="ml-1 text-paper/65">{projects.length}</span>
+      </button>
+      {categoriesWithCounts.map((category) => (
+        <button
+          type="button"
+          data-category-filter={category.id}
+          aria-pressed="false"
+          class="shrink-0 rounded-full border border-border bg-paper px-4 py-2 text-sm font-medium text-ink-muted transition-colors hover:border-ink hover:text-ink aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-paper"
+        >
+          {category.label} <span class="ml-1 opacity-60">{category.count}</span>
+        </button>
+      ))}
+    </nav>
+
+    <div class="flex items-center justify-between gap-4 border-b border-border pb-4 text-sm">
+      <p class="text-ink-muted" aria-live="polite" aria-atomic="true">
+        <span data-project-count>{projects.length}</span> {labels.results}
+      </p>
+      <button type="button" data-project-clear hidden class="text-ink underline decoration-border underline-offset-4 transition-colors hover:text-accent-strong">
+        {labels.clear}
+      </button>
+    </div>
+  </div>
+
+  <div data-project-grid class="grid w-full min-w-0 grid-cols-1 gap-x-10 sm:grid-cols-2">
+    {projects.map((project, index) => (
+      <ProjectCard project={project} index={index} categories={getCategories(project.data.tags)} />
+    ))}
+  </div>
+  <p data-project-empty hidden role="status" class="py-16 text-center text-ink-muted">{labels.empty}</p>
+</section>
+
+<script>
+  const normalizeText = (value: string) =>
+    value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase();
+
+  function setupProjectBrowser() {
+    document.querySelectorAll<HTMLElement>('[data-project-browser]').forEach((browser) => {
+      if (browser.dataset.ready === 'true') return;
+      browser.dataset.ready = 'true';
+
+      const controls = browser.querySelector<HTMLElement>('[data-project-controls]');
+      const grid = browser.querySelector<HTMLElement>('[data-project-grid]');
+      const search = browser.querySelector<HTMLInputElement>('[data-project-search]');
+      const year = browser.querySelector<HTMLSelectElement>('[data-project-year]');
+      const sort = browser.querySelector<HTMLSelectElement>('[data-project-sort]');
+      const count = browser.querySelector<HTMLElement>('[data-project-count]');
+      const clear = browser.querySelector<HTMLButtonElement>('[data-project-clear]');
+      const empty = browser.querySelector<HTMLElement>('[data-project-empty]');
+      if (!controls || !grid || !search || !year || !sort || !count || !clear || !empty) return;
+
+      controls.hidden = false;
+      const cards = Array.from(grid.querySelectorAll<HTMLElement>('[data-project-card]'));
+      const categoryButtons = Array.from(browser.querySelectorAll<HTMLButtonElement>('[data-category-filter]'));
+      let selectedCategory = 'all';
+
+      function update() {
+        const query = normalizeText(search!.value.trim());
+        const selectedYear = year!.value;
+        const sortBy = sort!.value;
+        const matching = cards.filter((card) => {
+          const matchesQuery = !query || normalizeText(card.dataset.search ?? '').includes(query);
+          const matchesYear = selectedYear === 'all' || card.dataset.year === selectedYear;
+          const categories = (card.dataset.categories ?? '').split(' ');
+          const matchesCategory = selectedCategory === 'all' || categories.includes(selectedCategory);
+          return matchesQuery && matchesYear && matchesCategory;
+        });
+
+        matching.sort((a, b) => {
+          if (sortBy === 'title') return (a.dataset.title ?? '').localeCompare(b.dataset.title ?? '');
+          const yearDifference = Number(a.dataset.year) - Number(b.dataset.year);
+          if (yearDifference !== 0) return sortBy === 'oldest' ? yearDifference : -yearDifference;
+          return Number(a.dataset.order) - Number(b.dataset.order);
+        });
+
+        const hiddenCards = cards.filter((card) => !matching.includes(card));
+        matching.forEach((card, index) => {
+          card.hidden = false;
+          card.classList.remove('mt-16', 'sm:mt-0');
+          if (index > 0) card.classList.add('mt-16');
+          if (index < 2) card.classList.add('sm:mt-0');
+        });
+        hiddenCards.forEach((card) => {
+          card.hidden = true;
+          card.classList.remove('mt-16', 'sm:mt-0');
+        });
+        grid!.append(...matching, ...hiddenCards);
+        count!.textContent = String(matching.length);
+        empty!.hidden = matching.length > 0;
+
+        const hasFilters = Boolean(query) || selectedYear !== 'all' || selectedCategory !== 'all';
+        clear!.hidden = !hasFilters;
+      }
+
+      categoryButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          selectedCategory = button.dataset.categoryFilter ?? 'all';
+          categoryButtons.forEach((item) => {
+            const active = item === button;
+            item.setAttribute('aria-pressed', String(active));
+            item.classList.toggle('border-ink', active);
+            item.classList.toggle('bg-ink', active);
+            item.classList.toggle('text-paper', active);
+            item.classList.toggle('bg-paper', !active);
+            item.classList.toggle('text-ink-muted', !active);
+          });
+          update();
+        });
+      });
+
+      search.addEventListener('input', update);
+      year.addEventListener('change', update);
+      sort.addEventListener('change', update);
+      clear.addEventListener('click', () => {
+        search.value = '';
+        year.value = 'all';
+        sort.value = 'recent';
+        selectedCategory = 'all';
+        categoryButtons.forEach((item) => {
+          const active = item.dataset.categoryFilter === 'all';
+          item.setAttribute('aria-pressed', String(active));
+          item.classList.toggle('border-ink', active);
+          item.classList.toggle('bg-ink', active);
+          item.classList.toggle('text-paper', active);
+          item.classList.toggle('bg-paper', !active);
+          item.classList.toggle('text-ink-muted', !active);
+        });
+        update();
+      });
+
+      update();
+    });
+  }
+
+  setupProjectBrowser();
+  document.addEventListener('astro:page-load', setupProjectBrowser);
+</script>

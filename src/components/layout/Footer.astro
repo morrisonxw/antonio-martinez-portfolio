@@ -10,9 +10,13 @@ const year = new Date().getFullYear();
 <footer class="border-t border-border py-10">
   <Container class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
     <p class="text-sm text-ink-muted">© {year} {site.name}. {t(locale, 'footer.rights')}</p>
-    <div class="flex items-center gap-4 text-sm text-ink-muted">
-      <a href={`mailto:${site.email}`} class="hover:text-accent-strong">{site.email}</a>
-      <a href={site.social.linkedin} class="hover:text-accent-strong" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <div class="flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-ink-muted">
+      <a href={`mailto:${site.email}`} class="transition-colors hover:text-ink">{site.email}</a>
+      <a href={site.whatsappUrl} class="transition-colors hover:text-ink" target="_blank" rel="noopener noreferrer" aria-label={`WhatsApp: ${site.phone}`}>
+        WhatsApp <span class="whitespace-nowrap">{site.phone}</span>
+      </a>
+      <a href={site.social.linkedin} class="transition-colors hover:text-ink" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href={site.social.behance} class="transition-colors hover:text-ink" target="_blank" rel="noopener noreferrer">Behance</a>
     </div>
   </Container>
 </footer>

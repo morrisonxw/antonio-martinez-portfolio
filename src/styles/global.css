@@ -2,6 +2,23 @@
 @import "./tokens.css";
 @plugin "@tailwindcss/typography";
 
+@layer components {
+  .project-card-media {
+    @apply relative overflow-hidden rounded-2xl bg-paper-muted;
+  }
+
+  .project-card-image {
+    @apply block w-full object-cover;
+    aspect-ratio: 1;
+    transition: transform 300ms ease-out;
+  }
+
+  .group:hover .project-card-image,
+  .group:focus-visible .project-card-image {
+    transform: scale(1.015);
+  }
+}
+
 body {
   background-color: var(--color-paper);
   color: var(--color-ink);
@@ -164,6 +181,10 @@ html.has-custom-cursor button {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .project-card-image {
+    transition: none;
+  }
+
   [data-reveal].reveal-init {
     opacity: 1;
     transform: none;
