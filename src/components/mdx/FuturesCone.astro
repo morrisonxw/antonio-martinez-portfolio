@@ -16,7 +16,7 @@ const en = language === 'en';
 ---
 
 <figure class="not-prose my-12" data-reveal>
-  <div class="overflow-x-auto rounded-2xl border border-border/60 bg-paper p-3 sm:p-5">
+  <div class="relative left-1/2 w-screen max-w-[80rem] -translate-x-1/2 overflow-x-auto">
     <svg viewBox="0 0 1020 520" class="block h-auto min-w-[820px] w-full" role="img" aria-label={en ? `Voros-inspired futures cone from the projected future to possible futures, with a separate preferable trajectory. ${bands.map((band) => `${band.name}: ${band.description}`).join(' ')}` : `Cono de futuros inspirado en Voros, del futuro proyectado a los futuros posibles, con una trayectoria preferible independiente. ${bands.map((band) => `${band.name}: ${band.description}`).join(' ')}`}>
       <defs>
         <marker id="futures-axis-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
