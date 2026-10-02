@@ -40,6 +40,17 @@ body {
   color: var(--color-ink);
 }
 
+/* Los elementos filtrados no reservan espacio en grids ni carruseles. */
+[data-home-project-card][hidden],
+[data-home-project-group][hidden],
+[data-project-card][hidden] {
+  display: none !important;
+}
+
+[data-home-project-group][data-filtered] {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+}
+
 ::selection {
   background-color: var(--color-accent-muted);
   color: var(--color-ink);

@@ -4,6 +4,7 @@ import Tag from '../ui/Tag.astro';
 import type { ProjectEntry } from '../../lib/content-types';
 import { t, type Locale } from '../../i18n/ui';
 import { projectHref } from '../../i18n/paths';
+import { normalizeProjectTag } from '../../lib/project-tags';
 
 interface Props {
   projects: ProjectEntry[];
@@ -29,6 +30,8 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
       class="group block w-[340px] shrink-0 [perspective:800px] sm:w-[480px] lg:w-[540px]"
       data-tilt
       data-project-id={project.id}
+      data-home-project-card
+      data-home-project-tags={JSON.stringify(project.data.tags.map(normalizeProjectTag))}
     >
       <div class="project-card-media" data-tilt-target>
         <Image
