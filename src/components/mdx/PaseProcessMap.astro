@@ -1,0 +1,71 @@
+---
+interface Props { locale?: 'es' | 'en'; }
+const { locale = 'es' } = Astro.props;
+const t = (es: string, en: string) => locale === 'en' ? en : es;
+const id = `pase-process-${locale}`;
+type Node = { key: string; x: number; y: number; kind: 'task' | 'decision' | 'end'; lines: string[] };
+const nodes: Node[] = [
+  { key: 'consult', x: 140, y: 85, kind: 'task', lines: [t('Consultar servicios', 'Consult services'), t('por fecha', 'by date')] },
+  { key: 'difference', x: 140, y: 185, kind: 'decision', lines: [t('¿Hay una', 'Any'), t('diferencia?', 'discrepancy?')] },
+  { key: 'daily', x: 140, y: 300, kind: 'end', lines: [t('Continuar', 'Continue'), t('revisión diaria', 'daily review')] },
+  { key: 'report', x: 140, y: 415, kind: 'task', lines: [t('Marcar diferencia', 'Report discrepancy'), t('48 h hábiles', '48 business hours')] },
+  { key: 'compare', x: 450, y: 415, kind: 'task', lines: [t('Contrastar acuerdos', 'Compare agreements'), t('y evidencia', 'and evidence')] },
+  { key: 'conditions', x: 450, y: 535, kind: 'decision', lines: [t('¿Cumple', 'Conditions'), t('condiciones?', 'met?')] },
+  { key: 'automatic', x: 450, y: 665, kind: 'task', lines: [t('Resolver y registrar', 'Resolve and record'), t('contexto', 'context')] },
+  { key: 'human', x: 750, y: 535, kind: 'task', lines: [t('Contabilidad', 'Accounting'), t('revisa el caso', 'reviews the case')] },
+  { key: 'need', x: 750, y: 665, kind: 'decision', lines: [t('¿Necesita datos', 'Need operations'), t('de operaciones?', 'information?')] },
+  { key: 'operations', x: 1050, y: 665, kind: 'task', lines: [t('Aportar información', 'Provide information'), t('a contabilidad', 'to accounting')] },
+  { key: 'response', x: 750, y: 815, kind: 'task', lines: [t('Contabilidad', 'Accounting'), t('determina respuesta', 'determines response')] },
+  { key: 'communicate', x: 450, y: 815, kind: 'task', lines: [t('Comunicar respuesta', 'Communicate response'), t('y referencias', 'and references')] },
+  { key: 'disagree', x: 140, y: 815, kind: 'decision', lines: [t('¿Persiste el', 'Disagreement'), t('desacuerdo?', 'persists?')] },
+  { key: 'finish', x: 140, y: 965, kind: 'end', lines: [t('Finaliza gestión', 'PASE handling'), t('en PASE', 'ends')] },
+  { key: 'traditional', x: 450, y: 985, kind: 'task', lines: [t('Reclamos tradicionales', 'Traditional claims'), t('con trazabilidad', 'with traceability')] },
+];
+const lanes = [t('Analista del proveedor', 'Provider analyst'), 'PASE', t('Contabilidad', 'Accounting'), t('Operaciones', 'Operations')];
+const edges = [
+  'M140 125V130', 'M140 240V260', 'M235 185H275V360H140V375', 'M250 415H340', 'M450 455V480',
+  'M450 590V625', 'M545 535H640', 'M750 575V610', 'M845 665H940', 'M750 720V775',
+  'M1050 705V870H885V815H860', 'M640 815H560', 'M450 705V775', 'M340 815H235',
+  'M140 870V925', 'M140 760V745H280V985H340',
+];
+---
+<div class="process-scroll" tabindex="0" role="region" aria-label={t('Proceso implementado, desplazable por carriles', 'Implemented process, scrollable by lane')}>
+  <svg viewBox="0 0 1200 1050" role="img" aria-labelledby={`${id}-title ${id}-description`}>
+    <title id={`${id}-title`}>{t('PASE: reconstrucción del proceso implementado', 'PASE: reconstruction of the implemented process')}</title>
+    <desc id={`${id}-description`}>{t('El proveedor consulta servicios. Si no identifica diferencias continúa su revisión diaria; si las identifica las marca en 48 horas hábiles. PASE contrasta acuerdos y evidencia. Si cumple las condiciones resuelve automáticamente; si no, contabilidad revisa, consulta a operaciones cuando necesita información y determina la respuesta. PASE comunica respuesta y referencias dentro de otras 48 horas hábiles. Si persiste desacuerdo, el proveedor continúa en reclamos tradicionales con trazabilidad, sin reapertura interna.', 'The provider consults services. Without discrepancies, daily review continues; discrepancies are reported within 48 business hours. PASE compares agreements and evidence. If conditions are met it resolves automatically; otherwise accounting reviews, consults operations if needed, and determines the response. PASE communicates the response and references within another 48 business hours. Persistent disagreement continues through traditional claims with traceability, not internal reopening.')}</desc>
+    <defs><marker id={`${id}-arrow`} markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="var(--ink-muted)" /></marker></defs>
+    {lanes.map((lane, index) => <g>
+      <rect x={index * 300} width="300" height="1050" fill={index % 2 ? 'var(--paper-muted)' : 'var(--paper)'} />
+      <text x={index * 300 + 150} y="28" text-anchor="middle" class="lane-label">{lane}</text>
+      {index > 0 && <path d={`M${index * 300} 40V1050`} stroke="var(--border)" stroke-dasharray="6 6" />}
+    </g>)}
+    <rect x="305" y="905" width="290" height="140" rx="6" fill="var(--paper)" stroke="var(--ink-muted)" stroke-dasharray="6 6" />
+    <text x="450" y="929" text-anchor="middle" class="edge-label">{t('Continuidad fuera de PASE', 'Continuation outside PASE')}</text>
+    <g class="connectors" marker-end={`url(#${id}-arrow)`}>{edges.map(d => <path d={d} />)}</g>
+    {nodes.map(node => <g data-process-node={node.key}>
+      {node.kind === 'task' && <rect x={node.x - 110} y={node.y - 40} width="220" height="80" rx="8" class="task" />}
+      {node.kind === 'decision' && <path d={`M${node.x} ${node.y - 55}L${node.x + 95} ${node.y}L${node.x} ${node.y + 55}L${node.x - 95} ${node.y}Z`} class="decision" />}
+      {node.kind === 'end' && <rect x={node.x - 105} y={node.y - 40} width="210" height="80" rx="40" class="terminal" />}
+      <text x={node.x} y={node.y - (node.lines.length - 1) * 11 + 5} text-anchor="middle" class="node-label">{node.lines.map((line, i) => <tspan x={node.x} dy={i ? 22 : 0}>{line}</tspan>)}</text>
+    </g>)}
+    <g class="edge-label">
+      <text x="152" y="253">No</text><text x="245" y="170">{t('Sí', 'Yes')}</text>
+      <text x="463" y="610">{t('Sí', 'Yes')}</text><text x="580" y="522">No</text>
+      <text x="885" y="652">{t('Sí', 'Yes')}</text><text x="765" y="752">No</text>
+      <text x="152" y="900">No</text><text x="200" y="735">{t('Sí', 'Yes')}</text>
+      <text x="1050" y="895" text-anchor="middle">{t('Consulta contable', 'Accounting consultation')}</text>
+    </g>
+  </svg>
+</div>
+<style>
+  .process-scroll { overflow-x: auto; }
+  .process-scroll:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 4px; }
+  svg { display: block; width: 100%; min-width: 1080px; height: auto; }
+  .connectors { fill: none; stroke: var(--ink-muted); stroke-width: 2; }
+  .task { fill: var(--paper); stroke: var(--ink-muted); stroke-width: 1.5; }
+  .decision { fill: var(--accent-muted); stroke: var(--accent-strong); stroke-width: 1.5; }
+  .terminal { fill: var(--paper); stroke: var(--ink); stroke-width: 2; }
+  .node-label { fill: var(--ink); font-size: 16px; }
+  .lane-label { fill: var(--ink); font-size: 17px; font-weight: 600; }
+  .edge-label { fill: var(--ink-muted); font-size: 14px; }
+</style>

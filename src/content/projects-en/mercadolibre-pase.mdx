@@ -12,6 +12,7 @@ featured: true
 order: 1
 draft: false
 
+duration: "7 months; initial follow-up of 1.5 months"
 role: "Semi-Senior UX Specialist"
 team: "Multidisciplinary product team: product leadership, tech leads, research, engineering, and business areas"
 company: "Mercado Libre"
@@ -25,99 +26,103 @@ import JourneyCompare from '../../components/mdx/JourneyCompare.astro';
 import PaseArtifacts from '../../components/mdx/PaseArtifacts.astro';
 import exploracionCards from '../../assets/projects/mercadolibre-pase/exploracion-cards.png';
 
-*Review version, not published. The maps reconstruct the described process and distinguish proposals awaiting validation. Screen data has been modified to protect sensitive information.*
+*Preproduction edition. Screens contain modified data to protect sensitive information. The maps on this page are retrospective reconstructions dated October 2, 2026.*
 
-## The decision that changed the approach
+## Prevent discrepancies before billing
 
-PASE moved route reconciliation from a late financial review into the daily work of Mercado Libre and its transportation providers. My contribution was to translate that change into an experience for reviewing execution, identifying discrepancies and supporting decisions before billing.
+PASE transformed reconciliation between Mercado Libre and its logistics providers: from reviewing services weeks after execution to handling discrepancies during the active cycle. Reported follow-up showed that the same providers went from claiming approximately 30% of their services to 10%.
 
-The problem extended beyond the interface. Reviewing a trip weeks later meant recovering information that should have remained linked to execution. A faster screen would not resolve that time gap. The design decision was to bring review closer to the moment when teams could still explain what had happened.
+I worked for seven months as the lead designer, supported by a senior expert and collaborating with product, business, engineering and analysts. I conducted interviews, AS-IS and TO-BE modelling, journeys, workshops, prototyping and tests. I supported rollout in Argentina and Brazil, across First Mile and Last Mile, and the initial month and a half of follow-up.
 
-## What we know and what is missing
+<PaseArtifacts kind="measurement" locale="en" />
 
-The existing case describes interviews, progressive validation, an executive dashboard and AI-assisted classification explorations. It is the starting point for this review, but does not include original research records or all operational rules.
+## The problem: collect payment now, reconstruct later
 
-It also reports a 70% reduction and resolution within 48 hours. Those figures remain in the review record, but are not presented here as verified impact: [original source], [period], [sites], [denominator] and [calculation method] are missing. Prototypes demonstrate design exploration, not adoption or production outcomes.
+Providers received a preliminary billing statement after accumulating between 20 days and a month of services. Even when they identified discrepancies, they moved ahead with payment documentation to sustain liquidity. In parallel, they reviewed records and claimed differences.
 
-## My role and collaboration
+Monitoring showed the current day’s operation but did not retain the history needed later. Some analysts took screenshots at the end of the day. This was manual and incomplete: not every service had closed.
 
-I led research, information architecture, interface design and prototyping, supported by a senior expert. I worked with product, business and engineering to make functional definitions tangible and understand operational work on both sides.
+Templates requested codes useful to accounting but difficult for providers to interpret. A two-day submission window concentrated up to approximately 20,000 claims, mainly in Last Mile, with seven days to review them. I do not have an exact breakdown of that volume.
 
-A central part of my contribution was identifying what the system could validate and what needed to remain with business and finance. This review makes that distinction visible through journeys, handoffs and decisions. Each role's specific authority still requires documentation.
+Adjustments generated supplementary statements for the next cycle, which could produce new discrepancies. Corrected cases could also be rejected because they appeared as already resolved. The process accumulated effort and made response reasons difficult to follow.
 
-## Understanding the process before designing the screen
+## Reframing and design decisions
 
-The original narrative places review weeks after the trip. It describes disputes that required reconstructing events and an operation with too much volume to audit every route individually. It does not confirm the exact channels or owners at each stage.
+Research showed that providers wanted the correct payment without disrupting operations. Product and experience reframed the challenge around the conditions causing claims, rather than simply speeding up their processing.
 
 <JourneyCompare rows={[
-  { label: "Described previous process", tone: "before", steps: ["Executed route", "Late review", "Evidence reconstruction", "Dispute", "Resolution"] },
-  { label: "Design direction described in PASE", tone: "after", steps: ["Executed route", "Daily reconciliation", "Discrepancy review", "Contextual decision", "Reconciled record"] }
-]} caption="Comparison reconstructed from the case. It is not an audit of the actual operational process." />
+  { label: "Before PASE", tone: "before", steps: ["20 days to a month of services", "Statement and payment documentation", "Template in a two-day window", "Seven-day accounting review", "Supplementary statement and possible new claims"] },
+  { label: "With PASE", tone: "after", steps: ["History by date", "Daily review", "48 business hours to report", "Another 48 business hours to respond", "Disagreement to traditional claims"] }
+]} caption="Retrospective synthesis. Deadlines describe process windows, not observed averages or a guaranteed total duration." />
 
-The review identified three gaps in explaining the service: progressive-validation conditions were not detailed, handoff owners were not shown, and pending versus reconciled cases were not clearly distinguished. These are documentation gaps, not proof that the operation lacked those definitions.
+PASE offered history and daily review with recent information and comprehensible language. We discarded wider windows because they separated review from service context. We also discarded batch rejections: they could reproduce problems from the previous process.
 
-## Work profiles, not invented biographies
+The dependency on [PACTO, another initiative I contributed to](/en/projects/mercadolibre-pacto), was essential. Its structured agreements became valid after provider acceptance and supported checking recognised concepts. This connected commercial terms, execution and reconciliation.
 
-I separated three roles to organise needs. Providers support a discrepancy with evidence; operations assess it; business and finance intervene when decisions exceed an operational rule. This distinction informs permissions, information and next actions.
+## Designing for those receiving and delivering the service
 
-The cards start from tasks mentioned in the case, not validated segmentation. Usage frequency, autonomy and prioritisation criteria need to be checked through [interviews and observation].
+We researched and tested with provider, accounting and operations analysts. Each role had a distinct task: identify discrepancies, manage a response or provide operational information. The cards synthesise those needs without fictional biographies.
 
 <PaseArtifacts kind="personas" locale="en" />
 
 ## The provider journey
 
-The journey follows one perspective: a provider coordinator who needs to clarify a route discrepancy before billing. It first organises actions, then identifies touchpoints, and finally connects friction to a proposed experience.
-
-Keeping one perspective avoids mixing user actions with internal service work. No emotional curve is drawn because no supporting data is available. Thoughts and emotions remain [information to validate].
+The journey keeps one perspective: the provider analyst reviewing services during the active cycle. It connects actions, touchpoints, friction and service responses. Critical moments are a retrospective synthesis, not original names or a measured emotional curve.
 
 <PaseArtifacts kind="journey" locale="en" />
 
-The opportunity is to retain context and a comprehensible next action for each discrepancy. Requesting evidence is not the same as resolving a case; a proposed adjustment is not a recorded reconciliation. That distinction informs states and confirmations.
+## Automation with context and responsibility
 
-## A target process with decisions and loops
+AI interpreted information, resolved cases in the system under agreed conditions and provided explanations referencing agreements or operational records. A concept not contracted or explicitly excluded could, for example, be rejected automatically.
 
-The following map is a proposal from this review, not a recovered historical artifact. It makes explicit the branches that the narrative did not detail: matching records, incomplete evidence, human review and requests for another review.
-
-The sequence starts with recorded execution. Matching records can only proceed under an [authorised rule]. When a discrepancy exists, the provider adds context. Missing evidence triggers a request without pretending that the case is resolved. Operations or finance make decisions requiring human authority.
+Cases that did not meet the conditions went to accounting. Accounting consulted operations when information was needed and retained responsibility for the response. Engineering implemented the technical conditions; my contribution was conceptual and experience-focused. “Absolute certainty” is not presented as a model guarantee.
 
 <PaseArtifacts kind="process" locale="en" />
 
-The proposed closure retains the decision's reason, author and version. Reconciliation is not presented as payment authorisation. Implementing this process in a real service requires agreement on [deadlines], [permissions], [authority], [rejection criteria] and [reopening policy].
+A version allowing operations to receive requests directly was planned for the next quarter. Its responses would reach the provider when accounting detected no issues, while accounting retained control. That evolution was outside the scope I supported.
 
-## From structure to interface
+## A tested decision: guide investigation, not the answer
 
-When volume made individual trip review impractical, I proposed an executive dashboard with filters and parameterised downloads. The decision addressed aggregate review rather than adding more information to every row.
+Engineering and business proposed suggesting resolutions when the system could not resolve a case automatically. I identified the risk of conditioning an analyst’s judgement through an insufficiently supported recommendation. We tested the proposal and observed confusion.
 
-The card exploration supports examination of how context and actions are presented per route. The design question is whether users understand what they are reviewing and what they can do next. Answering it requires testing; the image does not replace that evidence.
+I advocated an alternative: indicate what evidence to consult or whom to contact, without suggesting a resolution. This assistance reached production. Bias risk informed my argument; the observed finding was confusion, not experimentally measured bias.
 
-<Figure src={exploracionCards} alt="Exploration of card formats for reviewing claims linked to executed routes" caption="Existing exploration: alternative ways to organise information and actions per route." />
+<PaseArtifacts kind="employee" locale="en" />
 
-## AI as an exploration, not an authority
+Operations also raised questions about how to respond, share information with accounting and understand their responsibility. We revised copy and introduced training. Adoption required preparing teams’ work, not only designing the screen.
 
-I designed an AI-assisted evidence-classification flow and prototyped variants with Claude Code and Figma Make. This exploration is separated from the original process because [iteration dates] and [deployment status] are not documented.
+## The blueprint: information, handoffs and recovery
 
-The first variant supports examining how to present a claim in context. The second explores review from the routes dashboard. In the proposed process, classification suggests a category; it does not authorise an adjustment or replace business decisions.
+This blueprint was created after the project to explain the implemented service; it was not a method used originally. It aligns six journey stages with visible experience, internal work and supporting systems. Failure points show how service recovery worked.
+
+<PaseArtifacts kind="blueprint" locale="en" />
+
+After failures, reporting or resolution periods could be extended manually. If disagreement persisted after the response, providers continued through traditional claims, without reopening inside PASE. The transition relied on training and in-app help in both systems; the service incorporated PASE traceability.
+
+This continuity was measured, but I do not have its results. Transferred fields and an automated handoff mechanism are not documented here.
+
+## From decisions to interface
+
+Volume made reviewing every service individually on screen impractical. I proposed an executive dashboard with filters and parameterised downloads to support aggregate review. Card exploration aimed to expose each route’s context and actions.
+
+<Figure src={exploracionCards} alt="Card exploration for reviewing claims linked to executed routes" caption="Interface exploration: alternative ways of organising route context and actions." />
+
+The available videos show prototype variants built with Claude Code and Figma Make. They illustrate the experience, but are not user-test recordings or independent evidence of operational outcomes. Prototyping tools should not be confused with the AI resolving cases in the service.
 
 <figure class="media-bleed my-10">
-  <video src="/projects/mercadolibre-pase/prototipo-claude.mp4" controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototype of claims management for executed routes" />
-  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Claude Code exploration. Review question: is the claim's context and next action clear? Video without audio.</figcaption>
+  <video src="/projects/mercadolibre-pase/prototipo-claude.mp4" data-inline-playback controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototype of claims management for executed routes" />
+  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Claude Code variant: claim context and route actions. Video without audio.</figcaption>
 </figure>
 
 <figure class="media-bleed my-10">
-  <video src="/projects/mercadolibre-pase/prototipo-figma-make.mp4" controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototype of the executed-routes dashboard" />
-  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Figma Make exploration. Review question: are aggregate review and individual route management distinguishable? Video without audio.</figcaption>
+  <video src="/projects/mercadolibre-pase/prototipo-figma-make.mp4" data-inline-playback controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototype of the executed-routes dashboard" />
+  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Figma Make variant: aggregate review through the routes dashboard. Video without audio.</figcaption>
 </figure>
 
-## How to evaluate the proposal
+## What this case demonstrates
 
-The measurement plan separates speed, discrepancies, timeliness and rework. It first requires defined events and comparable cohorts, then enables observation of changes. No outcome charts are drawn because original data is unavailable.
+PASE connected commercial agreements, operational information, deadlines and responsibilities to address reconciliation before closing. My contribution combined research, modelling, facilitation, experience design and implementation support.
 
-<PaseArtifacts kind="measurement" locale="en" />
+Results are reported by the participant and attributed to business, accounting and product; original datasets were not reviewed. Initial follow-up cannot establish long-term persistence. A timely response does not mean agreement, and a service without claims does not establish billing accuracy.
 
-Proposed tests cover a route without discrepancies, incomplete evidence, a financial exception and a reopened case. Alongside task success, they should capture critical errors and comprehension of states. [Participant count], [success criterion] and [advancement threshold] must be agreed before testing.
-
-## Learning and the next review
-
-The design contribution was to bring reconciliation closer to execution and connect the interface with rules and responsibilities. This review strengthens the case explanation without attributing new outcomes or turning a proposal into project history.
-
-The next step is to check the artifacts against original sources and operational owners. A proposed blueprint and responsibility matrix accompany the editable review documentation. This version remains in Git as preproduction, pending evidence and editorial approval.
+The learning was that automating a service also requires designing the work that stays with people: context to decide, clear boundaries and continuity when a response does not resolve disagreement.

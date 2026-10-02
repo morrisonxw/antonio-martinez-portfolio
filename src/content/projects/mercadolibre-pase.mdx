@@ -12,6 +12,7 @@ featured: true
 order: 1
 draft: false
 
+duration: "7 meses; seguimiento inicial de 1,5 meses"
 role: "Especialista UX SSR"
 team: "Equipo multidisciplinario de producto: liderazgo de producto, tech leads, research, desarrollo y áreas de negocio"
 company: "Mercado Libre"
@@ -25,99 +26,103 @@ import JourneyCompare from '../../components/mdx/JourneyCompare.astro';
 import PaseArtifacts from '../../components/mdx/PaseArtifacts.astro';
 import exploracionCards from '../../assets/projects/mercadolibre-pase/exploracion-cards.png';
 
-*Versión de revisión, no publicada. Los mapas reconstruyen el proceso descrito y distinguen las propuestas pendientes de validar. Los datos de las pantallas fueron modificados para proteger información sensible.*
+*Edición de preproducción. Las pantallas muestran datos modificados para proteger información sensible. Los mapas de esta página son reconstrucciones retrospectivas del 2 de octubre de 2026.*
 
-## La decisión que cambió el enfoque
+## Prevenir diferencias antes de facturar
 
-PASE trasladó la conciliación de rutas desde una revisión financiera tardía hacia el trabajo diario de Mercado Libre y sus proveedores de transporte. Mi contribución fue traducir ese cambio en una experiencia que permitiera revisar lo ejecutado, identificar diferencias y dar contexto a las decisiones antes de facturación.
+PASE transformó la conciliación entre Mercado Libre y sus proveedores logísticos: de revisar servicios semanas después de ejecutarlos a gestionar diferencias durante el ciclo activo. El seguimiento reportado mostró que los mismos proveedores pasaron de reclamar aproximadamente el 30 % de sus servicios al 10 %.
 
-El problema no se limitaba a la interfaz. Revisar un viaje semanas después obligaba a recuperar información que debía permanecer vinculada a la ejecución. Una pantalla más rápida no resolvía esa distancia temporal. La decisión de diseño fue acercar la revisión al momento en que los equipos todavía podían explicar lo ocurrido.
+Participé durante siete meses como diseñador a cargo, con acompañamiento senior y colaboración de producto, negocio, desarrollo y analistas. Realicé entrevistas, modelos AS-IS y TO-BE, journeys, talleres, prototipos y testeos. Acompañé el despliegue en Argentina y Brasil, en First Mile y Last Mile, y el primer mes y medio de seguimiento.
 
-## Qué sabemos y qué falta
+<PaseArtifacts kind="measurement" />
 
-El caso existente describe entrevistas, validación progresiva, un panel ejecutivo y exploraciones de clasificación asistida por IA. Es el punto de partida de esta revisión, pero no incluye los registros originales de investigación ni la definición de todas las reglas operativas.
+## El problema: cobrar ahora, reconstruir después
 
-También declara una reducción del 70 % y una resolución en 48 horas. Esas cifras se conservan en el registro de revisión, pero no se presentan aquí como impacto verificado: faltan [fuente original], [periodo], [sites], [denominador] y [método de cálculo]. Los prototipos demuestran exploración de diseño, no adopción ni resultados en producción.
+Los proveedores recibían la prefactura tras acumular entre 20 días y un mes de servicios. Aunque detectaran diferencias, avanzaban con la documentación de cobro para sostener su liquidez. En paralelo, revisaban registros y reclamaban lo que no coincidía.
 
-## Mi rol y la colaboración
+El monitoreo permitía consultar la operación del día, pero no conservaba el histórico necesario. Algunos analistas tomaban capturas al finalizar la jornada. Era una respuesta manual e incompleta: no todos los servicios habían cerrado.
 
-Fui el diseñador a cargo de la investigación, la arquitectura de información, la interfaz y el prototipado, con acompañamiento de un experto senior. Trabajé con producto, negocio y desarrollo para hacer tangibles las definiciones funcionales y comprender el trabajo operativo de ambas partes.
+Las plantillas solicitaban códigos útiles para contabilidad, pero difíciles de interpretar para el proveedor. Una ventana de dos días concentraba hasta aproximadamente 20.000 reclamos, principalmente en Last Mile, con siete días para revisarlos. No dispongo del desglose exacto de ese volumen.
 
-Una parte central de mi contribución fue delimitar qué podía validar el sistema y qué debía permanecer en manos de negocio y finanzas. En esta revisión, esa distinción se hace visible en los recorridos, los traspasos y las decisiones. Las facultades concretas de cada rol siguen pendientes de documentación.
+Cuando correspondía un ajuste, se emitía una complementaria para el siguiente ciclo. Esa complementaria podía generar nuevas diferencias. Además, casos corregidos podían rechazarse por figurar como ya resueltos. El proceso acumulaba esfuerzo y hacía difícil seguir el motivo de las respuestas.
 
-## Leer el proceso antes de diseñar la pantalla
+## El reencuadre y sus decisiones
 
-El relato original sitúa la revisión semanas después del viaje. Describe disputas que exigían reconstruir lo ocurrido y una operación con demasiado volumen para auditar cada ruta individualmente. No permite confirmar los canales o responsables exactos de cada etapa.
+La investigación mostró que el proveedor buscaba cobrar lo correspondiente sin comprometer su operación. Desde experiencia y producto propusimos intervenir las condiciones que originaban los reclamos, no solo acelerar su procesamiento.
 
 <JourneyCompare rows={[
-  { label: "Proceso anterior descrito", tone: "before", steps: ["Ruta ejecutada", "Revisión tardía", "Reconstrucción de evidencia", "Disputa", "Resolución"] },
-  { label: "Dirección de diseño descrita en PASE", tone: "after", steps: ["Ruta ejecutada", "Conciliación diaria", "Revisión de diferencias", "Decisión con contexto", "Registro conciliado"] }
-]} caption="Comparación reconstruida a partir del caso. No representa una auditoría del proceso operativo real." />
+  { label: "Antes de PASE", tone: "before", steps: ["20 días a un mes de servicios", "Prefactura y cobro", "Plantilla en ventana de dos días", "Revisión contable de siete días", "Complementaria y posibles nuevos reclamos"] },
+  { label: "Con PASE", tone: "after", steps: ["Histórico por fecha", "Revisión diaria", "48 h hábiles para reportar", "Otras 48 h hábiles para responder", "Desacuerdo al flujo tradicional"] }
+]} caption="Síntesis retrospectiva. Los plazos describen ventanas del proceso, no promedios observados ni un tiempo total garantizado." />
 
-La revisión identificó tres vacíos para explicar el servicio: no se detallaban las condiciones de validación progresiva, no se mostraban los responsables de los traspasos y no se diferenciaba con suficiente claridad un caso pendiente de uno conciliado. Estas son carencias documentales; no prueban que la operación careciera de esas definiciones.
+PASE ofreció histórico y revisión cotidiana, con información reciente y lenguaje comprensible. Descartamos ventanas más amplias porque alejaban la revisión del contexto del servicio. También descartamos los rechazos por lotes: podían reproducir problemas del proceso anterior.
 
-## Perfiles de trabajo, no biografías inventadas
+La dependencia con [PACTO, otra iniciativa en la que participé](/proyectos/mercadolibre-pacto), era fundamental. Sus acuerdos estructurados entraban en vigor después de la aceptación del proveedor y servían para contrastar los conceptos reconocidos. Así se conectaban condiciones comerciales, ejecución y conciliación.
 
-Para ordenar las necesidades, separé tres roles. El proveedor necesita sustentar una diferencia; operación necesita contrastarla; negocio y finanzas deben intervenir donde la decisión excede una regla operativa. Esta separación ayuda a diseñar permisos, información y siguientes acciones.
+## Diseñar para quienes reciben y entregan el servicio
 
-Las tarjetas parten de tareas mencionadas en el caso, no de una segmentación validada. La frecuencia de uso, la autonomía y los criterios de priorización deberán contrastarse con [entrevistas y observación].
+Investigamos y testeamos con analistas de proveedores, contabilidad y operaciones. Cada rol tenía una tarea distinta: identificar diferencias, gestionar una respuesta o aportar información operativa. Las tarjetas sintetizan esas necesidades sin añadir biografías ficticias.
 
 <PaseArtifacts kind="personas" />
 
 ## El recorrido del proveedor
 
-El journey sigue una sola perspectiva: la coordinación del proveedor que necesita aclarar una ruta con diferencia antes de facturación. Primero organiza sus acciones; después ubica los puntos de contacto; por último vincula las fricciones con una experiencia propuesta.
-
-Mantener una perspectiva evita mezclar lo que el usuario hace con el trabajo interno del servicio. No se dibuja una curva emocional porque no hay datos para respaldarla. Los pensamientos y emociones quedan como [información por validar].
+El journey mantiene una sola perspectiva: el analista del proveedor que revisa servicios durante el ciclo activo. Relaciona acciones, contactos, fricciones y respuestas del servicio. Los momentos críticos son una síntesis retrospectiva, no nombres originales ni una curva emocional medida.
 
 <PaseArtifacts kind="journey" />
 
-La oportunidad consiste en que cada diferencia conserve su contexto y una siguiente acción comprensible. “Solicitar evidencia” no equivale a “resolver”; una propuesta de ajuste tampoco equivale a una conciliación registrada. Esa distinción orienta el contenido de los estados y las confirmaciones.
+## Automatización con contexto y responsabilidad
 
-## Un proceso objetivo con decisiones y retornos
+La IA interpretaba información, resolvía en el sistema bajo condiciones acordadas y dejaba una explicación con referencias al contrato o al registro operativo. Por ejemplo, un concepto no contratado o expresamente excluido podía rechazarse automáticamente.
 
-El mapa siguiente es una propuesta de esta revisión, no un artefacto histórico recuperado. Hace explícitas las ramas que el relato no detallaba: coincidencia, evidencia incompleta, revisión humana y solicitud de nueva revisión.
-
-La secuencia empieza en una ejecución registrada. Una coincidencia solo puede seguir una [regla autorizada]. Si existe una diferencia, el proveedor aporta contexto. Si falta evidencia, se solicita información sin fingir que el caso está resuelto. Operación o finanzas toman las decisiones que requieren autoridad humana.
+Si no se cumplían las condiciones, el caso pasaba a contabilidad. Esta área consultaba a operaciones cuando necesitaba información y conservaba la responsabilidad de la respuesta. Desarrollo era responsable de implementar las condiciones técnicas; mi aporte fue conceptual y de experiencia. No se presenta “certeza absoluta” como garantía del modelo.
 
 <PaseArtifacts kind="process" />
 
-El cierre propuesto conserva motivo, autor y versión de la decisión. La conciliación no se presenta como autorización de pago. Antes de implementar este proceso en un servicio real deben acordarse [plazos], [permisos], [facultades], [criterios de rechazo] y [política de reapertura].
+La variante para que operaciones recibiera directamente las consultas quedó prevista para el siguiente trimestre. Sus respuestas pasarían al proveedor cuando contabilidad no detectara problemas, conservando el control contable. Esa evolución no formaba parte del alcance que acompañé.
 
-## De la estructura a la interfaz
+## Una decisión validada: orientar, no anticipar la respuesta
 
-Cuando el volumen hacía inviable revisar cada viaje individualmente, propuse un panel ejecutivo con filtros y descarga parametrizada. La decisión respondía a una tarea de revisión agregada, no a la necesidad de añadir más información en cada fila.
+Desarrollo y negocio propusieron sugerir resoluciones cuando el sistema no pudiera resolver automáticamente. Identifiqué el riesgo de condicionar el juicio del analista con una recomendación insuficientemente sustentada. Llevamos la propuesta a testeos y observamos confusión.
 
-La exploración de cards permite revisar cómo presentar contexto y acciones por ruta. La pregunta de diseño es si el usuario entiende qué está revisando y qué puede hacer a continuación. Su respuesta requiere pruebas; la imagen no las sustituye.
+Impulsé una alternativa: indicar qué evidencia consultar o con quién contrastarla, sin sugerir una resolución. Esta asistencia llegó a producción. El riesgo de sesgo orientó mi argumento; el hallazgo observado fue la confusión, no un sesgo medido experimentalmente.
 
-<Figure src={exploracionCards} alt="Exploración de formatos de card para revisar reclamos asociados a rutas ejecutadas" caption="Exploración existente: distintas maneras de organizar la información y las acciones por ruta." />
+<PaseArtifacts kind="employee" />
 
-## La IA como exploración, no como autoridad
+En operaciones también aparecieron dudas sobre cómo responder, cómo trasladar información a contabilidad y qué responsabilidad les correspondía. Ajustamos textos e incorporamos capacitación. La adopción exigía preparar el trabajo de los equipos, no únicamente diseñar la pantalla.
 
-Diseñé un flujo asistido por IA para clasificar evidencias y prototipé variantes con Claude Code y Figma Make. Esta exploración se separa del proceso original porque no están documentadas [fechas de iteración] ni [estado de despliegue].
+## El blueprint: información, traspasos y recuperación
 
-La primera variante permite examinar cómo presentar un reclamo con su contexto. La segunda explora la revisión desde el panel de rutas. En el proceso propuesto, la clasificación sugiere una categoría; no autoriza un ajuste ni sustituye la decisión de negocio.
+Este blueprint se construyó después del proyecto para explicar el servicio implementado; no fue un método utilizado originalmente. Alinea las seis etapas del recorrido con la experiencia visible, el trabajo interno y los sistemas de soporte. Los puntos de falla muestran cómo se recuperaba el servicio.
+
+<PaseArtifacts kind="blueprint" />
+
+Ante fallas, los periodos de reporte o resolución podían extenderse mediante gestión manual. Si persistía un desacuerdo después de la respuesta, el proveedor continuaba en reclamos tradicionales, sin reapertura interna en PASE. La transición se apoyaba en capacitación y ayuda dentro de ambos sistemas; el servicio incorporaba trazabilidad de PASE.
+
+Esta continuidad fue medida, pero no dispongo de sus resultados. Tampoco se documentan aquí los campos transferidos ni un mecanismo automático de traspaso.
+
+## De las decisiones a la interfaz
+
+El volumen hizo inviable revisar todos los servicios individualmente en pantalla. Propuse un panel ejecutivo con filtros y descarga parametrizada para apoyar la revisión agregada. La exploración de cards buscaba hacer visible el contexto de cada ruta y sus acciones.
+
+<Figure src={exploracionCards} alt="Exploración de cards para revisar reclamos vinculados a rutas ejecutadas" caption="Exploración de interfaz: distintas formas de organizar contexto y acciones por ruta." />
+
+Los vídeos disponibles muestran variantes de prototipo construidas con Claude Code y Figma Make. Ilustran la experiencia, pero no son grabaciones de pruebas con usuarios ni evidencia independiente de resultados operativos. Las herramientas para prototipar no deben confundirse con la IA que resolvía casos en el servicio.
 
 <figure class="media-bleed my-10">
-  <video src="/projects/mercadolibre-pase/prototipo-claude.mp4" controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototipo de gestión de reclamos por rutas ejecutadas" />
-  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Exploración con Claude Code. Pregunta de revisión: ¿se entiende el contexto del reclamo y su siguiente acción? Vídeo sin audio.</figcaption>
+  <video src="/projects/mercadolibre-pase/prototipo-claude.mp4" data-inline-playback controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototipo de gestión de reclamos por rutas ejecutadas" />
+  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Variante con Claude Code: contexto del reclamo y acciones por ruta. Vídeo sin audio.</figcaption>
 </figure>
 
 <figure class="media-bleed my-10">
-  <video src="/projects/mercadolibre-pase/prototipo-figma-make.mp4" controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototipo del panel de control de rutas ejecutadas" />
-  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Exploración con Figma Make. Pregunta de revisión: ¿se distinguen la revisión agregada y la gestión de una ruta? Vídeo sin audio.</figcaption>
+  <video src="/projects/mercadolibre-pase/prototipo-figma-make.mp4" data-inline-playback controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototipo del panel de control de rutas ejecutadas" />
+  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Variante con Figma Make: revisión agregada desde el panel de rutas. Vídeo sin audio.</figcaption>
 </figure>
 
-## Cómo evaluar la propuesta
+## Lo que demuestra el caso
 
-El plan de medición distingue velocidad, diferencias, oportunidad y retrabajo. Primero exige definir eventos y cohortes comparables; después permite observar cambios. No se grafican resultados porque los datos originales no están disponibles.
+PASE conectó acuerdos comerciales, información operativa, plazos y responsabilidades para abordar la conciliación antes del cierre. Mi contribución combinó investigación, modelado, facilitación, diseño de experiencia y acompañamiento de implementación.
 
-<PaseArtifacts kind="measurement" />
+Los resultados son reportados por el participante y atribuidos a negocio, contabilidad y producto; no se revisaron bases originales. El seguimiento inicial no permite afirmar permanencia a largo plazo. Responder en plazo no equivale a acuerdo, y un servicio sin reclamo no demuestra exactitud de facturación.
 
-Las pruebas propuestas cubren una ruta sin diferencia, evidencia incompleta, una excepción financiera y una reapertura. Además del éxito de tarea, deben observarse errores críticos y comprensión de los estados. [Número de participantes], [criterio de éxito] y [umbral de avance] se acuerdan antes de ejecutar las pruebas.
-
-## Aprendizaje y siguiente revisión
-
-El valor del diseño estuvo en acercar la conciliación a la ejecución y articular interfaz, reglas y responsabilidades. Esta revisión fortalece la explicación del caso sin atribuirle resultados nuevos ni convertir una propuesta en historia del proyecto.
-
-El siguiente paso es contrastar los artefactos con las fuentes originales y responsables de operación. El blueprint y la matriz de responsabilidades acompañan la documentación editable de revisión. La versión permanece en Git como preproducción, pendiente de evidencia y aprobación editorial.
+El aprendizaje fue que automatizar un servicio exige diseñar también la labor que permanece en las personas: contexto para decidir, límites claros y continuidad cuando la respuesta no resuelve el desacuerdo.

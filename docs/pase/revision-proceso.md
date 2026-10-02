@@ -1,131 +1,64 @@
-# PASE: revisión del proceso
+# PASE: revisión del proceso y estado de la entrega
 
-Estado: preproducción. Fecha: 2 de octubre de 2026. Alcance: revisión del proceso descrito y mejora de su caso en el portfolio, no modificación de la operación real de Mercado Libre.
+Fecha: 2 de octubre de 2026. Estado: preproducción en `codex/pase-process-review`. No se modifica la operación real de Mercado Libre ni se publica esta versión.
 
 ## Análisis
 
-### Fuentes y alcance
+La revisión inicial (`5d7762e`) se basó en el caso existente, sin acceso a la conversación compartida. Antonio aportó después la exportación completa y el blueprint, versión interna 7. Se leyeron ambos íntegramente. El [contraste de fuentes](contraste-fuentes.md) documenta observaciones, correcciones entre borradores y decisiones antes de los cambios. La revisión inicial permanece recuperable en Git; sus propuestas de reapertura e IA solo exploratoria quedan reemplazadas.
 
-S1: caso local `src/content/projects/mercadolibre-pase.mdx` antes de esta revisión. S2: versión inglesa; no es evidencia independiente. S3: exploración de cards y dos vídeos de prototipos. S3 demuestra exploración de diseño, no adopción ni resultados operativos. No se encontraron otros documentos por nombre PASE en la carpeta del portfolio. El enlace compartido no pudo recuperarse: [contenido pendiente].
+La fuente es un relato retrospectivo del participante, no una auditoría ni documentación original del sistema. Las cifras se atribuyen a negocio, contabilidad y producto sin revisión de bases. Las instrucciones de la oferta laboral y las respuestas históricas del asistente son contexto, no autoridad para crear métodos o logros nuevos.
 
-No están disponibles entrevistas originales, registros operativos, reglas de validación, acuerdos financieros ni resultados de pruebas. Esta revisión permite mejorar la documentación y proponer un proceso; no certificar lo que ocurrió en la operación.
+## Cambios implementados en el caso
 
-El proceso anterior descrito es: ruta ejecutada → revisión semanas después → reconstrucción de evidencia → disputa → resolución. [Canales], [responsables por site] y [momento de facturación] están pendientes. PASE introduce conciliación diaria, validación progresiva, filtros y descarga parametrizada. No se detallan las condiciones de transición entre sistema, proveedor, operación y finanzas. La clasificación con IA se describe como prototipo, no como capacidad desplegada.
+Se incorporaron siete meses de participación y 1,5 meses de seguimiento; Argentina/Brasil y First/Last Mile; entrevistas, AS-IS/TO-BE, journeys, talleres y testeos relatados. El proceso explica histórico diario, 48 horas hábiles para reportar, otras 48 para resolver y extensiones manuales excepcionales. No se calcula un total garantizado ni una media.
 
-### Hallazgos antes de recomendar cambios
+La IA se describe como implementada, con condiciones técnicas a cargo de desarrollo y aporte de diseño conceptual y de experiencia. El proceso humano queda bajo contabilidad, con consultas a operaciones. El desacuerdo posterior continúa en reclamos tradicionales con trazabilidad y training in app, no una reapertura en PASE. La variante directa para operaciones era futura.
 
-| ID | Observación en S1 | Riesgo para el caso | Información necesaria |
-| --- | --- | --- | --- |
-| H1 | La reconstrucción de memoria se atribuye a entrevistas sin registros accesibles. | Presentar un relato como investigación comprobada. | [Guion, muestra y notas anonimizadas] |
-| H2 | No se especifican propietarios, entradas y salidas por etapa. | Ocultar esperas y traspasos. | [Roles, permisos y acuerdos] |
-| H3 | La validación progresiva no detalla reglas ni excepciones. | Confundir coincidencia, resolución, conciliación y pago. | [Criterios, plazos y cierre] |
-| H4 | Se declara 70 % menos diferencias y 48 horas de resolución. | Atribuir impacto sin denominador, periodo o fuente. | [Reporte y ficha de medición] |
-| H5 | Trabajo original y exploración con IA comparten relato sin cronología. | Confundir prototipo posterior con solución desplegada. | [Fechas y estado de versiones] |
-| H6 | Las pantallas no incluyen recorridos ni criterios de prueba. | No explicar las decisiones de servicio. | [Tareas, resultados y cambios derivados] |
+Se recuperaron los resultados como reportados: aproximadamente 30 % → 10 % de servicios reclamados en los mismos proveedores; −20 puntos porcentuales. El 70 % menos reclamos totales es un indicador separado, sin normalización por servicios. El 100 % es respuesta en plazo en el seguimiento inicial, no acuerdo. Esfuerzo del equipo es estimación; USD 7 millones es proyección; eNPS no fue medido y CSAT/continuidad no tienen cifras disponibles.
 
-## Mejoras propuestas
+## Artefactos y método
 
-P1, para H1/H6: reconstruir un journey desde el punto de vista del coordinador del proveedor. Primero delimitar una ruta con diferencia, después ordenar acciones y finalmente relacionar fricciones con oportunidades. No inventar emociones ni citas. Contrastar posteriormente con entrevistas y casos reales.
+### Perfiles de trabajo
 
-P2, para H2/H3: representar un proceso objetivo con carriles de sistema, proveedor y operación/finanzas; identificar decisiones, evidencia incompleta y retornos. Antes de implementar reglas operativas, completar permisos, plazos, facultades y condiciones de cierre. La implementación de esta revisión es documental y visual, no funcional en Mercado Libre.
-
-P3, para H4: conservar las cifras declaradas en este registro, pero no presentarlas como impacto verificado. El caso muestra un plan de medición con fórmulas y campos pendientes, sin gráficas de resultados inexistentes.
-
-P4, para H5: separar proceso descrito, exploración con IA y propuesta actual. La IA sugiere clasificación; no se le atribuye autorización de ajustes ni cierre financiero.
-
-P5, para H6: crear perfiles provisionales por rol y vincular los vídeos a preguntas de diseño. Reproducción manual con controles; no añadir personas ficticias presentadas como investigación.
-
-Tras este análisis, se amplía el caso ES/EN y se implementan cuatro artefactos con código: perfiles, journey, mapa de proceso y medición. Blueprint y matriz de responsabilidades se entregan aquí como documentación editable. Se conservan etiquetas y recursos originales. No se cambia producción.
-
-## Artefactos
-
-### Tarjetas persona
-
-Intención: distinguir necesidades por rol. Estructura: tarea → información necesaria → fricción descrita → validación pendiente. Se entregan perfiles provisionales porque las personas requieren investigación no disponible. No se añaden nombres, edades, fotografías ni citas.
-
-| Perfil | Tarea | Necesidad propuesta | Fricción descrita | Pendiente |
-| --- | --- | --- | --- | --- |
-| Coordinación del proveedor | Revisar rutas y sustentar diferencias | Saber qué falta y qué hacer después | Reconstrucción tardía en S1 | [Frecuencia, contexto y autonomía] |
-| Operación de Mercado Libre | Contrastar ejecución y ajustes | Distinguir coincidencia de excepción | Volumen incompatible con revisión individual en S1 | [Volumen y priorización] |
-| Negocio y finanzas | Resolver excepciones antes de facturar | Evidencia y decisión trazable | Facultades no detalladas | [Autoridad y escalamiento] |
+Se sintetizan tres roles investigados según el relato: analista MLP, contabilidad y operaciones. Estructura: objetivo, necesidad y fricción. No se reconstruyen biografías, edades, fotografías ni citas. No se presentan como personas originales recuperadas.
 
 ### Customer Journey
 
-Intención: explicar la experiencia, no el funcionamiento interno. Actor: coordinación del proveedor. Escenario: ruta con diferencia. Objetivo: aclararla antes de facturación. Primero se fija una perspectiva, después se ordenan las etapas y finalmente se vincula cada oportunidad con evidencia pendiente. El recorrido actual es reconstruido; el futuro es propuesto.
+Perspectiva: analista del proveedor. Escenario: diferencia durante el ciclo activo. Objetivo: cobrar lo correspondiente sin comprometer operación. Seis etapas alineadas con el blueprint: consultar, marcar diferencia, analizar, resolver, comprender respuesta y continuar desacuerdo. Filas: acciones, contactos, fricciones, respuesta del servicio y momentos críticos retrospectivos. [Estados exactos no disponibles]. No hay curva emocional medida.
 
-| Dimensión | Ejecutar | Detectar | Sustentar | Resolver | Conciliar |
-| --- | --- | --- | --- | --- | --- |
-| Acción reconstruida | Completar viaje | Revisar diferencia tardía | Recuperar lo ocurrido | Participar en disputa | Conocer resultado |
-| Contacto | [Registro de ruta] | Revisión financiera | [Canal de evidencia] | [Canal de resolución] | [Registro conciliado] |
-| Fricción | [Calidad del registro] | Tiempo desde la ruta | Reconstrucción de memoria | Semanas según S1 | [Visibilidad del resultado] |
-| Experiencia propuesta | Conservar ID y ejecución | Revisar a diario | Adjuntar evidencia en contexto | Ver responsable y siguiente acción | Recibir decisión y motivo |
-| Pensamientos/emociones | [Pendiente] | [Pendiente] | [Pendiente] | [Pendiente] | [Pendiente] |
-| Evidencia necesaria | [Registro real] | [Caso observado] | [Entrevista y evidencia] | [Historial de disputa] | [Conciliación trazable] |
+### Employee Journey
 
-### Mapas de proceso
+Perspectiva separada: analista de contabilidad. Cuatro etapas: recibir, investigar, consultar y decidir. Se muestran tareas, fricciones previas, diseño implementado y validaciones relatadas. Preservar el juicio significa orientar hacia evidencia en los casos inciertos, no eliminar la automatización de los casos que cumplían condiciones.
 
-Intención: hacer visibles decisiones y traspasos. El mapa anterior conserva solo la secuencia de S1. El objetivo usa carriles, tareas, rombos, inicio/fin y conectores dirigidos; no se denomina BPMN certificado. Las ramas identifican decisiones y los retornos explican qué se revisa.
+### Mapa funcional implementado
 
-Anterior: ruta ejecutada → revisión tardía → reconstrucción → disputa → resolución. [Responsables originales pendientes].
+Cuatro carriles verticales: proveedor, PASE, contabilidad y operaciones. La rama sin diferencia continúa revisión diaria; una diferencia activa contraste, resolución automática condicionada o gestión contable. Contabilidad puede pedir información a operaciones. Ambas ramas comunican respuesta; el desacuerdo sale a reclamos tradicionales. No BPMN 2.0, BPMS ni especificación ejecutable. Sin aprobación por silencio, reglas ordinarias de vencimiento o transferencias técnicas inventadas.
 
-Propuesto: ejecución registrada → contraste → ¿coincidencia? Si sí, aplicar [regla autorizada] y registrar decisión. Si no, proveedor revisa → ¿evidencia suficiente? Si no, pedir información y volver a revisión; si sí, revisión humana → registrar decisión. Ambas ramas notifican. ¿Solicita revisión? Si sí, volver a revisión humana; si no, registrar conciliación. Una coincidencia no autoriza un pago. El rechazo motivado y la reapertura requieren [política por definir].
+### Blueprint retrospectivo
 
-### Blueprint propuesto
+El [documento fuente versionado](blueprint-retrospectivo.md) conserva la versión interna 7 aportada. En la web se renderiza con código y dos paneles de tres etapas para legibilidad. Capas: evidencia, acciones del proveedor, frontstage, backstage, soporte, fallas y recuperación. Líneas: interacción, visibilidad e interacción interna. Se marca explícitamente como reconstrucción del 2 de octubre de 2026, no método utilizado en el proyecto original.
 
-Intención: conectar experiencia y trabajo interno. Se reutilizan las cinco etapas del journey, luego se separan acciones del proveedor, interacción visible, backstage y soporte. Las líneas nombradas distinguen sus responsabilidades. No es un blueprint histórico recuperado.
+### Resultados y visualización
 
-| Carril | Ejecutar | Detectar | Sustentar | Resolver | Conciliar |
-| --- | --- | --- | --- | --- | --- |
-| Evidencia | Registro de ruta | Diferencia | Adjuntos | Decisión motivada | Registro conciliado |
-| Proveedor | Completar ruta | Abrir diferencia | Adjuntar evidencia | Consultar o pedir revisión | Consultar resultado |
-| Línea de interacción | Proveedor/servicio | Proveedor/servicio | Proveedor/servicio | Proveedor/servicio | Proveedor/servicio |
-| Frontstage | Estado de ejecución | Bandeja diaria | Solicitud específica | Estado, responsable y motivo | Confirmación |
-| Línea de visibilidad | Visible/interno | Visible/interno | Visible/interno | Visible/interno | Visible/interno |
-| Backstage | Vincular ejecución | Contrastar reglas | Validar suficiencia | Resolver excepción | Registrar versión |
-| Línea interna | Operación/soporte | Operación/soporte | Operación/soporte | Operación/soporte | Operación/soporte |
-| Soporte | [Fuente de rutas] | [Reglas aprobadas] | [Permisos y retención] | [Autoridad financiera] | [Integración de facturación] |
+Barras proporcionales sobre la misma escala de 0–100 %, con valores visibles 30 % y 10 %. No series sintéticas, intervalos, tamaños de muestra o extrapolaciones. Los otros indicadores incluyen sus límites al lado, no solo en una nota remota. Los vídeos muestran variantes, no pruebas ni la implementación operativa de IA.
 
-### Responsabilidades propuestas
+## Responsabilidades reconstruidas
 
-Intención: evitar que el mapa oculte quién decide. Se identifican actividades y registros antes de asignar autoridad. No se fabrica un RACI definitivo; faltan responsables y aprobadores confirmados.
+| Actividad | Participante/sistema | Límite |
+| --- | --- | --- |
+| Consultar y marcar diferencias | Analista MLP | Ventana de reporte de 48 h hábiles |
+| Contrastar y resolver bajo condiciones | PASE con IA | [Umbrales técnicos no aportados] |
+| Gestionar ruta humana y determinar respuesta | Contabilidad | Conserva control del proceso |
+| Aportar evidencia operativa | Operaciones | Consulta canalizada por contabilidad en el despliegue |
+| Implementar condiciones técnicas | Desarrollo | Diseño aporta comprensión conceptual y experiencia |
+| Continuar desacuerdo | Reclamos tradicionales | Trazabilidad de PASE; [campos y mecanismo no aportados] |
 
-| Actividad | Ejecución propuesta | Aprobación | Salida |
-| --- | --- | --- | --- |
-| Capturar ejecución | [Sistema de rutas] | [Dueño de fuente] | ID y marca temporal |
-| Aportar evidencia | Coordinación del proveedor | [Rol habilitado] | Adjuntos asociados |
-| Resolver diferencia | [Operación habilitada] | [Autoridad según tipo/importe] | Motivo, autor y versión |
-| Resolver excepción financiera | [Negocio/finanzas habilitados] | [Autoridad financiera] | Resolución |
-| Publicar conciliación | [Servicio de conciliación] | [Responsable de cierre] | Estado y vínculo a facturación |
+No se denomina RACI confirmado: faltan facultades formales. La variante futura para operaciones se describe en prosa, no se mezcla con el proceso desplegado.
 
-### Plan de medición y validación
+## Validación y Git
 
-Intención: separar desempeño y percepción. Primero definir eventos de inicio/fin; después unidad de análisis; finalmente comparación entre periodos equivalentes. No hay datos para atribuir resultados.
+El [QA local](qa.md) distingue verificaciones técnicas/visuales de la validación operativa histórica relatada. Las pruebas de esta tarea no sustituyen entrevistas ni nuevos tests con usuarios.
 
-| Indicador | Definición | Condición pendiente | Valor |
-| --- | --- | --- | --- |
-| Resolución | Mediana y p90 de `decision_at − difference_opened_at`, horas | [Periodos/sites/cohortes], informar abiertos y pausas | [Pendiente] |
-| Diferencias | Rutas con diferencia de facturación / rutas facturadas | [Clasificación estable y denominador] | [Pendiente] |
-| Oportunidad | Rutas conciliadas antes del corte / rutas elegibles | [Corte y elegibilidad] | [Pendiente] |
-| Retrabajo | Casos reabiertos / cerrados de una cohorte | [Ventana de observación] | [Pendiente] |
-| Clasificación IA | Sugerencias correctas / evaluadas contra referencia humana | [Categorías, abstenciones y errores críticos] | [Pendiente] |
+Archivos de entrega: dos MDX ES/EN, `PaseArtifacts.astro`, `PaseProcessMap.astro`, este documento, `contraste-fuentes.md`, `blueprint-retrospectivo.md`, `qa.md` y capturas de QA. `Lightbox.astro` excluye únicamente los vídeos marcados `data-inline-playback`, para no interceptar sus controles. No se cambian las etiquetas ni portadas. Se preservan las modificaciones ajenas del árbol de trabajo. Se guarda un commit local sin push, merge ni despliegue.
 
-Cifras originales preservadas: S1 declaraba “70%” menos diferencias y “48 horas” de resolución. No se elimina el registro de la declaración; no se certifica su exactitud. Falta [reporte original]. No inferir ahorro económico ni causalidad.
-
-Pruebas propuestas: una ruta sin diferencia, una con evidencia incompleta, una excepción financiera y una reapertura. Registrar éxito de tarea, errores críticos, comprensión de estados y traspasos. Acordar [participantes], [criterio de éxito] y [umbral de avance] antes de probar. No se ejecutaron pruebas con usuarios en esta revisión.
-
-## Preparación de Git
-
-Rama local: `codex/pase-process-review`. No push, merge ni despliegue en esta fase. Los cambios previos ajenos se preservan sin incluirlos en el commit. Los dos archivos de PASE ya contenían ajustes de etiquetas: se conservan y quedarán incluidos al versionarlos.
-
-| Archivo | Propósito |
-| --- | --- |
-| `docs/pase/revision-proceso.md` | Análisis, trazabilidad y artefactos editables |
-| `docs/pase/qa.md` | Verificaciones y pendientes |
-| `src/components/mdx/PaseArtifacts.astro` | Artefactos visuales con código y ambos idiomas |
-| `src/content/projects/mercadolibre-pase.mdx` | Caso revisado en español |
-| `src/content/projects-en/mercadolibre-pase.mdx` | Caso equivalente en inglés |
-| `docs/pase/process-desktop.png` y `personas-mobile.png` | Capturas locales de QA; no reemplazan los artefactos renderizados con código |
-
-### Fuentes metodológicas
-
-[Journey Mapping 101, NN/g](https://www.nngroup.com/articles/journey-mapping-101/): una perspectiva, escenario, fases, acciones y oportunidades. [Personas Make Users Memorable, NN/g](https://www.nngroup.com/articles/persona/): investigación como base de personas; no completar atributos sin datos. [Service Blueprints: Definition, NN/g](https://www.nngroup.com/articles/service-blueprints-definition/): acciones visibles, internas y soporte. Documentación oficial de [componentes](https://docs.astro.build/en/basics/astro-components/) y [colecciones Astro](https://docs.astro.build/en/guides/content-collections/) para implementar sin cambiar la arquitectura.
+Fuentes metodológicas: [Journey Mapping 101](https://www.nngroup.com/articles/journey-mapping-101/) y [Service Blueprints: Definition](https://www.nngroup.com/articles/service-blueprints-definition/). Orientan la estructura, no aportan evidencia de PASE.
