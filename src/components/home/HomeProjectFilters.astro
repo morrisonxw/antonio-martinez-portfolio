@@ -1,0 +1,167 @@
+---
+import type { ProjectEntry } from '../../lib/content-types';
+import { getProjectTagsWithCounts } from '../../lib/project-tags';
+import type { Locale } from '../../i18n/ui';
+
+interface Props {
+  projects: ProjectEntry[];
+}
+
+const { projects } = Astro.props;
+const locale = (Astro.currentLocale ?? 'es') as Locale;
+const isEnglish = locale === 'en';
+const tags = getProjectTagsWithCounts(projects);
+const primaryOptions = [
+  { key: 'ux', label: 'UX' },
+  { key: 'product design', label: isEnglish ? 'Product' : 'Producto' },
+  { key: 'service design', label: 'Service Design' },
+];
+const primaryTags = primaryOptions.flatMap((option) => {
+  const tag = tags.find((tag) => tag.key === option.key);
+  return tag ? [{ ...tag, label: option.label }] : [];
+});
+const otherTags = tags.filter((tag) => !primaryOptions.some((option) => option.key === tag.key));
+const moreLabel = isEnglish ? 'Other filters' : 'Otros filtros';
+---
+
+<nav data-home-project-filters aria-label={isEnglish ? 'Filter projects by tag' : 'Filtrar proyectos por etiqueta'} class="flex min-w-0 max-w-full flex-wrap gap-2">
+  <button
+    type="button"
+    data-home-tag-filter="all"
+    aria-pressed="true"
+    class="shrink-0 rounded-full border border-ink bg-ink px-4 py-2 text-sm font-medium text-paper transition-colors aria-pressed:bg-ink aria-pressed:text-paper"
+  >
+    {isEnglish ? 'All' : 'Todos'} <span class="ml-1 opacity-60">{projects.length}</span>
+  </button>
+  {primaryTags.map((tag) => (
+    <button
+      type="button"
+      data-home-tag-filter={tag.key}
+      aria-pressed="false"
+      class="shrink-0 rounded-full border border-border bg-paper px-4 py-2 text-sm font-medium text-ink-muted transition-colors hover:border-ink hover:text-ink aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-paper"
+    >
+      {tag.label} <span class="ml-1 opacity-60">{tag.count}</span>
+    </button>
+  ))}
+  {otherTags.length > 0 && (
+    <details data-other-filters class="relative min-w-0 max-w-full">
+      <summary data-other-filters-trigger class="other-filter-trigger flex cursor-pointer items-center gap-2 rounded-full border border-border bg-paper px-4 py-2 text-sm font-medium text-ink-muted transition-colors hover:border-ink hover:text-ink">
+        <span data-other-filter-label data-default-label={moreLabel}>{moreLabel}</span>
+        <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+      </summary>
+      <div class="other-filter-options absolute left-0 top-full z-30 mt-2 w-64 max-w-[calc(100vw-3rem)] overflow-y-auto rounded-2xl border border-border bg-paper p-2 shadow-lg">
+        {otherTags.map((tag) => (
+          <button type="button" data-home-tag-filter={tag.key} data-other-tag-label={tag.label} aria-pressed="false" class="flex w-full items-center justify-between gap-3 rounded-xl border border-transparent bg-paper px-3 py-2 text-left text-sm font-medium text-ink-muted transition-colors hover:bg-paper-muted hover:text-ink aria-pressed:bg-ink aria-pressed:text-paper">
+            <span>{tag.label}</span><span class="opacity-60">{tag.count}</span>
+          </button>
+        ))}
+      </div>
+    </details>
+  )}
+  <span data-home-filter-status class="sr-only" role="status" aria-live="polite"></span>
+</nav>
+
+<style>
+  .other-filter-trigger { list-style: none; }
+  .other-filter-trigger::-webkit-details-marker { display: none; }
+  .other-filter-trigger:focus-visible,
+  [data-home-tag-filter]:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 3px; }
+  .other-filter-trigger[data-active] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  details[open] .other-filter-trigger svg { transform: rotate(180deg); }
+  .other-filter-options { max-height: min(26rem, 60vh); }
+  @media (prefers-reduced-motion: no-preference) {
+    .other-filter-trigger svg { transition: transform .15s ease; }
+  }
+</style>
+
+<script>
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  function setupHomeProjectFilters() {
+    document.querySelectorAll<HTMLElement>('[data-home-project-filters]').forEach((filters) => {
+      if (filters.dataset.ready === 'true') return;
+      filters.dataset.ready = 'true';
+
+      const buttons = Array.from(filters.querySelectorAll<HTMLButtonElement>('[data-home-tag-filter]'));
+      const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-home-project-card]'));
+      const groups = Array.from(document.querySelectorAll<HTMLElement>('[data-home-project-group]'));
+      if (!buttons.length || !cards.length) return;
+      const dropdown = filters.querySelector<HTMLDetailsElement>('[data-other-filters]');
+      const trigger = filters.querySelector<HTMLElement>('[data-other-filters-trigger]');
+      const triggerLabel = filters.querySelector<HTMLElement>('[data-other-filter-label]');
+      const status = filters.querySelector<HTMLElement>('[data-home-filter-status]');
+      dropdown?.addEventListener('toggle', () => {
+        if (dropdown.open) {
+          const options = dropdown.querySelector<HTMLElement>('.other-filter-options');
+          if (options) options.scrollTop = 0;
+        }
+      });
+      const events = new AbortController();
+      document.addEventListener('astro:before-swap', () => events.abort(), { once: true, signal: events.signal });
+
+      document.addEventListener('click', (event) => {
+        if (dropdown?.open && event.target instanceof Node && !dropdown.contains(event.target)) dropdown.open = false;
+      }, { signal: events.signal });
+      filters.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && dropdown?.open) {
+          dropdown.open = false;
+          trigger?.focus();
+        }
+      });
+
+      function applyFilter(tag: string) {
+        cards.forEach((card) => {
+          const tags = JSON.parse(card.dataset.homeProjectTags ?? '[]') as string[];
+          card.hidden = tag !== 'all' && !tags.includes(tag);
+        });
+
+        groups.forEach((group) => {
+          const groupCards = Array.from(group.querySelectorAll<HTMLElement>('[data-home-project-card]'));
+          group.hidden = groupCards.length > 0 && groupCards.every((card) => card.hidden);
+          group.toggleAttribute('data-filtered', tag !== 'all');
+          if (!group.hidden) {
+            // El filtrado cambia la posición de las secciones antes de que sus
+            // animaciones de entrada detecten el nuevo orden en pantalla.
+            if (group.hasAttribute('data-reveal')) group.classList.add('is-revealed');
+            group.querySelectorAll<HTMLElement>('[data-reveal]').forEach((element) => {
+              element.classList.add('is-revealed');
+            });
+          }
+          group.querySelectorAll<HTMLElement>('[data-project-scroller]').forEach((scroller) => {
+            scroller.scrollLeft = 0;
+          });
+        });
+        requestAnimationFrame(() => ScrollTrigger.refresh());
+      }
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          buttons.forEach((item) => {
+            const active = item === button;
+            item.setAttribute('aria-pressed', String(active));
+            item.classList.toggle('border-ink', active);
+            item.classList.toggle('bg-ink', active);
+            item.classList.toggle('text-paper', active);
+            item.classList.toggle('bg-paper', !active);
+            item.classList.toggle('text-ink-muted', !active);
+          });
+          applyFilter(button.dataset.homeTagFilter ?? 'all');
+          const otherLabel = button.dataset.otherTagLabel;
+          trigger?.toggleAttribute('data-active', Boolean(otherLabel));
+          if (triggerLabel) triggerLabel.textContent = otherLabel ?? triggerLabel.dataset.defaultLabel ?? '';
+          if (dropdown) dropdown.open = false;
+          if (otherLabel) trigger?.focus();
+          if (status) {
+            const count = cards.filter((card) => !card.hidden).length;
+            status.textContent = document.documentElement.lang.startsWith('en')
+              ? `${count} ${count === 1 ? 'project' : 'projects'}`
+              : `${count} ${count === 1 ? 'proyecto' : 'proyectos'}`;
+          }
+        });
+      });
+    });
+  }
+
+  setupHomeProjectFilters();
+  document.addEventListener('astro:page-load', setupHomeProjectFilters);
+</script>
