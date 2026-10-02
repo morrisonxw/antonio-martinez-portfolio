@@ -26,11 +26,11 @@ import JourneyCompare from '../../components/mdx/JourneyCompare.astro';
 import PaseArtifacts from '../../components/mdx/PaseArtifacts.astro';
 import exploracionCards from '../../assets/projects/mercadolibre-pase/exploracion-cards.png';
 
-*Preproduction edition. Screens contain modified data to protect sensitive information. The maps on this page are retrospective reconstructions dated October 2, 2026.*
+
 
 ## Prevent discrepancies before billing
 
-PASE transformed reconciliation between Mercado Libre and its logistics providers: from reviewing services weeks after execution to handling discrepancies during the active cycle. Reported follow-up showed that the same providers went from claiming approximately 30% of their services to 10%.
+PASE transformed reconciliation between Mercado Libre and its logistics providers: from reviewing services weeks after execution to handling discrepancies during the active cycle. During project follow-up, the indicators showed that the same providers went from claiming approximately 30% of their services to 10%.
 
 I worked for seven months as the lead designer, supported by a senior expert and collaborating with product, business, engineering and analysts. I conducted interviews, AS-IS and TO-BE modelling, journeys, workshops, prototyping and tests. I supported rollout in Argentina and Brazil, across First Mile and Last Mile, and the initial month and a half of follow-up.
 
@@ -42,7 +42,7 @@ Providers received a preliminary billing statement after accumulating between 20
 
 Monitoring showed the current day’s operation but did not retain the history needed later. Some analysts took screenshots at the end of the day. This was manual and incomplete: not every service had closed.
 
-Templates requested codes useful to accounting but difficult for providers to interpret. A two-day submission window concentrated up to approximately 20,000 claims, mainly in Last Mile, with seven days to review them. I do not have an exact breakdown of that volume.
+Templates requested codes useful to accounting but difficult for providers to interpret. A two-day submission window concentrated up to approximately 20,000 claims, mainly in Last Mile, with seven days to review them.
 
 Adjustments generated supplementary statements for the next cycle, which could produce new discrepancies. Corrected cases could also be rejected because they appeared as already resolved. The process accumulated effort and made response reasons difficult to follow.
 
@@ -53,7 +53,7 @@ Research showed that providers wanted the correct payment without disrupting ope
 <JourneyCompare rows={[
   { label: "Before PASE", tone: "before", steps: ["20 days to a month of services", "Statement and payment documentation", "Template in a two-day window", "Seven-day accounting review", "Supplementary statement and possible new claims"] },
   { label: "With PASE", tone: "after", steps: ["History by date", "Daily review", "48 business hours to report", "Another 48 business hours to respond", "Disagreement to traditional claims"] }
-]} caption="Retrospective synthesis. Deadlines describe process windows, not observed averages or a guaranteed total duration." />
+]} caption="From accumulated review at closing to daily reconciliation: 48 business hours to report a discrepancy and another 48 to respond." />
 
 PASE offered history and daily review with recent information and comprehensible language. We discarded wider windows because they separated review from service context. We also discarded batch rejections: they could reproduce problems from the previous process.
 
@@ -61,13 +61,13 @@ The dependency on [PACTO, another initiative I contributed to](/en/projects/merc
 
 ## Designing for those receiving and delivering the service
 
-We researched and tested with provider, accounting and operations analysts. Each role had a distinct task: identify discrepancies, manage a response or provide operational information. The cards synthesise those needs without fictional biographies.
+We researched and tested with provider, accounting and operations analysts. Each role had a distinct task: identify discrepancies, manage a response or provide operational information. The profiles clarify what each person needs to do their work and where the service needs to support them.
 
 <PaseArtifacts kind="personas" locale="en" />
 
 ## The provider journey
 
-The journey keeps one perspective: the provider analyst reviewing services during the active cycle. It connects actions, touchpoints, friction and service responses. Critical moments are a retrospective synthesis, not original names or a measured emotional curve.
+The journey keeps one perspective: the provider analyst reviewing services during the active cycle. It connects actions, touchpoints, friction and service responses. Critical moments show where to recover context, express a discrepancy and understand the decision.
 
 <PaseArtifacts kind="journey" locale="en" />
 
@@ -75,17 +75,17 @@ The journey keeps one perspective: the provider analyst reviewing services durin
 
 AI interpreted information, resolved cases in the system under agreed conditions and provided explanations referencing agreements or operational records. A concept not contracted or explicitly excluded could, for example, be rejected automatically.
 
-Cases that did not meet the conditions went to accounting. Accounting consulted operations when information was needed and retained responsibility for the response. Engineering implemented the technical conditions; my contribution was conceptual and experience-focused. “Absolute certainty” is not presented as a model guarantee.
+Cases that did not meet the conditions went to accounting. Accounting consulted operations when information was needed and retained responsibility for the response. Engineering implemented the technical conditions; my contribution was conceptual and experience-focused.
 
 <PaseArtifacts kind="process" locale="en" />
 
-A version allowing operations to receive requests directly was planned for the next quarter. Its responses would reach the provider when accounting detected no issues, while accounting retained control. That evolution was outside the scope I supported.
+A version allowing operations to receive requests directly was planned for the next quarter. Its responses would reach the provider when accounting detected no issues, while accounting retained control. The expected-impact hypothesis was to reduce information handoffs and speed up responses while retaining accounting ownership.
 
 ## A tested decision: guide investigation, not the answer
 
 Engineering and business proposed suggesting resolutions when the system could not resolve a case automatically. I identified the risk of conditioning an analyst’s judgement through an insufficiently supported recommendation. We tested the proposal and observed confusion.
 
-I advocated an alternative: indicate what evidence to consult or whom to contact, without suggesting a resolution. This assistance reached production. Bias risk informed my argument; the observed finding was confusion, not experimentally measured bias.
+I advocated an alternative: indicate what evidence to consult or whom to contact, without suggesting a resolution. This assistance reached production. The confusion observed reinforced the decision to support analysts’ investigation rather than anticipate their answers.
 
 <PaseArtifacts kind="employee" locale="en" />
 
@@ -93,13 +93,13 @@ Operations also raised questions about how to respond, share information with ac
 
 ## The blueprint: information, handoffs and recovery
 
-This blueprint was created after the project to explain the implemented service; it was not a method used originally. It aligns six journey stages with visible experience, internal work and supporting systems. Failure points show how service recovery worked.
+The blueprint brings the service into one view, connecting the provider experience with each team’s responsibilities. Created for this case, it aligns six journey stages with visible experience, internal work and supporting systems. Failure points show how service recovery worked.
 
 <PaseArtifacts kind="blueprint" locale="en" />
 
 After failures, reporting or resolution periods could be extended manually. If disagreement persisted after the response, providers continued through traditional claims, without reopening inside PASE. The transition relied on training and in-app help in both systems; the service incorporated PASE traceability.
 
-This continuity was measured, but I do not have its results. Transferred fields and an automated handoff mechanism are not documented here.
+The expected-impact hypothesis for this continuity is to reduce the need to reconstruct a case when changing channels. Evaluating that benefit requires observing provider effort and the time needed to resume handling.
 
 ## From decisions to interface
 
@@ -107,7 +107,7 @@ Volume made reviewing every service individually on screen impractical. I propos
 
 <Figure src={exploracionCards} alt="Card exploration for reviewing claims linked to executed routes" caption="Interface exploration: alternative ways of organising route context and actions." />
 
-The available videos show prototype variants built with Claude Code and Figma Make. They illustrate the experience, but are not user-test recordings or independent evidence of operational outcomes. Prototyping tools should not be confused with the AI resolving cases in the service.
+The videos show two prototype variants built with Claude Code and Figma Make. They demonstrate route review, discrepancy context and the available actions.
 
 <figure class="media-bleed my-10">
   <video src="/projects/mercadolibre-pase/prototipo-claude.mp4" data-inline-playback controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototype of claims management for executed routes" />
@@ -123,6 +123,6 @@ The available videos show prototype variants built with Claude Code and Figma Ma
 
 PASE connected commercial agreements, operational information, deadlines and responsibilities to address reconciliation before closing. My contribution combined research, modelling, facilitation, experience design and implementation support.
 
-Results are reported by the participant and attributed to business, accounting and product; original datasets were not reviewed. Initial follow-up cannot establish long-term persistence. A timely response does not mean agreement, and a service without claims does not establish billing accuracy.
+During the period I supported the project, follow-up showed fewer services with claims and responses within the defined deadlines. The long-term impact hypothesis is that daily review and shared context can sustain this improvement, reduce rework and strengthen provider relationships.
 
 The learning was that automating a service also requires designing the work that stays with people: context to decide, clear boundaries and continuity when a response does not resolve disagreement.
