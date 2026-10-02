@@ -32,7 +32,7 @@ import ScenarioMatrix from '../../components/mdx/ScenarioMatrix.astro';
 import BackcastingTimeline from '../../components/mdx/BackcastingTimeline.astro';
 import ServiceSystemMap from '../../components/mdx/ServiceSystemMap.astro';
 
-*This is an independently developed conceptual challenge. Zubank is a pseudonym. The 2028 scenario and its indicators describe a proposed future and a way to test it. They are not observed results.*
+Zubank is a pseudonym for this conceptual futures-design challenge. The proposal explores AI-augmented SME advice and how to evaluate its impact.
 
 ## In 2028, the advisor shows up earlier
 
@@ -65,7 +65,7 @@ I started with a 2028 scene: a client returns to their advisor before making a d
 
 ### The futures cone: opening options before choosing
 
-The earlier version reduced the cone to three scenarios and treated the preferred future as another probability band. The framework distinguishes projected, probable, plausible, and possible futures; “preferred” expresses a value choice and can cross any of those categories. “Preposterous” appears in some extensions of the model, beyond the boundary of what is considered possible, as a provocation rather than a forecast. It is shown separately here.
+The cone opens up alternatives before choosing a direction. It distinguishes continuity from probable, plausible and possible futures. The preferred trajectory expresses the design ambition: preserve human judgment and return saved time to the relationship with the SME. The preposterous zone, shown outside the cone, helps question the limits of that ambition.
 
 <FuturesCone
   language="en"
@@ -74,13 +74,12 @@ The earlier version reduced the cone to three scenarios and treated the preferre
     { name: "Probable", description: "AI assistants arrive, but targets remain unchanged; saved time becomes more sales activity and the relationship stays reactive." },
     { name: "Plausible", description: "Four scenarios emerge from combining access to external data with the speed of AI-advisory competition." },
     { name: "Possible", description: "Beyond 2028, agents from the bank and SME may take on parts of financial operations and negotiation." },
-    { name: "Preposterous · exploratory extension", description: "As a boundary test, autonomous agents negotiate and execute all financing without human involvement. This extrapolation was not developed in the original challenge." },
+    { name: "Preposterous · exploratory extension", description: "As a boundary test, autonomous agents negotiate and execute all financing without human involvement. This extreme scenario helps examine which decisions should retain human oversight." },
   ]}
   preferred={{ name: "Preferred", description: "AI prepares and coordinates; Laura retains judgment, and the time saved is protected for conversations that help the SME." }}
-  caption="Adaptation of Voros’s futures cone to the challenge horizon. Bands indicate scope and uncertainty, not calculated probabilities. The preferred trajectory is normative, not a probability category."
+  caption="The bands widen the range of future alternatives; the preferred trajectory marks the service we seek to build, not the most likely outcome."
 />
 
-The base cone described by Voros distinguishes possible, plausible, and probable futures, with preferable futures as a normative dimension. The projected future serves here as a baseline extrapolation from the present. The preposterous zone is a contemporary extension, not part of the original formulation. <a href="https://foresightinternational.com.au/wp-content/uploads/2020/03/Voros-Primer-on-FS-2001-Final.pdf" target="_blank" rel="noreferrer">Voros, A Primer on Futures Studies (2001)</a>; <a href="https://file.go.gov.sg/thinkingabouttomorrow-digitalcopy.pdf" target="_blank" rel="noreferrer">Centre for Strategic Futures, Thinking About Tomorrow</a>.
 
 ### Plausible scenarios: a two-uncertainty matrix
 
@@ -99,14 +98,14 @@ The challenge places four scenarios within the plausible zone. The horizontal ax
     { x: "left", y: "bottom", title: "Internal copilot", description: "AI prepares with internal data. Anticipation is partial; relationships remain the differentiator." },
     { x: "right", y: "bottom", title: "The advisor arrives first", description: "Authorized data and slower competition open a window for earlier contact." },
   ]}
-  caption="The challenge’s plausible-scenario matrix. These are exploratory futures, not observed outcomes."
+  caption="Four exploratory futures help assess how the proposal changes with data access and competitive conditions."
 />
 
 ### Method: from horizon to design decisions
 
 The work moved through four steps. First, I framed the challenge as a tension between the promise of guidance and a service that may arrive too late. Then I explored change forces across social, technological, economic, and regulatory dimensions, distinguishing established trends from emerging signals. From these forces I developed possible futures and selected a preferred direction for its value to the relationship, not its certainty. Finally, backcasting translated that direction into capabilities, conditions, and progressive experiments.
 
-The exploration considered social, technological, economic, environmental, and political-regulatory forces. It separated established trends from emerging signals, then used the two external uncertainties above to build scenarios. Backcasting from the preferred future informed capabilities, conditions, and progressive experiments. The methods informed one another; they are not evidence that the proposed service has been validated.
+The STEEP scan informed the scenarios; the matrix compared their implications and backcasting sequenced the capabilities needed to reach the preferred future. Together, these methods turned exploration into an experiment agenda.
 
 <DataTable
   columns={["STEEP dimension", "Change force considered", "Service implication", "Horizon"]}
@@ -117,12 +116,12 @@ The exploration considered social, technological, economic, environmental, and p
     ["Environmental", "Large buyers begin asking SME suppliers about sustainability.", "A future extension could include green finance and supply-chain adaptation.", "Beyond 2028"],
     ["Political and regulatory", "Open finance and increased expectations for explainable, supervised AI.", "Consent, traceability, and human accountability shape what can be designed.", "2027 to 2028"],
   ]}
-  caption="Selected forces from the challenge’s STEEP scan. These are scenario inputs, not findings from field research conducted for this case."
+  caption="Change forces connect the environment with service decisions and the horizon of each opportunity."
 />
 
 ### Opportunity prioritization
 
-The challenge ranked opportunities with six weighted criteria: customer and NPS impact (25%), business impact (25%), advisor impact (15%), feasibility and internal alignment (20%), regulatory risk (10%), and evidence (5%). This excerpt keeps the high-priority opportunities and faster approval, included by the project lead despite its feasibility and risk ratings. Scores reflect the challenge team’s judgment, not user measurements.
+The challenge ranked opportunities with six weighted criteria: customer and NPS impact (25%), business impact (25%), advisor impact (15%), feasibility and internal alignment (20%), regulatory risk (10%), and evidence (5%). This excerpt keeps the high-priority opportunities and faster approval, included by the project lead despite its feasibility and risk ratings. Scores express a design assessment used to prioritise opportunities.
 
 <DataTable
   columns={["Opportunity", "Customer", "Business", "Advisor", "Feasibility and alignment", "Risk", "Evidence", "Weighted score", "Priority"]}
@@ -173,7 +172,6 @@ The blueprint shows that arriving earlier depends on more than an interface. In 
 
 The blueprint preserves the timeline and separates evidence, Carlos’s actions, Laura’s visible interaction, the internal work of Wanda and Laura, support, systems, moments of truth, and opportunities. The interaction, visibility, and internal-interaction lines mark service handoffs. On mobile, scroll horizontally to keep the lanes readable.
 
-This follows the service-blueprint convention: evidence, customer actions, visible interaction, backstage work, and support processes aligned to a sequence, with lines marking service boundaries. <a href="https://www.ontario.ca/page/service-blueprints" target="_blank" rel="noreferrer">Ontario Digital Service, Service Blueprints</a>; <a href="https://guides.18f.org/methods/decide/service-blueprint/" target="_blank" rel="noreferrer">18F, Service blueprint</a>.
 
 ## An augmented system with human accountability
 
@@ -185,7 +183,7 @@ The narrative prototype follows a Tuesday in this future through a signal card, 
 
 ## How would we know whether this future deserves to scale?
 
-The measurement framework links early signals to customer experience and business outcomes. A pilot would track whether advisors reach decision moments earlier, operational workload falls, and SMEs find the guidance more useful. Over time, I would measure customer recommendation, trust, advisor experience, and the bank’s role in financing decisions. These are proposed indicators, not project results.
+The measurement framework links early signals to customer experience and business outcomes. A pilot would track whether advisors reach decision moments earlier, operational workload falls, and SMEs find the guidance more useful. Over time, I would measure customer recommendation, trust, advisor experience, and the bank’s role in financing decisions. The expected-impact hypothesis is that more useful preparation will enable earlier contact, reduce operational work and strengthen SME trust. The pilot would test that relationship.
 
 <ImpactStats
   stats={[
@@ -214,5 +212,3 @@ The service would advance only if advisors choose to use it, signals are reliabl
 This exercise moved AI from the interface into the wider service. For the future to work, the organization also needs suitable incentives, data governance, operational integration, and a commitment to return saved time to conversations with SMEs.
 
 The next step would be to review the scenario with advisors, SMEs, risk, and compliance. I would then test the preparation brief against real tasks and establish a baseline for evaluating change. That learning would help decide which capabilities to build and which to leave behind.
-
-*The concept, strategy, artifacts, and narrative were developed by Antonio Martínez with AI assistance. No interviews with real users were conducted, and the service described was not implemented.*
