@@ -1,11 +1,11 @@
 ---
 title: "PASE: de reclamos reactivos a conciliación operativa diaria"
-summary: "Diseñé PASE, la plataforma donde Mercado Libre y sus proveedores logísticos concilian a diario lo ejecutado en ruta, evitando fugas de capital antes de que lleguen a facturación."
+summary: "Diseñé la experiencia de PASE para acercar la conciliación de rutas al trabajo diario y dar contexto a las diferencias entre Mercado Libre y sus proveedores logísticos."
 cover: "../../assets/projects/mercadolibre-pase/cover.png"
 coverAlt: "Panel de control de rutas ejecutadas en PASE, con ajustes y reclamos por ruta"
 thumbnail: "../../assets/projects/covers/mercadolibre-pase.png"
 thumbnailAlt: "Ilustración editorial de rutas logísticas que convergen en una conciliación operativa."
-tags: ["Product Design", "B2B Enterprise", "Logística", "Conciliación"]
+tags: ["UX", "Product Design", "B2B", "Logistics", "Dashboard", "IA aplicada"]
 year: 2022
 yearLabel: "2022–2026"
 featured: true
@@ -20,75 +20,104 @@ scope: ["UX Research", "Estrategia UX", "Service Design", "Arquitectura de Infor
 tools: ["Figma", "FigJam", "Claude Code", "Gemini", "Figma Make", "NotebookLM", "Workshops de co-creación", "User Testing"]
 confidential: false
 ---
-
-import ImpactStats from '../../components/mdx/ImpactStats.astro';
-import ProductDivider from '../../components/mdx/ProductDivider.astro';
 import Figure from '../../components/mdx/Figure.astro';
+import JourneyCompare from '../../components/mdx/JourneyCompare.astro';
+import PaseArtifacts from '../../components/mdx/PaseArtifacts.astro';
 import exploracionCards from '../../assets/projects/mercadolibre-pase/exploracion-cards.png';
 
-*Se modificaron datos e información de las pantallas mostradas a continuación para proteger la información sensible de la empresa y la confidencialidad del proyecto.*
+*Versión de revisión, no publicada. Los mapas reconstruyen el proceso descrito y distinguen las propuestas pendientes de validar. Los datos de las pantallas fueron modificados para proteger información sensible.*
 
-## Contexto
+## La decisión que cambió el enfoque
 
-La conciliación financiera con los proveedores de transporte se resolvía semanas después de cada viaje, generando pérdidas y saturando soporte.
+PASE trasladó la conciliación de rutas desde una revisión financiera tardía hacia el trabajo diario de Mercado Libre y sus proveedores de transporte. Mi contribución fue traducir ese cambio en una experiencia que permitiera revisar lo ejecutado, identificar diferencias y dar contexto a las decisiones antes de facturación.
 
-## Mi rol
+El problema no se limitaba a la interfaz. Revisar un viaje semanas después obligaba a recuperar información que debía permanecer vinculada a la ejecución. Una pantalla más rápida no resolvía esa distancia temporal. La decisión de diseño fue acercar la revisión al momento en que los equipos todavía podían explicar lo ocurrido.
 
-Fui el diseñador a cargo del proyecto a lo largo de todo el proceso, desde la investigación y la arquitectura de información hasta la interfaz y el prototipado, con el acompañamiento de un experto senior del equipo. Alineé las definiciones funcionales con producto, investigué cómo trabajaban los equipos operativos de ambas partes y acompañé la solución desde la exploración hasta su puesta en producción, en colaboración con producto, negocio y desarrollo.
+## Qué sabemos y qué falta
 
-## Impacto
+El caso existente describe entrevistas, validación progresiva, un panel ejecutivo y exploraciones de clasificación asistida por IA. Es el punto de partida de esta revisión, pero no incluye los registros originales de investigación ni la definición de todas las reglas operativas.
 
-<ImpactStats
-  stats={[
-    { value: "70%", label: "Menos diferencias de facturación y reclamos extemporáneos en los sites de despliegue inicial." },
-    { value: "48 horas", label: "Tiempo de resolución de disputas, antes medido en semanas." },
-  ]}
-/>
+También declara una reducción del 70 % y una resolución en 48 horas. Esas cifras se conservan en el registro de revisión, pero no se presentan aquí como impacto verificado: faltan [fuente original], [periodo], [sites], [denominador] y [método de cálculo]. Los prototipos demuestran exploración de diseño, no adopción ni resultados en producción.
 
-## Cómo trabajé
+## Mi rol y la colaboración
 
-En las entrevistas encontramos que revisar un viaje de semanas atrás exigía reconstruir de memoria algo que debió quedar registrado el mismo día. Ese hallazgo cambió el foco del problema: no era hacer la revisión más rápida al final del proceso, sino moverla al día a día.
+Fui el diseñador a cargo de la investigación, la arquitectura de información, la interfaz y el prototipado, con acompañamiento de un experto senior. Trabajé con producto, negocio y desarrollo para hacer tangibles las definiciones funcionales y comprender el trabajo operativo de ambas partes.
 
-<ProductDivider eyebrow="Research" label="Revisar un viaje con semanas de antigüedad exigía reconstruir de memoria algo que debió quedar registrado el mismo día." />
+Una parte central de mi contribución fue delimitar qué podía validar el sistema y qué debía permanecer en manos de negocio y finanzas. En esta revisión, esa distinción se hace visible en los recorridos, los traspasos y las decisiones. Las facultades concretas de cada rol siguen pendientes de documentación.
 
-Entre negocio, tecnología y diseño definimos la lógica que le permitió al sistema validar servicios sin depender de una auditoría manual caso por caso. Diseñé el mecanismo de validación progresiva, ajustado a la forma de trabajo real de los transportistas, e iteré la propuesta con el equipo hasta considerarla lista para pruebas. También ayudé a delimitar qué podía resolver el sistema y qué debía seguir en manos de negocio y finanzas. Esa distinción fue tan importante como la funcionalidad: permitió reservar los sobrepagos difíciles de recuperar casi exclusivamente para casos límite.
+## Leer el proceso antes de diseñar la pantalla
 
-Cuando el volumen de datos hizo inviable auditar viajes uno por uno en pantalla, propuse un panel ejecutivo con filtrado y descarga parametrizada en vez de forzar una revisión fila por fila.
+El relato original sitúa la revisión semanas después del viaje. Describe disputas que exigían reconstruir lo ocurrido y una operación con demasiado volumen para auditar cada ruta individualmente. No permite confirmar los canales o responsables exactos de cada etapa.
 
-<Figure
-  src={exploracionCards}
-  alt="Exploración de cards para la gestión de reclamos de rutas ejecutadas"
-  caption="Exploración de distintos formatos de card para priorizar y resolver reclamos por ruta."
-/>
+<JourneyCompare rows={[
+  { label: "Proceso anterior descrito", tone: "before", steps: ["Ruta ejecutada", "Revisión tardía", "Reconstrucción de evidencia", "Disputa", "Resolución"] },
+  { label: "Dirección de diseño descrita en PASE", tone: "after", steps: ["Ruta ejecutada", "Conciliación diaria", "Revisión de diferencias", "Decisión con contexto", "Registro conciliado"] }
+]} caption="Comparación reconstruida a partir del caso. No representa una auditoría del proceso operativo real." />
 
-<ProductDivider eyebrow="Decisión de diseño" label="Mover la revisión del final del proceso al día a día fue lo que cambió la naturaleza del problema, no solo su velocidad." />
+La revisión identificó tres vacíos para explicar el servicio: no se detallaban las condiciones de validación progresiva, no se mostraban los responsables de los traspasos y no se diferenciaba con suficiente claridad un caso pendiente de uno conciliado. Estas son carencias documentales; no prueban que la operación careciera de esas definiciones.
 
-Para clasificar evidencias, diseñé un flujo asistido por IA y prototipé variantes con Claude Code y Figma Make para validarlas con el equipo y preparar pruebas:
+## Perfiles de trabajo, no biografías inventadas
 
-<figure class="my-10">
-  <video
-    src="/projects/mercadolibre-pase/prototipo-claude.mp4"
-    autoplay
-    loop
-    muted
-    playsinline
-    class="w-full rounded-xl"
-  />
-  <figcaption class="mt-3 text-sm text-ink-muted">Prototipo de la gestión de reclamos por rutas ejecutadas, construido con Claude Code.</figcaption>
+Para ordenar las necesidades, separé tres roles. El proveedor necesita sustentar una diferencia; operación necesita contrastarla; negocio y finanzas deben intervenir donde la decisión excede una regla operativa. Esta separación ayuda a diseñar permisos, información y siguientes acciones.
+
+Las tarjetas parten de tareas mencionadas en el caso, no de una segmentación validada. La frecuencia de uso, la autonomía y los criterios de priorización deberán contrastarse con [entrevistas y observación].
+
+<PaseArtifacts kind="personas" />
+
+## El recorrido del proveedor
+
+El journey sigue una sola perspectiva: la coordinación del proveedor que necesita aclarar una ruta con diferencia antes de facturación. Primero organiza sus acciones; después ubica los puntos de contacto; por último vincula las fricciones con una experiencia propuesta.
+
+Mantener una perspectiva evita mezclar lo que el usuario hace con el trabajo interno del servicio. No se dibuja una curva emocional porque no hay datos para respaldarla. Los pensamientos y emociones quedan como [información por validar].
+
+<PaseArtifacts kind="journey" />
+
+La oportunidad consiste en que cada diferencia conserve su contexto y una siguiente acción comprensible. “Solicitar evidencia” no equivale a “resolver”; una propuesta de ajuste tampoco equivale a una conciliación registrada. Esa distinción orienta el contenido de los estados y las confirmaciones.
+
+## Un proceso objetivo con decisiones y retornos
+
+El mapa siguiente es una propuesta de esta revisión, no un artefacto histórico recuperado. Hace explícitas las ramas que el relato no detallaba: coincidencia, evidencia incompleta, revisión humana y solicitud de nueva revisión.
+
+La secuencia empieza en una ejecución registrada. Una coincidencia solo puede seguir una [regla autorizada]. Si existe una diferencia, el proveedor aporta contexto. Si falta evidencia, se solicita información sin fingir que el caso está resuelto. Operación o finanzas toman las decisiones que requieren autoridad humana.
+
+<PaseArtifacts kind="process" />
+
+El cierre propuesto conserva motivo, autor y versión de la decisión. La conciliación no se presenta como autorización de pago. Antes de implementar este proceso en un servicio real deben acordarse [plazos], [permisos], [facultades], [criterios de rechazo] y [política de reapertura].
+
+## De la estructura a la interfaz
+
+Cuando el volumen hacía inviable revisar cada viaje individualmente, propuse un panel ejecutivo con filtros y descarga parametrizada. La decisión respondía a una tarea de revisión agregada, no a la necesidad de añadir más información en cada fila.
+
+La exploración de cards permite revisar cómo presentar contexto y acciones por ruta. La pregunta de diseño es si el usuario entiende qué está revisando y qué puede hacer a continuación. Su respuesta requiere pruebas; la imagen no las sustituye.
+
+<Figure src={exploracionCards} alt="Exploración de formatos de card para revisar reclamos asociados a rutas ejecutadas" caption="Exploración existente: distintas maneras de organizar la información y las acciones por ruta." />
+
+## La IA como exploración, no como autoridad
+
+Diseñé un flujo asistido por IA para clasificar evidencias y prototipé variantes con Claude Code y Figma Make. Esta exploración se separa del proceso original porque no están documentadas [fechas de iteración] ni [estado de despliegue].
+
+La primera variante permite examinar cómo presentar un reclamo con su contexto. La segunda explora la revisión desde el panel de rutas. En el proceso propuesto, la clasificación sugiere una categoría; no autoriza un ajuste ni sustituye la decisión de negocio.
+
+<figure class="media-bleed my-10">
+  <video src="/projects/mercadolibre-pase/prototipo-claude.mp4" controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototipo de gestión de reclamos por rutas ejecutadas" />
+  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Exploración con Claude Code. Pregunta de revisión: ¿se entiende el contexto del reclamo y su siguiente acción? Vídeo sin audio.</figcaption>
 </figure>
 
-<figure class="my-10">
-  <video
-    src="/projects/mercadolibre-pase/prototipo-figma-make.mp4"
-    autoplay
-    loop
-    muted
-    playsinline
-    class="w-full rounded-xl"
-  />
-  <figcaption class="mt-3 text-sm text-ink-muted">Iteración del panel de control de rutas ejecutadas, prototipado con Figma Make.</figcaption>
+<figure class="media-bleed my-10">
+  <video src="/projects/mercadolibre-pase/prototipo-figma-make.mp4" controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototipo del panel de control de rutas ejecutadas" />
+  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Exploración con Figma Make. Pregunta de revisión: ¿se distinguen la revisión agregada y la gestión de una ruta? Vídeo sin audio.</figcaption>
 </figure>
 
-## Resultado
+## Cómo evaluar la propuesta
 
-Menos diferencias no recuperables, disputas resueltas en horas en vez de semanas, y coordinadores que dejaron de reconstruir casos de memoria. El aprendizaje: en herramientas B2B complejas, el diseño de interfaz solo funciona si se articula con cómo el equipo estructura los incentivos por fuera de la pantalla.
+El plan de medición distingue velocidad, diferencias, oportunidad y retrabajo. Primero exige definir eventos y cohortes comparables; después permite observar cambios. No se grafican resultados porque los datos originales no están disponibles.
+
+<PaseArtifacts kind="measurement" />
+
+Las pruebas propuestas cubren una ruta sin diferencia, evidencia incompleta, una excepción financiera y una reapertura. Además del éxito de tarea, deben observarse errores críticos y comprensión de los estados. [Número de participantes], [criterio de éxito] y [umbral de avance] se acuerdan antes de ejecutar las pruebas.
+
+## Aprendizaje y siguiente revisión
+
+El valor del diseño estuvo en acercar la conciliación a la ejecución y articular interfaz, reglas y responsabilidades. Esta revisión fortalece la explicación del caso sin atribuirle resultados nuevos ni convertir una propuesta en historia del proyecto.
+
+El siguiente paso es contrastar los artefactos con las fuentes originales y responsables de operación. El blueprint y la matriz de responsabilidades acompañan la documentación editable de revisión. La versión permanece en Git como preproducción, pendiente de evidencia y aprobación editorial.

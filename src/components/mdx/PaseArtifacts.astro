@@ -1,0 +1,118 @@
+---
+interface Props { kind: 'personas' | 'journey' | 'process' | 'measurement'; locale?: 'es' | 'en'; }
+const { kind, locale = 'es' } = Astro.props;
+const t = (es: string, en: string) => locale === 'en' ? en : es;
+const personas = [
+  [t('Coordinación del proveedor', 'Provider coordinator'), t('Revisar rutas y sustentar diferencias.', 'Review routes and support discrepancies.'), t('Saber qué falta y qué hacer después.', 'Know what is missing and what to do next.'), t('Reconstrucción tardía descrita en el caso.', 'Late reconstruction described in the case.'), t('[Frecuencia, contexto y autonomía]', '[Frequency, context and autonomy]')],
+  [t('Operación de Mercado Libre', 'Mercado Libre operations'), t('Contrastar ejecución y ajustes.', 'Compare execution and adjustments.'), t('Distinguir coincidencias de excepciones.', 'Distinguish matching records from exceptions.'), t('Volumen incompatible con revisión individual.', 'Volume incompatible with individual review.'), t('[Volumen y priorización]', '[Volume and prioritisation]')],
+  [t('Negocio y finanzas', 'Business and finance'), t('Resolver excepciones antes de facturar.', 'Resolve exceptions before billing.'), t('Evidencia y decisión trazable.', 'Evidence and a traceable decision.'), t('Facultades no detalladas en el caso.', 'Authority not detailed in the case.'), t('[Autoridad y escalamiento]', '[Authority and escalation]')],
+];
+const stages = locale === 'en' ? ['Execute', 'Detect', 'Support', 'Resolve', 'Reconcile'] : ['Ejecutar', 'Detectar', 'Sustentar', 'Resolver', 'Conciliar'];
+const journey = locale === 'en' ? [
+  ['Reconstructed action', 'Complete trip', 'Review late discrepancy', 'Recover what happened', 'Take part in dispute', 'Check outcome'],
+  ['Touchpoint', '[Route record]', 'Financial review', '[Evidence channel]', '[Resolution channel]', '[Reconciliation record]'],
+  ['Friction', '[Record quality]', 'Time elapsed since trip', 'Reconstruction from memory', 'Weeks to resolve, per the case', '[Outcome visibility]'],
+  ['Proposed experience', 'Retain execution and route ID', 'Review discrepancies daily', 'Attach evidence in context', 'See owner and next action', 'Receive decision and reason'],
+  ['Thoughts and emotions', '[To validate]', '[To validate]', '[To validate]', '[To validate]', '[To validate]'],
+  ['Evidence needed', '[Actual record]', '[Observed case]', '[Interview and evidence]', '[Dispute history]', '[Traceable reconciliation]'],
+] : [
+  ['Acción reconstruida', 'Completar viaje', 'Revisar diferencia tardía', 'Recuperar lo ocurrido', 'Participar en disputa', 'Conocer resultado'],
+  ['Punto de contacto', '[Registro de ruta]', 'Revisión financiera', '[Canal de evidencia]', '[Canal de resolución]', '[Registro conciliado]'],
+  ['Fricción', '[Calidad del registro]', 'Tiempo desde la ruta', 'Reconstrucción de memoria', 'Semanas según el caso', '[Visibilidad del resultado]'],
+  ['Experiencia propuesta', 'Conservar ejecución e ID', 'Revisar diferencias a diario', 'Adjuntar evidencia en contexto', 'Ver responsable y siguiente acción', 'Recibir decisión y motivo'],
+  ['Pensamientos y emociones', '[Por validar]', '[Por validar]', '[Por validar]', '[Por validar]', '[Por validar]'],
+  ['Evidencia necesaria', '[Registro real]', '[Caso observado]', '[Entrevista y evidencia]', '[Historial de disputa]', '[Conciliación trazable]'],
+];
+const metrics = [
+  [t('Resolución', 'Resolution'), t('Mediana y p90 de horas entre apertura y decisión; informar casos abiertos.', 'Median and p90 hours from opening to decision; report open cases.'), t('[Periodos, sites y cohortes]', '[Periods, sites and cohorts]')],
+  [t('Diferencias', 'Discrepancies'), t('Rutas con diferencia de facturación / rutas facturadas.', 'Routes with billing discrepancies / billed routes.'), t('[Clasificación y denominador]', '[Classification and denominator]')],
+  [t('Oportunidad', 'Timeliness'), t('Rutas conciliadas antes del corte / rutas elegibles.', 'Routes reconciled before cutoff / eligible routes.'), t('[Corte y elegibilidad]', '[Cutoff and eligibility]')],
+  [t('Retrabajo', 'Rework'), t('Casos reabiertos / cerrados de una cohorte.', 'Reopened cases / closed cases in a cohort.'), t('[Ventana de observación]', '[Observation window]')],
+  [t('Clasificación IA', 'AI classification'), t('Sugerencias correctas / evaluadas contra referencia humana.', 'Correct suggestions / suggestions assessed against human reference.'), t('[Categorías y errores críticos]', '[Categories and critical errors]')],
+];
+const id = `pase-flow-${locale}`;
+---
+<figure class="not-prose media-bleed my-12 pase-artifact" data-pase-artifact={kind}>
+  {kind === 'personas' && <>
+    <div class="grid gap-6 md:grid-cols-3">{personas.map(([role, task, need, friction, pending]) => <section class="border-t-2 border-ink pt-5">
+      <p class="text-xs uppercase tracking-wide text-ink-muted">{t('Perfil provisional', 'Provisional profile')}</p>
+      <h3 class="mt-2 font-display text-xl font-semibold text-ink">{role}</h3>
+      <dl class="mt-4 space-y-4 text-sm leading-relaxed">{[[t('Tarea', 'Task'), task], [t('Necesidad propuesta', 'Proposed need'), need], [t('Fricción descrita', 'Described friction'), friction], [t('Por validar', 'To validate'), pending]].map(([label, value]) => <div><dt class="font-semibold text-ink">{label}</dt><dd class="mt-1 text-ink-muted">{value}</dd></div>)}</dl>
+    </section>)}</div>
+    <figcaption>{t('Perfiles por rol, no personas validadas. Sin biografías ni citas ficticias.', 'Role profiles, not validated personas. No fictional biographies or quotes.')}</figcaption>
+  </>}
+  {kind === 'journey' && <>
+    <p class="mb-4 text-sm text-ink">{t('Actor: coordinación del proveedor. Escenario: una ruta con diferencia. Objetivo: aclararla antes de facturación.', 'Actor: provider coordinator. Scenario: a route with a discrepancy. Goal: resolve it before billing.')}</p>
+    <div class="table-scroll" tabindex="0" role="region" aria-label={t('Journey del proveedor, desplazable', 'Provider journey, scrollable')}>
+      <table><caption class="sr-only">{t('Journey reconstruido y experiencia propuesta', 'Reconstructed journey and proposed experience')}</caption>
+        <thead><tr><th scope="col">{t('Dimensión', 'Dimension')}</th>{stages.map(s => <th scope="col">{s}</th>)}</tr></thead>
+        <tbody>{journey.map(([label, ...cells]) => <tr><th scope="row">{label}</th>{cells.map(cell => <td>{cell}</td>)}</tr>)}</tbody>
+      </table>
+    </div>
+    <figcaption>{t('Reconstrucción del caso existente y propuesta futura. Los campos entre corchetes requieren evidencia.', 'Reconstruction of the existing case and a future proposal. Bracketed fields require evidence.')}</figcaption>
+  </>}
+  {kind === 'process' && <>
+    <p class="mb-4 text-sm text-ink">{t('Proceso objetivo propuesto. Una coincidencia necesita una regla autorizada; las excepciones conservan revisión humana.', 'Proposed target process. Matching records need an authorised rule; exceptions retain human review.')}</p>
+    <div class="flow-scroll" tabindex="0" role="region" aria-label={t('Mapa de proceso con carriles, desplazable', 'Swimlane process map, scrollable')}>
+      <svg viewBox="0 0 1120 640" role="img" aria-labelledby={`${id}-title ${id}-desc`}>
+        <title id={`${id}-title`}>{t('PASE: decisiones y retornos de conciliación', 'PASE: reconciliation decisions and loops')}</title>
+        <desc id={`${id}-desc`}>{t('El sistema contrasta ejecución. Una coincidencia pasa por una regla autorizada. Las diferencias pasan al proveedor: si falta evidencia se solicita y se vuelve a revisar; si es suficiente, operación o finanzas revisan. Se registra y notifica la decisión. El proveedor puede pedir nueva revisión o cerrar la conciliación.', 'The system compares execution. Matching records use an authorised rule. Discrepancies go to the provider: missing evidence is requested and reviewed again; sufficient evidence goes to operations or finance. The decision is recorded and communicated. The provider may request another review or close reconciliation.')}</desc>
+        <defs><marker id={`${id}-arrow`} markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="var(--ink-muted)" /></marker></defs>
+        <rect width="1120" height="180" fill="var(--paper-muted)" /><rect y="180" width="1120" height="220" fill="var(--paper)" /><rect y="400" width="1120" height="240" fill="var(--paper-muted)" />
+        <path d="M0 180H1120 M0 400H1120 M145 0V640" stroke="var(--border)" stroke-dasharray="5 5" fill="none" />
+        <g class="lane"><text x="15" y="45">{t('Sistema', 'System')}</text><text x="15" y="225">{t('Proveedor', 'Provider')}</text><text x="15" y="445">{t('Operación', 'Operations')}</text><text x="15" y="470">{t('y finanzas', 'and finance')}</text></g>
+        <g class="arrows" marker-end={`url(#${id}-arrow)`}>
+          <path d="M182 90H205" /><path d="M345 90H375" /><path d="M495 90H540" /><path d="M690 90H720V425H780V450" />
+          <path d="M435 140V235H245V250" /><path d="M315 300H370" /><path d="M435 355V475H540" />
+          <path d="M500 300H530" /><path d="M605 250V205H245V250" />
+          <path d="M690 500H710V475H720" /><path d="M860 475H925V355" /><path d="M985 300H1015" /><path d="M925 355V585H615V525" />
+        </g>
+        <circle cx="170" cy="90" r="12" class="terminal" />
+        <g class="task"><rect x="205" y="65" width="140" height="50" rx="6" /><rect x="540" y="65" width="150" height="50" rx="6" /><rect x="175" y="250" width="140" height="100" rx="6" /><rect x="530" y="250" width="150" height="100" rx="6" /><rect x="540" y="450" width="150" height="75" rx="6" /><rect x="720" y="450" width="140" height="75" rx="6" /></g>
+        <g class="decision"><path d="M435 40L495 90L435 140L375 90Z" /><path d="M435 245L500 300L435 355L370 300Z" /><path d="M925 245L985 300L925 355L865 300Z" /></g>
+        <ellipse cx="1065" cy="300" rx="48" ry="38" class="terminal" />
+        <g class="labels" text-anchor="middle">
+          <text x="275" y="85"><tspan x="275">{t('Contrastar', 'Compare')}</tspan><tspan x="275" dy="20">{t('ejecución', 'execution')}</tspan></text>
+          <text x="435" y="95">{t('¿Coincide?', 'Match?')}</text>
+          <text x="615" y="85"><tspan x="615">{t('[Regla', '[Authorised')}</tspan><tspan x="615" dy="20">{t('autorizada]', 'rule]')}</tspan></text>
+          <text x="245" y="285"><tspan x="245">{t('Revisar y', 'Review and')}</tspan><tspan x="245" dy="20">{t('aportar', 'provide')}</tspan><tspan x="245" dy="20">{t('evidencia', 'evidence')}</tspan></text>
+          <text x="435" y="295"><tspan x="435">{t('¿Evidencia', 'Enough')}</tspan><tspan x="435" dy="20">{t('suficiente?', 'evidence?')}</tspan></text>
+          <text x="605" y="285"><tspan x="605">{t('Solicitar', 'Request')}</tspan><tspan x="605" dy="20">{t('información', 'missing')}</tspan><tspan x="605" dy="20">{t('faltante', 'information')}</tspan></text>
+          <text x="615" y="480"><tspan x="615">{t('Revisión', 'Human')}</tspan><tspan x="615" dy="20">{t('humana', 'review')}</tspan></text>
+          <text x="790" y="470"><tspan x="790">{t('Registrar y', 'Record and')}</tspan><tspan x="790" dy="20">{t('notificar', 'communicate')}</tspan><tspan x="790" dy="20">{t('decisión', 'decision')}</tspan></text>
+          <text x="925" y="295"><tspan x="925">{t('¿Pide', 'Request')}</tspan><tspan x="925" dy="20">{t('revisión?', 'review?')}</tspan></text>
+          <text x="1065" y="295"><tspan x="1065">{t('Registro', 'Reconciled')}</tspan><tspan x="1065" dy="20">{t('conciliado', 'record')}</tspan></text>
+        </g>
+        <g class="edges"><text x="505" y="78">{t('Sí', 'Yes')}</text><text x="445" y="220">No</text><text x="505" y="287">No</text><text x="447" y="380">{t('Sí', 'Yes')}</text><text x="990" y="285">No</text><text x="760" y="575">{t('Sí: nueva revisión', 'Yes: review again')}</text><text x="320" y="198">{t('Completar evidencia', 'Complete evidence')}</text></g>
+      </svg>
+    </div>
+    <figcaption>{t('Mapa de proceso, no BPMN certificado. Inicio: ejecución registrada. Fin: conciliación registrada, no pago autorizado. Plazos y facultades: [por definir].', 'Process map, not certified BPMN. Start: recorded execution. End: recorded reconciliation, not authorised payment. Deadlines and authority: [to define].')}</figcaption>
+  </>}
+  {kind === 'measurement' && <>
+    <div class="table-scroll" tabindex="0" role="region" aria-label={t('Plan de medición, desplazable', 'Measurement plan, scrollable')}>
+      <table class="metrics"><caption class="sr-only">{t('Indicadores propuestos sin resultados atribuidos', 'Proposed indicators without attributed results')}</caption>
+        <thead><tr>{[t('Indicador', 'Indicator'), t('Definición', 'Definition'), t('Información pendiente', 'Missing information')].map(label => <th scope="col">{label}</th>)}</tr></thead>
+        <tbody>{metrics.map(([label, definition, pending]) => <tr><th scope="row">{label}</th><td>{definition}</td><td>{pending}</td></tr>)}</tbody>
+      </table>
+    </div>
+    <figcaption>{t('No hay datos disponibles para graficar resultados. Estos indicadores no son resultados del proyecto.', 'No data is available to chart outcomes. These indicators are not project results.')}</figcaption>
+  </>}
+</figure>
+<style>
+  figcaption { margin-top: 1rem; color: var(--ink-muted); font-size: .875rem; line-height: 1.6; }
+  .table-scroll, .flow-scroll { overflow-x: auto; }
+  .table-scroll:focus-visible, .flow-scroll:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 4px; }
+  table { width: 100%; min-width: 960px; border-collapse: collapse; font-size: .875rem; line-height: 1.6; }
+  th, td { padding: 1rem; vertical-align: top; text-align: left; border-bottom: 1px solid var(--border); }
+  thead { background: var(--paper-muted); }
+  th { color: var(--ink); font-weight: 600; } td { color: var(--ink-soft); }
+  tbody th { min-width: 145px; } .metrics { min-width: 640px; }
+  svg { width: 100%; min-width: 1000px; height: auto; display: block; }
+  .arrows { fill: none; stroke: var(--ink-muted); stroke-width: 2; }
+  .task rect { fill: var(--paper); stroke: var(--ink-muted); stroke-width: 1.5; }
+  .decision { fill: var(--accent-muted); stroke: var(--accent-strong); stroke-width: 1.5; }
+  .terminal { fill: var(--paper); stroke: var(--ink); stroke-width: 2; }
+  .labels { fill: var(--ink); font-size: 14px; }
+  .lane { fill: var(--ink); font-size: 16px; font-weight: 600; }
+  .edges { fill: var(--ink-muted); font-size: 13px; }
+</style>
