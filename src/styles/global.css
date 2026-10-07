@@ -26,12 +26,27 @@
   .project-card-image {
     @apply block w-full object-cover;
     aspect-ratio: 1;
-    transition: transform 300ms ease-out;
+    transition: transform 300ms ease-out, filter 300ms ease-out;
+  }
+
+  .project-company-overlay {
+    @apply absolute inset-0 z-10 flex items-center justify-center bg-ink/45 px-6 text-center opacity-0;
+    transition: opacity 300ms ease-out;
+  }
+
+  .project-company-overlay span {
+    @apply font-display text-xl font-semibold text-paper sm:text-2xl;
   }
 
   .group:hover .project-card-image,
   .group:focus-visible .project-card-image {
     transform: scale(1.015);
+    filter: blur(4px) brightness(0.72);
+  }
+
+  .group:hover .project-company-overlay,
+  .group:focus-visible .project-company-overlay {
+    opacity: 1;
   }
 }
 
@@ -218,6 +233,10 @@ html.has-custom-cursor button {
 
 @media (prefers-reduced-motion: reduce) {
   .project-card-image {
+    transition: none;
+  }
+
+  .project-company-overlay {
     transition: none;
   }
 
