@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import Tag from '../ui/Tag.astro';
 import type { ProjectEntry } from '../../lib/content-types';
 import type { Locale } from '../../i18n/ui';
 import { projectHref } from '../../i18n/paths';
@@ -25,6 +24,11 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
     {
       items.map(({ project, company }) => {
         const href = project.data.externalUrl ?? projectHref(locale, project.id);
+        const companyName = company.split(/[(/]/)[0].trim();
+        const repeatedCompanyPrefix = `${companyName}:`;
+        const cardTitle = project.data.title.toLocaleLowerCase().startsWith(repeatedCompanyPrefix.toLocaleLowerCase())
+          ? project.data.title.slice(repeatedCompanyPrefix.length).trim()
+          : project.data.title;
         return (
           <a
             href={href}
@@ -61,16 +65,9 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
                 {company}
               </p>
               <h2 id={`home-project-${project.id}`} class="mt-3 font-display text-xl font-semibold leading-tight text-ink sm:text-2xl">
-                {project.data.title}
+                {cardTitle}
                 {project.data.externalUrl && <span class="ml-1 text-base text-accent-blue" aria-hidden="true">↗</span>}
               </h2>
-              {
-                project.data.tags.length > 0 && (
-                  <div class="mt-4 flex flex-wrap gap-2">
-                    {project.data.tags.map((tag) => <Tag>{tag}</Tag>)}
-                  </div>
-                )
-              }
             </div>
           </a>
         );

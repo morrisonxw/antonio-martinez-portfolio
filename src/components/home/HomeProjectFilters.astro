@@ -31,7 +31,7 @@ const moreLabel = isEnglish ? 'Other filters' : 'Otros filtros';
     aria-pressed="true"
     class="shrink-0 rounded-full border border-ink bg-ink px-4 py-2 text-sm font-medium text-paper transition-colors aria-pressed:bg-ink aria-pressed:text-paper"
   >
-    {isEnglish ? 'All' : 'Todos'} <span class="ml-1 opacity-60">{projects.length}</span>
+    {isEnglish ? 'All' : 'Todos'}
   </button>
   {primaryTags.map((tag) => (
     <button
@@ -40,7 +40,7 @@ const moreLabel = isEnglish ? 'Other filters' : 'Otros filtros';
       aria-pressed="false"
       class="shrink-0 rounded-full border border-border bg-paper px-4 py-2 text-sm font-medium text-ink-muted transition-colors hover:border-ink hover:text-ink aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-paper"
     >
-      {tag.label} <span class="ml-1 opacity-60">{tag.count}</span>
+      {tag.label}
     </button>
   ))}
   {otherTags.length > 0 && (
