@@ -84,9 +84,9 @@ function rasterizeTextMask(width: number, height: number): void {
   maskCtx.textAlign = 'center';
   maskCtx.textBaseline = 'middle';
 
-  const desiredSize = clamp(width / 12, 24, 128);
-  const maxTextWidth = width * (width >= 720 ? 0.56 : 0.9);
-  const text = 'Human Centered';
+  const desiredSize = clamp(width / 8, 40, 180);
+  const maxTextWidth = width * 0.94;
+  const text = 'HUMAN CENTERED';
   let fontSize = desiredSize;
   maskCtx.font = `700 ${fontSize}px "Space Grotesk", Inter, sans-serif`;
   const textWidth = maskCtx.measureText(text).width;
@@ -95,8 +95,8 @@ function rasterizeTextMask(width: number, height: number): void {
     maskCtx.font = `700 ${fontSize}px "Space Grotesk", Inter, sans-serif`;
   }
 
-  const maskX = width >= 720 ? width * 0.72 : width / 2;
-  const maskY = height * (width >= 720 ? 0.28 : 0.22);
+  const maskX = width / 2;
+  const maskY = height / 2;
   maskCtx.fillText(text, maskX, maskY, maxTextWidth);
   maskPixels = maskCtx.getImageData(0, 0, maskWidth, maskHeight).data;
 }
