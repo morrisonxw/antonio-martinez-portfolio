@@ -148,8 +148,9 @@ function draw(timeMs: number): void {
       const coverage = coverageAt(x, y);
       const textPulse = reducedMotion
         ? coverage * 0.82
-        : coverage * (0.76 + Math.sin(seconds * 1.15 + x * 0.018 - y * 0.011) * 0.16);
-      const illuminatedValue = clamp(0.08 + noise * 0.5 + textPulse * 0.82);
+        : coverage * (0.76 + Math.sin(seconds * 1.15 + x * 0.018 - y * 0.011) * 0.1);
+      // Motif stays legible but secondary to the headline.
+      const illuminatedValue = clamp(0.08 + noise * 0.5 + textPulse * 0.62);
       const contrast = smoothstep(clamp((illuminatedValue - 0.24) / 0.68));
       const glyphIndex = Math.min(GLYPHS.length - 1, Math.floor(contrast * GLYPHS.length));
       const glyph = GLYPHS[glyphIndex];
@@ -158,7 +159,7 @@ function draw(timeMs: number): void {
       const characterSize = BASE_CHARACTER_SIZE * (0.82 + illuminatedValue * 0.9);
       const colorExposure = illuminatedValue ** 1.65;
       ctx.fillStyle = mixColor(gridRgb, highlightRgb, colorExposure);
-      ctx.globalAlpha = 0.12 + colorExposure * 0.68;
+      ctx.globalAlpha = 0.12 + colorExposure * 0.56;
       ctx.font = `${characterSize.toFixed(1)}px ui-monospace, "SFMono-Regular", Consolas, monospace`;
       ctx.fillText(glyph, x, y);
     }
