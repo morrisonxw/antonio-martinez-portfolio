@@ -21,7 +21,7 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
 ---
 
 <section id="projects" data-home-project-group aria-label={label} class="mx-auto w-full max-w-[var(--content-width)] scroll-mt-28 px-6 pb-24 sm:px-8 sm:pb-28">
-  <div class="grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 md:gap-y-20">
+  <div class="grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 md:gap-y-20 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-16">
     {
       items.map(({ project, company }) => {
         const href = project.data.externalUrl ?? projectHref(locale, project.id);
