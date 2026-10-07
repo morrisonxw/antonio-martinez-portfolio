@@ -22,6 +22,7 @@ tools: ["Figma", "FigJam", "Claude Code", "Gemini", "Figma Make", "NotebookLM", 
 confidential: false
 ---
 import Figure from '../../components/mdx/Figure.astro';
+import CaseVideo from '../../components/mdx/CaseVideo.astro';
 import JourneyCompare from '../../components/mdx/JourneyCompare.astro';
 import PaseArtifacts from '../../components/mdx/PaseArtifacts.astro';
 import exploracionCards from '../../assets/projects/mercadolibre-pase/exploracion-cards.png';
@@ -109,15 +110,9 @@ El volumen hizo inviable revisar todos los servicios individualmente en pantalla
 
 Los vídeos muestran dos variantes de prototipo construidas con Claude Code y Figma Make. Permiten recorrer la revisión de rutas, consultar el contexto de una diferencia y explorar las acciones disponibles.
 
-<figure class="media-bleed my-10">
-  <video src="/projects/mercadolibre-pase/prototipo-claude.mp4" data-inline-playback controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototipo de gestión de reclamos por rutas ejecutadas" />
-  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Variante con Claude Code: contexto del reclamo y acciones por ruta. Vídeo sin audio.</figcaption>
-</figure>
+<CaseVideo src="/projects/mercadolibre-pase/prototipo-claude.mp4" poster="/projects/mercadolibre-pase/prototipo-claude-poster.jpg" label="Reproducir prototipo de gestión de reclamos por rutas ejecutadas" caption="Variante con Claude Code: contexto del reclamo y acciones por ruta. Vídeo sin audio." />
 
-<figure class="media-bleed my-10">
-  <video src="/projects/mercadolibre-pase/prototipo-figma-make.mp4" data-inline-playback controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototipo del panel de control de rutas ejecutadas" />
-  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Variante con Figma Make: revisión agregada desde el panel de rutas. Vídeo sin audio.</figcaption>
-</figure>
+<CaseVideo src="/projects/mercadolibre-pase/prototipo-figma-make.mp4" poster="/projects/mercadolibre-pase/prototipo-figma-make-poster.jpg" label="Reproducir prototipo del panel de control de rutas ejecutadas" caption="Variante con Figma Make: revisión agregada desde el panel de rutas. Vídeo sin audio." />
 
 ## Lo que demuestra el caso
 

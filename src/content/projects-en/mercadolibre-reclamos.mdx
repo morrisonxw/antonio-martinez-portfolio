@@ -22,6 +22,7 @@ confidential: false
 ---
 
 import Figure from '../../components/mdx/Figure.astro';
+import CaseVideo from '../../components/mdx/CaseVideo.astro';
 import ImpactStats from '../../components/mdx/ImpactStats.astro';
 import ProductDivider from '../../components/mdx/ProductDivider.astro';
 
@@ -50,17 +51,7 @@ We started by mapping the existing process together with analysts and providers 
 
 I built the flows and prototyped a standardized queue with automatic validations, designed to process in batches instead of case by case, with every claim queryable from one place instead of scattered across email and tickets, and we tested it with analysts until it freed them up for the cases that actually needed human judgment.
 
-<figure class="my-10">
-  <video
-    src="/projects/mercadolibre-reclamos/crear-reclamo.mp4"
-    autoplay
-    loop
-    muted
-    playsinline
-    class="w-full rounded-xl"
-  />
-  <figcaption class="mt-3 text-sm text-ink-muted">Claim-creation flow.</figcaption>
-</figure>
+<CaseVideo src="/projects/mercadolibre-reclamos/crear-reclamo.mp4" poster="/projects/mercadolibre-reclamos/crear-reclamo-poster.jpg" label="Play the claim-creation flow" caption="Claim-creation flow. Video without audio." />
 
 <ProductDivider eyebrow="Claims system" label="The process only became sustainable once we stopped designing it case by case and started designing it by batch." />
 

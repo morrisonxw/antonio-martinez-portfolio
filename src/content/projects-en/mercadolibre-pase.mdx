@@ -22,6 +22,7 @@ tools: ["Figma", "FigJam", "Claude Code", "Gemini", "Figma Make", "NotebookLM", 
 confidential: false
 ---
 import Figure from '../../components/mdx/Figure.astro';
+import CaseVideo from '../../components/mdx/CaseVideo.astro';
 import JourneyCompare from '../../components/mdx/JourneyCompare.astro';
 import PaseArtifacts from '../../components/mdx/PaseArtifacts.astro';
 import exploracionCards from '../../assets/projects/mercadolibre-pase/exploracion-cards.png';
@@ -109,15 +110,9 @@ Volume made reviewing every service individually on screen impractical. I propos
 
 The videos show two prototype variants built with Claude Code and Figma Make. They demonstrate route review, discrepancy context and the available actions.
 
-<figure class="media-bleed my-10">
-  <video src="/projects/mercadolibre-pase/prototipo-claude.mp4" data-inline-playback controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototype of claims management for executed routes" />
-  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Claude Code variant: claim context and route actions. Video without audio.</figcaption>
-</figure>
+<CaseVideo src="/projects/mercadolibre-pase/prototipo-claude.mp4" poster="/projects/mercadolibre-pase/prototipo-claude-poster.jpg" label="Play prototype for claims management on executed routes" caption="Claude Code variant: claim context and route actions. Video without audio." />
 
-<figure class="media-bleed my-10">
-  <video src="/projects/mercadolibre-pase/prototipo-figma-make.mp4" data-inline-playback controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototype of the executed-routes dashboard" />
-  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Figma Make variant: aggregate review through the routes dashboard. Video without audio.</figcaption>
-</figure>
+<CaseVideo src="/projects/mercadolibre-pase/prototipo-figma-make.mp4" poster="/projects/mercadolibre-pase/prototipo-figma-make-poster.jpg" label="Play prototype of the executed-routes dashboard" caption="Figma Make variant: aggregate review through the routes dashboard. Video without audio." />
 
 ## What this case demonstrates
 

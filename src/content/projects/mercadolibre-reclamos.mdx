@@ -22,6 +22,7 @@ confidential: false
 ---
 
 import Figure from '../../components/mdx/Figure.astro';
+import CaseVideo from '../../components/mdx/CaseVideo.astro';
 import ImpactStats from '../../components/mdx/ImpactStats.astro';
 import ProductDivider from '../../components/mdx/ProductDivider.astro';
 
@@ -50,17 +51,7 @@ Empezamos por mapear el proceso existente con analistas y proveedores para defin
 
 Armé los flujos y prototipé una bandeja estandarizada con validaciones automáticas y procesamiento por lotes. Centralizamos los reclamos, antes dispersos entre correos y tickets, y probamos la propuesta con analistas para que pudieran concentrarse en los casos que sí requerían criterio humano.
 
-<figure class="my-10">
-  <video
-    src="/projects/mercadolibre-reclamos/crear-reclamo.mp4"
-    autoplay
-    loop
-    muted
-    playsinline
-    class="w-full rounded-xl"
-  />
-  <figcaption class="mt-3 text-sm text-ink-muted">Flujo de creación de un reclamo.</figcaption>
-</figure>
+<CaseVideo src="/projects/mercadolibre-reclamos/crear-reclamo.mp4" poster="/projects/mercadolibre-reclamos/crear-reclamo-poster.jpg" label="Reproducir flujo de creación de un reclamo" caption="Flujo de creación de un reclamo. Vídeo sin audio." />
 
 <ProductDivider eyebrow="Sistema de reclamos" label="El proceso solo se volvió sostenible cuando dejamos de diseñarlo caso por caso y empezamos a diseñarlo por lotes." />
 
