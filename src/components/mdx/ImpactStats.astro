@@ -22,7 +22,7 @@ const { stats } = Astro.props;
     partir palabras a mitad de sílaba para que quepan.
   */
 }
-<div class="my-10 grid grid-cols-1 gap-x-8 border-t border-border pt-8 sm:grid-cols-2">
+<div class="media-bleed my-10 grid grid-cols-1 gap-x-8 border-t border-border pt-8 sm:grid-cols-2">
   {
     stats.map((stat, index) => {
       const isRightCol = index % 2 === 1;

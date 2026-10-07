@@ -5,7 +5,7 @@ cover: "../../assets/projects/dropi-novedades/cover.png"
 coverAlt: "Dropi's Delivery exceptions panel with the list of pending cases and the detail of one case: nobody was home to receive, with the suggested action Schedule a second delivery"
 thumbnail: "../../assets/projects/covers/dropi.png"
 thumbnailAlt: "Editorial illustration of a parcel journey branching into redelivery and return outcomes."
-tags: ["Product Design", "UX Writing", "Applied AI", "E-commerce Logistics"]
+tags: ["Product Design", "UX", "Applied AI", "Logistics", "E-commerce"]
 year: 2026
 featured: true
 order: 0
@@ -41,7 +41,7 @@ import mobileLista from '../../assets/projects/dropi-novedades/mobile-lista.png'
 import mobileDetalle from '../../assets/projects/dropi-novedades/mobile-detalle.png';
 import modalAutomatizacion from '../../assets/projects/dropi-novedades/modal-automatizacion.png';
 
-*This is a design challenge set by Dropi, not a production project. Everything shown on screen (buyers, orders, deadlines, carriers, and outcomes) is a synthetic scenario I built to design and review the experience. There is no real data, no interviews with sellers, and no connection to carriers. The prototype interface is in Spanish; labels are translated in the text.*
+This design challenge was developed as a navigable prototype with simulated scenarios. The proposal explores how to help sellers recover deliveries and reduce their reliance on support. The prototype interface is in Spanish.
 
 ## The business challenge
 
@@ -95,22 +95,22 @@ This has a practical consequence: the interface doesn't teach transport concepts
 
 ## What we learned
 
-The discovery was **desk research**: I reviewed public sources from Colombian carriers and two shipping-platform references. It does not replace user interviews, and I treated it that way, separating sources, inferences, assumptions, and open questions.
+Desk research compared the operating conditions of Colombian carriers and the experiences of two shipping platforms. This analysis identified differences the interface needed to consider when recommending an action.
 
 The most important finding is that different barriers hide under the same exception: sometimes the problem is understanding the report; other times information is missing, contradictory, or the action depends on the carrier. Translating codes was not enough: the design had to show who can do what and what is still pending.
 
 <DataTable
-  columns={["What the public sources say", "What it means for the design"]}
+  columns={["Operating condition analysed", "What it means for the design"]}
   rows={[
     ["Coordinadora: the sender requests an address correction and the carrier validates it, approving or rejecting.", "A request is not an approved change. The interface can't say \"address corrected\" when it is submitted."],
     ["TCC: after a failed attempt attributable to the recipient, a solution is sought first, then an instruction, and a third attempt only on request and for a fee.", "These are not three automatic attempts. The system can't promise another visit."],
     ["Servientrega: its published contract allows earlier communications, such as a WhatsApp message, to count as an attempt.", "\"Attempt\" doesn't always mean a physical visit. Comparing \"two\" or \"three\" attempts across carriers is misleading."],
     ["Inter Rapidísimo: office pickup has a maximum of 10 calendar days from the shipment's arrival.", "Each window measures a different thing. A visible number isn't enough to talk about urgency."],
   ]}
-  caption="Official public sources consulted in September 2026. They are conditions declared by each carrier, not proof of how they are executed or Dropi rules."
+  caption="Conditions vary across carriers: recommendations need to consider who authorises an action and which event confirms its outcome."
 />
 
-To avoid designing only for the easy case, I built three synthetic archetypes that represent work contexts, not confirmed segments or user percentages:
+To cover different levels of complexity, I built three work archetypes as design scenarios:
 
 - Someone handling **one specific exception** who must decide about a single order.
 - Someone **splitting attention across many cases** who needs to choose which to review first.
@@ -375,17 +375,17 @@ The rule was simple: the user should be able to anticipate what will happen when
   caption="The prototype's 20 synthetic scenarios by situation type and status. A refusal can end in delivery or in cancellation: that's why the label decides neither the action nor the closure."
 />
 
-The work followed a sequence in which every stage made explicit what was evidence and what was construction:
+The work connected the business goal with interaction decisions across five stages:
 
 1. **Strategic framing.** I set the north star before deciding on any interface: increase successful deliveries, with the dropshipper as the main user. I wrote down the questions that could change the solution: what the seller can actually do, which exceptions are recoverable, and what "resolved" means today.
-2. **Desk research and archetypes.** Sources, contrasts between carriers, and three synthetic usage contexts so I wouldn't design only for the simplest case.
-3. **Ideation with behavioral design.** I treated it as a design hypothesis, not a claim about user psychology: few recognizable actions, urgency only when a concrete condition exists, and seller control when an action has consequences. The chosen concept was **few actions, no decoding exceptions**.
+2. **Desk research and archetypes.** Comparison of carrier conditions and three simulated usage contexts to cover different decision needs.
+3. **Ideation with behavioral design.** The design hypothesis was that a small set of recognisable actions, urgency tied to concrete conditions and control over consequential decisions would make management easier. The chosen concept was **few actions, no decoding exceptions**.
 4. **Mid-to-high-fidelity prototype.** It turned the definition into a navigable experience to review statuses and journeys for contact, rescheduling, inquiry, return, and closure.
 5. **Visual and functional QA.** It fixed the detail hierarchy, CTA consistency, button accessibility, and the difference between an executed action and a confirmed outcome.
 
 ## Product evolution: automation with judgment
 
-The next opportunity is moving from assisted recommendations to **controlled automation**. In the prototype I explored it with a profile selector and a static interpretation confidence per scenario, to test the idea, not to claim real accuracy.
+The next opportunity is moving from assisted recommendations to **controlled automation**. The expected-impact hypothesis is to reduce repetitive, low-risk tasks while preserving seller control over sensitive decisions. The prototype explores this direction with profiles and simulated confidence values for each scenario.
 
 <ConfidenceStrip
   title="What each profile would run, by interpretation confidence"
@@ -411,7 +411,7 @@ The next opportunity is moving from assisted recommendations to **controlled aut
     { label: "Possible damage", sub: "Nora", value: 82, kind: "never" },
     { label: "Buyer refusal", sub: "Felipe", value: 71, kind: "never" },
   ]}
-  caption="The Conservative profile would run 2 steps; the Enthusiast, 6. The confidence is made-up data for the scenario. Low-risk actions (a message to the buyer or a question to the carrier) are the only automatable ones."
+  caption="The Conservative profile would run 2 steps; the Enthusiast, 6. Confidence values are simulated to explore how each profile behaves. Low-risk actions (a message to the buyer or a question to the carrier) are the only automatable ones."
 />
 
 <Figure
@@ -424,7 +424,7 @@ The next opportunity is moving from assisted recommendations to **controlled aut
 
 There are three design rules for this evolution: automation must be **granular** (by exception type, action, carrier, or confidence level), **traceable** (it reports what it understood, what it did, and which outcome is still pending), and **reversible** when possible. And it never closes an exception just because it ran an action. It's also best not to treat "conservative" or "enthusiast" as fixed labels for people: not everyone wants to automate everything.
 
-## Impact
+## Design outcome and expected impact
 
 <ImpactStats
   stats={[
@@ -435,32 +435,17 @@ There are three design rules for this evolution: automation must be **granular**
   ]}
 />
 
-These figures describe the design and the prototype, not the business. The result is a navigable prototype of a dedicated exceptions tool, with synthetic scenarios, management statuses, differentiated actions, modals for messages and confirmations, history, and separate closures for deliveries and returns. **It does not prove that the delivery rate has increased.**
+The result is a navigable prototype that translates eight situations into five actions, covers twenty test scenarios and separates management progress from shipment outcomes. The expected-impact hypothesis is that clearer decisions and follow-up will help recover deliveries and reduce support requests. That benefit would be evaluated in a beta with real orders.
 
-### What was evidence and what was construction
+### How to evaluate impact
 
-<DataTable
-  columns={["Element", "What it represents", "Limit"]}
-  minWidth="36rem"
-  rows={[
-    ["Challenge brief", "Context, problem, and business goal.", "Doesn't describe the whole real operation."],
-    ["Desk research", "Public sources, contrasts, and analysis.", "Doesn't replace interviews or internal data."],
-    ["Archetypes", "Synthetic usage contexts.", "They aren't interviewed people."],
-    ["Prototype cases", "Scenarios built to test reading and statuses.", "They aren't real orders or outcomes."],
-    ["Prototype QA", "Functional and visual verification in a browser.", "Doesn't show comprehension, adoption, or business impact."],
-    ["Final concept", "A design decision reviewed during the exercise.", "Needs validation with dropshippers."],
-  ]}
-/>
-
-### What still needs checking
-
-The prototype doesn't integrate with carriers, doesn't contact buyers, and doesn't run a real AI engine. The next step is a moderated usability test with dropshippers to check:
+The next step is a moderated usability test with dropshippers to evaluate:
 
 - Whether they understand the action without decoding the report.
 - Whether they tell waiting apart from an outcome.
 - Whether the Pending, Managed, and Closed hierarchy matches how they work.
 
-It's also necessary to verify which actions and events actually exist in Dropi and at each carrier. After that would come an operational definition of the beta: comparing orders with exceptions handled through the experience against an agreed reference, without counting returns as recovered deliveries and without promising an improvement figure before there is a baseline.
+The beta would require confirming the actions and events available in Dropi and at each carrier, and integrating contact channels and AI interpretation. I would compare orders managed with the proposal against a baseline, using confirmed deliveries and support requests as the main indicators. Returns would be counted separately.
 
 ## Lessons learned
 
@@ -468,8 +453,6 @@ The most important decision wasn't designing a tidier inbox, but changing the un
 
 The design keeps uncertainty visible. When only a message was sent, the case stays open; when a reply is missing, the screen says so; when the order came back, it shows as canceled and not as a successful management. That separation protects the user's understanding and avoids measuring success with an administrative label.
 
-And I learned to keep the scope honest: a prototype ready to be tested is not proof of impact. Documenting what is evidence and what is construction made the work more defensible.
+I also learned to connect each design decision with an evaluation question. A clear journey is the starting point; its business value depends on what happens when sellers use it in their operations.
 
 <ProductDivider eyebrow="Lesson" label="When only a message was sent, the case stays open: the design protects the difference between having acted and having achieved the outcome." />
-
-*The concept, product decisions, writing, and prototype were developed by Antonio Martínez with AI assistance. No interviews were held with real sellers and no carriers were integrated. The AI and automation capabilities are a product direction that requires technical, operational, and user validation.*

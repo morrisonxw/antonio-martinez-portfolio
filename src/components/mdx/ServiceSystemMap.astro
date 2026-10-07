@@ -8,8 +8,8 @@ const { locale = 'es', caption } = Astro.props;
 const en = locale === 'en';
 ---
 
-<figure class="not-prose my-10" data-reveal>
-  <div class="overflow-x-auto rounded-2xl border border-border/60 bg-paper p-3 sm:p-5">
+<figure class="not-prose media-bleed my-10" data-reveal>
+  <div class="overflow-x-auto">
     <svg viewBox="0 0 960 470" class="block h-auto min-w-[760px] w-full" role="img" aria-label={en ? 'Service system map. The SME interacts with the human advisor. AI supports the advisor behind the scenes, enabled by risk, data governance, compliance, and leadership.' : 'Mapa del sistema de servicio. La pyme interactúa con la asesora. La IA apoya a la asesora tras escena, con habilitación de riesgo, gobierno de datos, compliance y liderazgo.'}>
       <defs>
         <marker id="system-arrow-orange" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M1 1 L7 4 L1 7" class="fill-none stroke-accent" stroke-width="1.5" /></marker>

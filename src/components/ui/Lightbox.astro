@@ -139,7 +139,8 @@ const locale = (Astro.currentLocale ?? 'es') as Locale;
       });
     });
 
-    article.querySelectorAll<HTMLVideoElement>('video').forEach((video) => {
+    // Los vídeos con reproducción inline conservan sus controles nativos.
+    article.querySelectorAll<HTMLVideoElement>('video:not([data-inline-playback])').forEach((video) => {
       const label = video.closest('figure')?.querySelector('figcaption')?.textContent?.trim() || expandLabel;
       video.classList.add('cursor-zoom-in');
       video.tabIndex = 0;

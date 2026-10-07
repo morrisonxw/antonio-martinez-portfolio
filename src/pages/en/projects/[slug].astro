@@ -1,20 +1,23 @@
 ---
 import { getCollection, render } from 'astro:content';
 import CaseStudyLayout from '../../../layouts/CaseStudyLayout.astro';
+import { sortByPortfolioOrder } from '../../../lib/project-order';
 
 export async function getStaticPaths() {
-  const projects = (await getCollection('projectsEn', ({ data }) => !data.draft && !data.externalUrl)).sort(
-    (a, b) => b.data.year - a.data.year || a.data.order - b.data.order,
-  );
+  const projects = sortByPortfolioOrder(await getCollection('projectsEn', ({ data }) => !data.draft));
 
-  return projects.map((project, index) => ({
-    params: { slug: project.id },
-    props: {
-      project,
-      prev: projects[index - 1],
-      next: projects[index + 1],
-    },
-  }));
+  return projects.flatMap((project, index) =>
+    project.data.externalUrl
+      ? []
+      : [{
+          params: { slug: project.id },
+          props: {
+            project,
+            prev: projects[index - 1],
+            next: projects[index + 1],
+          },
+        }],
+  );
 }
 
 const { project, prev, next } = Astro.props;

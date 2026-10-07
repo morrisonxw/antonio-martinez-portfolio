@@ -2,12 +2,11 @@
 import { getCollection } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
 import Container from '../components/ui/Container.astro';
-import SectionHeading from '../components/ui/SectionHeading.astro';
-import HomeProjectCarousel from '../components/home/HomeProjectCarousel.astro';
-import ExperienceBlock from '../components/home/ExperienceBlock.astro';
+import HomeProjectGrid from '../components/home/HomeProjectGrid.astro';
+import HomeProjectFilters from '../components/home/HomeProjectFilters.astro';
 import { site } from '../content-data/site';
 import { experience } from '../content-data/experience';
-import { t, type Locale } from '../i18n/ui';
+import { projectOrderIndex } from '../lib/project-order';
 
 const allProjects = await getCollection('projects', ({ data }) => !data.draft);
 const projectsById = new Map(allProjects.map((project) => [project.id, project]));
@@ -32,25 +31,21 @@ const featured = allProjects
   .filter((p) => p.data.featured && !slugsInTimeline.has(p.id))
   .sort((a, b) => a.data.order - b.data.order);
 const projectsToShow = featured.length > 0 ? featured : allProjects.filter((p) => !slugsInTimeline.has(p.id)).slice(0, 4);
-const locale = (Astro.currentLocale ?? 'es') as Locale;
-const intergrupoIndex = timeline.findIndex((item) => item.company === 'Intergrupo SoftwareOne');
-const timelineBeforeOtherProjects = intergrupoIndex < 0 ? timeline : timeline.slice(0, intergrupoIndex);
-const timelineAfterOtherProjects = intergrupoIndex < 0 ? [] : timeline.slice(intergrupoIndex);
+const independentCompany = (projectId: string) => (projectId === 'dropi-novedades' ? 'Dropi' : 'Zubank');
+const mercadoLibre = timeline.find((item) => item.company === 'Mercado Libre');
+const remainingExperience = timeline.filter((item) => item !== mercadoLibre);
+const homeItems = [
+  ...(mercadoLibre?.projects.map((project) => ({ project, company: mercadoLibre.company })) ?? []),
+  ...projectsToShow.map((project) => ({ project, company: independentCompany(project.id) })),
+  ...remainingExperience.flatMap((item) => item.projects.map((project) => ({ project, company: item.company }))),
+].sort((a, b) => projectOrderIndex(a.project.id) - projectOrderIndex(b.project.id));
+const homeProjects = homeItems.map(({ project }) => project);
 ---
 
 <PageLayout title={site.name} description={site.description}>
-  {timelineBeforeOtherProjects.map((item) => <ExperienceBlock {...item} />)}
+  <Container class="pb-8 pt-8 sm:pb-12 sm:pt-10" data-reveal>
+    <HomeProjectFilters projects={homeProjects} />
+  </Container>
 
-  {
-    projectsToShow.length > 0 && (
-      <Container class="py-24 sm:py-28">
-        <SectionHeading eyebrow={t(locale, 'home.moreWorkEyebrow')} class="mb-2" data-reveal>
-          {t(locale, 'home.moreWorkHeading')}
-        </SectionHeading>
-        <HomeProjectCarousel projects={projectsToShow} label={t(locale, 'home.moreWorkHeading')} />
-      </Container>
-    )
-  }
-
-  {timelineAfterOtherProjects.map((item) => <ExperienceBlock {...item} />)}
+  <HomeProjectGrid items={homeItems} label="Proyectos" />
 </PageLayout>

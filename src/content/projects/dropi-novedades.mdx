@@ -5,7 +5,7 @@ cover: "../../assets/projects/dropi-novedades/cover.png"
 coverAlt: "Panel de Novedades de entrega de Dropi con la lista de novedades pendientes y el detalle de un caso: no había nadie para recibir, con la acción sugerida Programar segunda entrega"
 thumbnail: "../../assets/projects/covers/dropi.png"
 thumbnailAlt: "Ilustración editorial del recorrido de un paquete que se divide entre reentrega y devolución."
-tags: ["Product Design", "UX Writing", "IA aplicada", "Logística e-commerce"]
+tags: ["Product Design", "UX", "IA aplicada", "Logistics", "E-commerce"]
 year: 2026
 featured: true
 order: 0
@@ -41,7 +41,7 @@ import mobileLista from '../../assets/projects/dropi-novedades/mobile-lista.png'
 import mobileDetalle from '../../assets/projects/dropi-novedades/mobile-detalle.png';
 import modalAutomatizacion from '../../assets/projects/dropi-novedades/modal-automatizacion.png';
 
-*Este es un reto de diseño planteado por Dropi, no un proyecto en producción. Todo lo que se ve en las pantallas (compradores, pedidos, plazos, transportadoras y resultados) son escenarios sintéticos que construí para diseñar y revisar la experiencia. No hay datos reales, ni entrevistas con vendedores, ni conexión con transportadoras.*
+Este reto de diseño se desarrolló como un prototipo navegable con escenarios simulados. La propuesta explora cómo ayudar al vendedor a recuperar entregas y reducir su dependencia de soporte.
 
 ## El reto de negocio
 
@@ -95,22 +95,22 @@ Este criterio tiene una consecuencia práctica: la interfaz no enseña conceptos
 
 ## Lo que aprendimos
 
-El discovery fue **documental**: revisé fuentes públicas de transportadoras colombianas y dos referencias de plataformas de envíos. No sustituye entrevistas con usuarios y lo traté así, separando fuentes, inferencias, supuestos y preguntas abiertas.
+El discovery documental comparó las condiciones de operación de transportadoras colombianas y las experiencias de dos plataformas de envíos. Ese análisis permitió identificar diferencias que la interfaz debía tener en cuenta al recomendar una acción.
 
 El hallazgo más importante es que bajo una misma novedad hay barreras distintas: a veces el problema es entender el reporte; otras, falta información, hay contradicciones o la acción depende de la transportadora. Traducir códigos no alcanzaba: había que mostrar quién puede hacer qué y qué sigue pendiente.
 
 <DataTable
-  columns={["Lo que dicen las fuentes públicas", "Qué implica para el diseño"]}
+  columns={["Condición operativa analizada", "Qué implica para el diseño"]}
   rows={[
     ["Coordinadora: el remitente solicita corregir una dirección y la transportadora la valida, aprobando o rechazando.", "Una solicitud no es un cambio aprobado. La interfaz no puede decir \"dirección corregida\" al enviarla."],
     ["TCC: ante un intento fallido atribuible al destinatario, primero se busca una solución, luego una instrucción, y un tercer intento sólo a solicitud y con cobro.", "No son tres intentos automáticos. El sistema no puede prometer otra visita."],
     ["Servientrega: su contrato publicado permite contar comunicaciones previas, como un mensaje por WhatsApp, como intento.", "\"Intento\" no siempre significa visita física. Comparar \"dos\" o \"tres\" intentos entre operadores engaña."],
     ["Inter Rapidísimo: el retiro en oficina tiene un máximo de 10 días calendario desde el arribo del envío.", "Cada ventana mide un fenómeno distinto. Un número visible no basta para hablar de urgencia."],
   ]}
-  caption="Fuentes oficiales abiertas consultadas en septiembre de 2026. Son condiciones declaradas por cada operador, no pruebas de cómo se ejecutan ni reglas de Dropi."
+  caption="Las condiciones varían entre operadores: la recomendación debe considerar quién autoriza la acción y qué evento confirma su resultado."
 />
 
-Para no diseñar sólo para el caso sencillo, construí tres arquetipos sintéticos que representan contextos de trabajo, no segmentos confirmados ni porcentajes de usuarios:
+Para cubrir distintos niveles de complejidad, construí tres arquetipos de trabajo como escenarios de diseño:
 
 - Quien atiende **una excepción concreta** y debe decidir sobre un solo pedido.
 - Quien **reparte atención entre muchos casos** y necesita elegir cuál revisar primero.
@@ -375,17 +375,17 @@ La regla fue sencilla: el usuario debe poder anticipar qué ocurrirá al activar
   caption="Los 20 escenarios sintéticos del prototipo por tipo de situación y estado. Un rechazo puede terminar en entrega o en cancelación: por eso la etiqueta no decide la acción ni el cierre."
 />
 
-El trabajo siguió una secuencia donde cada etapa dejó explícito qué era evidencia y qué era construcción:
+El trabajo conectó el objetivo de negocio con las decisiones de interacción en cinco etapas:
 
 1. **Encuadre estratégico.** Fijé el norte antes de decidir interfaz: aumentar las entregas exitosas, con el dropshipper como usuario principal. Dejé escritas las preguntas que podían cambiar la solución: qué puede hacer realmente el vendedor, qué novedades son recuperables y qué significa hoy "resuelta".
-2. **Discovery documental y arquetipos.** Fuentes, contrastes entre transportadoras y tres contextos sintéticos de uso para no diseñar sólo para el caso más sencillo.
-3. **Ideación con behavioral design.** Lo traté como hipótesis de diseño, no como afirmación sobre la psicología de los usuarios: pocas acciones reconocibles, urgencia sólo cuando existe una condición concreta y control del vendedor cuando una acción tiene consecuencias. El concepto elegido fue **pocas acciones, sin descifrar novedades**.
+2. **Discovery documental y arquetipos.** Comparación de condiciones entre transportadoras y tres contextos simulados de uso para cubrir distintas necesidades de decisión.
+3. **Ideación con behavioral design.** La hipótesis de diseño fue que pocas acciones reconocibles, una urgencia asociada a condiciones concretas y el control sobre las decisiones con consecuencias facilitarían la gestión. El concepto elegido fue **pocas acciones, sin descifrar novedades**.
 4. **Prototipo de fidelidad media-alta.** Convirtió la definición en una experiencia navegable para revisar estados y recorridos de contacto, reprogramación, consulta, devolución y cierre.
 5. **QA visual y funcional.** Corrigió la jerarquía del detalle, la consistencia de los CTA, la accesibilidad de los botones y la diferencia entre una acción ejecutada y un resultado confirmado.
 
 ## Evolución del producto: automatización con criterio
 
-La siguiente oportunidad es pasar de recomendaciones asistidas a **automatización controlada**. En el prototipo la exploré con un selector de perfiles y una confianza de interpretación estática por escenario, para probar la idea, no para afirmar una precisión real.
+La siguiente oportunidad es pasar de recomendaciones asistidas a **automatización controlada**. La hipótesis de impacto esperado es reducir tareas repetitivas de bajo riesgo sin quitar al vendedor el control sobre decisiones sensibles. El prototipo explora esa dirección con perfiles y valores simulados de confianza por escenario.
 
 <ConfidenceStrip
   title="Qué ejecutaría cada perfil, según la confianza de la interpretación"
@@ -411,7 +411,7 @@ La siguiente oportunidad es pasar de recomendaciones asistidas a **automatizaci�
     { label: "Posible daño", sub: "Nora", value: 82, kind: "never" },
     { label: "Rechazo del comprador", sub: "Felipe", value: 71, kind: "never" },
   ]}
-  caption="Con el perfil Conservador se ejecutarían 2 pasos; con el Entusiasta, 6. La confianza es un dato inventado para el escenario. Las acciones de bajo riesgo (un mensaje al comprador o una consulta a la transportadora) son las únicas automatizables."
+  caption="Con el perfil Conservador se ejecutarían 2 pasos; con el Entusiasta, 6. Los valores de confianza son simulados para explorar el comportamiento de cada perfil. Las acciones de bajo riesgo (un mensaje al comprador o una consulta a la transportadora) son las únicas automatizables."
 />
 
 <Figure
@@ -424,7 +424,7 @@ La siguiente oportunidad es pasar de recomendaciones asistidas a **automatizaci�
 
 Las reglas de diseño para esta evolución son tres: la automatización debe ser **granular** (por tipo de novedad, acción, transportadora o nivel de confianza), **trazable** (informa qué entendió, qué hizo y qué resultado sigue pendiente) y **reversible** cuando se pueda. Y nunca cierra una novedad sólo porque ejecutó una acción. Tampoco conviene tomar "conservador" o "entusiasta" como etiquetas fijas de persona: nadie necesariamente quiere automatizarlo todo.
 
-## Impacto
+## Resultado del diseño e impacto esperado
 
 <ImpactStats
   stats={[
@@ -435,32 +435,17 @@ Las reglas de diseño para esta evolución son tres: la automatización debe ser
   ]}
 />
 
-Estas cifras describen el diseño y el prototipo, no el negocio. El resultado es un prototipo navegable de una herramienta exclusiva de novedades, con escenarios sintéticos, estados de gestión, acciones diferenciadas, modales para mensajes y confirmaciones, historial y cierres separados para entregas y devoluciones. **No demuestra que la tasa de entregas haya aumentado.**
+El resultado es un prototipo navegable que traduce ocho situaciones en cinco acciones, organiza veinte escenarios de prueba y separa la gestión del resultado del envío. La hipótesis de impacto esperado es que una decisión más clara y un seguimiento comprensible ayuden a recuperar entregas y reducir las consultas a soporte. Ese beneficio se evaluaría en una beta con pedidos reales.
 
-### Qué fue evidencia y qué fue construcción
+### Cómo evaluar el impacto
 
-<DataTable
-  columns={["Elemento", "Qué representa", "Límite"]}
-  minWidth="36rem"
-  rows={[
-    ["Brief del reto", "Contexto, problema y objetivo de negocio.", "No describe toda la operación real."],
-    ["Discovery documental", "Fuentes públicas, contrastes y análisis.", "No reemplaza entrevistas ni datos internos."],
-    ["Arquetipos", "Contextos sintéticos de uso.", "No son personas entrevistadas."],
-    ["Casos del prototipo", "Escenarios construidos para probar lectura y estados.", "No son pedidos ni resultados reales."],
-    ["QA del prototipo", "Verificación funcional y visual en navegador.", "No demuestra comprensión, adopción ni impacto de negocio."],
-    ["Concepto final", "Decisión de diseño revisada durante el ejercicio.", "Requiere validación con dropshippers."],
-  ]}
-/>
-
-### Lo que falta comprobar
-
-El prototipo no integra transportadoras, no contacta compradores y no ejecuta un motor de IA real. El siguiente paso es una prueba moderada de usabilidad con dropshippers para comprobar:
+El siguiente paso es una prueba moderada de usabilidad con dropshippers para evaluar:
 
 - Si entienden la acción sin descifrar el reporte.
 - Si distinguen una espera de un resultado.
 - Si la jerarquía Pendientes, Gestionadas y Cerradas coincide con su forma de trabajar.
 
-También falta verificar qué acciones y eventos existen realmente en Dropi y en cada transportadora. Después vendría una definición operativa de la beta: comparar pedidos con novedad tratados con la experiencia contra una referencia acordada, sin contar devoluciones como entregas recuperadas y sin prometer una cifra de mejora antes de tener línea base.
+La beta requeriría confirmar las acciones y los eventos disponibles en Dropi y en cada transportadora, así como integrar los canales de contacto y la capacidad de interpretación de IA. Compararía pedidos gestionados con la propuesta frente a una línea base, usando entregas confirmadas y consultas a soporte como indicadores principales. Las devoluciones se contabilizarían por separado.
 
 ## Aprendizajes
 
@@ -468,8 +453,6 @@ La decisión más importante no fue diseñar una bandeja más ordenada, sino cam
 
 El diseño mantiene visible la incertidumbre. Cuando sólo se envió un mensaje, el caso sigue abierto; cuando falta una respuesta, la pantalla lo dice; cuando el pedido regresó, se muestra como cancelado y no como una gestión exitosa. Esa separación protege la comprensión del usuario y evita medir el éxito con una etiqueta administrativa.
 
-Y aprendí a mantener la honestidad del alcance: un prototipo listo para probarse no es una prueba de impacto. Documentar qué es evidencia y qué es construcción hizo el trabajo más defendible.
+También aprendí a conectar cada decisión de diseño con una pregunta de evaluación. Un recorrido claro es el punto de partida; su valor para el negocio depende de lo que ocurra cuando los vendedores lo usen en su operación.
 
 <ProductDivider eyebrow="Aprendizaje" label="Cuando sólo se envió un mensaje, el caso sigue abierto: el diseño protege la diferencia entre haber actuado y haber logrado el resultado." />
-
-*El concepto, las decisiones de producto, la escritura y el prototipo fueron desarrollados por Antonio Martínez con asistencia de IA. No se realizaron entrevistas con vendedores reales ni integraciones con transportadoras. Las capacidades de IA y automatización son una dirección de producto que requiere validación técnica, operativa y con usuarios.*

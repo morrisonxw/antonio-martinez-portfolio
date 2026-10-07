@@ -3,9 +3,11 @@ title: "Zubank: imaginar un asesor Pyme aumentado con IA"
 summary: "Diseño de futuros para evolucionar el acompañamiento a pymes: una IA prepara al asesor para llegar antes, sin sustituir su criterio ni la relación humana."
 cover: "../../assets/projects/zubank-cover.svg"
 coverAlt: "Diagrama del servicio futuro: señales de negocio, preparación con IA y conversación entre asesora y pyme"
+entryImage: "../../assets/projects/zubank-laura-wanda-entry.png"
+entryImageAlt: "Laura revisa señales del negocio con el apoyo de Wanda, una asistente de IA, antes de preparar una conversación con la pyme."
 thumbnail: "../../assets/projects/covers/zubank.png"
-thumbnailAlt: "Ilustración editorial de una asesora conectada con señales de negocio e insights asistidos por IA."
-tags: ["Diseño de futuros", "Service Design", "IA responsable", "Banca Pyme"]
+thumbnailAlt: "Diagrama de señales de negocio que convergen para abrir distintas oportunidades financieras."
+tags: ["Diseño de futuros", "Service Design", "IA Aplicada", "Banca", "Pyme", "UX"]
 year: 2026
 yearLabel: "Horizonte: de 2026 a 2028"
 featured: true
@@ -30,7 +32,7 @@ import ScenarioMatrix from '../../components/mdx/ScenarioMatrix.astro';
 import BackcastingTimeline from '../../components/mdx/BackcastingTimeline.astro';
 import ServiceSystemMap from '../../components/mdx/ServiceSystemMap.astro';
 
-*Este es un reto conceptual desarrollado de forma individual. Zubank es un seudónimo. El escenario de 2028 y sus indicadores describen una propuesta de futuro y una forma de validarla; no son resultados observados.*
+Zubank es un seudónimo para este reto conceptual de diseño de futuros. La propuesta explora un servicio de asesoría Pyme aumentado con IA y plantea cómo evaluar su impacto.
 
 ## En 2028, el asesor llega antes
 
@@ -62,7 +64,7 @@ Partí de una escena de 2028: el cliente vuelve a buscar a su asesora antes de t
 
 ### El cono de futuros: abrir opciones antes de elegir
 
-La versión anterior reducía el cono a tres escenarios y ubicaba lo preferible como si fuera otra banda de probabilidad. El marco distingue futuros proyectados, probables, plausibles y posibles; “preferible” expresa una elección de valor y puede atravesar cualquiera de esas categorías. “Descabellado” aparece en algunas extensiones del modelo, fuera del límite de lo posible, como provocación y no como pronóstico. Aquí se muestra separado del cono.
+El cono permite abrir el campo de opciones antes de elegir una dirección. Distingue la continuidad del presente de futuros probables, plausibles y posibles. La trayectoria preferible expresa la apuesta de diseño: proteger el criterio humano y dedicar el tiempo liberado a la relación con la pyme. La zona descabellada, separada del cono, ayuda a cuestionar los límites de esa apuesta.
 
 <FuturesCone
   bands={[
@@ -70,13 +72,12 @@ La versión anterior reducía el cono a tres escenarios y ubicaba lo preferible 
     { name: "Probable", description: "Se incorporan asistentes de IA, pero las metas no cambian; el tiempo liberado se convierte en más gestión comercial y la relación sigue siendo reactiva." },
     { name: "Plausible", description: "Cuatro escenarios resultan de cruzar el acceso a datos externos con la velocidad de la competencia que ofrece asesoría basada en IA." },
     { name: "Posible", description: "Más allá de 2028, agentes del banco y de la pyme podrían asumir parte de la operación y la negociación financiera." },
-    { name: "Descabellado · extensión exploratoria", description: "Como prueba de límites, agentes autónomos negocian y ejecutan toda la financiación sin intervención humana. Esta extrapolación no estaba desarrollada en el reto." },
+    { name: "Descabellado · extensión exploratoria", description: "Como prueba de límites, agentes autónomos negocian y ejecutan toda la financiación sin intervención humana. Este escenario extremo permite examinar qué decisiones deberían conservar la supervisión humana." },
   ]}
   preferred={{ name: "Preferible", description: "La IA prepara y coordina; Laura conserva el criterio, y el tiempo liberado se protege para conversaciones que aportan valor a la pyme." }}
-  caption="Adaptación del cono de Voros al horizonte del reto. Las bandas expresan alcance e incertidumbre, no probabilidades calculadas. La trayectoria preferible es normativa, no una categoría de probabilidad."
+  caption="Las bandas amplían las alternativas de futuro; la trayectoria preferible marca el servicio que buscamos construir, no el desenlace más probable."
 />
 
-El cono base de Voros distingue futuros posibles, plausibles y probables, junto con los preferibles como una dimensión normativa. El futuro proyectado funciona aquí como línea de continuidad del presente. La zona descabellada es una ampliación contemporánea, no una categoría de la formulación original. <a href="https://foresightinternational.com.au/wp-content/uploads/2020/03/Voros-Primer-on-FS-2001-Final.pdf" target="_blank" rel="noreferrer">Voros, A Primer on Futures Studies (2001)</a>; <a href="https://file.go.gov.sg/thinkingabouttomorrow-digitalcopy.pdf" target="_blank" rel="noreferrer">Centre for Strategic Futures, Thinking About Tomorrow</a>.
 
 ### Escenarios plausibles: matriz de dos incertidumbres
 
@@ -95,14 +96,14 @@ El reto sitúa cuatro escenarios en la zona plausible. El eje horizontal represe
     { x: "left", y: "bottom", title: "Copiloto de puertas adentro", description: "La IA prepara con datos internos. La anticipación es parcial; la relación sigue diferenciando." },
     { x: "right", y: "bottom", title: "El asesor que llega antes", description: "El acceso autorizado y la competencia lenta abren una ventana para contactar primero." },
   ]}
-  caption="Matriz de escenarios plausibles del reto. Las descripciones son futuros exploratorios, no resultados observados."
+  caption="Cuatro futuros exploratorios permiten evaluar cómo cambia la propuesta ante distintas condiciones de acceso a datos y competencia."
 />
 
 ### Método: del horizonte a decisiones de diseño
 
 El trabajo avanzó en cuatro movimientos. Primero, encuadré el reto como una tensión entre la promesa de acompañamiento y un servicio que puede llegar tarde. Después exploré fuerzas sociales, tecnológicas, económicas, ambientales y político-regulatorias, distinguiendo tendencias consolidadas de señales emergentes. Con esas fuerzas construí futuros posibles y elegí uno preferible por su valor para la relación, no por su certeza. Por último, usé backcasting para traducirlo en capacidades, condiciones y experimentos progresivos.
 
-La exploración consideró las cinco dimensiones STEEP. Separó tendencias de señales y usó las dos incertidumbres externas para construir escenarios. El backcasting desde el futuro preferible orientó capacidades, condiciones y experimentos progresivos. Los métodos se conectan entre sí, pero no constituyen evidencia de que el servicio propuesto haya sido validado.
+El análisis STEEP alimentó los escenarios; la matriz permitió comparar sus implicaciones y el backcasting ordenó las capacidades necesarias para avanzar hacia el futuro preferible. Esta secuencia convirtió la exploración en una agenda de experimentos.
 
 <DataTable
   columns={["Dimensión STEEP", "Fuerza de cambio considerada", "Implicación para el servicio", "Horizonte"]}
@@ -113,12 +114,12 @@ La exploración consideró las cinco dimensiones STEEP. Separó tendencias de se
     ["Ambiental", "Grandes compradores empiezan a preguntar a proveedores Pyme por sostenibilidad.", "Una extensión futura podría incluir financiación verde y adaptación de la cadena.", "Más allá de 2028"],
     ["Política y regulatoria", "Finanzas abiertas y mayor exigencia de explicar y supervisar la IA.", "Consentimiento, trazabilidad y responsabilidad humana condicionan el diseño.", "2027 a 2028"],
   ]}
-  caption="Selección de fuerzas del análisis STEEP del reto. Son insumos para construir escenarios, no hallazgos de investigación de campo de este caso."
+  caption="Las fuerzas de cambio conectan el entorno con las decisiones de servicio y el horizonte de cada oportunidad."
 />
 
 ### Priorización de oportunidades
 
-El reto priorizó con una matriz ponderada de seis criterios: impacto en cliente y NPS (25 %), impacto en negocio (25 %), impacto en el asesor (15 %), factibilidad y alineamiento interno (20 %), riesgo regulatorio (10 %) y evidencia (5 %). El siguiente recorte conserva las oportunidades de prioridad alta y la de aprobación más rápida, incluida por decisión del líder pese a su factibilidad y riesgo. Las calificaciones son el juicio del equipo del reto; no son mediciones de usuarios.
+El reto priorizó con una matriz ponderada de seis criterios: impacto en cliente y NPS (25 %), impacto en negocio (25 %), impacto en el asesor (15 %), factibilidad y alineamiento interno (20 %), riesgo regulatorio (10 %) y evidencia (5 %). El siguiente recorte conserva las oportunidades de prioridad alta y la de aprobación más rápida, incluida por decisión del líder pese a su factibilidad y riesgo. Las calificaciones expresan una valoración de diseño para orientar la priorización de oportunidades.
 
 <DataTable
   columns={["Oportunidad", "Cliente", "Negocio", "Asesor", "Factibilidad y alineamiento", "Riesgo", "Evidencia", "Puntaje ponderado", "Prioridad"]}
@@ -168,7 +169,6 @@ El blueprint hace visible que llegar antes no depende solo de una pantalla. En e
 
 El blueprint conserva la secuencia temporal y diferencia evidencia, acciones de Carlos, interacción visible de Laura, trabajo interno de Wanda y Laura, soporte, sistemas, momentos de verdad y oportunidades. Las líneas de interacción, visibilidad e interacción interna delimitan los traspasos. En móvil se recorre horizontalmente para mantener legibles los carriles.
 
-La estructura sigue la convención del blueprint de servicio: evidencia, acciones del cliente, interacción visible, trabajo interno y procesos de soporte, alineados en una secuencia; sus líneas marcan las fronteras del servicio. <a href="https://www.ontario.ca/page/service-blueprints" target="_blank" rel="noreferrer">Ontario Digital Service, Service Blueprints</a>; <a href="https://guides.18f.org/methods/decide/service-blueprint/" target="_blank" rel="noreferrer">18F, Service blueprint</a>.
 
 ## Un sistema aumentado, con responsabilidad humana
 
@@ -180,7 +180,7 @@ El prototipo narrativo muestra un martes de ese futuro a través de una tarjeta 
 
 ## Cómo sabríamos si el futuro merece escalar
 
-El marco de medición relaciona señales tempranas con la experiencia y los resultados del negocio. En un piloto observaría si el asesor llega antes a los momentos de decisión, si reduce su carga operativa y si la pyme percibe un acompañamiento más útil. A más largo plazo mediría la recomendación de los clientes, la confianza, la experiencia de los asesores y la participación del banco en las decisiones de financiación. Son indicadores propuestos; el proyecto no produjo resultados de impacto.
+El marco de medición relaciona señales tempranas con la experiencia y los resultados del negocio. En un piloto observaría si el asesor llega antes a los momentos de decisión, si reduce su carga operativa y si la pyme percibe un acompañamiento más útil. A más largo plazo mediría la recomendación de los clientes, la confianza, la experiencia de los asesores y la participación del banco en las decisiones de financiación. La hipótesis de impacto esperado es que una preparación más útil permita llegar antes, reducir trabajo operativo y fortalecer la confianza de la pyme. El piloto pondría a prueba esa relación.
 
 <ImpactStats
   stats={[
@@ -209,5 +209,3 @@ El servicio solo avanzaría si los asesores adoptan la herramienta voluntariamen
 El ejercicio llevó la IA del plano de la interfaz al del servicio completo. Para que este futuro funcione, también hacen falta incentivos adecuados, gobierno de datos, integración operativa y un compromiso organizacional: que el tiempo liberado vuelva a las conversaciones con las pymes.
 
 El paso siguiente sería revisar el escenario con asesores, pymes, los equipos de riesgo y cumplimiento. Después probaría la ficha de preparación con tareas reales y establecería una línea base para evaluar los cambios. Ese aprendizaje permitiría decidir qué capacidades desarrollar y cuáles descartar.
-
-*El concepto, la estrategia, los artefactos y la narrativa fueron desarrollados por Antonio Martínez con asistencia de IA. No se realizaron entrevistas con usuarios reales ni se implementó el servicio descrito.*

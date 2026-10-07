@@ -39,9 +39,9 @@ export function homeHref(locale: Locale): string {
   return locale === 'en' ? '/en' : '/';
 }
 
-/** Href al listado de proyectos para el locale dado. */
+/** Href a la cuadrícula de proyectos en la home para el locale dado. */
 export function projectsHref(locale: Locale): string {
-  return locale === 'en' ? '/en/projects' : '/proyectos';
+  return locale === 'en' ? '/en/#projects' : '/#projects';
 }
 
 /** Href a "Sobre mí" / "About" para el locale dado. */

@@ -1,17 +1,18 @@
 ---
 title: "PASE: from reactive claims to daily operational reconciliation"
-summary: "I designed PASE, the platform where Mercado Libre and its logistics providers reconcile executed routes daily, catching capital leaks before they reach billing."
+summary: "I designed the PASE experience to bring route reconciliation into daily operations and add context to discrepancies between Mercado Libre and its logistics providers."
 cover: "../../assets/projects/mercadolibre-pase/cover.png"
 coverAlt: "Control panel for executed routes in PASE, with adjustments and claims per route"
 thumbnail: "../../assets/projects/covers/mercadolibre-pase.png"
 thumbnailAlt: "Editorial illustration of logistics routes converging into operational reconciliation."
-tags: ["Product Design", "B2B Enterprise", "Logistics", "Reconciliation"]
+tags: ["UX", "Product Design", "B2B", "Logistics", "Dashboard", "Applied AI"]
 year: 2022
 yearLabel: "2022–2026"
 featured: true
 order: 1
 draft: false
 
+duration: "7 months; initial follow-up of 1.5 months"
 role: "Semi-Senior UX Specialist"
 team: "Multidisciplinary product team: product leadership, tech leads, research, engineering, and business areas"
 company: "Mercado Libre"
@@ -20,75 +21,108 @@ scope: ["UX Research", "UX Strategy", "Service Design", "Information Architectur
 tools: ["Figma", "FigJam", "Claude Code", "Gemini", "Figma Make", "NotebookLM", "Co-creation workshops", "User Testing"]
 confidential: false
 ---
-
-import ImpactStats from '../../components/mdx/ImpactStats.astro';
-import ProductDivider from '../../components/mdx/ProductDivider.astro';
 import Figure from '../../components/mdx/Figure.astro';
+import JourneyCompare from '../../components/mdx/JourneyCompare.astro';
+import PaseArtifacts from '../../components/mdx/PaseArtifacts.astro';
 import exploracionCards from '../../assets/projects/mercadolibre-pase/exploracion-cards.png';
 
-*Data and information shown in the screens below has been modified to protect the company's sensitive information and the project's confidentiality.*
 
-## Context
 
-Financial reconciliation with transportation providers was resolved weeks after each trip, generating losses and overwhelming support.
+## Prevent discrepancies before billing
 
-## My role
+PASE transformed reconciliation between Mercado Libre and its logistics providers: from reviewing services weeks after execution to handling discrepancies during the active cycle. During project follow-up, the indicators showed that the same providers went from claiming approximately 30% of their services to 10%.
 
-I was the designer in charge of taking the project end to end, from research and information architecture to UI and prototyping, supported by a senior expert on the team. I aligned functional definitions with product, researched how operational teams worked on both sides, and carried the solution from exploration through launch support, working closely with product, business, and engineering.
+I worked for seven months as the lead designer, supported by an Expert UX and collaborating with product, business, engineering and analysts. I conducted interviews, AS-IS and TO-BE modelling, journeys, workshops, prototyping and tests. I supported rollout in Argentina and Brazil, across First Mile and Last Mile, and the initial month and a half of follow-up.
 
-## Impact
+<PaseArtifacts kind="measurement" locale="en" />
 
-<ImpactStats
-  stats={[
-    { value: "70%", label: "Fewer billing discrepancies and late claims at the initial rollout sites." },
-    { value: "48 hours", label: "Dispute resolution time, previously measured in weeks." },
-  ]}
-/>
+## The problem: collect payment now, reconstruct later
 
-## How I worked
+Providers received a preliminary billing statement after accumulating between 20 days and a month of services. Even when they identified discrepancies, they moved ahead with payment documentation to sustain liquidity. In parallel, they reviewed records and claimed differences.
 
-In interviews we found that reviewing a weeks-old trip meant reconstructing from memory something that should have been logged the same day. That finding shifted the focus of the problem: it wasn't about making the end-of-process review faster, but about moving it into the day-to-day.
+Monitoring showed the current day’s operation but did not retain the history needed later. Some analysts took screenshots at the end of the day. This was manual and incomplete: not every service had closed.
 
-<ProductDivider eyebrow="Research" label="Reviewing a weeks-old trip meant reconstructing from memory something that should have been logged the same day." />
+Templates requested codes useful to accounting but difficult for providers to interpret. A two-day submission window concentrated up to approximately 20,000 claims, mainly in Last Mile, with seven days to review them.
 
-Between business, tech, and design, we shaped the logic that let the system validate services without relying on manual, case-by-case auditing. My part was to make that definition tangible: I designed the progressive-validation mechanism, tailored to carriers' real way of working, and iterated the proposal with the team until we considered it ready for testing. I also helped draw the line between what the system could resolve on its own and what had to stay with business and finance. That boundary mattered as much as the functionality itself, and it's what let us reserve the scheme for overpayments that were hard to recover almost exclusively for edge cases.
+Adjustments generated supplementary statements for the next cycle, which could produce new discrepancies. Corrected cases could also be rejected because they appeared as already resolved. The process accumulated effort and made response reasons difficult to follow.
 
-When data volume made it impossible to audit trips one by one on screen, I proposed an executive panel with filtering and parameterized downloads instead of forcing a row-by-row review.
+## Reframing and design decisions
 
-<Figure
-  src={exploracionCards}
-  alt="Card exploration for managing claims on executed routes"
-  caption="Exploring different card formats to prioritize and resolve claims per route."
-/>
+Research showed that providers wanted the correct payment without disrupting operations. Product and experience reframed the challenge around the conditions causing claims, rather than simply speeding up their processing.
 
-<ProductDivider eyebrow="Design decision" label="Moving the review from the end of the process into day-to-day operations was what changed the nature of the problem, not just its speed." />
+<JourneyCompare rows={[
+  { label: "Before PASE", tone: "before", steps: ["20 days to a month of services", "Statement and payment documentation", "Template in a two-day window", "Seven-day accounting review", "Supplementary statement and possible new claims"] },
+  { label: "With PASE", tone: "after", steps: ["History by date", "Daily review", "48 business hours to report", "Another 48 business hours to respond", "Disagreement to traditional claims"] }
+]} caption="From accumulated review at closing to daily reconciliation: 48 business hours to report a discrepancy and another 48 to respond." />
 
-For evidence classification, I designed an AI-assisted flow and prototyped variants with Claude Code and Figma Make to validate them with the team and run tests:
+PASE offered history and daily review with recent information and comprehensible language. We discarded wider windows because they separated review from service context. We also discarded batch rejections: they could reproduce problems from the previous process.
 
-<figure class="my-10">
-  <video
-    src="/projects/mercadolibre-pase/prototipo-claude.mp4"
-    autoplay
-    loop
-    muted
-    playsinline
-    class="w-full rounded-xl"
-  />
-  <figcaption class="mt-3 text-sm text-ink-muted">Prototype of claims management for executed routes, built with Claude Code.</figcaption>
+The dependency on [PACTO, another initiative I contributed to](/en/projects/mercadolibre-pacto), was essential. Its structured agreements became valid after provider acceptance and supported checking recognised concepts. This connected commercial terms, execution and reconciliation.
+
+## Designing for those receiving and delivering the service
+
+We researched and tested with provider, accounting and operations analysts. Each role had a distinct task: identify discrepancies, manage a response or provide operational information. The profiles clarify what each person needs to do their work and where the service needs to support them.
+
+<PaseArtifacts kind="personas" locale="en" />
+
+## The provider journey
+
+The journey keeps one perspective: the provider analyst reviewing services during the active cycle. It connects actions, touchpoints, friction and service responses. Critical moments show where to recover context, express a discrepancy and understand the decision.
+
+<PaseArtifacts kind="journey" locale="en" />
+
+## Automation with context and responsibility
+
+AI interpreted information, resolved cases in the system under agreed conditions and provided explanations referencing agreements or operational records. A concept not contracted or explicitly excluded could, for example, be rejected automatically.
+
+Cases that did not meet the conditions went to accounting. Accounting consulted operations when information was needed and retained responsibility for the response. Engineering implemented the technical conditions; my contribution was conceptual and experience-focused.
+
+<PaseArtifacts kind="process" locale="en" />
+
+A version allowing operations to receive requests directly was planned for the next quarter. Its responses would reach the provider when accounting detected no issues, while accounting retained control. The expected-impact hypothesis was to reduce information handoffs and speed up responses while retaining accounting ownership.
+
+## A tested decision: guide investigation, not the answer
+
+Engineering and business proposed suggesting resolutions when the system could not resolve a case automatically. I identified the risk of conditioning an analyst’s judgement through an insufficiently supported recommendation. We tested the proposal and observed confusion.
+
+I advocated an alternative: indicate what evidence to consult or whom to contact, without suggesting a resolution. This assistance reached production. The confusion observed reinforced the decision to support analysts’ investigation rather than anticipate their answers.
+
+<PaseArtifacts kind="employee" locale="en" />
+
+Operations also raised questions about how to respond, share information with accounting and understand their responsibility. We revised copy and introduced training. Adoption required preparing teams’ work, not only designing the screen.
+
+## The blueprint: information, handoffs and recovery
+
+The blueprint brings the service into one view, connecting the provider experience with each team’s responsibilities. Created for this case, it aligns six journey stages with visible experience, internal work and supporting systems. Failure points show how service recovery worked.
+
+<PaseArtifacts kind="blueprint" locale="en" />
+
+After failures, reporting or resolution periods could be extended manually. If disagreement persisted after the response, providers continued through traditional claims, without reopening inside PASE. The transition relied on training and in-app help in both systems; the service incorporated PASE traceability.
+
+The expected-impact hypothesis for this continuity is to reduce the need to reconstruct a case when changing channels. Evaluating that benefit requires observing provider effort and the time needed to resume handling.
+
+## From decisions to interface
+
+Volume made reviewing every service individually on screen impractical. I proposed an executive dashboard with filters and parameterised downloads to support aggregate review. Card exploration aimed to expose each route’s context and actions.
+
+<Figure src={exploracionCards} alt="Card exploration for reviewing claims linked to executed routes" caption="Interface exploration: alternative ways of organising route context and actions." />
+
+The videos show two prototype variants built with Claude Code and Figma Make. They demonstrate route review, discrepancy context and the available actions.
+
+<figure class="media-bleed my-10">
+  <video src="/projects/mercadolibre-pase/prototipo-claude.mp4" data-inline-playback controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototype of claims management for executed routes" />
+  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Claude Code variant: claim context and route actions. Video without audio.</figcaption>
 </figure>
 
-<figure class="my-10">
-  <video
-    src="/projects/mercadolibre-pase/prototipo-figma-make.mp4"
-    autoplay
-    loop
-    muted
-    playsinline
-    class="w-full rounded-xl"
-  />
-  <figcaption class="mt-3 text-sm text-ink-muted">Iteration of the executed-routes control panel, prototyped with Figma Make.</figcaption>
+<figure class="media-bleed my-10">
+  <video src="/projects/mercadolibre-pase/prototipo-figma-make.mp4" data-inline-playback controls preload="none" playsinline class="w-full rounded-xl" aria-label="Prototype of the executed-routes dashboard" />
+  <figcaption class="media-caption mt-3 text-sm text-ink-muted">Figma Make variant: aggregate review through the routes dashboard. Video without audio.</figcaption>
 </figure>
 
-## Result
+## What this case demonstrates
 
-Fewer unrecoverable discrepancies, disputes resolved in hours instead of weeks, and coordinators who stopped reconstructing cases from memory. The lesson: in complex B2B tools, interface design only works if it's paired with how the team structures incentives outside the screen.
+PASE connected commercial agreements, operational information, deadlines and responsibilities to address reconciliation before closing. My contribution combined research, modelling, facilitation, experience design and implementation support.
+
+During the period I supported the project, follow-up showed fewer services with claims and responses within the defined deadlines. The long-term impact hypothesis is that daily review and shared context can sustain this improvement, reduce rework and strengthen provider relationships.
+
+The learning was that automating a service also requires designing the work that stays with people: context to decide, clear boundaries and continuity when a response does not resolve disagreement.

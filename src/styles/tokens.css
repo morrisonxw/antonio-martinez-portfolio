@@ -37,6 +37,7 @@
   --ink: #1a1714;
   --ink-muted: #6e675c;
   --ink-soft: #3d3830;
+  --company-overline: #5c5c5c;
   --paper: #faf8f5;
   --paper-muted: #f0ece6;
   --accent: #e55800;
@@ -56,6 +57,7 @@
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
   --color-ink-soft: var(--ink-soft);
+  --color-company-overline: var(--company-overline);
   --color-paper: var(--paper);
   --color-paper-muted: var(--paper-muted);
   --color-accent: var(--accent);
