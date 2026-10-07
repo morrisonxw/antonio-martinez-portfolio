@@ -26,8 +26,8 @@ let dpr = 1;
 let rafId: number | null = null;
 let isVisible = true;
 let reducedMotion = false;
-let accentRgb: Rgb = [229, 88, 0];
-let inkRgb: Rgb = [26, 23, 20];
+let gridRgb: Rgb = [92, 92, 92];
+let highlightRgb: Rgb = [250, 248, 245];
 let onResize: (() => void) | null = null;
 let visibilityObserver: IntersectionObserver | null = null;
 
@@ -145,16 +145,20 @@ function draw(timeMs: number): void {
       const noise = broad * 0.68 + fine * 0.32;
 
       // Integrate sampled text coverage before contrast so letterforms keep moving with the field.
-      const illuminatedValue = clamp(0.12 + noise * 0.58 + coverageAt(x, y) * 0.72);
+      const coverage = coverageAt(x, y);
+      const textPulse = reducedMotion
+        ? coverage * 0.82
+        : coverage * (0.76 + Math.sin(seconds * 1.15 + x * 0.018 - y * 0.011) * 0.16);
+      const illuminatedValue = clamp(0.08 + noise * 0.5 + textPulse * 0.82);
       const contrast = smoothstep(clamp((illuminatedValue - 0.24) / 0.68));
       const glyphIndex = Math.min(GLYPHS.length - 1, Math.floor(contrast * GLYPHS.length));
       const glyph = GLYPHS[glyphIndex];
 
       // Character scale follows the direct field; color has its own exposure curve.
       const characterSize = BASE_CHARACTER_SIZE * (0.82 + illuminatedValue * 0.9);
-      const colorExposure = illuminatedValue ** 1.8;
-      ctx.fillStyle = mixColor(inkRgb, accentRgb, colorExposure);
-      ctx.globalAlpha = 0.08 + colorExposure * 0.55;
+      const colorExposure = illuminatedValue ** 1.65;
+      ctx.fillStyle = mixColor(gridRgb, highlightRgb, colorExposure);
+      ctx.globalAlpha = 0.12 + colorExposure * 0.68;
       ctx.font = `${characterSize.toFixed(1)}px ui-monospace, "SFMono-Regular", Consolas, monospace`;
       ctx.fillText(glyph, x, y);
     }
@@ -177,8 +181,8 @@ export function initHeroGrid(root: ParentNode = document): void {
   if (!ctx || !maskCtx) return;
 
   const styles = getComputedStyle(document.documentElement);
-  accentRgb = hexToRgb(styles.getPropertyValue('--accent'), [229, 88, 0]);
-  inkRgb = hexToRgb(styles.getPropertyValue('--ink'), [26, 23, 20]);
+  gridRgb = hexToRgb(styles.getPropertyValue('--company-overline'), [92, 92, 92]);
+  highlightRgb = hexToRgb(styles.getPropertyValue('--paper'), [250, 248, 245]);
   reducedMotion = prefersReducedMotion();
   resize();
 

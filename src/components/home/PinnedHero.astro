@@ -10,19 +10,19 @@ const site = locale === 'en' ? siteEn : siteEs;
 
 <section
   data-hero-grid-section
-  class="relative flex min-h-[max(480px,calc(100svh-5rem))] flex-col justify-center overflow-hidden bg-paper py-12 text-ink sm:min-h-[calc(100svh-5rem)] sm:py-16"
+  class="relative flex min-h-[400px] flex-col justify-center overflow-hidden bg-ink py-10 text-paper sm:min-h-[440px] sm:py-12 lg:min-h-[480px]"
 >
   {/* Fondo ASCII animado; el texto del canvas es decorativo y el mensaje principal sigue siendo HTML. */}
   <canvas data-hero-grid class="pointer-events-none absolute inset-0 z-0" aria-hidden="true"></canvas>
 
   <Container class="relative z-[1]">
     <h1
-      class="mt-4 max-w-4xl font-display text-4xl font-bold tracking-tightest text-ink sm:text-6xl lg:text-7xl"
+      class="max-w-4xl font-display text-4xl font-bold tracking-tightest text-paper sm:text-5xl lg:text-6xl"
       data-reveal
     >
       {site.tagline}
     </h1>
-    <p class="mt-6 max-w-2xl text-lg text-ink-muted sm:text-xl" data-reveal>
+    <p class="mt-5 max-w-2xl text-base leading-relaxed text-paper/70 sm:text-lg" data-reveal>
       {site.subheading}
     </p>
   </Container>
